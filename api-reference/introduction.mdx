@@ -1,33 +1,45 @@
 ---
-title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+title: API reference
 ---
 
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
+Most phospho features are available through the API.
 
-## Welcome
+For example, this will log a task to phospho:
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
-
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-  View the OpenAPI specification file
-</Card>
-
-## Authentication
-
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
-
-```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
+```bash
+curl -X POST https://api.phospho.ai/v0/log/$PHOSPHO_PROJECT_ID \
+-H "Authorization: Bearer $PHOSPHO_API_KEY" \
+-H "Content-Type: application/json" \
+-d '{
+    "batched_log_events": [
+        {
+            "input": "your_input",
+            "output": "your_output"
+        }
+    ]
+}'
 ```
+
+API endpoints are available at `https://api.phospho.ai/v0`
+
+[Read the API documentation here.](https://api.phospho.ai/v0/redoc)
+
+## User Feedback
+
+In your app, you may have thumbs up and thumbs down next to your chat messages. Using the API, you can directly log them to phospho.
+
+```bash
+curl -X POST https://api.phospho.ai/v0/tasks/TASK_ID/flag \
+-H "Authorization: Bearer $PHOSPHO_API_KEY" \
+-H "Content-Type: application/json" \
+-d '{
+    "flag": "success",
+    "source": "user"
+}'
+```
+
+Pass `"flag": "success"` or `"flag": "failure"` to the app. 
+
+## Dedicated endpoints
+
+Contact us at *contact@phospho.app* to discuss integrating Phospho into your products through dedicated endpoints, allowing seamless, behind-the-scenes functionality for your customers.
