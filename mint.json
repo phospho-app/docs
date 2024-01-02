@@ -61,5 +61,6 @@
     "twitter": "https://twitter.com/phospho_app",
     "github": "https://github.com/phospho-app",
     "linkedin": "https://www.linkedin.com/company/phospho-app/"
-  }
+  },
+  "openapi": "https://api.phospho.ai/v0/openapi.json"
 }
