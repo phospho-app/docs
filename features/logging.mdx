@@ -1,0 +1,219 @@
+---
+title: Logging
+description: 'Collecting interactions'
+---
+
+## Log tasks to phospho. 
+
+**Tasks are the basic bricks that make up your LLM apps.** If you're a programmer, you can think of tasks like functions. 
+
+A task is made of at least two things:
+- `input (str)`: What goes into a task. Eg: what the user asks to the assistant.
+- `output (str)`: What goes out of the task. Eg: what the assistant replied to the user.
+
+Example of tasks you can log to phospho: 
+- Call to an LLM (input = query, output = llm response)
+- Answering a question (input = question, output = answer)
+- Searching in documents (input = search query, output = docuemnt)
+- Summarizing a text (input = text, output = summary)
+- Performing inference of a model (input = X, output = y)
+
+## Initialize phospho module
+
+In your app, initialize the phospho module before logging.
+
+```python
+import phospho
+
+phospho.init()
+```
+
+### Logging text inputs and outputs
+
+phospho lets you manually register tasks. A task is made at least of two things:
+
+- `input (str)`: What goes into a task. Eg: what the user asks to the assistant.
+- `output (str)`: What goes out of the task. Eg: what the assistant replied to the user.
+
+```python
+import phospho
+
+# By default, phospho reads the PHOSPHO_PROJECT_ID and PHOSPHO_API_KEY from the environment variables
+phospho.init()
+
+# Example
+input = "Hello! This is what the user asked to the system"
+output = "This is the response showed to the user by the app."
+
+# This is how you log a task to phospho
+phospho.log(input=input, output=output)
+```
+
+Example of interactions you likely want to log to phospho:
+
+- LLM calls
+- Prewritten answers
+- Steps of an LLM chain
+
+### Logging OpenAI queries and responses
+
+phospho aims to be battery included. So if you pass something else than a `str` to `phospho.log`, phospho extracts what's usually considered "the input" or "the output".
+
+For example, if you use the OpenAI API:
+
+```python
+import openai
+import phospho
+
+phospho.init(api_key="phospho-key", project_id="phospho-project-id")
+openai_client = openai.OpenAI(api_key="openai-key")
+
+input_prompt = "Explain quantum computers in less than 20 words."
+
+# This is your LLM app code
+query = {
+    "messages": [{"role": "system", "content": "You are a helpful assistant."},
+                 {"role": "user", "content": input_prompt},
+    ],
+    "model": "gpt-3.5-turbo",
+}
+response = openai_client.chat.completions.create(**query)
+
+# You can directly pass as dict or a ChatCompletion as input and output
+log = phospho.log(input=query, output=response)
+print("input:", log["input"])
+print("output:", log["output"])
+```
+
+Result:
+
+```text
+input: Explain quantum computers in less than 20 words.
+output: Qubits harness quantum physics for faster, more powerful computation.
+```
+
+## Wrapping functions' arguments and values
+
+You can wrap any function to `phospho.wrap` to automatically log an interaction:
+- The passed arguments will be the logged as input
+- The returned value will be logged as output
+
+Decorate functions in Python to log them when they are called. 
+
+```python
+@phospho.wrap(stream=True, stop=lambda token: token is None)
+def answer(messages: List[Dict[str, str]]) -> Generator[Optional[str], Any, None]:
+    streaming_response: Stream[
+        ChatCompletionChunk
+    ] = openai_client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=messages,
+        stream=True,
+    )
+    for response in streaming_response:
+        yield response.choices[0].delta.content
+```
+
+You can also directly use `phospho.wrap`: 
+
+```python
+# You can wrap any function call in phospho.wrap
+response = phospho.wrap(
+    openai_client.chat.completions.create,
+    # Pass additional metadata
+    metadata={"more": "details"},
+)(
+    messages=[{"role": "system", "content": "You are a helpful assistant."},
+                 {"role": "user", "content": "Explain quantum computers in less than 20 words."},], 
+    model="gpt-3.5-turbo", 
+)
+```
+
+## Logging additional metadata
+
+You can log additional data with each interaction (user id, version id,...) by passing arguments to `phospho.log`. 
+
+```python
+log = phospho.log(
+    input="log this", output="and that", 
+    raw_input={"more": "details"},
+    raw_output={"even": "more"},
+    metadata={"always": "moooore"},
+    log_anything_and_everything="even_this",
+)
+```
+
+## Streaming
+
+You can pass streaming OpenAI responses to `phospho.log` or `phospho.wrap`. Phospho aggregates streamed chunks and log the final response. Just specify `stream=True` as a parameter.
+
+### Example with phospho.log
+
+```python
+
+from openai.types.chat import ChatCompletionChunk
+from openai._streaming import Stream
+
+query = {
+    "messages": [{"role": "system", "content": "You are a helpful assistant."},
+                 {"role": "user", "content": "Explain quantum computers in less than 20 words."},
+    ], 
+    "model": "gpt-3.5-turbo", 
+    # Enable streaming on OpenAI
+    "stream": True
+}
+# OpenAI completion function return a Stream of chunks
+response: Stream[ChatCompletionChunk] = openai_client.chat.completions.create(**query)
+
+# Pass stream=True to phospho.log to handle this
+phospho.log(input=query, output=response, stream=True)
+```
+
+For generators, you need to use `phospho.MutableGenerator` or `phospho.MutableAsyncGenerator`
+
+```python
+# Example with an Ollama endpoint 
+
+r = requests.post(
+    "http://localhost:11434/api/generate",
+    json={
+        "model": model,
+        "prompt": prompt,
+        "context": context,
+    },
+    # This connects to a streaming API endpoint
+    stream=True,
+)
+r.raise_for_status()
+response_iterator = r.iter_lines()
+
+# In order to directly log this to phospho, we need to wrap it this way
+response_iterator = phospho.MutableGenerator(
+    generator=response_iterator,
+    # We need to indicate when the generation stops
+    stop=lambda line: json.loads(line).get("done", False),
+)
+
+# Log the generated content to phospho with Stream=True
+phospho.log(input=prompt, output=response_iterator, stream=True)
+```
+
+## Logging with the API
+
+You can directly log using the API [with the /log endpoint.](https://api.phospho.ai/v0/redoc#tag/Logs)
+
+```bash
+curl -X POST https://api.phospho.ai/v0/log/$PHOSPHO_PROJECT_ID \
+-H "Authorization: Bearer $PHOSPHO_API_KEY" \
+-H "Content-Type: application/json" \
+-d '{
+    "batched_log_events": [
+        {
+            "input": "your_input",
+            "output": "your_output"
+        }
+    ]
+}'
+```
+
+Check [the API doc for more.](/api)

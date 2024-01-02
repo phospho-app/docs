@@ -1,0 +1,48 @@
+---
+title: Evaluation
+description: 'Evaluation and scoring of your LLM app'
+---
+
+phospho enables you to evaluate the quality (success or failure) of the interactions between your users and your LLM app.
+
+- By default, phospho **automatically** evaluate the task succes or failure.
+- In the webapp and **manually** override phospho's annotations 
+- Trigger [the API endpoint](https://api.phospho.ai/v0/redoc#tag/Tasks/operation/post_flag_task_tasks__task_id__flag_post) to override phospho's annotations at scale  
+
+Additional annotations enhance the stats and further improve phospho's detection algorithms. 
+
+Results can be seen :
+
+- as aggregated metrics at the project level
+- as individual evaluations for each task
+
+## Automatic Evaluation
+
+Every time you log a task, phospho will evaluate the success of the task. To improve the quality of the automatic evaluation, annotate tasks manually in the dashboard.
+
+
+
+## Annotate in the phospho webapp
+
+In the phospho dashboard, you can annotate tasks as successful or unsuccessful. Go to the _Sessions_ tab and click on a session. You'll see the list of tasks in the session. Click on a task to annotate it. 
+- A thumbs up means that the task was successful. 
+- A thumbs down means that the task failed.
+
+Click the thumb to update the evaluation. The button will change to mark that this task was evaluated by a human, and not by phospho.
+
+Add notes and any kind of text with the Notes button next to the thumbs. If there is a note already written, the color of the button changes. 
+
+## Annotate with User feedback
+
+You can gather annotations any way you want. For example, if you have your own tool to collect feedback (such as thumbs up/thumbs down in your chat interface), you can chose to use the phospho API.
+
+Trigger [the API endpoint](https://api.phospho.ai/v0/redoc#tag/Tasks/operation/post_flag_task_tasks__task_id__flag_post) to send your annotations to phospho at scale.
+
+
+## Visualize the results
+
+Visualize the aggregated results of the evaluations in the _Dashboard_ tab of the phospho webapp.
+
+You can also visualize the results for each task in the _Sessions_ tab. Click on a session to see the list of tasks in the session. A green thumbs up means that the task was successful. A red thumbs down means that the task failed.
+
+If you disagree with the evaluation, you can change it by clicking on the thumbs up or thumbs down. This will be taken into account for the next automatic evaluations.

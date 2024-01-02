@@ -42,7 +42,11 @@
     },
     {
       "group": "Features",
-      "pages": ["essentials/markdown", "essentials/code", "essentials/images", "essentials/settings", "essentials/navigation"]
+      "pages": ["features/logging", "features/evaluation", "features/user-feedback", "features/events"]
+    },
+    {
+      "group": "Other",
+      "pages": ["other/faq"]
     },
     {
       "group": "Examples",
