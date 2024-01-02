@@ -16,4 +16,7 @@ If you wish to self host the phospho backend, contact us at *dev@phospho.app*
 
 ## Will the phospho logger impact my app's performances?
 
-The phospho logger is designed to use as little resources as possible. The logger runs on a separate, asynchronous thread. All the heavy computation happens asynchronously in the phospho backend. The logger is non-blocking. The logger won't raise any Exception in your app if the phospho's servers are unavailable.
+No. The phospho logger is designed to use as little resources as possible. The logger runs on a separate, asynchronous thread. All the heavy computation happens asynchronously in the phospho backend. 
+
+## If phospho is down, will my app be down?
+phosphor is non-blocking by design. The logger won't raise any Exception in your app if the phospho's servers are unavailable or if you exceeded you quotas.
