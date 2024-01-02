@@ -1,78 +1,66 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Starter Kit",
-  "logo": {
-    "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
-  },
+  "name": "phospho",
   "favicon": "/favicon.svg",
   "colors": {
-    "primary": "#0D9373",
-    "light": "#07C983",
-    "dark": "#0D9373",
+    "primary": "#00FF00",
+    "light": "#00FF00",
+    "dark": "#1E1E1E",
     "anchors": {
-      "from": "#0D9373",
+      "from": "#00FF00",
       "to": "#07C983"
     }
+  },
+  "modeToggle": {
+    "default": "dark",
+    "isHidden": true
   },
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "url": "mailto:contact@phospho.app"
     }
   ],
   "topbarCtaButton": {
     "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "url": "https://platform.phospho.ai"
   },
   "tabs": [
     {
       "name": "API Reference",
       "url": "api-reference"
-    }
-  ],
-  "anchors": [
-    {
-      "name": "Documentation",
-      "icon": "book-open-cover",
-      "url": "https://mintlify.com/docs"
     },
     {
-      "name": "Community",
-      "icon": "slack",
-      "url": "https://mintlify.com/community"
-    },
-    {
-      "name": "Blog",
-      "icon": "newspaper",
-      "url": "https://mintlify.com/blog"
+      "name": "Examples",
+      "url": "examples"
     }
   ],
   "navigation": [
     {
       "group": "Get Started",
-      "pages": ["introduction", "quickstart", "development"]
+      "pages": ["introduction", "quickstart"]
     },
     {
-      "group": "Essentials",
-      "pages": ["essentials/markdown", "essentials/code", "essentials/images", "essentials/settings", "essentials/navigation"]
+      "group": "Features",
+      "pages": ["features/logging", "features/evaluation", "features/user-feedback", "features/events"]
+    },
+    {
+      "group": "Other",
+      "pages": ["other/faq"]
+    },
+    {
+      "group": "Examples",
+      "pages": ["examples/openai-agent", "examples/openai-streamlit"]
     },
     {
       "group": "API Documentation",
       "pages": ["api-reference/introduction"]
-    },
-    {
-      "group": "Endpoint Examples",
-      "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
-      ]
     }
   ],
   "footerSocials": {
-    "twitter": "https://twitter.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://www.linkedin.com/company/mintsearch"
-  }
+    "twitter": "https://twitter.com/phospho_app",
+    "github": "https://github.com/phospho-app",
+    "linkedin": "https://www.linkedin.com/company/phospho-app/"
+  },
+  "openapi": "https://api.phospho.ai/v0/openapi.json"
 }

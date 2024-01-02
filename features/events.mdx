@@ -1,0 +1,43 @@
+---
+title: Events Detection
+description: 'phospho analyze every interaction to look for events'
+---
+
+## What are events in phospho?
+
+Every task logged to phospho goes through an analytics pipeline. In this pipeline, phospho looks for **events** that you defined in your project settings.
+
+By default, phospho will look for the following events:
+
+- _question_answering_: The user asks a question
+- _thanks_: The user thanks the assistant.
+- _toxic_behavior_: The assistant is being toxic to the user.
+
+For example, create custom events to discover key talking points in a conversation.
+
+### Example of events
+
+phospho enables you to detect custom events in your app. Here are examples of events:
+
+- The user is trying to book a flight
+- The assistant responded something that could be considered financial advice
+- The assistant started with 'As an AI language model'
+- The user uses slang that the LLM didn't understand
+- The user thanked the agent for its help
+
+## Define events
+
+Events help you define and discover user behaviour on your conversational app. You are the one that define what events you want to look for.
+
+To define an event, go to the _Settings_ tab of your [dashboard](https://platform.phospho.ai/).
+
+You can add an the event name and the event description.
+
+You tell phospho what events to look for with natural language. Events are automatically detected by phospho's algorithms.
+
+- As a best practice, you should refere to your user as "the user" and to your LLM app as "the assistant".
+- Every time you log an interaction, phospho will detect if an event occured. If an event occured, it will be logged to phospho.
+
+## Manage events
+
+Open Settings. At the bottom of the screen, you'll see Events already created. Click delete to delete an event.

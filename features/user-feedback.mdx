@@ -1,0 +1,67 @@
+---
+title: User Feedback
+description: 'Create something your users want'
+---
+
+In your app, you likely collects feedback from the user, in the form of rating of free text.
+
+This feedback can be logged so it is displayed in the webapp.
+
+## Note down task_id
+
+In your app, you likely collect user feedback **after** having logged a task to phospho. To link the user feedback to the log, phospho need to know the **task_id**. 
+
+phospho keeps tracks of the latest task id used. For simple use cases, you can do:
+
+```python
+phospho.user_feedback(
+    task_id=phospho.latest_task_id, raw_flag="success", notes="Some notes (can be None)"
+)
+```
+
+For more complex use cases, you can get the task_id from the `phospho.log`
+
+```python
+logged_content = phospho.log(input="question", output="answer")
+task_id = logged_content["task_id"]
+
+# ... later, when you collect feedback
+
+phospho.user_feedback(
+    task_id=task_id, raw_flag="success", notes="Some notes (can be None)"
+)
+```
+
+You can also entirely manage the task_id yourself. 
+
+```python
+# Generate a new task_id
+task_id = phospho.new_task_id()
+
+# Pass it to phospho.log to create a task with this id
+phospho.log(input="question", output="answer", task_id=task_id)
+
+# Give user feedback
+phospho.user_feedback(
+    task_id=task_id, raw_flag="success", notes="Some notes (can be None)"
+)
+```
+
+### API endpoint
+
+If you have a more custom setup, log the user feedback to phospho using the "Update task" endpoint in the [API](/api). 
+
+```bash
+curl -X POST https://api.phospho.ai/v0/tasks/$TASK_ID/ \
+-H "Authorization: Bearer $PHOSPHO_API_KEY" \
+-H "Content-Type: application/json" \
+-d '{
+
+    "flag": "success",
+    "flag_source": "user"
+    "metadata": {"stuff": "more stuff"}
+    "notes": "This is what the user said about this task"
+}'
+```
+
+Pass `"flag": "success"` or `"flag": "failure"` to the app. 
