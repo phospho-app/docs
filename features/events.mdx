@@ -15,6 +15,8 @@ By default, phospho will look for the following events:
 
 For example, create custom events to discover key talking points in a conversation.
 
+You can attach a webhook to an event, to be notified everytime the event is detected.
+
 ### Example of events
 
 phospho enables you to detect custom events in your app. Here are examples of events:
@@ -33,11 +35,17 @@ To define an event, go to the _Settings_ tab of your [dashboard](https://platfor
 
 You can add an the event name and the event description.
 
-You tell phospho what events to look for with natural language. Events are automatically detected by phospho's algorithms.
+You tell phospho what events to look for with natural language in the description of your event. Events are automatically detected by phospho's algorithms.
 
 - As a best practice, you should refere to your user as "the user" and to your LLM app as "the assistant".
 - Every time you log an interaction, phospho will detect if an event occured. If an event occured, it will be logged to phospho.
 
+(Optional) You can attach a webhook to the event. Every time the event is detected, phospho will send a POST request to the webhook, with the Event object in the body. Just add your webhook URL in the _Webhook_ field.
+
 ## Manage events
 
 Open Settings. At the bottom of the screen, you'll see Events already created. Click delete to delete an event.
+
+## Add a webhook
+
+Open Settings. 
