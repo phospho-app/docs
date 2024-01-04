@@ -38,23 +38,39 @@
   "navigation": [
     {
       "group": "Get Started",
-      "pages": ["introduction", "quickstart"]
+      "pages": [
+        "introduction",
+        "quickstart"
+      ]
     },
     {
       "group": "Features",
-      "pages": ["features/logging", "features/evaluation", "features/user-feedback", "features/events"]
+      "pages": [
+        "features/logging",
+        "features/evaluation",
+        "features/user-feedback",
+        "features/events",
+        "features/testing"
+      ]
     },
     {
       "group": "Other",
-      "pages": ["other/faq"]
+      "pages": [
+        "other/faq"
+      ]
     },
     {
       "group": "Examples",
-      "pages": ["examples/openai-agent", "examples/openai-streamlit"]
+      "pages": [
+        "examples/openai-agent",
+        "examples/openai-streamlit"
+      ]
     },
     {
       "group": "API Documentation",
-      "pages": ["api-reference/introduction"]
+      "pages": [
+        "api-reference/introduction"
+      ]
     }
   ],
   "footerSocials": {
