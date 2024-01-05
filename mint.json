@@ -63,7 +63,8 @@
       "group": "Examples",
       "pages": [
         "examples/openai-agent",
-        "examples/openai-streamlit"
+        "examples/openai-streamlit",
+        "examples/langchain-rag"
       ]
     },
     {
