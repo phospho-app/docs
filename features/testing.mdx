@@ -28,6 +28,7 @@ To test your agent, create a new file called `phospho_test.py`. This file will c
 # phospho_test.py
 
 import phospho
+from typing import Dict, List
 
 # Create a new test setup
 phospho_test = phospho.PhosphoTest()
@@ -40,8 +41,9 @@ phospho_test = phospho.PhosphoTest()
 )
 def test_my_agent(messages: List[Dict[str, str]]):
     # Here, call your agent
-    new_ouput = call_my_agent(messages) 
-    return new_ouput
+    # new_ouput = call_my_agent(messages) 
+    # We will just return a str for now
+    return "The response from the agent"
 
 # Run the test
 phospho_test.run(executor_type="parallel")
