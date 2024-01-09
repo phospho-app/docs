@@ -54,7 +54,7 @@ phospho.user_feedback(
 If you have a more custom setup, log the user feedback to phospho using the "Update task" endpoint in the [API](/api). 
 
 ```bash
-curl -X POST https://api.phospho.ai/v0/tasks/$TASK_ID/ \
+curl -X POST https://api.phospho.ai/v2/tasks/$TASK_ID/ \
 -H "Authorization: Bearer $PHOSPHO_API_KEY" \
 -H "Content-Type: application/json" \
 -d '{

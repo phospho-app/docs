@@ -2,16 +2,14 @@
 title: API reference
 ---
 
-Most phospho features are available through the API.
+Most phospho features are available through the API. The URL of the phospho API is `https://api.phospho.ai/v2`
 
-API endpoints are available at `https://api.phospho.ai/v0`
-
-[Read the API documentation here.](https://api.phospho.ai/v0/redoc)
+[Read the API documentation here!](https://api.phospho.ai/v2/redoc)
 
 For example, this will log a task to phospho:
 
 ```bash
-curl -X POST https://api.phospho.ai/v0/log/$PHOSPHO_PROJECT_ID \
+curl -X POST https://api.phospho.ai/v2/log/$PHOSPHO_PROJECT_ID \
 -H "Authorization: Bearer $PHOSPHO_API_KEY" \
 -H "Content-Type: application/json" \
 -d '{
@@ -30,7 +28,7 @@ curl -X POST https://api.phospho.ai/v0/log/$PHOSPHO_PROJECT_ID \
 In your app, you may have thumbs up and thumbs down next to your chat messages. Using the API, you can directly log them to phospho.
 
 ```bash
-curl -X POST https://api.phospho.ai/v0/tasks/TASK_ID/flag \
+curl -X POST https://api.phospho.ai/v2/tasks/TASK_ID/flag \
 -H "Authorization: Bearer $PHOSPHO_API_KEY" \
 -H "Content-Type: application/json" \
 -d '{
