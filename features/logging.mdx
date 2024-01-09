@@ -200,10 +200,10 @@ phospho.log(input=prompt, output=response_iterator, stream=True)
 
 ## Logging with the API
 
-You can directly log using the API [with the /log endpoint.](https://api.phospho.ai/v0/redoc#tag/Logs)
+You can directly log using the API [with the /log endpoint.](https://api.phospho.ai/v2/redoc#tag/Logs)
 
 ```bash
-curl -X POST https://api.phospho.ai/v0/log/$PHOSPHO_PROJECT_ID \
+curl -X POST https://api.phospho.ai/v2/log/$PHOSPHO_PROJECT_ID \
 -H "Authorization: Bearer $PHOSPHO_API_KEY" \
 -H "Content-Type: application/json" \
 -d '{

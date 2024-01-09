@@ -38,10 +38,7 @@
   "navigation": [
     {
       "group": "Get Started",
-      "pages": [
-        "introduction",
-        "quickstart"
-      ]
+      "pages": ["introduction", "quickstart"]
     },
     {
       "group": "Features",
@@ -55,9 +52,7 @@
     },
     {
       "group": "Other",
-      "pages": [
-        "other/faq"
-      ]
+      "pages": ["other/faq"]
     },
     {
       "group": "Examples",
@@ -69,9 +64,7 @@
     },
     {
       "group": "API Documentation",
-      "pages": [
-        "api-reference/introduction"
-      ]
+      "pages": ["api-reference/introduction"]
     }
   ],
   "footerSocials": {
@@ -79,5 +72,5 @@
     "github": "https://github.com/phospho-app",
     "linkedin": "https://www.linkedin.com/company/phospho-app/"
   },
-  "openapi": "https://api.phospho.ai/v0/openapi.json"
+  "openapi": "https://api.phospho.ai/v2/openapi.json"
 }
