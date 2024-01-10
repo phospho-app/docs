@@ -34,27 +34,26 @@ If you already have a project, go to Settings. Your project id is displayed on t
 
 ### Add environment variables
 
-In your code, add the following environment variable :
+In your code, add the following environment variables:
 
 ```bash
-export PHOSPHO_PROJECT_ID="your_project_id"
 export PHOSPHO_API_KEY="your_api_key"
+export PHOSPHO_PROJECT_ID="your_project_id"
 ```
 
 ### Log tasks to phospho
 
 **Tasks are the basic bricks that make up your LLM apps.** If you're a programmer, you can think of tasks like functions.
 
-A task is made of at least two things:
+A task is made of an input and an optional output, ideally readable by a human.
 
-- `input (str)`: What goes into a task. Eg: what the user asks to the assistant.
-- `output (Optional[str])`: What goes out of the task. Eg: what the assistant replied to the user.
+- `input (str)`: What goes into a task. _Eg: what the user asks to the assistant._
+- `output (Optional[str])`: What goes out of the task. _Eg: what the assistant replied to the user._
 
-Example of tasks you can log to phospho: _call to an LLM, answering a question, searching in documents, summarizing a text, performing inference of a model, steps of a LLM chain..._
+Example of tasks you can log to phospho: _call to an LLM, answering a question, searching in documents, summarizing a text, performing inference of a model, steps of a chain-of-thought..._
 
-Tasks can be grouped into **session**, and sessions can be grouped into **users**.
+Tasks can be grouped into **sessions**. Tasks and Sessions can be attached to **users**.
 
-Log tasks using the integrations.
 
 ### How to setup logging?
 
@@ -71,7 +70,7 @@ To log tasks, use `phospho.log`. The logged tasks are analyzed by the phospho an
 ```python
 import phospho
 
-# By default, phospho reads the PHOSPHO_PROJECT_ID and PHOSPHO_API_KEY from the environment variables
+# By default, phospho reads the PHOSPHO_API_KEY and PHOSPHO_PROJECT_ID from the environment variables
 phospho.init()
 
 # Example
@@ -112,7 +111,7 @@ To log tasks, use `phospho.log`. The logged tasks are analyzed by the phospho an
 ```js
 import { phospho } from "phospho";
 
-// By default, phospho reads the PHOSPHO_PROJECT_ID and PHOSPHO_API_KEY from the environment variables
+// By default, phospho reads the PHOSPHO_API_ID and PHOSPHO_PROJECT_KEY from the environment variables
 phospho.init();
 
 // Example

@@ -35,10 +35,10 @@ pip install --upgrade phospho
 
 ## Initialize phospho
 
-In your app, initialize the phospho module. By default, phospho will look for `PHOSPHO_PROJECT_ID` and `PHOSPHO_API_KEY` environment variables.
+In your app, initialize the phospho module. By default, phospho will look for `PHOSPHO_API_KEY` and `PHOSPHO_PROJECT_ID` environment variables.
 
 <Tip>
-  Learn how to get your project id and api key by [clicking
+  Learn how to get your api key and project id by [clicking
   here!](getting-started##1-get-your-phospho-api-key-and-your-project-id)
 </Tip>
 
@@ -48,7 +48,7 @@ import phospho
 phospho.init()
 ```
 
-You can also pass the `project_id` and `api_key` parameters to `phospho.init`.
+You can also pass the `api_key` and `project_id` parameters to `phospho.init`.
 
 ```python
 phospho.init(api_key="phospho-key", project_id="phospho-project-id")
