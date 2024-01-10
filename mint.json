@@ -31,10 +31,27 @@
       "url": "api-reference"
     }
   ],
+  "anchors": [
+    {
+      "name": "phospho platform",
+      "icon": "vial",
+      "url": "https://platform.phospho.ai"
+    },
+    {
+      "name": "Python",
+      "icon": "python",
+      "url": "python"
+    },
+    {
+      "name": "Javascript",
+      "icon": "js",
+      "url": "javascript"
+    }
+  ],
   "navigation": [
     {
       "group": "Getting Started",
-      "pages": ["welcome", "getting-started"]
+      "pages": ["welcome", "quickstart"]
     },
     {
       "icon": "python",
