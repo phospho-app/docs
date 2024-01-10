@@ -1,5 +1,5 @@
 ---
-title: Logging
+title: Logging to phospho with Python
 description: "Collect interactions and tasks"
 ---
 
@@ -29,7 +29,7 @@ pip install --upgrade phospho
 ```
 
 <Info>
-  This module is an open source work in progress. [Your help is deeply
+  The phospho module is an open source work in progress. [Your help is deeply
   appreciated!](https://github.com/phospho-app/phospho)
 </Info>
 
@@ -280,14 +280,3 @@ phospho.log(input=prompt, output=response_iterator, stream=True)
 for line in response_iterator:
     print(line)
 ```
-
-## Not a Python user?
-
-<CardGroup>
-  <Card title="Javascript" icon="js" href="javascript">
-    Log with the Javascript/Typescript SDK
-  </Card>
-  <Card title="API" icon="webhook" href="api-reference/introduction">
-    Log with the API endpoint
-  </Card>
-</CardGroup>

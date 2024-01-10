@@ -1,5 +1,5 @@
 ---
-title: Logging
+title: Logging to phospho with Javascript
 description: "Collect interactions and tasks"
 ---
 
@@ -33,7 +33,7 @@ yarn add phospho
 ```
 
 <Info>
-  This module is an open source work in progress. [Your help is deeply
+  The phospho module is an open source work in progress. [Your help is deeply
   appreciated!](https://github.com/phospho-app/phosphojs)
 </Info>
 
@@ -184,14 +184,3 @@ for await (const chunk of streamedResult) {
   process.stdout.write(chunk.choices[0]?.delta?.content || "");
 }
 ```
-
-## Not a Javascript user?
-
-<CardGroup>
-  <Card title="Python" icon="python" href="python">
-    Log with the Python module
-  </Card>
-  <Card title="API" icon="webhook" href="api-reference/introduction">
-    Log with the API endpoint
-  </Card>
-</CardGroup>

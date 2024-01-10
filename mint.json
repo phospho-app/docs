@@ -37,30 +37,6 @@
       "pages": ["welcome", "getting-started"]
     },
     {
-      "icon": "python",
-      "group": "Python",
-      "pages": [
-        "python/logging",
-        "python/testing",
-        {
-          "group": "Examples",
-          "pages": [
-            "python/examples/openai-agent",
-            "python/examples/openai-streamlit"
-          ]
-        },
-        {
-          "group": "Integrations",
-          "pages": ["python/integrations/langchain-rag"]
-        }
-      ]
-    },
-    {
-      "icon": "js",
-      "group": "Javascript",
-      "pages": ["javascript/logging"]
-    },
-    {
       "group": "Guides",
       "pages": [
         "guides/evaluation",
@@ -70,6 +46,37 @@
         "guides/ab-test"
       ]
     },
+    {
+      "group": "Integrations",
+      "pages": [
+        {
+          "icon": "python",
+          "group": "Python",
+          "pages": [
+            "integrations/python/logging",
+            "integrations/python/testing",
+            {
+              "group": "Examples",
+              "pages": [
+                "integrations/python/examples/openai-agent",
+                "integrations/python/examples/openai-streamlit"
+              ]
+            }
+          ]
+        },
+        {
+          "icon": "js",
+          "group": "Javascript",
+          "pages": ["integrations/javascript/logging"]
+        },
+        {
+          "icon": "bird",
+          "group": "Langchain",
+          "pages": ["integrations/langchain"]
+        }
+      ]
+    },
+
     {
       "group": "Other",
       "pages": ["other/faq"]

@@ -8,16 +8,17 @@ description: "Add AI analytics in your LLM app in a blitz"
 How to get started with phospho:
 
 <Steps>
-  <Step title="Create a phospho account">
+  <Step title="Get your phospho API key and your project id">
     Create an account on [phospho.ai](https://platform.phospho.ai). No credit
     card is required to get started.
   </Step>
   <Step title="Setup phospho logging in your app">
     Start logging using the Python Client, the JavaScript SDK or with the HTTP
-    API. It takes on average 5 minutes fo the basic setup.
+    API. It takes on average 5 minutes for the basic setup.
   </Step>
-  <Step title="Visualize your data">
-    Get analyses of your user interactions in the phospho dashboard.
+  <Step title="Get insigths in the dashboard">
+    Get analyses of your user interactions, explore the analytics and improve
+    your app.
   </Step>
 </Steps>
 
@@ -40,7 +41,7 @@ export PHOSPHO_PROJECT_ID="your_project_id"
 export PHOSPHO_API_KEY="your_api_key"
 ```
 
-### Log to phospho
+### Log tasks to phospho
 
 Logging is how you register tasks to phospho.
 
@@ -53,7 +54,9 @@ A task is made of at least two things:
 
 Example of tasks you can log to phospho: _call to an LLM, answering a question, searching in documents, summarizing a text, performing inference of a model, steps of a LLM chain..._
 
-Log tasks using the phospho Python module, the phospho JavaScript/Typescript module, or the API.
+Log tasks using the integrations.
+
+### How to setup logging?
 
 <Tabs>
 <Tab title="Python" icon="python">
@@ -114,7 +117,7 @@ phospho.log({ input, output });
 <Card
   title="More about logging in Javascript"
   icon="js"
-  href="javascript/logging"
+  href="integrations/javascript/logging"
 >
   Did you know you could log OpenAI completions, streaming outputs and metadata?
   Learn more by clicking here.
@@ -145,6 +148,34 @@ curl -X POST https://api.phospho.ai/v2/log/$PHOSPHO_PROJECT_ID \
 </Card>
 
 </Tab>
+
+<Tab title="Langchain">
+
+We provide a Langchain callback in our [Python module](https://pypi.org/project/phospho/).
+
+```bash
+pip install --upgrade phospho
+```
+
+```python
+from phospho.integrations import PhosphoLangchainCallbackHandler
+
+chain = ... # Your Langchain agent or chain
+
+chain.invoke(
+    "Your chain input",
+    # Add the callback handler to the config
+    config={"callbacks": [PhosphoLangchainCallbackHandler()]},
+)
+```
+
+<Card title="Langchain guide" icon="bird" href="integrations/langchain">
+  Customize what is logged to phospho by customizing the callback. Learn more by
+  clicking here.
+</Card>
+
+</Tab>
+
 </Tabs>
 
 ## 3. Get insights in the dashboard

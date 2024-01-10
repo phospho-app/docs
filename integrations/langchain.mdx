@@ -1,5 +1,6 @@
 ---
-title: Langchain integration
+title: Logging to phospho in Python Langchain
+description: Add AI analytics to your Langchain agent with phospho
 ---
 
 phospho can be added to a Langchain agent as a callback handler. By default, the task input is the beginning of the chain, and the task output is the end result. Intermediate steps are also logged.
@@ -10,7 +11,7 @@ from phospho.integrations import PhosphoLangchainCallbackHandler
 chain = ... # Your Langchain agent or chain
 
 chain.invoke(
-    text,
+    "Your chain input",
     # Add the callback handler to the config
     config={"callbacks": [PhosphoLangchainCallbackHandler()]},
 )
@@ -28,14 +29,26 @@ export PHOSPHO_PROJECT_ID=...
 export OPENAI_API_KEY=...
 ```
 
+<Tip>
+  Learn how to get your project id and api key by [clicking
+  here!](getting-started##1-get-your-phospho-api-key-and-your-project-id)
+</Tip>
+
 </Step>
 
 <Step>
-Install requirements
+Install requirements:
 
 ```
 pip install phospho openai langchain faiss-cpu
 ```
+
+The phospho module implements the Langchain callback as well as other helpful tools to interact with phospho. Learn more in the [python doc.](/integrations/python)
+
+<Info>
+  The phospho module is an open source work in progress. [Your help is deeply
+  appreciated!](https://github.com/phospho-app/phospho)
+</Info>
 
 </Step>
 
