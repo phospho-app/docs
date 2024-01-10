@@ -43,8 +43,6 @@ export PHOSPHO_API_KEY="your_api_key"
 
 ### Log tasks to phospho
 
-Logging is how you register tasks to phospho.
-
 **Tasks are the basic bricks that make up your LLM apps.** If you're a programmer, you can think of tasks like functions.
 
 A task is made of at least two things:
@@ -53,6 +51,8 @@ A task is made of at least two things:
 - `output (Optional[str])`: What goes out of the task. Eg: what the assistant replied to the user.
 
 Example of tasks you can log to phospho: _call to an LLM, answering a question, searching in documents, summarizing a text, performing inference of a model, steps of a LLM chain..._
+
+Tasks can be grouped into **session**, and sessions can be grouped into **users**.
 
 Log tasks using the integrations.
 
@@ -79,7 +79,12 @@ input = "Hello! This is what the user asked to the system"
 output = "This is the response showed to the user by the app."
 
 # This is how you log a task to phospho
-phospho.log(input=input, output=output)
+phospho.log(
+  input=input,
+  output=output,
+  # Optional: for chats, group tasks together in sessions
+  # session_id = "session_1",
+)
 ```
 
 <Card
@@ -115,7 +120,12 @@ const input = "Hello! This is what the user asked to the system";
 const output = "This is the response showed to the user by the app.";
 
 // This is how you log a task to phospho
-phospho.log({ input, output });
+phospho.log({
+  input,
+  output,
+  // Optional: for chats, group tasks together in sessions
+  // session_id: "session_1",
+});
 ```
 
 <Card
