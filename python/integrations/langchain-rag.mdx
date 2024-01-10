@@ -2,8 +2,7 @@
 title: Langchain integration
 ---
 
-
-phospho can be added to a Langchain agent as a callback handler. By default, the task input is the beginning of the chain, and the task output is the end result. Intermediate steps are also logged. 
+phospho can be added to a Langchain agent as a callback handler. By default, the task input is the beginning of the chain, and the task output is the end result. Intermediate steps are also logged.
 
 ```python
 from phospho.integrations import PhosphoLangchainCallbackHandler
@@ -11,12 +10,11 @@ from phospho.integrations import PhosphoLangchainCallbackHandler
 chain = ... # Your Langchain agent or chain
 
 chain.invoke(
-    text, 
+    text,
     # Add the callback handler to the config
     config={"callbacks": [PhosphoLangchainCallbackHandler()]},
 )
 ```
-
 
 ## Detailed setup in a retrieval agent
 
@@ -29,21 +27,22 @@ export PHOSPHO_API_KEY=...
 export PHOSPHO_PROJECT_ID=...
 export OPENAI_API_KEY=...
 ```
+
 </Step>
 
 <Step>
-Install requirements 
+Install requirements
 
 ```
 pip install phospho openai langchain faiss-cpu
 ```
-</Step> 
+
+</Step>
 
 <Step>
-Create a file called `main.py` with the agent code. 
+Create a file called `main.py` with the agent code.
 
 phospho is integrated with langchain via the `PhosphoLangchainCallbackHandler` callback handler. This callback handler will log the input and output of the agent to phospho.
-
 
 ```python
 
@@ -56,7 +55,7 @@ from langchain_core.runnables import RunnablePassthrough
 
 vectorstore = FAISS.from_texts(
     [
-        "Phospho is the LLM analytics platform",
+        "phospho is the LLM analytics platform",
         "Paris is the capital of Fashion (sorry not sorry London)",
         "The Concorde had a maximum cruising speed of 2,179 km (1,354 miles) per hour, or Mach 2.04 (more than twice the speed of sound), allowing the aircraft to reduce the flight time between London and New York to about three hours.",
     ],
@@ -98,7 +97,7 @@ The integration with phospho is done by adding the `PhosphoLangchainCallbackHand
 </Step>
 
 <Step>
-Start the RAG agent and ask questions about the documents. 
+Start the RAG agent and ask questions about the documents.
 
 ```bash
 python main.py
@@ -118,10 +117,9 @@ The conversation and the intermediate retrievals steps (such as the documents re
 
 ## Custom logging in langchain
 
-For more advanced manual logging with a langchain, you can inherit from the `PhosphoLangchainCallbackHandler` and add custom behaviour. 
+For more advanced manual logging with a langchain, you can inherit from the `PhosphoLangchainCallbackHandler` and add custom behaviour.
 
 The callback has a reference to the `phospho` object, which can be used to log custom data.
-
 
 ```python
 from phospho.integrations import PhosphoLangchainCallbackHandler
@@ -130,7 +128,7 @@ class MyCustomLangchainCallbackHandler(PhosphoLangchainCallbackHandler):
 
     def on_agent_finish(self, finish: AgentFinish, **kwargs: Any) -> Any:
         """Run on agent end."""
-        
+
         # Do something custom here
         self.phospho.log(input="...", output="...")
 

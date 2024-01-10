@@ -55,7 +55,7 @@ phospho.init();
 You can also pass the `project_id` and `api_key` parameters to `phospho.init`.
 
 ```javascript
-// Initialize Phospho
+// Initialize phospho
 phospho.init({ apiKey: "api_key", projectId: "project_id" });
 ```
 
@@ -90,7 +90,7 @@ phospho aims to be battery included. So if you pass something else than a `strin
 For example, if you use the OpenAI API:
 
 ```javascript
-// If you pass full OpenAI queries and results to Phospho, it will extract the input and output for you.
+// If you pass full OpenAI queries and results to phospho, it will extract the input and output for you.
 const question = "What's the capital of Fashion ?";
 const query = {
   model: "gpt-3.5-turbo",
@@ -114,7 +114,7 @@ const loggedContent = await phospho.log({ input: query, output: result });
 
 // Look at the fields "input" and "output" in the logged content
 // Original fields are in "raw_input" and "raw_output"
-console.log("The following content was logged to Phospho:", loggedContent);
+console.log("The following content was logged to phospho:", loggedContent);
 ```
 
 ### Custom extractors

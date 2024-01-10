@@ -3,7 +3,7 @@ title: Testing
 description: "Test your agent before deploying it to production with backtesting and dataset testing"
 ---
 
-Evaluate your app's performance before deploying it to production. The testing framework allows you to test your app with historical data or a custom dataset. The output of the test is a report that can be viewed in the Phospho dashboard.
+Evaluate your app's performance before deploying it to production. The testing framework allows you to test your app with historical data or a custom dataset. The output of the test is a report that can be viewed in the phospho dashboard.
 
 <Note>This feature is a work in progress, expect more updates soon!</Note>
 
@@ -11,10 +11,10 @@ Evaluate your app's performance before deploying it to production. The testing f
 
 The testing framework supports two types of testing:
 
-- **Backtesting**: Backtesting uses the logged Phospho data to evaluate your app's performance. This is great to quickly have representative data to test with.
+- **Backtesting**: Backtesting uses the logged phospho data to evaluate your app's performance. This is great to quickly have representative data to test with.
 - **Dataset**: Dataset testing allows testing with a custom dataset, providing more control over input scenarios. It's also useful when you don't have a lot of historical data.
 
-The output of the test is a report that can be viewed in the Phospho dashboard. To set up what's in the report, you can specify the metrics you want to evaluate. The two main metrics supported by the module are:
+The output of the test is a report that can be viewed in the phospho dashboard. To set up what's in the report, you can specify the metrics you want to evaluate. The two main metrics supported by the module are:
 
 - **Evaluate**: Evaluates the output of the app as success or failure based on the provided inputs (this is the same as [phospho evaluation](/features/evaluation))
 - **Compare**: Compares the current output of the app with a reference output
@@ -212,7 +212,7 @@ The `run` method takes the following parameters:
 
 ## Viewing the report
 
-The report can be viewed in the Phospho dashboard. To view the report, go to the Phospho dashboard and click on the `Tests` tab. The report will be displayed in the `Test Reports` section.
+The report can be viewed in the phospho dashboard. To view the report, go to the phospho dashboard and click on the `Tests` tab. The report will be displayed in the `Test Reports` section.
 
 ## Not a Python user?
 
