@@ -1,0 +1,154 @@
+---
+title: User Feedback
+description: "Create something your users want"
+---
+
+In your app, you likely collects feedback from the user, in the form of a rating (success/failure) or free text (ex: a comment).
+
+The logged feedback is displayed in the webapp for you to review.
+
+## How to log user feedback?
+
+In your app, you likely collect user feedback **after** having logged a task to phospho. To link the user feedback to the log, phospho needs to know the **task_id**.
+
+## How do I get the task_id?
+
+<Tabs>
+<Tab title="Python" icon="python">
+
+phospho keeps tracks of the latest task id used. For simple use cases, you can do:
+
+```python
+phospho.user_feedback(
+    task_id=phospho.latest_task_id,
+    flag="success", # or "failure"
+    flag_source="user",
+    notes="Some notes (can be None)",
+)
+```
+
+For more complex use cases, you can get the task_id from the `phospho.log`
+
+```python
+logged_content = phospho.log(input="question", output="answer")
+task_id = logged_content["task_id"]
+
+# ... later, when you collect feedback
+
+phospho.user_feedback(
+    task_id=task_id,
+    flag="success",
+)
+```
+
+You can also entirely manage the task_id yourself.
+
+```python
+# Generate a new task_id
+task_id = phospho.new_task()
+
+# Pass it to phospho.log to create a task with this id
+phospho.log(input="question", output="answer", task_id=task_id)
+
+# Give user feedback
+phospho.user_feedback(
+    task_id=task_id,
+    flag="success"
+)
+```
+
+</Tab>
+
+<Tab title="Javascript/Typescript" icon="js">
+
+phospho keeps tracks of the latest task id used. For simple use cases, you can do:
+
+```javascript
+phospho.userFeedback({
+  tastId: phospho.latestTaskId,
+  flag: "success", // or "failure"
+  flagSource: "user",
+  notes: "Some notes (can be None)",
+});
+```
+
+For more complex use cases, you can get the task_id from the `phospho.log`. Beware ! The task_id is in snake_case.
+
+```javascript
+const loggedContent = await phospho.log({
+  input: "question",
+  output: "answer",
+});
+// Beware ! The task_id is in snake_case
+const taskId = loggedContent.task_id;
+
+// ... later, when you collect feedback
+
+phospho.userFeedback({
+  taskId: taskId,
+  flag: "success",
+});
+```
+
+You can also entirely manage the task_id yourself.
+
+```javascript
+// Generate a new task_id
+const taskId = phospho.newTask();
+
+// Pass it to phospho.log to create a task with this id
+phospho.log({ input: "question", output: "answer", taskId: taskId });
+
+// Give user feedback
+phospho.userFeedback({
+  taskId: taskId,
+  flag: "success",
+});
+```
+
+</Tab>
+
+<Tab title="API" icon="webhook">
+
+If you are using the API directly, you need to manage the task_id by yourself.
+
+Create a task_id by generating a random string hash.
+
+```bash
+TASK_ID=$(openssl rand -hex 16)
+```
+
+<Warning>If this id is already used, phospho will return an error!</Warning>
+
+Pass this task_id to the `log` endpoint.
+
+```bash
+curl -X POST https://api.phospho.ai/v2/log/$PHOSPHO_PROJECT_ID \
+-H "Authorization: Bearer $PHOSPHO_API_KEY" \
+-H "Content-Type: application/json" \
+-d '{
+    "batched_log_events": [
+        {
+            "input": "your_input",
+            "output": "your_output",
+            "task_id": "$TASK_ID"
+        }
+    ]
+}'
+```
+
+Give user feedback by updating the task associated to this hash.s
+
+```bash
+curl -X POST https://api.phospho.ai/v2/tasks/$TASK_ID/ \
+-H "Authorization: Bearer $PHOSPHO_API_KEY" \
+-H "Content-Type: application/json" \
+-d '{
+    "flag": "success",
+    "flag_source": "user"
+    "notes": "This is what the user said about this task"
+}'
+```
+
+</Tab>
+</Tabs>

@@ -13,7 +13,7 @@
   },
   "modeToggle": {
     "default": "dark",
-    "isHidden": true
+    "isHidden": false
   },
   "topbarLinks": [
     {
@@ -29,25 +29,45 @@
     {
       "name": "API Reference",
       "url": "api-reference"
-    },
-    {
-      "name": "Examples",
-      "url": "examples"
     }
   ],
   "navigation": [
     {
-      "group": "Get Started",
-      "pages": ["introduction", "quickstart"]
+      "group": "Getting Started",
+      "pages": ["welcome", "getting-started"]
     },
     {
-      "group": "Features",
+      "icon": "python",
+      "group": "Python",
       "pages": [
-        "features/logging",
-        "features/evaluation",
-        "features/user-feedback",
-        "features/events",
-        "features/testing"
+        "python/logging",
+        "python/testing",
+        {
+          "group": "Examples",
+          "pages": [
+            "python/examples/openai-agent",
+            "python/examples/openai-streamlit"
+          ]
+        },
+        {
+          "group": "Integrations",
+          "pages": ["python/integrations/langchain-rag"]
+        }
+      ]
+    },
+    {
+      "icon": "js",
+      "group": "Javascript",
+      "pages": ["javascript/logging"]
+    },
+    {
+      "group": "Guides",
+      "pages": [
+        "guides/evaluation",
+        "guides/events",
+        "guides/user-feedback",
+        "guides/sessions-and-users",
+        "guides/ab-test"
       ]
     },
     {
@@ -55,16 +75,8 @@
       "pages": ["other/faq"]
     },
     {
-      "group": "Examples",
-      "pages": [
-        "examples/openai-agent",
-        "examples/openai-streamlit",
-        "examples/langchain-rag"
-      ]
-    },
-    {
-      "group": "API Documentation",
-      "pages": ["api-reference/introduction"]
+      "group": "API Reference",
+      "pages": ["api-reference/introduction", "api-reference/logging"]
     }
   ],
   "footerSocials": {

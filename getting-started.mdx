@@ -1,0 +1,172 @@
+---
+title: "Getting started"
+description: "Add AI analytics in your LLM app ."
+---
+
+<Note>The project is in **Beta**. Expect frequent changes and updates!</Note>
+
+How to get started with phospho:
+
+<Steps>
+  <Step title="Create a phospho account">
+    Create an account on [phospho.ai](https://platform.phospho.ai). No credit
+    card is required to get started.
+  </Step>
+  <Step title="Setup phospho logging in your app">
+    Start logging using the Python Client, the JavaScript SDK or with the HTTP
+    API. It takes on average 5 minutes fo the basic setup.
+  </Step>
+  <Step title="Visualize your data">
+    Get analyses of your user interactions in the phospho dashboard.
+  </Step>
+</Steps>
+
+## 1. Get your phospho API key and your project id
+
+Go to the [phospho platform](https://platform.phospho.ai/). Login or create an account if you don't have one.
+
+If this is your first time using phospho, a Default project has been created for you. On the main page, note down the **project id** and follow the link to create a new **API key**.
+
+If you already have a project, go to Settings. Your project id is displayed on the top of the page. To create an API key, click on the _Manage Organization & API keys_ button. Store your **API key** safely!
+
+## 2. Setup phospho logging in your app
+
+### Add environment variables
+
+In your code, add the following environment variable :
+
+```bash
+export PHOSPHO_PROJECT_ID="your_project_id"
+export PHOSPHO_API_KEY="your_api_key"
+```
+
+### Log to phospho
+
+Logging is how you register tasks to phospho.
+
+**Tasks are the basic bricks that make up your LLM apps.** If you're a programmer, you can think of tasks like functions.
+
+A task is made of at least two things:
+
+- `input (str)`: What goes into a task. Eg: what the user asks to the assistant.
+- `output (Optional[str])`: What goes out of the task. Eg: what the assistant replied to the user.
+
+Example of tasks you can log to phospho: _call to an LLM, answering a question, searching in documents, summarizing a text, performing inference of a model, steps of a LLM chain..._
+
+Log tasks using the phospho Python module, the phospho JavaScript/Typescript module, or the API.
+
+<Tabs>
+<Tab title="Python (recommended)" icon="python">
+The phospho [Python module](https://pypi.org/project/phospho/) in the easiest way to log to phospho. It is compatible with Python 3.9+.
+
+```bash
+pip install --upgrade phospho
+```
+
+To log tasks, use `phospho.log`. The logged tasks are analyzed by the phospho analytics pipeline.
+
+```python
+import phospho
+
+# By default, phospho reads the PHOSPHO_PROJECT_ID and PHOSPHO_API_KEY from the environment variables
+phospho.init()
+
+# Example
+input = "Hello! This is what the user asked to the system"
+output = "This is the response showed to the user by the app."
+
+# This is how you log a task to phospho
+phospho.log(input=input, output=output)
+```
+
+<Card title="More about logging in Python" icon="python" href="python/logging">
+  Did you know you could log OpenAI completions, streaming outputs and metadata?
+  Learn more by clicking here.
+</Card>
+
+</Tab>
+<Tab title="Javascript/Typescript" icon="js">
+
+The phospho [JavaScript module](https://www.npmjs.com/package/phospho) is the easiest way to log to phospho. It is compatible with Node.js.
+
+Types are available for your Typescript codebase.
+
+```bash
+npm i phospho
+```
+
+To log tasks, use `phospho.log`. The logged tasks are analyzed by the phospho analytics pipeline.
+
+```js
+import { phospho } from "phospho";
+
+// By default, phospho reads the PHOSPHO_PROJECT_ID and PHOSPHO_API_KEY from the environment variables
+phospho.init();
+
+// Example
+const input = "Hello! This is what the user asked to the system";
+const output = "This is the response showed to the user by the app.";
+
+// This is how you log a task to phospho
+phospho.log({ input, output });
+```
+
+<Card
+  title="More about logging in Javascript"
+  icon="js"
+  href="javascript/logging"
+>
+  Did you know you could log OpenAI completions, streaming outputs and metadata?
+  Learn more by clicking here.
+</Card>
+
+</Tab>
+
+<Tab title="API" icon="webhook">
+
+You can directly log to phospho using [the /log endpoint](https://api.phospho.ai/v2/redoc#tag/Logs) of the API.
+
+```bash
+curl -X POST https://api.phospho.ai/v2/log/$PHOSPHO_PROJECT_ID \
+-H "Authorization: Bearer $PHOSPHO_API_KEY" \
+-H "Content-Type: application/json" \
+-d '{
+    "batched_log_events": [
+        {
+            "input": "your_input",
+            "output": "your_output"
+        }
+    ]
+}'
+```
+
+<Card title="API reference" icon="webhook" href="api-reference/introduction">
+  Create a tailored integration with the API. Learn more by clicking here.
+</Card>
+
+</Tab>
+</Tabs>
+
+## 3. Get insights in the dashboard
+
+Phospho extracts insights from the tasks logged. Discover the insights in the [phospho dashboard](https://phospho.ai/).
+
+Learn more about the insights you can get by reading our [guides](/guides):
+
+<CardGroup>
+  <Card title="Evaluation" href="guides/evaluation">
+    phospho automatically rates the tasks as success or failure.
+  </Card>
+  <Card title="Events detection" href="guides/events">
+    phospho detects in your tasks the events you're looking for.
+  </Card>
+  <Card title="User Feedback" href="guides/user-feedback">
+    Collect user feedback to improve your app and the automatic evaluation.
+  </Card>
+  <Card title="Sessions and Users" href="guides/sessions-and-users">
+    Group tasks together to structure insights.
+  </Card>
+  <Card title="AB Testing" href="guides/ab-testing">
+    Use different project id to compare versions of your app.
+  </Card>
+</CardGroup>

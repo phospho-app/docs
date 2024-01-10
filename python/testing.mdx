@@ -1,8 +1,7 @@
 ---
 title: Testing
-description: 'Test your agent before deploying it to production with backtesting and dataset testing'
+description: "Test your agent before deploying it to production with backtesting and dataset testing"
 ---
-
 
 Evaluate your app's performance before deploying it to production. The testing framework allows you to test your app with historical data or a custom dataset. The output of the test is a report that can be viewed in the Phospho dashboard.
 
@@ -22,7 +21,7 @@ The output of the test is a report that can be viewed in the Phospho dashboard. 
 
 ## Getting Started
 
-To test your agent, create a new file called `phospho_test.py`. This file will contain the test cases for your app. 
+To test your agent, create a new file called `phospho_test.py`. This file will contain the test cases for your app.
 
 ```python
 # phospho_test.py
@@ -41,7 +40,7 @@ phospho_test = phospho.PhosphoTest()
 )
 def test_my_agent(messages: List[Dict[str, str]]):
     # Here, call your agent
-    # new_ouput = call_my_agent(messages) 
+    # new_ouput = call_my_agent(messages)
     # We will just return a str for now
     return "The response from the agent"
 
@@ -49,7 +48,7 @@ def test_my_agent(messages: List[Dict[str, str]]):
 phospho_test.run(executor_type="parallel")
 ```
 
-The test cases are defined as functions with the `@phospho_test.test` decorator. 
+The test cases are defined as functions with the `@phospho_test.test` decorator.
 
 The `@phospho_test.test` decorator takes the following parameters:
 
@@ -91,7 +90,7 @@ phospho_test.run(executor_type="parallel")
 
 In this example, the test_santa function is backtested with 10 samples, while test_santa_dataset is tested with a custom dataset loaded from `golden_dataset.xlsx` repeated twice.
 
-Since LLM generate random responses, testing on a sufficient number of samples is important to get a good idea of the app's performance. 
+Since LLM generate random responses, testing on a sufficient number of samples is important to get a good idea of the app's performance.
 
 ## Sources Loaders
 
@@ -127,8 +126,6 @@ Source Loader Parameters: Parameters such as `path` to the local file and `test_
 
 Supported file formats: `csv`, `xlsx`, `json`
 
-
-
 Example of a local csv file:
 
 ```
@@ -136,7 +133,11 @@ input, output
 "Hello", "Hi! How can I help you?"
 ```
 
-<Note>When testing with the metric `compare`, the dataset must have a column `output` to be used as a reference output. The new output is compared to this reference (better or worse).</Note>
+<Note>
+  When testing with the metric `compare`, the dataset must have a column
+  `output` to be used as a reference output. The new output is compared to this
+  reference (better or worse).
+</Note>
 
 Example of a test:
 
@@ -151,7 +152,10 @@ def test_santa_dataset(input: str):
     return santa_claus_agent.answer(messages=[{"role": "user", "content": input}])
 ```
 
-<Note>The columns of the dataset must match the signature of the app function to evaluate. Extra columns will be ignored.</Note>
+<Note>
+  The columns of the dataset must match the signature of the app function to
+  evaluate. Extra columns will be ignored.
+</Note>
 
 ## Metrics
 
@@ -209,3 +213,14 @@ The `run` method takes the following parameters:
 ## Viewing the report
 
 The report can be viewed in the Phospho dashboard. To view the report, go to the Phospho dashboard and click on the `Tests` tab. The report will be displayed in the `Test Reports` section.
+
+## Not a Python user?
+
+<CardGroup>
+  {/* <Card title="Javascript" icon="js" href="javascript">
+    Log with the Javascript/Typescript SDK
+  </Card> */}
+  <Card title="API" icon="webhook" href="api-reference/introduction">
+    Run tests with the API endpoints
+  </Card>
+</CardGroup>
