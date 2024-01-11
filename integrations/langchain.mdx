@@ -99,7 +99,10 @@ from phospho.integrations import PhosphoLangchainCallbackHandler
 while True:
     text = input("Enter a question: ")
     response = retrieval_chain.invoke(
-        text, config={"callbacks": [PhosphoLangchainCallbackHandler()]}
+        text, 
+        config={
+            "callbacks": [PhosphoLangchainCallbackHandler()]
+        }
     )
     print(response)
 

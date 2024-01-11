@@ -103,6 +103,21 @@ phospho.log({
 });
 ```
 
+```python Langchain
+import phospho
+from phospho.integrations import PhosphoLangchainCallbackHandler
+
+session_id = phospho.new_session()
+
+response = retrieval_chain.invoke(
+    "Chain input", 
+    config={"callbacks": [
+        # Pass the session_id to the callback
+        PhosphoLangchainCallbackHandler(session_id=session_id)
+    ]}
+)
+```
+
 </CodeGroup>
 
 Sessions are useful for short term insights. For example, to monitor for how long a user chats with your LLM app before disconnecting, the average number of messages per session, or what kind of messages ends a session.
