@@ -29,6 +29,10 @@
     {
       "name": "API Reference",
       "url": "api-reference"
+    },
+    {
+      "name": "Examples",
+      "url": "examples"
     }
   ],
   "navigation": [
@@ -84,6 +88,10 @@
     {
       "group": "API Reference",
       "pages": ["api-reference/introduction", "api-reference/logging"]
+    },
+    {
+      "group": "Examples",
+      "pages": ["examples/introduction"]
     }
   ],
   "footerSocials": {
