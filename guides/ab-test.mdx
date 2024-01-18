@@ -5,8 +5,44 @@ description: "Run AB tests in your app to see which version performs better"
 
 You can try out different versions of your app to see which one performs better.
 
-To do so, you need to create a new project in phospho. By comparing the results of the two projects, you can see which version performs better.
+To do so, add a field `version_id` with the name of your version in the metadata field of the tasks you log to phospho.
 
-## Step by Step
+<CodeGroup>
 
-<Tip>Coming soon!</Tip>
+```python python
+log = phospho.log(
+    input="log this",
+    output="and that",
+    version_id="YOUR_VERSION_ID"
+)
+```
+
+```javascript javascript
+log = phospho.log({
+  input: "log this",
+  output: "and that",
+  version_id:"YOUR_VERSION_ID",
+});
+```
+
+```bash HTTP API
+curl -X POST https://api.phospho.ai/v2/log/$PHOSPHO_PROJECT_ID \
+-H "Authorization: Bearer $PHOSPHO_API_KEY" \
+-H "Content-Type: application/json" \
+-d '{
+    "batched_log_events": [
+        {
+            "input": "your_input",
+            "output": "your_output"
+            "metadata": {
+                "version_id": "YOUR_VERSION_ID"
+            }
+        }
+    ]
+}'
+
+```
+
+</CodeGroup>
+
+To see the results of your AB test, go to the [Phospho dashboard](https://platform.phospho.ai) and click on the "AB Testing" tab.
