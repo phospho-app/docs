@@ -1,11 +1,10 @@
 ---
-title: Testing in phospho with Python
+title: Testing with phospho in Python
 description: "Test your agent before deploying it to production"
 ---
 
 Evaluate your app's performance before deploying it to production. The testing framework allows you to test your app with historical data or a custom dataset. The output of the test is a report that can be viewed in the phospho dashboard.
 
-<Note>This feature is a work in progress, expect more updates soon!</Note>
 
 ## Overview
 
@@ -21,11 +20,10 @@ The output of the test is a report that can be viewed in the phospho dashboard. 
 
 ## Getting Started
 
-To test your agent, create a new file called `phospho_test.py`. This file will contain the test cases for your app.
+To test your agent, create a new file called `phospho_testing.py`. This file will contain the test cases for your app.
 
-```python
-# phospho_test.py
 
+```python phospho_testing.py
 import phospho
 from typing import Dict, List
 
@@ -56,9 +54,10 @@ The `@phospho_test.test` decorator takes the following parameters:
 - `source_loader_params`: Parameters for the source loader. These parameters vary depending on the source loader used.
 - `metrics`: The metrics to evaluate. This can be either `evaluate` or `compare`.
 
-### Detailed example
 
-```python
+## Example
+
+```python phospho_testing.py
 import phospho
 from backend import SantaClausAgent
 from typing import Dict, List
@@ -92,6 +91,7 @@ In this example, the test_santa function is backtested with 10 samples, while te
 
 Since LLM generate random responses, testing on a sufficient number of samples is important to get a good idea of the app's performance.
 
+
 ## Sources Loaders
 
 Source loaders are used to load the data for testing.
@@ -105,6 +105,7 @@ Use the data logged to phospho to evaluate your app's performance.
 Decorator Parameter: `source_loader="backtest"`
 Source Loader Parameters: Parameters like `sample_size` can be specified to control the number of samples used for testing.
 
+
 ```python
 @phospho_test.test(
     source_loader="backtest",
@@ -115,6 +116,7 @@ def test_santa(messages: List[Dict[str, str]]):
     santa_claus_agent = SantaClausAgent()
     return santa_claus_agent.answer(messages)
 ```
+
 
 ### Dataset (custom data)
 
@@ -210,6 +212,3 @@ The `run` method takes the following parameters:
 
 - `executor_type`: The executor type to use for running the test. This can be either `parallel` or `sequential`. Sequential is great for debugging while parallel offers the best speed. The default is `parallel`.
 
-## Viewing the report
-
-The report can be viewed in the phospho dashboard. To view the report, go to the phospho dashboard and click on the `Tests` tab. The report will be displayed in the `Test Reports` section.
