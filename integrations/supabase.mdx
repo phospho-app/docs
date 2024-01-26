@@ -25,7 +25,7 @@ We also assume that you have already created the chatbot UI using Supabase ([her
 
 [Create an account on phospho](https://app.phospho.ai/dashboard) and get your API key and project id from the Settings.
 
-Then, add those environment variables to your Supabase project.
+Then, add the `PHOSPHO_API_KEY` and `PHOSPHO_PROJECT_ID` secrets to your Supabase project.
 
 ### Option 1: In the CLI
 
@@ -36,7 +36,7 @@ PHOSPHO_API_KEY="..."
 PHOSPHO_PROJECT_ID="..."
 ```
 
-Push those environment variables to your Supabase project:
+Push those secrets to your Supabase project:
 
 ```bash
 supabase secrets set --env-file ./supabase/.env
@@ -44,7 +44,7 @@ supabase secrets set --env-file ./supabase/.env
 
 ### Option 2: In the console UI
 
-You can also add the phospho API key and project id directly in the Supabase console. Go to Settings/Environment variables, and create the `PHOSPHO_API_KEY` and `PHOSPHO_PROJECT_ID` variables.
+Add directly the phospho API key and project id as Edge Functions Secrets in the Supabase console. Go to Settings/Edge Functions, and create the `PHOSPHO_API_KEY` and `PHOSPHO_PROJECT_ID` secrets.
 
 <img width={"100%"} src="../images/supabase/secrets_edge_functions.png" />
 
