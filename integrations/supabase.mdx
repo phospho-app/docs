@@ -96,11 +96,11 @@ Example of how to insert a new row in the chat_history table with Supabase:
 // The first time a user sends a message, let the chat_id be generated automatically
 const { firstMessage, error } = await supabase
   .from('chat_history')
-  .upsert({ 
+  .insert({ 
     user_message: userMessage, // The message sent by the user
     assistant_response: assistantResponse, // The response displayed to the user, eg LLM generation
     metadata: metadata // Optional Object
-})
+}).select()
 
 // We get the chat_id of the first message
 const chat_id = firstMessage.chat_id
@@ -109,12 +109,12 @@ const chat_id = firstMessage.chat_id
 // This groups all the messages from the same conversation
 const { error } = await supabase
   .from('chat_history')
-  .upsert({ 
+  .insert({ 
     chat_id: chat_id, 
     user_message: userMessage, 
     assistant_response: assistantResponse, 
     metadata: metadata
-})
+}).select()
 ```
 
 ## Setup the Supabase Edge Function
@@ -261,7 +261,9 @@ In the HTTP Headers section, add an `Authorization` header with the value `Beare
 
 ### Test the webhook
 
-To test the webhook, send a message to your chatbot. You should see a new row in the `chat_history` table, and the webhook should be triggered.
+To test the webhook, insert a row in the `chat_history` table, and the webhook should be triggered. You'll see the logs in the phospho dashboard.
+
+You can also send a message to your chatbot. This will now trigger the webhook and log the message to phospho.
 
 ## Next steps
 
