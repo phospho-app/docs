@@ -38,7 +38,10 @@
   "navigation": [
     {
       "group": "Getting Started",
-      "pages": ["welcome", "getting-started"]
+      "pages": [
+        "welcome",
+        "getting-started"
+      ]
     },
     {
       "group": "Guides",
@@ -48,7 +51,8 @@
         "guides/user-feedback",
         "guides/sessions-and-users",
         "guides/testing",
-        "guides/ab-test"
+        "guides/ab-test",
+        "guides/topics"
       ]
     },
     {
@@ -73,27 +77,37 @@
         {
           "icon": "js",
           "group": "JavaScript",
-          "pages": ["integrations/javascript/logging"]
+          "pages": [
+            "integrations/javascript/logging"
+          ]
         },
         {
           "icon": "bird",
           "group": "Langchain",
-          "pages": ["integrations/langchain"]
+          "pages": [
+            "integrations/langchain"
+          ]
         }
       ]
     },
-
     {
       "group": "Other",
-      "pages": ["other/faq"]
+      "pages": [
+        "other/faq"
+      ]
     },
     {
       "group": "API Reference",
-      "pages": ["api-reference/introduction", "api-reference/logging"]
+      "pages": [
+        "api-reference/introduction",
+        "api-reference/logging"
+      ]
     },
     {
       "group": "Examples",
-      "pages": ["examples/introduction"]
+      "pages": [
+        "examples/introduction"
+      ]
     }
   ],
   "footerSocials": {
@@ -101,5 +115,15 @@
     "github": "https://github.com/phospho-app",
     "linkedin": "https://www.linkedin.com/company/phospho-app/"
   },
-  "openapi": "https://api.phospho.ai/v2/openapi.json"
+  "openapi": "https://api.phospho.ai/v2/openapi.json",
+  "analytics": {
+    "posthog": {
+      "apiKey": "phc_EesFKS4CVoyc0URzJN0FOETpg7KipCBEpRvHEvv5mDF",
+      "apiHost": "https://app.posthog.com"
+    }
+  },
+  "feedback": {
+    "thumbsRating": true,
+    "raiseIssue": true
+  }
 }
