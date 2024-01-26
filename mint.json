@@ -79,6 +79,11 @@
           "icon": "bird",
           "group": "Langchain",
           "pages": ["integrations/langchain"]
+        },
+        {
+          "icon": "bolt",
+          "group": "Supabase",
+          "pages": ["integrations/supabase"]
         }
       ]
     },
