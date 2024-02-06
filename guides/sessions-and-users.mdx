@@ -124,16 +124,16 @@ Sessions are useful for short term insights. For example, to monitor for how lon
 
 ## Users
 
-<Tip>Coming soon!</Tip>
+Find out how specific users interact with your LLM app by logging the user id.
 
-Attach tasks and sessions to a **user id** when logging. The user id can be any string. 
+To do so, attach tasks and sessions to a `user_id` when logging. The user id can be any string. 
 
 <CodeGroup>
 ```python Python
 phospho.log(
     input="What is the meaning of life?",
     output="42",
-    user_id="user_1",
+    user_id="roger@gmail.com",
 )
 ```
 
@@ -141,9 +141,13 @@ phospho.log(
 phospho.log({
     input: "What is the meaning of life?",
     output: "42",
-    userId: "user_1",
+    user_id: "roger@gmail.com",
 });
 ```
 </CodeGroup>
 
-Users are useful to understand how someone use your LLM app on the long run. For example, to monitor the retention of your users.
+User analytics are available in the tabs Insights/Users. 
+- Discover aggregated metrics (number of tasks, average session duration, etc.)
+- Access the tasks and sessions of a user by clicking on the corresponding row.
+
+Monitoring users helps you discover power users of your app, abusive users, or users who are struggling with your LLM app.
