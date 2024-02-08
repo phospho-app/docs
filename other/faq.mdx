@@ -29,4 +29,4 @@ phospho modules are non-blocking by design. The logger won't raise any Exception
 
 1. Make sure you're using the latest version of the phospho module in your app
 2. Make sure you have the correct API key and project ID set up
-3. If you're using background tasks and a serverless deployment, your instance may get shut down before the logger has time to send the data to phospho. In this case, you can set the instance CPU to be "always allocated" or avoid using background tasks (the logger is designed to be async and non-blocking, so you can use it in the main thread of your app without impacting performances)
+3. If you're using background tasks and a serverless deployment, your instance may get shut down before the logger has time to send the data to phospho. In this case, you can set the instance CPU to be "always allocated" or avoid using background tasks (the logger is designed to be async and non-blocking, so you can use it in the main thread of your app without heavy impact on performance)
