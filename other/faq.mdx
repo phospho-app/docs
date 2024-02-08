@@ -9,6 +9,8 @@ phospho's algorithms infer what is a success or a failure for your project based
 - the user feedback collected by phospho
 - the success or failure annotation from you and your team in your dashboard
 
+You can also collect user feedback or use your own model. Just send the label `success` or `failure` to phospho using the API. [Read more](../guides/user-feedback)
+
 ## Where is stored the data logged to phospho?
 
 The data logged to phospho is stored in a database hosted by Google Cloud on European servers.
@@ -22,3 +24,9 @@ No. The phospho logger is designed to use as little resources as possible. The l
 ## If phospho is down, will my app be down?
 
 phospho modules are non-blocking by design. The logger won't raise any Exception in your app if the phospho's servers are unavailable or if you exceeded you quotas.
+
+## Troubleshooting: I'm not seeing any data in my dashboard
+
+1. Make sure you're using the latest version of the phospho module in your app
+2. Make sure you have the correct API key and project ID set up
+3. If you're using background tasks and a serverless deployment, your instance may get shut down before the logger has time to send the data to phospho. In this case, you can set the instance CPU to be "always allocated" or avoid using background tasks (the logger is designed to be async and non-blocking, so you can use it in the main thread of your app without impacting performances)
