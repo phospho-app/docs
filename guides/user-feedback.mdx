@@ -63,9 +63,14 @@ phospho.user_feedback(
 
 <Tab title="Javascript/Typescript" icon="js">
 
-phospho keeps tracks of the latest task id used. For simple use cases, you can do:
+
+### Server-side (Node.js)
+
+phospho keeps tracks of the latest task id used. 
+
 
 ```javascript
+import {phospho} from "phospho";
 phospho.userFeedback({
   tastId: phospho.latestTaskId,
   flag: "success", // or "failure"
@@ -85,7 +90,6 @@ const loggedContent = await phospho.log({
 const taskId = loggedContent.task_id;
 
 // ... later, when you collect feedback
-
 phospho.userFeedback({
   taskId: taskId,
   flag: "success",
@@ -105,6 +109,42 @@ phospho.log({ input: "question", output: "answer", taskId: taskId });
 phospho.userFeedback({
   taskId: taskId,
   flag: "success",
+});
+```
+
+### Client-side (Browser)
+
+If you collect user feedback in the browser, you can use the `sendUserFeedback` function. 
+
+This function is different from the server side, because it doesn't need authentication. However, it requires the `projectId` to be passed as an argument.
+
+After logging a task, you can send it back to the browser and use the `sendUserFeedback` function. 
+
+```javascript
+import {sendUserFeedback} from "phospho";
+
+// Handle logging in your backend, and send the task_id to the browser
+const taskId = await fetch(
+  "https://your-backend.com/some-endpoint",
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      your: "stuff",
+    }),
+  }
+).then((res) => res.json()).then((data) => data.task_id);
+
+// When you collect feedback, send it to phospho
+// For example, when the user clicks on a button
+sendUserFeedback({
+  projectId: "your_project_id",
+  tastId: taskId,
+  flag: "success", // or "failure"
+  flagSource: "user",
+  notes: "Some notes (can be None)",
 });
 ```
 
@@ -139,13 +179,15 @@ curl -X POST https://api.phospho.ai/v2/log/$PHOSPHO_PROJECT_ID \
 }'
 ```
 
-Give user feedback by updating the task associated to this hash.s
+Give user feedback by updating the task associated to this id.
+
+This endpoint is public. You shouldn't need to pass the API key, but you need to pass the project_id. This is done to avoid leaking your phospho API key.
 
 ```bash
 curl -X POST https://api.phospho.ai/v2/tasks/$TASK_ID/ \
--H "Authorization: Bearer $PHOSPHO_API_KEY" \
 -H "Content-Type: application/json" \
 -d '{
+    "project_id": "$PHOSPHO_PROJECT_ID",
     "flag": "success",
     "flag_source": "user"
     "notes": "This is what the user said about this task"
