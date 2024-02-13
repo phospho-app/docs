@@ -9,14 +9,20 @@ You can also log this end user feedback to phospho. This helps improve the quali
 
 The logged feedback is displayed in the webapp for you to review.
 
-## How to log user feedback?
+## What's the task id?
 
 In your app, you likely collect user feedback **after** having logged a task to phospho. To link the user feedback to the log, phospho needs to know the **task_id**.
 
-## How do I get the task_id?
+## How to log user feedback?
 
 <Tabs>
 <Tab title="Python" icon="python">
+
+The phospho python package provides a `user_feedback` function to log user feedback.
+
+```python
+pip install phospho
+```
 
 phospho keeps tracks of the latest task id used. For simple use cases, you can do:
 
@@ -63,6 +69,11 @@ phospho.user_feedback(
 
 <Tab title="Javascript/Typescript" icon="js">
 
+The phospho javascript package provides a server-side `userFeedback` function and a client-side `sendUserFeedback` function to log user feedback.
+
+```bash
+npm install phospho
+```
 
 ### Server-side (Node.js)
 
@@ -116,9 +127,11 @@ phospho.userFeedback({
 
 If you collect user feedback in the browser, you can use the `sendUserFeedback` function. 
 
-This function is different from the server side, because it doesn't need authentication. However, it requires the `projectId` to be passed as an argument.
+This function is different from the server side, because it doesn't need your phospho api key. This is done to avoid leaking your phospho API key.
 
-After logging a task, you can send it back to the browser and use the `sendUserFeedback` function. 
+However, this function requires the `projectId`.
+
+Here is how to use the `sendUserFeedback` function. 
 
 ```javascript
 import {sendUserFeedback} from "phospho";
@@ -154,13 +167,15 @@ sendUserFeedback({
 
 If you are using the API directly, you need to manage the task_id by yourself.
 
-Create a task_id by generating a random string hash.
+Create a task_id by generating a random string hash. It needs to be unique for each task. 
 
 ```bash
-TASK_ID=$(openssl rand -hex 16)
+TASK_ID=$(openssl rand -hex 32)
 ```
 
-<Warning>If this id is already used, phospho will return an error!</Warning>
+<Note>
+Did you know? You have higher chances of winning the lottery than generating the same task_id twice.
+</Note>
 
 Pass this task_id to the `log` endpoint.
 
