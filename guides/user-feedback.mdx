@@ -9,7 +9,9 @@ Setup user feedback in your app to log the user feedback to phospho, review it i
 
 ## Architecture: what's the task_id?
 
-In your app, you should collect user feedback **after** having logged a task to phospho. For phospho to know what task the user is giving feedback on, you need to pass the **task_id**.
+In your app, you should collect user feedback **after** having logged a task to phospho. Every task logged to phospho is identified by a unique **task_id**. 
+
+For phospho to know what task the user is giving feedback on, you need to keep track of the **task_id**.
 
 There are two ways to manage the task_id: frontend or backend. 
 
