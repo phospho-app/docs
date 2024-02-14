@@ -152,9 +152,9 @@ curl -X POST https://api.phospho.ai/v2/log/$PHOSPHO_PROJECT_ID \
 
 ## Frontend: Collect user feedback
 
-Once your backend has executed the task and logged it to phospho with a clear task_id, send this **task_id** to your frontend.
+Once your backend has executed the task and logged it to phospho with a known **task_id**, send the **task_id** back to your frontend.
 
-In your frontend, you can collect user feedback and send it to phospho.
+In your frontend, using the **task_id**, you can collect user feedback and send it to phospho.
 
 <Tabs>
 
