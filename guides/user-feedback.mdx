@@ -122,15 +122,11 @@ const latestTaskId = phospho.latestTaskId;
 
 If you are using the API directly, you need to manage the task_id by yourself.
 
-Create a task_id by generating a random string hash. It needs to be unique for each task. 
+Create a task_id by generating a string hash. It needs to be unique for each task. 
 
 ```bash
-TASK_ID=$(openssl rand -hex 32)
+TASK_ID=$(uuidgen)
 ```
-
-<Note>
-You have higher chances of winning the lottery than generating the same task_id twice with this method.
-</Note>
 
 Pass this task_id to the `log` endpoint.
 
