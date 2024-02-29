@@ -43,7 +43,8 @@
     {
       "group": "Local Experiments",
       "pages": [
-        "local/phospho-lab"
+        "local/quickstart",
+        "local/optimize"
       ]
     },
     {
