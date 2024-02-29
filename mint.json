@@ -41,6 +41,13 @@
       "pages": ["welcome", "getting-started"]
     },
     {
+      "group": "Local Experiments",
+      "pages": [
+        "local/quickstart",
+        "local/optimize"
+      ]
+    },
+    {
       "group": "Guides",
       "pages": [
         "guides/evaluation",
