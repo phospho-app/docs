@@ -41,6 +41,12 @@
       "pages": ["welcome", "getting-started"]
     },
     {
+      "group": "Local Experiments",
+      "pages": [
+        "local/phospho-lab"
+      ]
+    },
+    {
       "group": "Guides",
       "pages": [
         "guides/evaluation",
