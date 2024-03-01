@@ -25,6 +25,18 @@
     "name": "Go to phospho",
     "url": "https://platform.phospho.ai"
   },
+  "anchors": [
+    {
+      "name": "Community",
+      "icon": "discord",
+      "url": "https://discord.gg/axPJjsm65T"
+  },
+    {
+      "name": "Github",
+      "icon": "github",
+      "url": "https://github.com/phospho-app/phospho"
+  }
+  ],
   "tabs": [
     {
       "name": "API Reference",
