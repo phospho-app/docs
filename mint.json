@@ -30,12 +30,12 @@
       "name": "Community",
       "icon": "discord",
       "url": "https://discord.gg/axPJjsm65T"
-  },
+    },
     {
       "name": "Github",
       "icon": "github",
       "url": "https://github.com/phospho-app/phospho"
-  }
+    }
   ],
   "tabs": [
     {
@@ -54,11 +54,7 @@
     },
     {
       "group": "Local Experiments",
-      "pages": [
-        "local/quickstart",
-        "local/custom-job",
-        "local/optimize"
-      ]
+      "pages": ["local/quickstart", "local/custom-job", "local/optimize"]
     },
     {
       "group": "Guides",
@@ -81,6 +77,7 @@
           "pages": [
             "integrations/python/logging",
             "integrations/python/testing",
+            "integrations/python/analytics",
             {
               "group": "Examples",
               "pages": [
