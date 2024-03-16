@@ -33,7 +33,7 @@ export OVERRIDE_WITH_OLLAMA_MODEL=mistral
 
 This will replace all calls to OpenAI models with calls to the `mistral` model running with Ollama. Make sure you've downloaded Item.
 
-## Run jobs
+## Create a workload
 
 The phospho lab lets you run extractions on your messages.
 
@@ -45,6 +45,8 @@ from phospho import lab
 # Create the phospho workload
 workload = lab.Workload()
 ```
+
+## Define jobs
 
 Define jobs and add them to the workload. For example, let's add an event detection job. Those are the jobs you can setup in phospho cloud.
 
@@ -67,6 +69,8 @@ workload.add_job(
         )
 ```
 
+## Run the workload
+
 Now, you can run the workload on your messages. 
 
 Messages are a basic abstraction. They can be user messages or LLM outputs. They can contain metadata or additional information. It's up to the jobs to decide what to do with them.
@@ -86,6 +90,8 @@ await workload.async_run(
             executor_type="sequential",
         )
 ```
+
+## Gather results
 
 Results are stored in the workload.
 
