@@ -35,7 +35,7 @@ This will return a DataFrame where one row is one (task, event) pair.
 Example:
 
 | task_id | task_input | task_output | task_metadata | task_eval | task_eval_source | task_eval_at | task_created_at | session_id | session_length | event_name | event_created_at |
-|---------|------------|-------------|---------------|-----------|------------------|--------------|-----------------|------------|------------|------------------|
+|---------|------------|-------------|---------------|-----------|------------------|--------------|-----------------|------------|------------|------------------| -----------------|
 | b58aacc6102f4a5e9d2364202ce23bf2 | Some input | Some output | \{'client_created_at': 1709925970, 'last_update... | success | owner | 2024-03-08 19:27:49 | 2024-03-09 15:09:31 | 71ee278ab2874666ae157c28a69c1679 | 2 | correction by user | 2024-03-08 19:27:43 |
 | b58aacc6102f4a5e9d2364202ce23bf2 | Some input | Some output | \{'client_created_at': 1709925970, 'last_update... | success | owner | 2024-03-08 19:27:49 | 2024-03-09 15:09:31 | 71ee278ab2874666ae157c28a69c1679 | 2 | user frustration indication | 2024-03-08 19:27:43 |
 | b58aacc6102f4a5e9d2364202ce23bf2 | Some input | Some output | \{'client_created_at': 1709925970, 'last_update... | success | owner | 2024-03-08 19:27:49 | 2024-03-09 15:09:31 | 71ee278ab2874666ae157c28a69c1679 | 2 |follow-up question | 2024-03-08 19:27:43 |
@@ -55,7 +55,7 @@ phospho.tasks_df(limit=1000, with_events=False)
 Result:
 
 |task_id | task_input | task_output | task_metadata | task_eval | task_eval_source | task_eval_at | task_created_at | session_id | session_length |
-|---|---|---|---|---|---|---|---|---|---|---|
+|---|---|---|---|---|---|---|---|---|---|
 |21f3b21e8646402d930f1a02159e942f | Some input | Some output | \{'client_created_at':42f'... | failure | owner | 2024-03-08 19:53:59 | 2024-03-09 16:45:18 | a6b1b4224f874608b6037d41d582286a | 2 |
 |64382c6093b04a028a97a14131a4ab32 | Some input | Some output | \{'client_created_at':42f'... | success | owner | 2024-03-08 19:27:48 | 2024-03-09 15:51:07 | 9d13562051a84d6c806d4e6f6a58fb37 | 1 |
 |b58aacc6102f4a5e9d2364202ce23bf2 | Some input | Some output | \{'client_created_at':42f'... | success | owner | 2024-03-08 19:27:49 | 2024-03-09 15:09:31 | 71ee278ab2874666ae157c28a69c1679 | 3 |
