@@ -1,6 +1,6 @@
 ---
 title: Events Detection
-description: "phospho analyze every interaction to look for events"
+description: "phospho looks for events in every interaction to warn you when needed"
 ---
 
 ## What are events in phospho?
@@ -28,18 +28,14 @@ Go to the **Insights/Events** tab of the [phospho dashboard](https://platform.ph
 
 ### Event definition
 
-Add the event name and the event description.
-
 The event description is a natural language description of the event. Explain how to detect the event in an interaction as if you were explaining it to a 5 years old or an alien.
 
-In the description, refere to your user as "the user" and to your LLM app as "the assistant".
+In the description, refer to your user as "the user" and to your LLM app as "the assistant".
 
 <Card title="Example of an event description">
   The user is trying to book a flight. The user asked a question about a flight.
   Don't include fight suggestions from the agent if the user didn't ask for it.
 </Card>
-
-### Manage events
 
 Manage Events in the **Insights/Events** tab. Click delete to delete an event.
 
@@ -73,7 +69,7 @@ Here is the content of the body:
 }
 ```
 
-With the task_id, you can retrieve the task in the [phospho API.](https://api.phospho.ai/v2/redoc#tag/Tasks/operation/get_task_tasks__task_id__get)
+Retrieve the task using the `task_id` and the [phospho API.](https://api.phospho.ai/v2/redoc#tag/Tasks/operation/get_task_tasks__task_id__get)
 
 ### Examples
 
