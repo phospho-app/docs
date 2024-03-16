@@ -5,13 +5,13 @@ description: "phospho analyze every interaction to look for events"
 
 ## What are events in phospho?
 
-Every task logged to phospho goes through an analytics pipeline. In this pipeline, phospho looks for **events** that you defined in your project settings.
+Every task logged to phospho goes through an analytics pipeline. In this pipeline, phospho looks for **events** defined in your project settings.
 
-By default, phospho will look for some events (question_answering, thanks, toxic_behavior). You can delete them and create your own!
+Events are described in **natural language**. Create events to discover key talking points in a conversation, conversion events, hallucinations... 
 
-Create events to discover key talking points in a conversation, conversion events, hallucinations...
+When an event is detected, phospho will log it in the task, and you can see it in the dashboard.
 
-You can be notified everytime the event is detected.
+Be notified and take action when an event is detected using **webhooks**.
 
 ### Example of events
 
@@ -24,7 +24,7 @@ You can be notified everytime the event is detected.
 
 ## Create events
 
-Go to the _Settings_ tab of your [dashboard](https://platform.phospho.ai/).
+Go to the **Insights/Events** tab of the [phospho dashboard](https://platform.phospho.ai/).
 
 ### Event definition
 
@@ -39,19 +39,42 @@ In the description, refere to your user as "the user" and to your LLM app as "th
   Don't include fight suggestions from the agent if the user didn't ask for it.
 </Card>
 
-## Manage events
+### Manage events
 
-Open Settings. At the bottom of the screen, you'll see Events already created. Click delete to delete an event.
+Manage Events in the **Insights/Events** tab. Click delete to delete an event.
 
-## Webhook (optional)
+## Webhooks
 
-Add a webhook to be notified when an event is detected. This is optional.
+Add an optional webhook to be notified when an event is detected. Click on **Additional settings** to add the webhook URL and the eventual Authorization header.
 
-Every time the event is detected, phospho will send a POST request to the webhook, with the Event object in the body.
+### What is a webhook?
 
-### Example: Slack
+Webhooks are automated messages sent from apps when something happens. They have a message (payload) and are sent to a unique URL, which is like an app's phone number or address. 
 
-For example, you can use the webhook to send a slack message to your team.
+If you have an LLM app with a backend, you can create webhooks.
 
-1. [Follow this guide to get your slack webhook url](https://api.slack.com/messaging/webhooks)
-2. Add the webhook url when creating the event. The URL looks like this: `https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX`
+### How to use the webhook?
+
+Every time the event is detected, phospho will send a `POST` request to the webhook, with the Event object in the body.
+
+Here is the content of the body:
+
+```json
+{
+    "id": "xxxxxxxxx", // Unique identifier of the detected event
+    "created_at": 13289238198, // Unix timestamp (in seconds)
+    "event_name": "privacy_policy", // The name of the event, as written in the dashboard
+    "task_id": "xxxxxxx", // The task id where the event was detected
+    "session_id": "xxxxxxx", // The session id where the event was detected
+    "project_id": "xxxxxxx", // The project id where the event was detected
+    "org_id": "xxxxxxx", // The organization id where the event was detected
+    "webhook": "https://your-webhook-url.com", // The webhook URL
+    "source": "phospho-unknown", // Starts with phospho if detected by phospho
+}
+```
+
+With the task_id, you can retrieve the task in the [phospho API.](https://api.phospho.ai/v2/redoc#tag/Tasks/operation/get_task_tasks__task_id__get)
+
+### Examples
+
+Use webhooks to send slack notifications, emails, SMS, notifications, UI updates, or to trigger a function in your backend.

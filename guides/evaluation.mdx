@@ -12,17 +12,17 @@ Every time you log a task, phospho will **automatically evaluate** the success o
 The evaluation is based on LLM self-critique.
 
 The evaluation leverages the following sources of information:
-- The tasks annotated in the phospho webapp
+- The tasks annotated in the phospho webapp, by **you and your team**
 - The **user feedbacks** sent to phospho
 - The `system_prompt (str)` parameter in `metadata` when logging 
-- Previous tasks in the same session
+- Previous tasks in the **same session**
 
-If the information are not available, phospho will use default heuristics.
+If the information are not available, phospho will use default heuristics. 
 
 ## How to improve the automatic evaluation?
 
 To improve the automatic evaluation, you can:
-- Label tasks in the phospho webapp
+- Label tasks in the phospho webapp. **Invite** your team members to help you!
 - Gather [user feedback](/guides/user-feedback)
 - Pass the `system_prompt (str)` parameter in `metadata` when [logging](/guides/sessions-and-users#metadata)
 - Group tasks in [sessions](/guides/sessions)
@@ -30,13 +30,23 @@ To improve the automatic evaluation, you can:
 
 ## Annotate in the phospho webapp
 
-In the phospho dashboard, you can annotate tasks as a success or a failure. Go to the _Sessions_ tab and click on a session. You'll see the list of tasks in the session. Click on a task to annotate it. 
+In the phospho dashboard, you can annotate tasks as a success or a failure. 
+
+### Thumbs up / Thumbs down
+
+In the Transcript tab, view tasks to access the thumbs up and thumbs down buttons.
 - A thumbs up means that the task was successful. 
 - A thumbs down means that the task failed.
 
-Click the thumb to update the evaluation. The button will change to mark that this task was evaluated by a human, and not by phospho.
+Update the evaluation by clicking on the thumbs.
 
-Add notes and any kind of text with the Notes button next to the thumbs. If there is a note already written, the color of the button changes. 
+The button **changes color** to mark that this task was evaluated by a human, and not by phospho.
+
+### Notes
+
+Add notes and any kind of text with the **Notes** button next to the thumbs. 
+
+If there is a note already written, the color of the button changes. 
 
 ## Annotate with User feedback
 
