@@ -121,7 +121,8 @@
   "footerSocials": {
     "twitter": "https://twitter.com/phospho_app",
     "github": "https://github.com/phospho-app",
-    "linkedin": "https://www.linkedin.com/company/phospho-app/"
+    "linkedin": "https://www.linkedin.com/company/phospho-app/",
+    "discord": "https://discord.gg/m8wzBGQA55"
   },
   "openapi": "https://api.phospho.ai/v2/openapi.json",
   "analytics": {
