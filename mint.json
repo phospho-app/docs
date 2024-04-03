@@ -66,6 +66,7 @@
         "guides/events",
         "guides/user-feedback",
         "guides/sessions-and-users",
+        "guides/fine-tuning",
         "guides/testing",
         "guides/ab-test",
         "guides/topics"
