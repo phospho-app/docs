@@ -5,9 +5,43 @@ description: "You can upload historical data to phospho to backfill your logs."
 
 phospho supports backfilling of transcripts from files or other data sources. To backfill your data, create a script to iterate over your tasks, and upload them to phospho using the HTTP API. Keep the batch size to a reasonable limit to avoid timeouts (a thousand items).
 
+This method support all the features of the usual log API, such as the ability to add metadata to the tasks.
+
 ### Sample code
 
 <CodeGroup>
+
+```python Python
+import phospho
+from phospho.models import Task
+
+# Your project ID
+project_id = "your_project_id"
+org_id = "your_org_id"
+
+# You need to have the PHOSPHO_API_KEY and PHOSPHO_PROJECT_ID environment variables set
+# Otherwise, you can set them as parameters to the init function
+phospho.init()
+
+phospho.backfill(
+    [
+        Task(
+            project_id=project_id,
+            org_id=org_id,
+            input="First batch input",
+            output="First batch output",
+        ),
+        Task(
+            project_id=project_id,
+            org_id=org_id,
+            input="Second batch input",
+            output="Second batch output",
+            metadata={"key": "value"},
+        ),
+    ]
+)
+
+```
 
 ```bash HTTP API
 curl -X 'POST' \
@@ -26,10 +60,6 @@ curl -X 'POST' \
     }
   ]
 }'
-```
-
-```python Python
-# Comming soon
 ```
 
 ```javascript JS
