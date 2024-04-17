@@ -1,0 +1,56 @@
+---
+title: Backfill Historical Data
+description: "You can upload historical data to phospho to backfill your logs."
+---
+
+phospho supports backfilling of transcripts from files or other data sources. To backfill your data, create a script to iterate over your conversations, and upload them to phospho using the HTTP API. Keep the batch size to a reasonable limit to avoid timeouts (a thousand items).
+
+### Sample code
+
+<CodeGroup>
+
+```bash HTTP API
+curl -X 'POST' \
+  'https://api.phospho.ai/v2/backfill/$PHOSPHO_PROJECT_ID' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer $PHOSPHO_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "tasks": [
+    {
+      "created_at": 1713342083,
+      "org_id": $PHOSPHO_ORG_ID,
+      "project_id": $PHOSPHO_PROJECT_ID,
+      "input": "Here is the text of the input",
+      "output": "Here is the text of the output"
+    }
+  ]
+}'
+```
+
+```python Python
+# Comming soon
+```
+
+```javascript JS
+// Comming soon
+```
+
+</CodeGroup>
+### The task object in a backfill
+
+<ParamField path="created_at" type="int" required>
+  A Unix timestamp of when the task was created (in seconds).
+</ParamField>
+<ParamField path="org_id" type="string" required>
+  Your organization's ID.
+</ParamField>
+<ParamField path="project_id" type="string" required>
+  Your project's ID.
+</ParamField>
+<ParamField path="input" type="string" required>
+  The input text of the task.
+</ParamField>
+<ParamField path="output" type="string" required>
+  The output text of the task.
+</ParamField>
