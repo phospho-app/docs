@@ -93,6 +93,26 @@ You will get a model object in the response. You will need the `model_id` to use
 }
 ```
 
+The training will take a few minutes. You can check the status of the model using the following API call:
+
+<CodeGroup>
+
+```bash HTTP API
+
+curl -X 'GET' \
+  'https://api.phospho.ai/v2/models/YOUR_MODEL_ID' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer $PHOSPHO_API_KEY'
+```
+
+```python Python
+# Coming soon!
+```
+
+</CodeGroup>
+
+Your model will be ready when the status will changed from `training` to `trained`.
+
 ## Use the model
 
 You can use the model 2 ways:
@@ -127,7 +147,7 @@ curl -X 'POST' \
 
 </CodeGroup>
 
-### Download and use locally the model
+### Download and use locally your model
 
 You can download the model from phospho Hugging Face repo. The model id is the same as the one you got when training the model, but you need to change the `:` to `-`.
 
@@ -144,3 +164,23 @@ outputs = model.predict(["This is a sentence to classify", "Another sentence"])
 ```
 
 Make sure to have enough RAM to load the model and the tokenizer in memory. The model is 420MB.
+
+## List your models
+
+You can also list all the models you have have access to and that can accept requests:
+
+<CodeGroup>
+
+```bash HTTP API
+
+curl -X 'GET' \
+  'https://api.phospho.ai/v2/models' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer $PHOSPHO_API_KEY'
+```
+
+```python Python
+# Coming soon!
+```
+
+</CodeGroup>
