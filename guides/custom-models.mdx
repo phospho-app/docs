@@ -1,0 +1,32 @@
+---
+title: AI Models Endpoints
+description: "Train and use general or custom models."
+---
+
+<Note>
+  AI Models Endpoints are in preview and not yet ready for production trafic.
+  Request access to the preview by contacting us at contact@phospho.app
+</Note>
+
+phospho enables you to train and use general or custom models.
+For now, only binary classification models are supported (learn [here](https://en.wikipedia.org/wiki/Binary_classification) what binary classification is).
+
+# Upload a dataset
+
+To train a model, you need to upload a dataset containing text, labels and a label description.
+
+- `text` (str): the text to classify (for example, a user message)
+- `label` (bool): True or False accroding to the classification
+- `label_description` (str): a few word description of the label when true (for example, "user asking for pricing")
+
+<CodeGroup>
+
+```bash HTTP API
+console.log("Hello World");
+```
+
+```python python
+# Coming soon!
+```
+
+</CodeGroup>

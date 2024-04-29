@@ -65,7 +65,8 @@
         "guides/sessions-and-users",
         "guides/testing",
         "guides/ab-test",
-        "guides/topics"
+        "guides/topics",
+        "guides/custom-models"
       ]
     },
     {
