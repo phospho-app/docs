@@ -1,6 +1,6 @@
 ---
 title: AI Models Endpoints
-description: "Train and use general or custom models."
+description: "Train and use general or custom models"
 ---
 
 <Note>
@@ -11,22 +11,136 @@ description: "Train and use general or custom models."
 phospho enables you to train and use general or custom models.
 For now, only binary classification models are supported (learn [here](https://en.wikipedia.org/wiki/Binary_classification) what binary classification is).
 
+# Available models
+
+`phospho-small` is a small text classification model that can be trained with a few examples (16 examples are enough).
+It runs on CPU and once trained using phospho, you can download your trained version from Hugging Face.
+
 # Upload a dataset
 
-To train a model, you need to upload a dataset containing text, labels and a label description.
+To train a model, you need to upload a csv dataset containing text, labels and a label description. The csv columns should be:
 
 - `text` (str): the text to classify (for example, a user message)
 - `label` (bool): True or False accroding to the classification
-- `label_description` (str): a few word description of the label when true (for example, "user asking for pricing")
+- `label_text` (str): a few word description of the label when true (for example, "user asking for pricing")
+
+For example:
+
+| text                    | label | label_text              |
+| ----------------------- | ----- | ----------------------- |
+| How much does it costs? | True  | user asking for pricing |
+| What is the max speed?  | False | user asking for pricing |
+
+For `phospho-small`, only 16 examples are needed!
+
+Upload the dataset to phospho using the following API call:
 
 <CodeGroup>
 
 ```bash HTTP API
-console.log("Hello World");
+curl -X 'POST' \
+  'https://api.phospho.ai/v2/files' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer $PHOSPHO_API_KEY' \
+  -H 'Content-Type: multipart/form-data' \
+  -F 'file=@/path/to/your/local/file.csv.csv;type=text/csv'
 ```
 
-```python python
+```python Python
+# Coming soon!
+```
+
+You will get the `file_id` in the response. You will need it to train a model.
+
+</CodeGroup>
+
+## Train a model
+
+Once the dataset is uploaded, you can train a model using the following API call:
+
+<CodeGroup>
+
+```bash HTTP API
+
+curl -X 'POST' \
+  'https://api.phospho.ai/v2/train' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer $PHOSPHO_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "model": "phospho-small",
+  "dataset": "YOUR_FILE_ID",
+  "task_type": "binary-classification"
+}'
+```
+
+```python Python
 # Coming soon!
 ```
 
 </CodeGroup>
+
+You will get a model object in the response. You will need the `model_id` to use the model. It should look like this: `phospho-small:8963ba3`.
+
+```json
+{
+  "id": "YOUR_MODEL_ID",
+  "created_at": 1714418246,
+  "status": "training",
+  "owned_by": "YOUR_ORG_ID",
+  "task_type": "binary-classification",
+  "context_window": 514
+}
+```
+
+## Use the model
+
+You can use the model 2 ways:
+
+- through the phospho API
+- you can directly download it from Hugging Face (`phospho-small` runs on CPU)
+
+### Use the model through the API
+
+To use the model through the API, you need to send a POST request to the `/predict` endpoint with the model id and the batch of text to classify.
+
+<CodeGroup>
+
+```bash HTTP API
+
+curl -X 'POST' \
+  'https://api.phospho.ai/v2/predict' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer $PHOSPHO_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "inputs": [
+    "Can I have a discount on phospho pro?"
+  ],
+  "model": "YOUR_MODEL_ID"
+}'
+```
+
+```python Python
+# Coming soon!
+```
+
+</CodeGroup>
+
+### Download and use locally the model
+
+You can download the model from phospho Hugging Face repo. The model id is the same as the one you got when training the model, but you need to change the `:` to `-`.
+
+For example, if the model id is `phospho-small:8963ba3`, you can download the model from Hugging Face with the id `phospho-app/phospho-small-8963ba3`.
+
+Then you can use the model like any other Hugging Face model:
+
+```python
+from setfit import SetFitModel
+
+model = SetFitModel.from_pretrained("phospho-app/phospho-small-8963ba3")
+
+outputs = model.predict(["This is a sentence to classify", "Another sentence"])
+```
+
+Make sure to have enough RAM to load the model and the tokenizer in memory. The model is 420MB.
