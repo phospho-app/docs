@@ -63,7 +63,6 @@
         "guides/events",
         "guides/user-feedback",
         "guides/sessions-and-users",
-        "guides/backfill",
         "guides/testing",
         "guides/ab-test",
         "guides/topics"
