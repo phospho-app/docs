@@ -41,7 +41,7 @@ For example, your examples could look like this:
   ]
 ```
 
-Start the training using the following API call:
+Start the training using the following API call or python code snippet:
 
 <CodeGroup>
 
@@ -72,7 +72,27 @@ curl -X 'POST' \
 ```
 
 ```python Python
-# Coming soon!
+import phospho
+
+phospho.init()
+
+my_examples = [
+    {
+      "text": "How much is phospho pro?",
+      "label": True,
+      "label_text": "user asking for pricing"
+    },
+    {
+      "text": "I want to know more about phospho pro",
+      "label": False,
+      "label_text": "user asking for pricing"
+    },
+    ...
+  ]
+
+model = phospho.train("phospho-small", my_examples)
+
+print(model)
 ```
 
 </CodeGroup>
@@ -103,7 +123,20 @@ curl -X 'GET' \
 ```
 
 ```python Python
-# Coming soon!
+import requests
+import os
+
+model_id = "YOUR_MODEL_ID" # model["id"] if you run the above code
+url = f"https://api.phospho.ai/v2/models/{model_id}"
+
+headers = {"accept": "application/json",
+           "Content-Type": "application/json",
+           "Authorization": f"Bearer {os.environ['PHOSPHO_API_KEY']}"
+          }
+
+response = requests.get(url, headers=headers)
+
+print(response.text)
 ```
 
 </CodeGroup>
@@ -114,8 +147,26 @@ Your model will be ready when the status will changed from `training` to `traine
 
 You can use the model 2 ways:
 
+- directly download it from Hugging Face (`phospho-small` runs on CPU)
 - through the phospho API
-- you can directly download it from Hugging Face (`phospho-small` runs on CPU)
+
+### Download and use locally your model (recommended for production)
+
+You can download the model from phospho Hugging Face repo. The model id is the same as the one you got when training the model, but you need to change the `:` to `-`.
+
+For example, if the model id is `phospho-small:8963ba3`, you can download the model from Hugging Face with the id `phospho-app/phospho-small-8963ba3`.
+
+Then you can use the model like any other Hugging Face model:
+
+```python
+from setfit import SetFitModel
+
+model = SetFitModel.from_pretrained("phospho-app/phospho-small-8963ba3")
+
+outputs = model.predict(["This is a sentence to classify", "Another sentence"])
+```
+
+Make sure to have enough RAM to load the model and the tokenizer in memory. The model is 420MB.
 
 ### Use the model through the API
 
@@ -149,24 +200,6 @@ curl -X 'POST' \
 ```
 
 </CodeGroup>
-
-### Download and use locally your model (recommended for production)
-
-You can download the model from phospho Hugging Face repo. The model id is the same as the one you got when training the model, but you need to change the `:` to `-`.
-
-For example, if the model id is `phospho-small:8963ba3`, you can download the model from Hugging Face with the id `phospho-app/phospho-small-8963ba3`.
-
-Then you can use the model like any other Hugging Face model:
-
-```python
-from setfit import SetFitModel
-
-model = SetFitModel.from_pretrained("phospho-app/phospho-small-8963ba3")
-
-outputs = model.predict(["This is a sentence to classify", "Another sentence"])
-```
-
-Make sure to have enough RAM to load the model and the tokenizer in memory. The model is 420MB.
 
 ## List your models
 
