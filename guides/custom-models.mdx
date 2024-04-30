@@ -1,14 +1,24 @@
 ---
 title: AI Models Endpoints
-description: "Train, use and download AI models"
+description: "Train, use and download NLP models"
 ---
 
 <Note>
   Request access to the preview by contacting us at contact@phospho.app
 </Note>
 
-phospho enables you to train and use general or custom models.
+phospho can handle all the data processing, data engineering and model training for you.
 For now, only binary classification models are supported (learn [here](https://en.wikipedia.org/wiki/Binary_classification) what binary classification is).
+
+# Why train your custom classification model?
+
+Most LLM chains involve classification steps where the LLM is prompted with a classification task.
+Training your own classification model can help you to:
+
+- improve the accuracy of the classification
+- reduce the latency of the classification (as you have the model running in the application code)
+- reduce the cost of the classification (as you don't have to call an external LLM API)
+- reduce risks of downtime (as you don't depend on an external LLM API)
 
 # Available models
 
