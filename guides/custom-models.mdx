@@ -1,10 +1,9 @@
 ---
 title: AI Models Endpoints
-description: "Train and use AI models"
+description: "Train, use and download AI models"
 ---
 
 <Note>
-  AI Models Endpoints are in preview and not yet ready for production trafic.
   Request access to the preview by contacting us at contact@phospho.app
 </Note>
 
@@ -13,50 +12,36 @@ For now, only binary classification models are supported (learn [here](https://e
 
 # Available models
 
-`phospho-small` is a small text classification model that can be trained with a few examples (16 examples are enough).
-It runs on CPU and once trained using phospho, you can download your trained version from Hugging Face.
+`phospho-small` is a small text classification model that can be trained with a few examples (minimum 20 examples).
+It runs on CPU and once trained using phospho, you can download your trained model from Hugging Face.
 
-# Upload a dataset
+# Train a model on your data
 
-To train a model, you need to upload a csv dataset containing text, labels and a label description. The csv columns should be:
+To train a model, you need to upload a list at least 20 examples containing text, labels and a label description. Each example should have the following fields:
 
 - `text` (str): the text to classify (for example, a user message)
-- `label` (bool): True or False accroding to the classification
+- `label` (bool): True or False according to the classification
 - `label_text` (str): a few word description of the label when true (for example, "user asking for pricing")
 
-For example:
+For example, your examples could look like this:
 
-| text                    | label | label_text              |
-| ----------------------- | ----- | ----------------------- |
-| How much does it costs? | True  | user asking for pricing |
-| What is the max speed?  | False | user asking for pricing |
-
-For `phospho-small`, only 16 examples are needed!
-
-Upload the dataset to phospho using the following API call:
-
-<CodeGroup>
-
-```bash HTTP API
-curl -X 'POST' \
-  'https://api.phospho.ai/v2/files' \
-  -H 'accept: application/json' \
-  -H 'Authorization: Bearer $PHOSPHO_API_KEY' \
-  -H 'Content-Type: multipart/form-data' \
-  -F 'file=@/path/to/your/local/file.csv.csv;type=text/csv'
+```json
+[
+    {
+      "text": "Can I have a discount on phospho pro?",
+      "label": true,
+      "label_text": "user asking for pricing"
+    },
+    {
+      "text": "I want to know more about phospho pro",
+      "label": false,
+      "label_text": "user asking for pricing"
+    },
+    ...
+  ]
 ```
 
-```python Python
-# Coming soon!
-```
-
-You will get the `file_id` in the response. You will need it to train a model.
-
-</CodeGroup>
-
-## Train a model
-
-Once the dataset is uploaded, you can train a model using the following API call:
+Start the training using the following API call:
 
 <CodeGroup>
 
@@ -69,7 +54,19 @@ curl -X 'POST' \
   -H 'Content-Type: application/json' \
   -d '{
   "model": "phospho-small",
-  "dataset": "YOUR_FILE_ID",
+  "examples": [
+    {
+      "text": "How much is phospho pro?",
+      "label": true,
+      "label_text": "user asking for pricing"
+    },
+    {
+      "text": "I want to know more about phospho pro",
+      "label": false,
+      "label_text": "user asking for pricing"
+    },
+    ...
+  ],
   "task_type": "binary-classification"
 }'
 ```
@@ -122,7 +119,13 @@ You can use the model 2 ways:
 
 ### Use the model through the API
 
+<Warning>
+  {" "}
+  AI Models predict endpoints are in preview and not yet ready for production trafic.
+</Warning>
+
 To use the model through the API, you need to send a POST request to the `/predict` endpoint with the model id and the batch of text to classify.
+If it's the first request you send, you might experience a delay as the model is loaded in memory.
 
 <CodeGroup>
 
@@ -147,7 +150,7 @@ curl -X 'POST' \
 
 </CodeGroup>
 
-### Download and use locally your model
+### Download and use locally your model (recommended for production)
 
 You can download the model from phospho Hugging Face repo. The model id is the same as the one you got when training the model, but you need to change the `:` to `-`.
 
