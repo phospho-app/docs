@@ -4,15 +4,25 @@ description: ""
 ---
 
 <Note>
-  Request access to the preview by contacting us at contact@phospho.app
+  This model is in preview and not ready yet for production traffic in phospho
+  Cloud. Contact us for on premise deployment or production endpoints.
 </Note>
-<Note>This model is in preview and not ready yet for production traffic</Note>
 
 # Requirements
 
 Create an account on [phospho.ai](https://platform.phospho.ai) and get your API key.
+You need to have setup a billing method. You can add a it in the Settings of your dashboard [here](https://platform.phospho.ai/org/settings/billing).
 
 # Sending a request
+
+To send a request, add:
+
+- `text`: your text prompt. For instance: "What is this?"
+- `image_url`: either a URL of the image or the base64 encoded image data.
+  The `inputs` list must be of lenght 1.
+
+If you pass a URL, make sure it is a generally available image (for instance by passing the link in a Private Navigation window).
+To encode an image in base 64, you can use [this website](https://base64.guru/converter/encode/image).
 
 <CodeGroup>
 
@@ -50,3 +60,10 @@ print(response.json()['predictions'][0]['description'])
 ```
 
 </CodeGroup>
+
+# Pricing
+
+Our pricing is based on the number of images you send, not the number of tokens or pixels.
+`phospho-multimodal` costs $1 for 100 images.
+
+Discounts are availble for higher usage.
