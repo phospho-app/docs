@@ -1,12 +1,9 @@
 ---
 title: Multimodal LLM
-description: ""
+description: "Enable your LLM app to understand images"
 ---
 
-<Note>
-  This model is in preview and not ready yet for production traffic in phospho
-  Cloud. Contact us for on premise deployment or production endpoints.
-</Note>
+Enable your LLM app to understand images with the phospho mutlimodal model.
 
 # Requirements
 
@@ -66,11 +63,26 @@ print(response.json()['predictions'][0]['description'])
 
 ```
 
+<Note>
+  This API endpoint is for preview and not optimal for production scale serving. Contact us for on premise deployment or high performance endpoints.
+</Note>
+
 </CodeGroup>
 
 # Pricing
 
-Our pricing is based on the number of images you send, not the number of tokens or pixels.
-`phospho-multimodal` costs $1 for 100 images.
+The pricing is based on the number of images sent.
 
-Discounts are availble for higher usage.
+**Note:** You need to have a billing method setup to use the model. Acces your [billing portal](https://platform.phospho.ai/org/settings/billing) to add one.
+
+Model name | Price per 100 images | Price per 1000 images
+--- | --- | ---
+`phospho-multimodal` | $1 | $10
+
+<Info>
+You are billed in \$1 increment. 
+
+*Example: if you send 150 images, you will be billed \$2.*
+</Info>
+
+[Contact us](mailto:contact@phospho.app) for high volume pricing.

@@ -50,21 +50,29 @@
   "navigation": [
     {
       "group": "Getting Started",
-      "pages": ["welcome", "getting-started"]
+      "pages": [
+        "welcome",
+        "getting-started",
+        {
+          "group": "Discover the Lab",
+          "pages": ["local/quickstart", "local/custom-job", "local/optimize"]
+        }
+      ]
     },
-    {
-      "group": "Local Experiments",
-      "pages": ["local/quickstart", "local/custom-job", "local/optimize"]
-    },
+
     {
       "group": "Guides",
       "pages": [
-        "guides/evaluation",
+        {
+          "group": "Evaluation",
+          "pages": ["guides/evaluation", "guides/user-feedback"]
+        },
         "guides/events",
-        "guides/user-feedback",
         "guides/sessions-and-users",
-        "guides/testing",
-        "guides/ab-test",
+        {
+          "group": "Testing",
+          "pages": ["guides/testing", "guides/ab-test"]
+        },
         "guides/topics"
       ]
     },
