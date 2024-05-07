@@ -1,0 +1,36 @@
+---
+title: Multimodal LLM
+description: ""
+---
+
+<Note>
+  Request access to the preview by contacting us at contact@phospho.app
+</Note>
+<Note>This model is in preview and not ready yet for production traffic</Note>
+
+# Requirements
+
+Create an account on [phospho.ai](https://platform.phospho.ai) and get your API key.
+
+# Sending a request
+
+<CodeGroup>
+
+```bash HTTP API
+
+curl -X 'POST' \
+  'https://api.phospho.ai/v2/predict' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer YOUR_PHOSPHO_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "inputs": [{"text": "What is this?", "image_url": "http://images.cocodataset.org/val2017/000000039769.jpg"}],
+  "model": "phospho-multimodal"
+}'
+```
+
+```python Python
+# Coming soon
+```
+
+</CodeGroup>
