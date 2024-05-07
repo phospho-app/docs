@@ -30,7 +30,23 @@ curl -X 'POST' \
 ```
 
 ```python Python
-# Coming soon
+import requests
+
+url = 'https://api.phospho.ai/v2/predict'
+headers = {
+    'accept': 'application/json',
+    'Authorization': 'Bearer YOUR_PHOSPHO_API_KEY',
+    'Content-Type': 'application/json'
+}
+data = {
+    "inputs": [{"text": "What is this?", "image_url": "http://images.cocodataset.org/val2017/000000039769.jpg"}],
+    "model": "phospho-multimodal"
+}
+
+response = requests.post(url, json=data, headers=headers)
+
+print(response.json()['predictions'][0]['description'])
+
 ```
 
 </CodeGroup>
