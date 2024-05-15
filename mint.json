@@ -55,30 +55,44 @@
         "getting-started",
         {
           "group": "Discover the Lab",
-          "pages": ["local/quickstart", "local/custom-job", "local/optimize"]
+          "pages": [
+            "local/quickstart",
+            "local/custom-job",
+            "local/optimize"
+          ]
         }
       ]
     },
-
     {
       "group": "Guides",
       "pages": [
         {
           "group": "Evaluation",
-          "pages": ["guides/evaluation", "guides/user-feedback"]
+          "pages": [
+            "guides/evaluation",
+            "guides/user-feedback"
+          ]
         },
         "guides/events",
+        "guides/language",
+        "guides/sentiment-analysis",
         "guides/sessions-and-users",
         {
           "group": "Testing",
-          "pages": ["guides/testing", "guides/ab-test"]
+          "pages": [
+            "guides/testing",
+            "guides/ab-test"
+          ]
         },
         "guides/topics"
       ]
     },
     {
       "group": "Models API",
-      "pages": ["models/classify", "models/multimodal"]
+      "pages": [
+        "models/classify",
+        "models/multimodal"
+      ]
     },
     {
       "group": "Integrations",
@@ -103,31 +117,44 @@
         {
           "icon": "js",
           "group": "JavaScript",
-          "pages": ["integrations/javascript/logging"]
+          "pages": [
+            "integrations/javascript/logging"
+          ]
         },
         {
           "icon": "bird",
           "group": "Langchain",
-          "pages": ["integrations/langchain"]
+          "pages": [
+            "integrations/langchain"
+          ]
         },
         {
           "icon": "bolt",
           "group": "Supabase",
-          "pages": ["integrations/supabase"]
+          "pages": [
+            "integrations/supabase"
+          ]
         }
       ]
     },
     {
       "group": "Other",
-      "pages": ["other/faq"]
+      "pages": [
+        "other/faq"
+      ]
     },
     {
       "group": "API Reference",
-      "pages": ["api-reference/introduction", "api-reference/logging"]
+      "pages": [
+        "api-reference/introduction",
+        "api-reference/logging"
+      ]
     },
     {
       "group": "Examples",
-      "pages": ["examples/introduction"]
+      "pages": [
+        "examples/introduction"
+      ]
     }
   ],
   "footerSocials": {

@@ -1,0 +1,17 @@
+---
+title: Language Detection
+description: "What language is your user speaking?"
+---
+
+We noticed people wanted to know the language their users were speaking. 
+So we added a feature to detect the input language.
+
+Note that this feature focuses on the **input** of a task, so the task below will be flagged as english, despite the assistant answering in French.
+
+|        User       |              Assistant             |
+|-------------------|------------------------------------|
+| What can you do ? | Je ne peux pas répondre en anglais |
+
+Also, the language detection method is based on keywords so if the input is very short, the language might be misidentified.
+
+You can also **filter** your tasks by language in the task list.
