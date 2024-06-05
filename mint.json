@@ -72,9 +72,7 @@
         "getting-started",
         {
           "group": "Import your data",
-          "pages": [
-            "import_data/import_csv"
-          ]
+          "pages": ["import_data/import_csv"]
         },
         {
           "group": "Discover the Lab",
@@ -92,10 +90,7 @@
       "pages": [
         {
           "group": "Evaluation",
-          "pages": [
-            "explore/evaluation",
-            "explore/user-feedback"
-          ]
+          "pages": ["explore/evaluation", "explore/user-feedback"]
         },
         "explore/events",
         "explore/language",
@@ -104,20 +99,13 @@
         "explore/fine-tuning",
         {
           "group": "Testing",
-          "pages": [
-            "explore/testing",
-            "explore/ab-test"
-          ]
-        },
-        "explore/topics"
+          "pages": ["explore/testing", "explore/ab-test"]
+        }
       ]
     },
     {
       "group": "Models API",
-      "pages": [
-        "models/classify",
-        "models/multimodal"
-      ]
+      "pages": ["models/classify", "models/multimodal"]
     },
     {
       "group": "Integrations",
@@ -142,23 +130,17 @@
         {
           "icon": "js",
           "group": "JavaScript",
-          "pages": [
-            "integrations/javascript/logging"
-          ]
+          "pages": ["integrations/javascript/logging"]
         },
         {
           "icon": "bird",
           "group": "Langchain",
-          "pages": [
-            "integrations/langchain"
-          ]
+          "pages": ["integrations/langchain"]
         },
         {
           "icon": "bolt",
           "group": "Supabase",
-          "pages": [
-            "integrations/supabase"
-          ]
+          "pages": ["integrations/supabase"]
         }
       ]
     },
@@ -174,16 +156,11 @@
     },
     {
       "group": "API Reference",
-      "pages": [
-        "api-reference/introduction",
-        "api-reference/logging"
-      ]
+      "pages": ["api-reference/introduction", "api-reference/logging"]
     },
     {
       "group": "Examples",
-      "pages": [
-        "examples/introduction"
-      ]
+      "pages": ["examples/introduction"]
     }
   ],
   "footerSocials": {
