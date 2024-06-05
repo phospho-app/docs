@@ -47,12 +47,12 @@ For other options, you can take a look at the [technical documentation](/getting
 You can import a CSV/Excel file with the following format:
 
 ```csv
-input,output,task_id,session_id,created_at
-"Hello! This is what the user asked to the system","This is the response showed to the user by the app.","task_1","session_1","2024-05-31 12:31:22"
+input;output;task_id;session_id;created_at
+"Hello! This is what the user asked to the system";"This is the response showed to the user by the app.";"task_1";"session_1";"2024-05-31 12:31:22"
 ```
 
 <Info>
-- Make sure that your CSV is a valid CSV file separated by a comma. 
+- Make sure that your CSV is a valid CSV file separated by a semicolon. 
 - Make sure the created_at field is in the format `YYYY-MM-DD HH:MM:SS`.
 </Info>
 
