@@ -1,4 +1,17 @@
 {
+  "metadata": {
+    "og:site_name": "docs.phospho.ai",
+    "og:title": "Phospho documentation",
+    "og:description": "Open source text analytics platform for LLM apps, documentation page.",
+    "og:url": "https://docs.phospho.ai",
+    "og:image": "/logo/light.svg",
+    "og:logo": "/logo/logo.svg",
+    "twitter:title": "Phospho documentation",
+    "twitter:description": "Open source text analytics platform for LLM apps, documentation page.",
+    "twitter:url": "https://docs.phospho.ai",
+    "twitter:image": "/logo/light.svg",
+    "twitter:site": "@phospho_app"
+  },
   "$schema": "https://mintlify.com/schema.json",
   "name": "phospho",
   "favicon": "/favicon.svg",
@@ -30,14 +43,18 @@
       "name": "Community",
       "icon": "discord",
       "url": "https://discord.gg/axPJjsm65T"
-  },
+    },
     {
       "name": "Github",
       "icon": "github",
       "url": "https://github.com/phospho-app/phospho"
-  }
+    }
   ],
   "tabs": [
+    {
+      "name": "Guides",
+      "url": "guides"
+    },
     {
       "name": "API Reference",
       "url": "api-reference"
@@ -50,26 +67,54 @@
   "navigation": [
     {
       "group": "Getting Started",
-      "pages": ["welcome", "getting-started"]
-    },
-    {
-      "group": "Local Experiments",
       "pages": [
-        "local/quickstart",
-        "local/optimize"
+        "welcome",
+        "getting-started",
+        {
+          "group": "Import your data",
+          "pages": [
+            "import_data/import_csv"
+          ]
+        },
+        {
+          "group": "Discover the Lab",
+          "pages": [
+            "local/quickstart",
+            "local/custom-job",
+            "local/optimize"
+          ]
+        }
       ]
     },
     {
-      "group": "Guides",
+      "group": "Explore",
       "pages": [
-        "guides/evaluation",
-        "guides/events",
-        "guides/user-feedback",
-        "guides/sessions-and-users",
-        "guides/fine-tuning",
-        "guides/testing",
-        "guides/ab-test",
-        "guides/topics"
+        {
+          "group": "Evaluation",
+          "pages": [
+            "explore/evaluation",
+            "explore/user-feedback"
+          ]
+        },
+        "explore/events",
+        "explore/language",
+        "explore/sentiment-analysis",
+        "explore/sessions-and-users",
+        {
+          "group": "Testing",
+          "pages": [
+            "explore/testing",
+            "explore/ab-test"
+          ]
+        },
+        "explore/topics"
+      ]
+    },
+    {
+      "group": "Models API",
+      "pages": [
+        "models/classify",
+        "models/multimodal"
       ]
     },
     {
@@ -81,6 +126,7 @@
           "pages": [
             "integrations/python/logging",
             "integrations/python/testing",
+            "integrations/python/analytics",
             {
               "group": "Examples",
               "pages": [
@@ -94,37 +140,55 @@
         {
           "icon": "js",
           "group": "JavaScript",
-          "pages": ["integrations/javascript/logging"]
+          "pages": [
+            "integrations/javascript/logging"
+          ]
         },
         {
           "icon": "bird",
           "group": "Langchain",
-          "pages": ["integrations/langchain"]
+          "pages": [
+            "integrations/langchain"
+          ]
         },
         {
           "icon": "bolt",
           "group": "Supabase",
-          "pages": ["integrations/supabase"]
+          "pages": [
+            "integrations/supabase"
+          ]
         }
       ]
     },
     {
-      "group": "Other",
-      "pages": ["other/faq"]
+      "group": "Guides",
+      "pages": [
+        "guides/welcome-guide",
+        "guides/getting-started",
+        "guides/LLM-judge",
+        "guides/user-intent",
+        "guides/understand-your-data"
+      ]
     },
     {
       "group": "API Reference",
-      "pages": ["api-reference/introduction", "api-reference/logging"]
+      "pages": [
+        "api-reference/introduction",
+        "api-reference/logging"
+      ]
     },
     {
       "group": "Examples",
-      "pages": ["examples/introduction"]
+      "pages": [
+        "examples/introduction"
+      ]
     }
   ],
   "footerSocials": {
     "twitter": "https://twitter.com/phospho_app",
     "github": "https://github.com/phospho-app",
-    "linkedin": "https://www.linkedin.com/company/phospho-app/"
+    "linkedin": "https://www.linkedin.com/company/phospho-app/",
+    "discord": "https://discord.gg/m8wzBGQA55"
   },
   "openapi": "https://api.phospho.ai/v2/openapi.json",
   "analytics": {

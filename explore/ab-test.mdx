@@ -3,13 +3,13 @@ title: AB Testing
 description: "Run AB tests in your app to see which version performs better"
 ---
 
-You can try out different versions of your app to see which one performs better.
+Use AB testing to compare different versions of your app and see which one performs better.
 
-To do so, add a field `version_id` with the name of your version in the metadata field of the tasks you log to phospho.
+To get started, simply add a field `version_id` with the name of your version in the `metadata` when logging to phospho.
 
 <CodeGroup>
 
-```python python
+```python Python
 log = phospho.log(
     input="log this",
     output="and that",
@@ -17,7 +17,7 @@ log = phospho.log(
 )
 ```
 
-```javascript javascript
+```javascript JavaScript
 log = phospho.log({
   input: "log this",
   output: "and that",
@@ -45,4 +45,8 @@ curl -X POST https://api.phospho.ai/v2/log/$PHOSPHO_PROJECT_ID \
 
 </CodeGroup>
 
+Using this version_id, you will be able to compare the [average success rate](/guides/evaluation) of the different versions. 
+
+Note that the difference in success rate must be statistically significant to be considered as a real difference. That's why phospho also computes the standard deviation.
+ 
 To see the results of your AB test, go to the [Phospho dashboard](https://platform.phospho.ai) and click on the "AB Testing" tab.

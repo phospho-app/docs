@@ -1,17 +1,17 @@
 ---
 title: "Getting started"
-description: "Add AI analytics in your LLM app in a blitz"
+description: "Add text analytics in your LLM app in a blitz"
 ---
 
-<Note>The project is in **Beta**. Expect frequent changes and updates!</Note>
-
-You can start experimenting with phospho locally. See the [local quickstart](/local/quickstart) for more information.
-How to get started with phospho cloud:
+This guide will help you get started with the hosted version of [phospho](https://platform.phospho.ai).
 
 <Steps>
   <Step title="Get your phospho API key and your project id">
-    Create an account on [phospho.ai](https://platform.phospho.ai). No credit
-    card is required to get started.
+    Create an account on [phospho.ai](https://platform.phospho.ai).
+    <Note>
+      Don't want to create an account? Get started with the [local version of
+      phospho](/local/quickstart).
+    </Note>
   </Step>
   <Step title="Setup phospho logging in your app">
     Start logging using the Python Client, the JavaScript SDK or with the HTTP
@@ -83,6 +83,10 @@ phospho.log(
   output=output,
   # Optional: for chats, group tasks together in sessions
   # session_id = "session_1",
+  # Optional: attach tasks to users
+  # user_id = "user_1",
+  # Optional: add metadata to the task
+  # metadata = {"system_prompt": "You are a helpful assistant."},
 )
 ```
 
@@ -124,6 +128,10 @@ phospho.log({
   output,
   // Optional: for chats, group tasks together in sessions
   // session_id: "session_1",
+  // Optional: attach tasks to users
+  // user_id: "user_1",
+  // Optional: add metadata to the task
+  // metadata: { system_prompt: "You are a helpful assistant." },
 });
 ```
 
@@ -150,11 +158,16 @@ curl -X POST https://api.phospho.ai/v2/log/$PHOSPHO_PROJECT_ID \
     "batched_log_events": [
         {
             "input": "your_input",
-            "output": "your_output"
+            "output": "your_output",
+            "session_id": "session_1",
+            "user_id": "user_1",
+            "metadata": {"system_prompt": "You are a helpful assistant."},
         }
     ]
 }'
 ```
+
+<Info>The `session_id`, `user_id` and `metadata` fields are **optional.**</Info>
 
 <Card title="API reference" icon="webhook" href="api-reference/introduction">
   Create a tailored integration with the API. Learn more by clicking here.
@@ -198,7 +211,7 @@ Integrate phospho to your Supabase app is as simple as using the **phospho API**
   Supabase app!
 </Note>
 
-<Card title="Supabase guide" icon="bolt" href="integrations/supabase">
+<Card title="Read the supabase guide" icon="bolt" href="integrations/supabase">
   Get started with Supabase and phospho. Learn more by clicking here.
 </Card>
 
@@ -213,19 +226,23 @@ phospho extracts insights from the tasks logged. Discover the insights in the [p
 Learn more about the insights you can get by reading our [guides](/guides):
 
 <CardGroup>
-  <Card title="Evaluation" href="guides/evaluation">
-    phospho automatically rates the tasks as success or failure.
+  <Card title="Automatic event detection" href="/guides/events">
+    Define events relevant to you, phospho detect them and can warn you when
+    they happen. **Take action.**
   </Card>
-  <Card title="Events detection" href="guides/events">
-    phospho detects in your tasks the events you're looking for.
+  <Card title="Automatic Evaluation" href="/guides/evaluation">
+    phospho classify interactions as successes or failures according to **your
+    own definition.**
   </Card>
-  <Card title="User Feedback" href="guides/user-feedback">
-    Collect user feedback to improve your app and the automatic evaluation.
+  <Card title="User Feedback" href="/guides/user-feedback">
+    Collect and attach user feedbacks to specific interactions. **All in one
+    place.**
   </Card>
-  <Card title="Sessions and Users" href="guides/sessions-and-users">
-    Group tasks together to structure insights.
+  <Card title="Review and Label" href="/guides/evaluation">
+    Let your team review and annotate flagged interactions. **Collaborate with
+    non-technical team members.**
   </Card>
-  <Card title="AB Testing" href="guides/ab-test">
-    Use different project id to compare versions of your app.
+  <Card title="Offline Testing" href="/guides/testing">
+    Run tests and get success scores to improve your app before releasing it
   </Card>
 </CardGroup>

@@ -1,16 +1,17 @@
 ---
 title: Welcome!
-description: "Open Source LLM analytics platform"
+description: "Open Source Text Analytics Platform for LLM apps"
 ---
 
-[phospho](https://phospho.ai/) is an open source LLM analytics platform to finally get your LLM app ready for production.
+[phospho](https://phospho.ai/) is an open source text analytics platform to finally get your LLM app ready for production.
 
 <iframe
   className="w-full aspect-video"
-  src="https://www.loom.com/embed/830e489b54454a2aae64da5c7ceb2fd6?sid=4c8248d0-3f56-4906-85ad-1bfa08036608"
+  src="https://www.youtube.com/embed/4QeNPa4xOc8?si=S7Z37Wtw94JCbw0K"
+  allowFullScreen
 ></iframe>
 
-Monitor interactions between your LLM app and your users. Test changes before pushing to prod. Get AI analytics and product-level insights to improve your LLM app.
+Monitor interactions between your LLM app and your users. Test changes before pushing to prod. Get real time AI analytics and product-level insights to improve your LLM app.
 
 **Keywords:** _logging, automatic evaluations, experiments, A/B tests, user feedback, testing_
 
@@ -33,15 +34,14 @@ Don't have an LLM app? Try phospho in [Google Colab](https://colab.research.goog
 
 <Steps>
   <Step title="Log">
-    **Log the tasks** completed by your LLM app (ex: _what was the question
-    asked by the user, and what answer of the assistant_)
+    **You log the tasks** completed by your LLM app (ex: _what the user asked, what the assistant answered_)
   </Step>
-  <Step title="Run evals">
-    Configure the analytics pipeline to **run evaluations** on transcripts (ex:
+  <Step title="Analyze">
+    **We run custom evaluation pipelines** on your transcripts. **No OpenAI key needed.** (ex:
     _detect when the assistant couldn't answer the user's question_)
   </Step>
   <Step title="Explore">
-    Explore your LLM app evaluations on the **phospho dashboard**
+    You explore your LLM app evaluations on the **phospho dashboard** and with integrations.
   </Step>
 </Steps>
 
@@ -49,21 +49,22 @@ Don't have an LLM app? Try phospho in [Google Colab](https://colab.research.goog
 
 <CardGroup>
   <Card title="Logging" href="/getting-started">
-    Log every interactions with your LLM app in a non-invasive way
-  </Card>
-  <Card title="User Feedback" href="/guides/user-feedback">
-    Collect and attach user feedbacks to specific interactions
-  </Card>
-  <Card title="Review and Annotate" href="/guides/evaluation">
-    Let your team review and annotate flagged interactions
-  </Card>
-  <Card title="Automatic Evaluation" href="/guides/evaluation">
-    phospho will classify interactions as a success or a failure according to
-    **your** own definition of success
+    Log every interaction with your LLM app in a non-invasive way. 
+    **No monkey patch, no proxy, no framework.**
   </Card>
   <Card title="Automatic event detection" href="/guides/events">
-    Define events relevant to you, phospho will detect them and can warn you
-    when they happen
+    Define events relevant to you, phospho detect them and can warn you
+    when they happen. **Take action.**
+  </Card>
+  <Card title="Automatic Evaluation" href="/guides/evaluation">
+    phospho classify interactions as successes or failures according to
+    **your own definition.** 
+  </Card>
+  <Card title="User Feedback" href="/guides/user-feedback">
+    Collect and attach user feedbacks to specific interactions. **All in one place.**
+  </Card>
+  <Card title="Review and Label" href="/guides/evaluation">
+    Let your team review and annotate flagged interactions. **Collaborate with non-technical team members.**
   </Card>
   <Card title="Offline Testing" href="/guides/testing">
     Run tests and get success scores to improve your app before releasing it
