@@ -1,4 +1,17 @@
 {
+  "metadata": {
+    "og:site_name": "docs.phospho.ai",
+    "og:title": "Phospho documentation",
+    "og:description": "Open source text analytics platform for LLM apps, documentation page.",
+    "og:url": "https://docs.phospho.ai",
+    "og:image": "/logo/light.svg",
+    "og:logo": "/logo/logo.svg",
+    "twitter:title": "Phospho documentation",
+    "twitter:description": "Open source text analytics platform for LLM apps, documentation page.",
+    "twitter:url": "https://docs.phospho.ai",
+    "twitter:image": "/logo/light.svg",
+    "twitter:site": "@phospho_app"
+  },
   "$schema": "https://mintlify.com/schema.json",
   "name": "phospho",
   "favicon": "/favicon.svg",
@@ -39,6 +52,10 @@
   ],
   "tabs": [
     {
+      "name": "Guides",
+      "url": "guides"
+    },
+    {
       "name": "API Reference",
       "url": "api-reference"
     },
@@ -55,35 +72,50 @@
         "getting-started",
         {
           "group": "Import your data",
-          "pages": ["import_data/import_csv"]
+          "pages": [
+            "import_data/import_csv"
+          ]
         },
         {
           "group": "Discover the Lab",
-          "pages": ["local/quickstart", "local/custom-job", "local/optimize"]
+          "pages": [
+            "local/quickstart",
+            "local/custom-job",
+            "local/optimize"
+          ]
         }
       ]
     },
     {
-      "group": "Guides",
+      "group": "Explore",
       "pages": [
         {
           "group": "Evaluation",
-          "pages": ["guides/evaluation", "guides/user-feedback"]
+          "pages": [
+            "explore/evaluation",
+            "explore/user-feedback"
+          ]
         },
-        "guides/events",
-        "guides/language",
-        "guides/sentiment-analysis",
-        "guides/sessions-and-users",
+        "explore/events",
+        "explore/language",
+        "explore/sentiment-analysis",
+        "explore/sessions-and-users",
         {
           "group": "Testing",
-          "pages": ["guides/testing", "guides/ab-test"]
+          "pages": [
+            "explore/testing",
+            "explore/ab-test"
+          ]
         },
-        "guides/topics"
+        "explore/topics"
       ]
     },
     {
       "group": "Models API",
-      "pages": ["models/classify", "models/multimodal"]
+      "pages": [
+        "models/classify",
+        "models/multimodal"
+      ]
     },
     {
       "group": "Integrations",
@@ -108,31 +140,48 @@
         {
           "icon": "js",
           "group": "JavaScript",
-          "pages": ["integrations/javascript/logging"]
+          "pages": [
+            "integrations/javascript/logging"
+          ]
         },
         {
           "icon": "bird",
           "group": "Langchain",
-          "pages": ["integrations/langchain"]
+          "pages": [
+            "integrations/langchain"
+          ]
         },
         {
           "icon": "bolt",
           "group": "Supabase",
-          "pages": ["integrations/supabase"]
+          "pages": [
+            "integrations/supabase"
+          ]
         }
       ]
     },
     {
-      "group": "Other",
-      "pages": ["other/faq"]
+      "group": "Guides",
+      "pages": [
+        "guides/welcome-guide",
+        "guides/getting-started",
+        "guides/LLM-judge",
+        "guides/user-intent",
+        "guides/understand-your-data"
+      ]
     },
     {
       "group": "API Reference",
-      "pages": ["api-reference/introduction", "api-reference/logging"]
+      "pages": [
+        "api-reference/introduction",
+        "api-reference/logging"
+      ]
     },
     {
       "group": "Examples",
-      "pages": ["examples/introduction"]
+      "pages": [
+        "examples/introduction"
+      ]
     }
   ],
   "footerSocials": {
