@@ -81,7 +81,8 @@
           "pages": [
             "local/quickstart",
             "local/custom-job",
-            "local/optimize"
+            "local/optimize",
+            "local/llm-provider"
           ]
         }
       ]
@@ -100,6 +101,7 @@
         "explore/language",
         "explore/sentiment-analysis",
         "explore/sessions-and-users",
+        "explore/fine-tuning",
         {
           "group": "Testing",
           "pages": [
