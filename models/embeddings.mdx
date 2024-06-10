@@ -20,6 +20,33 @@ You need to have setup a billing method. You can add a it in the Settings of you
 
 # Usage
 
+## Using the OpenAI client
+
+The phospho embedding endpoint is OpenAI compatible. You can use the OpenAI client to send requests to the phospho API.
+
+```python
+
+from openai import OpenAI
+
+client = OpenAI(
+    api_key="YOUR_PHOSPHO_API_KEY",
+    base_url="https://api.phospho.ai/v2",
+)
+
+response = client.embeddings.create(
+    model="intent-embed",
+    input="I want to use the phospho intent embeddings api",
+    encoding_format="float",
+)
+
+print(response)
+
+```
+
+For now, the input must be a single string. Passing more than one string will result in an error.
+
+## Using the API directly
+
 To send a request, add:
 
 - `text`: The text to embed, usually a user query or message.
@@ -70,21 +97,23 @@ You will get a response with the embeddings for the input text. The embeddings a
 
 ```json
 {
-  "id": "b429bea42f21476d8b54244679d5a432",
-  "created_at": 1717774563,
-  "text": "Where is Nico?",
-  "embeddings": [
-    -0.04311951,
-    -0.018762443,
-    0.012137596,
-    0.0074640415,
-    -0.0021662095,
-    ...
-    ],
-    "model": "intent-embed",
-    "org_id": "YOUR_ORG_ID",
-    "project_id": null,
-    "task_id": null
+  "object": "list",
+  "data": [
+    {
+      "object": "embedding",
+      "embedding": [
+        -0.045429688,
+        -0.039863896,
+        0.0077658836,
+        ...],
+      "index": 0
+    }
+  ],
+  "model": "intent-embed",
+  "usage": {
+    "prompt_tokens": 3,
+    "total_tokens": 3
+  }
 }
 ```
 
