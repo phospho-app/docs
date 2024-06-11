@@ -1,5 +1,5 @@
 ---
-title: "User Intentions"
+title: "Cluster User Intentions"
 description: "Detect user intentions in your data"
 ---
 
@@ -18,18 +18,26 @@ Once on the platform, go to the **clustering** tab in the menu on the left of th
 On here, phospho runs various algorithms to analyze your user interactions and detect patterns.
 
 We **group similar interactions** together to help you understand what your users are talking about.
+
 </Step>
 <Step>
 
 Click on **Run cluser detection** to start the process.
 
 ![Clusters](../images/guides/user-intentions/clusters.png)
+
 </Step>
 </Steps>
 
 <Info>
-Clustering is not yet a continuous process, you will need to re-run it manually to get the latest results.
+  Clustering is not yet a continuous process, you will need to re-run it
+  manually to get the latest results.
 </Info>
+
+## How it works
+
+Phospho uses the phospho `intent-embed` model to represent user interactions in a high-dimensional space. Then, we use clustering techniques to group similar user messages together.
+Finaly, we generate a summary of the clusters to help you understand what your users are talking about.
 
 ## Next steps
 
@@ -43,7 +51,3 @@ Clustering is not yet a continuous process, you will need to re-run it manually 
     **Quick and easy**
   </Card>
 </CardGroup>
-
-
-## Next steps
-
