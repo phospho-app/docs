@@ -82,7 +82,8 @@
             "local/optimize",
             "local/llm-provider"
           ]
-        }
+        },
+        "self-hosting"
       ]
     },
     {
