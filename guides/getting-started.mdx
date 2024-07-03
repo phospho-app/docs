@@ -11,6 +11,10 @@ This guide will help you get started with the [phospho platform](https://platfor
   </Step>
   <Step title="Import your data in a project">
     Import your data or try phospho in [Google Colab](https://colab.research.google.com/drive/1Wv9KHffpfHlQCxK1VGvP_ofnMiOGK83Q)
+    - From [CSV/Excel](#import-from-a-csv-file)
+    - From [LangSmith](#import-from-langsmith)
+    - From [LangFuse](#import-from-langfuse)
+    - From [API](/getting-started)
   </Step>
   <Step title="Setup events, and get insights on your dashboard">
     Analyze user interactions, explore the analytics and improve
@@ -36,7 +40,7 @@ You can then click on import data.
 
 ![Click on settings](../images/guides/getting_started/settings.png)
 
-You now have different options, the easiest options are to import from a CSV/Excel file or to synchronise with LangSmith if you have existing data there.
+You now have different options, the easiest options are to import from a CSV/Excel file, to synchronise with LangSmith or LangFuse if you have existing data there.
 
 For other options, you can take a look at the [technical documentation](/getting-started) to import data directly from your system.
 
@@ -44,7 +48,21 @@ For other options, you can take a look at the [technical documentation](/getting
 
 #### Import from a CSV file
 
-You can import a CSV/Excel file with the following format:
+You can import a CSV/Excel file into phospho.
+
+<Accordion title="How to import a CSV to phospho">
+
+Head over to the [phospho](https://platform.phospho.ai) platform and click on the settings icon at the top right of the screen. Then select `Import data`.
+
+![Import data](../images/import/import_data.png)
+
+Click on the **Upload dataset** button.
+
+![Import from CSV](../images/import/start_sending_data.png)
+
+You can now drag and drop your CSV file or click on the box to select it.
+
+Your CSV should have the following format
 
 ```csv
 input;output;task_id;session_id;created_at
@@ -55,6 +73,8 @@ input;output;task_id;session_id;created_at
 - Make sure that your CSV is a valid CSV file separated by a semicolon. 
 - Make sure the created_at field is in the format `YYYY-MM-DD HH:MM:SS`.
 </Info>
+
+</Accordion>
 
 #### Import from LangSmith
 
