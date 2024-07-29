@@ -1,19 +1,19 @@
 ---
-title: Events Detection
-description: "phospho looks for events in every interaction to warn you when needed"
+title: Automatic tagging
+description: "phospho automatically tags your data and warns you when needed"
 ---
 
-## What are events in phospho?
+## How are tags detected?
 
-Every task logged to phospho goes through an analytics pipeline. In this pipeline, phospho looks for **events** defined in your project settings.
+Every message logged to phospho goes through an analytics pipeline. In this pipeline, phospho looks for **tags** defined in your project settings.
 
-Events are described in **natural language**. Create events to discover key talking points in a conversation, conversion events, hallucinations... 
+Tags are described in **natural language**. Create tags to detect topics, hallucinations, behaviours, intents, or any other concept you want to track.
 
-When an event is detected, phospho will log it in the task, and you can see it in the dashboard.
+Tags are displayed on the platform and you can use them to filter data.
 
-Be notified and take action when an event is detected using **webhooks**.
+Be notified when a tag is detected with **webhooks**.
 
-### Example of events
+### Example of tags
 
 - The user is trying to book a flight
 - The user thanked the agent for its help
@@ -22,18 +22,18 @@ Be notified and take action when an event is detected using **webhooks**.
 - The assistant responded something that could be considered financial advice
 - The assistant talked as if he was a customer, and not a support
 
-## Create events
+## Create tags
 
-Go to the **Insights/Events** tab of the [phospho dashboard](https://platform.phospho.ai/), and click Add Event on the right.
+Go to the **Analytics** tab of the [phospho dashboard](https://platform.phospho.ai/), and click Add Tagger on the right.
 
 You will find some event templates like Coherence and Plausibility to get you started.
 
 ![Events tab](../images/explore/events%20detection/Create%20event.png)
 
 
-### Event definition
+### Tag definition
 
-The event description is a natural language description of the event. Explain how to detect the event in an interaction as if you were explaining it to a 5 years old or an alien.
+The event description is a natural language description of the tag. Explain how to detect the tag in an interaction as if you were explaining it to a 5 years old or an alien.
 
 In the description, refer to your user as "the user" and to your LLM app as "the assistant".
 
@@ -42,15 +42,15 @@ In the description, refer to your user as "the user" and to your LLM app as "the
   Don't include fight suggestions from the agent if the user didn't ask for it.
 </Card>
 
-Manage Events in the **Insights/Events** tab. Click delete to delete an event.
+Manage Tags in the **Analytics** tab. Click delete to delete a tag detector.
 
-### Event suggestion
+### Tag suggestion
 
-Note that you can also use the magic wand button on any session to get a suggestion for a possible event that has been detected in the session.
+Note that you can also use the magic wand button on any session to get a suggestion for a possible tag that has been detected in the session.
 
-![Event suggestion](../images/explore/events%20detection/Event%20suggestion.png)
+![Tag suggestion](../images/explore/events%20detection/Event%20suggestion.png)
 
-The button is right next to "Events" in the Session tab, use it to get ideas for possible events.
+The button is right next to "Events" in the Session tab.
 
 ## Webhooks
 
@@ -58,15 +58,13 @@ Add an optional webhook to be notified when an event is detected. Click on **Add
 
 ### What is a webhook?
 
-Webhooks are automated messages sent from apps when something happens. They have a message (payload) and are sent to a unique URL, which is like an app's phone number or address. 
+Webhooks are automated messages sent from apps when something happens. They have a payload and are sent to a unique URL, which is like an app's phone number or address. 
 
 If you have an LLM app with a backend, you can create webhooks.
 
 ### How to use the webhook?
 
-Every time the event is detected, phospho will send a `POST` request to the webhook, with the Event object in the body.
-
-Here is the content of the body:
+Every time the event is detected, phospho will send a `POST` request to the webhook with this payload:
 
 ```json
 {
@@ -82,7 +80,7 @@ Here is the content of the body:
 }
 ```
 
-Retrieve the task using the `task_id` and the [phospho API.](https://api.phospho.ai/v2/redoc#tag/Tasks/operation/get_task_tasks__task_id__get)
+Retrieve the messages using the `task_id` and the [phospho API.](https://api.phospho.ai/v2/redoc#tag/Tasks/operation/get_task_tasks__task_id__get)
 
 ### Examples
 

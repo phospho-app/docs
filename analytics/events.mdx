@@ -1,0 +1,34 @@
+---
+title: Event detection
+description: "phospho automatically look for events in your data"
+---
+
+## What are events in phospho?
+
+Events are **actions** or **behaviours** that you want to track in your data. There are three types of events:
+
+- **Tags**: Tags are detected in the data and can be used to filter data. Tags are described in natural language. Tags are either present, or not present in a message.
+- **Scores**: Scores are values between 1 and 5 that are assigned to a message. Scores can be used to track the quality of the conversation.
+- **Categories**: Categories are the result of a classification. Use categories to classify messages in different classes. For example, if you have a set of user intents, you can classify messages in these intents.
+
+## How are events detected?
+
+Every message logged to phospho goes through an analytics pipeline. In this pipeline, phospho looks for **events** defined in your project settings.
+
+This pipeline uses a combination of **rules**, **machine learning**, and **large language mdoels** to detect events. The rules are defined in the **Analytics** tab of the phospho dashboard.
+
+## How good is the event detection?
+
+To help you keep track and improve the event detection, phospho enables you **annotate** and **validate** the events detected in your data.
+
+Click on an event in the **Transcripts** to annotate it. This will display a dropdown where you can validate, remove or edit the event.
+
+Advanced **performance metrics** (F1 Score, Accuracy, Recall, Precision, R-squared, MSE) are available when you click on an event in the Analytics tab.
+
+## Automatic improvement of the event detection
+
+The event detection models are **automatically improved** and updated using the **feedback you provide**. The more you annotate and validate the events, the better the models will become.
+
+Click on an event in the **Transcripts** to annotate it. This will display a dropdown where you can validate, remove or edit the event.
+
+We are also constantly improving the models and the algorithms to provide the best results.
