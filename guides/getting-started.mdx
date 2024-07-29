@@ -46,9 +46,9 @@ For other options, you can take a look at the [technical documentation](/getting
 
 ![Import data](../images/guides/getting_started/import_data.png)
 
-#### Import from a CSV file
+#### Import from file
 
-You can import a CSV/Excel file into phospho.
+You can import a CSV or a Excel file into phospho.
 
 <Accordion title="How to import a CSV to phospho">
 
@@ -60,9 +60,9 @@ Click on the **Upload dataset** button.
 
 ![Import from CSV](../images/import/start_sending_data.png)
 
-You can now drag and drop your CSV file or click on the box to select it.
+You can now drag and drop your file or click on the box to select it.
 
-Your CSV should have the following format
+You should have the following columns in your file:
 
 ```csv
 input;output;task_id;session_id;created_at
@@ -70,7 +70,7 @@ input;output;task_id;session_id;created_at
 ```
 
 <Info>
-- Make sure that your CSV is a valid CSV file separated by a semicolon. 
+- Make sure that your CSV is a valid CSV file separated by a colon or a semicolon.
 - Make sure the created_at field is in the format `YYYY-MM-DD HH:MM:SS`.
 </Info>
 
@@ -104,7 +104,7 @@ You can now copy your API key in the input field and enter the name of your lang
 
 ![title](../images/import/start_sending_data.png)
 
-Your tasks will be populated in your project in a minute. You might need to refresh the page to see them.
+Your data will be synced to your project in a minute. 
 
 </Accordion>
 
@@ -143,7 +143,7 @@ This data is encrypted and stored securely. We need it to periodically fetch you
 
 ![Import from LangFuse](../images/import/start_sending_data.png)
 
-Your tasks will be populated in your project in a minute. You might need to refresh the page to see them.
+Your data will be synced to your project in a minute. 
 </Accordion>
 
 <Note>

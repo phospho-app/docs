@@ -71,65 +71,64 @@
         "welcome",
         "getting-started",
         {
-          "group": "Import your data",
+          "group": "Import data",
           "pages": [
-            "import_data/import_csv",
-            "import_data/import_langsmith",
-            "import_data/import_langfuse"
+            "import-data/import-file",
+            "import-data/import-langsmith",
+            "import-data/import-langfuse"
           ]
         },
-        {
-          "group": "Discover the Lab",
-          "pages": [
-            "local/quickstart",
-            "local/custom-job",
-            "local/optimize",
-            "local/llm-provider"
-          ]
-        },
+
         "self-hosting"
       ]
     },
     {
-      "group": "Explore",
+      "group": "Analytics",
       "pages": [
+        "analytics/ab-test",
+        "analytics/events",
+        "analytics/tagging",
+        "analytics/clustering",
+        {
+          "group": "User analytics",
+          "pages": [
+            "analytics/sessions-and-users",
+            "analytics/language",
+            "analytics/sentiment-analysis"
+          ]
+        },
         {
           "group": "Evaluation",
-          "pages": ["explore/evaluation", "explore/user-feedback"]
-        },
-        "explore/events",
-        "explore/language",
-        "explore/sentiment-analysis",
-        "explore/sessions-and-users",
-        "explore/fine-tuning",
-        {
-          "group": "Testing",
-          "pages": ["explore/testing", "explore/ab-test"]
+          "pages": ["analytics/evaluation", "analytics/user-feedback"]
         }
       ]
     },
     {
-      "group": "Models API",
-      "pages": ["models/embeddings", "models/classify", "models/multimodal"]
-    },
-    {
-      "group": "Integrations",
+      "group": "Connectors",
       "pages": [
         {
           "icon": "python",
           "group": "Python",
           "pages": [
             "integrations/python/logging",
-            "integrations/python/testing",
-            "integrations/python/analytics",
             {
-              "group": "Examples",
+              "group": "Logging examples in Python",
               "pages": [
                 "integrations/python/examples/openai-agent",
                 "integrations/python/examples/openai-streamlit"
               ]
             },
-            "integrations/python/reference"
+            "integrations/python/analytics",
+            {
+              "group": "Discover the Lab",
+              "pages": [
+                "local/quickstart",
+                "local/custom-job",
+                "local/optimize",
+                "local/llm-provider"
+              ]
+            },
+            "integrations/python/testing"
           ]
         },
         {
@@ -139,13 +138,43 @@
         },
         {
           "icon": "bird",
-          "group": "Langchain",
-          "pages": ["integrations/langchain"]
+          "group": "Langchain & Langsmith",
+          "pages": ["integrations/langchain", "import-data/import-langsmith"]
+        },
+        {
+          "icon": "pretzel",
+          "group": "Langfuse",
+          "pages": ["import-data/import-langfuse"]
         },
         {
           "icon": "bolt",
           "group": "Supabase",
           "pages": ["integrations/supabase"]
+        }
+      ]
+    },
+    {
+      "group": "Integrations",
+      "pages": [
+        {
+          "icon": "circle",
+          "group": "Argilla",
+          "pages": ["integrations/argilla"]
+        },
+        {
+          "icon": "database",
+          "group": "PostgreSQL",
+          "pages": ["integrations/postgresql"]
+        },
+        {
+          "icon": "microsoft",
+          "group": "PowerBI",
+          "pages": ["integrations/powerbi"]
+        },
+        {
+          "icon": "teddy-bear",
+          "group": "Pandas",
+          "pages": ["integrations/python/analytics"]
         }
       ]
     },
@@ -167,6 +196,10 @@
     {
       "group": "Examples",
       "pages": ["examples/introduction"]
+    },
+    {
+      "group": "Models API",
+      "pages": ["models/embeddings", "models/multimodal"]
     }
   ],
   "footerSocials": {

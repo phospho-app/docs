@@ -111,7 +111,7 @@ for row in sub_dataset:
     messages.append(lab.Message(content=text))
 
 # Run the lab on it
-# The job will be runned with the default model (openai:gpt-3.5-turbo)
+# The job will be run with the default model (openai:gpt-3.5-turbo)
 workload_results = await workload.async_run(messages=messages, executor_type="parallel")
 
 # Compute alternative results with the Mistral API and Ollama
@@ -152,7 +152,7 @@ for row in sub_dataset:
     text = row["dialog"][0]
     messages.append(lab.Message(content=text))
 
-# The job will be runned with the best model (mistral:mistral-small-latest in our case)
+# The job will be run with the best model (mistral:mistral-small-latest in our case)
 workload_results = await workload.async_run(messages=messages, executor_type="parallel")
 ```
 
