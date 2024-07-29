@@ -42,16 +42,14 @@ export PHOSPHO_API_KEY="your_api_key"
 export PHOSPHO_PROJECT_ID="your_project_id"
 ```
 
-### Log tasks to phospho
+### Log to phospho
 
-**Tasks are the basic bricks that make up your LLM apps.** If you're a programmer, you can think of tasks like functions.
+The basic abstraction of phospho is the **task**. If you're a programmer, you can think of tasks like a function.
 
-A task is made of an input and an optional output, ideally readable by a human.
+- `input (str)`: The text that goes into the system. _Eg: the user message._
+- `output (Optional[str])`: The text that comes out of the system. _Eg: the system response._
 
-- `input (str)`: What goes into a task. _Eg: what the user asks to the assistant._
-- `output (Optional[str])`: What goes out of the task. _Eg: what the assistant replied to the user._
-
-Example of tasks you can log to phospho: _call to an LLM, answering a question, searching in documents, summarizing a text, performing inference of a model, steps of a chain-of-thought..._
+We prefer to use this abstraction because of its flexibility. You can log any text to a task, not just chat messages: _call to an LLM, answering a question, searching in documents, summarizing a text, performing inference of a model, steps of a chain-of-thought..._
 
 Tasks can be grouped into **sessions**. Tasks and Sessions can be attached to **users**.
 
@@ -221,7 +219,7 @@ Integrate phospho to your Supabase app is as simple as using the **phospho API**
 
 ## 3. Get insights in the dashboard
 
-phospho extracts insights from the tasks logged. Discover the insights in the [phospho dashboard](https://phospho.ai/).
+phospho extracts insights from the messages logged. Discover the insights in the [phospho dashboard](https://phospho.ai/).
 
 Learn more about the insights you can get by reading our [guides](/guides):
 
