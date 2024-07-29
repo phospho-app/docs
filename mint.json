@@ -71,7 +71,7 @@
         "welcome",
         "getting-started",
         {
-          "group": "Import your data",
+          "group": "Import data",
           "pages": [
             "import-data/import-file",
             "import-data/import-langsmith",
@@ -89,9 +89,14 @@
         "analytics/events",
         "analytics/tagging",
         "analytics/clustering",
-        "analytics/sentiment-analysis",
-        "analytics/sessions-and-users",
-        "analytics/language",
+        {
+          "group": "User analytics",
+          "pages": [
+            "analytics/sessions-and-users",
+            "analytics/language",
+            "analytics/sentiment-analysis"
+          ]
+        },
         {
           "group": "Evaluation",
           "pages": ["analytics/evaluation", "analytics/user-feedback"]
