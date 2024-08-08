@@ -24,16 +24,15 @@ phospho_test = phospho.PhosphoTest()
     source_loader_params={"sample_size": 3},
 )
 def test_backtest(message: phospho.lab.Message) -> str | None:
+    client = phospho.lab.get_sync_client("mistral")
     response = client.chat.completions.create(
-        model=model,
+        model="mistral-small",
         messages=[
             {"role": "system", "content": "You are an helpful assistant"},
             {"role": message.role, "content": message.content},
         ],
     )
     return response.choices[0].message.content
-
-phospho_test.run()
 ```
 
 
@@ -52,16 +51,15 @@ phospho_test = phospho.PhosphoTest()
     source_loader_params={"path": "path/to/dataset.csv"},
 )
 def test_backtest(column_a: str, column_b: str) -> str | None:
+    client = phospho.lab.get_sync_client("mistral")
     response = client.chat.completions.create(
-        model=model,
+        model="mistral-small",
         messages=[
             {"role": "system", "content": "You are an helpful assistant"},
             {"role": "user", "content": column_a},
         ],
     )
     return response.choices[0].message.content
-
-phospho_test.run()
 ```
 
 
@@ -80,37 +78,55 @@ column_a, column_b
 
 ## Custom tests
 
+To write custom tests, you can just create a function and decorate it with `@phospho_test.test()`. 
+
+At the end, add `phospho.log` to send the data to phospho for analysis.
+
 ```python
-import phospho 
+import phospho
 
 phospho_test = phospho.PhosphoTest()
 
-@phospho_test.test(
-    source_loader="dataset", 
-    source_loader_params={"path": "path/to/dataset.csv"},
-)
-def test_backtest(column_a: str, column_b: str) -> str | None:
+@phospho_test.test()
+def test_simple():
+    client = phospho.lab.get_sync_client("mistral")
     response = client.chat.completions.create(
-        model=model,
+        model="mistral-small",
         messages=[
             {"role": "system", "content": "You are an helpful assistant"},
-            {"role": "user", "content": column_a},
+            {"role": "user", "content": "What's bigger: 3.11 or 3.9 ?"},
         ],
     )
-    return response.choices[0].message.content
-
-phospho_test.run()
+    response_text = response.choices[0].message.content
+    # Use phospho.log to send the data to phospho for analysis
+    phospho.log(
+        input="What's bigger: 3.11 or 3.9 ?",
+        output=response_text,
+        # Specify the version_id of the test
+        version_id=phospho_test.version_id,
+    )
 ```
 
 ## Running the test
 
-To run the test, use the `run` method of the `PhosphoTest` class.
+To run the tests, use the `run` method of the `PhosphoTest` class.
 
 ```python
-phospho_test.run(executor_type="parallel")
+phospho_test.run()
 ```
 
-The `run` method takes the following parameters:
+The `executor_type` can be either:
+- `parallel` (default): parallelizes the backtest and dataset source loader calls. 
+- `parallel_jobs`: all functions are called in parallel.
+- `sequential`: great for debugging.
 
-- `executor_type`: The executor type to use for running the test. This can be either `parallel` or `sequential`. Sequential is great for debugging while parallel offers the best speed. The default is `parallel`.
+You can also use the phospho command line interface to run the tests. 
 
+```bash
+phospho init # Run this only once
+phospho test
+```
+
+<Card title="phospo CLI" href="/cli" icon="square-terminal">
+Learn how to install phospho command line interface
+</Card>
