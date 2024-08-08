@@ -78,8 +78,8 @@
             "import-data/import-langfuse"
           ]
         },
-
-        "self-hosting"
+        "self-hosting",
+        "cli"
       ]
     },
     {

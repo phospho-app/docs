@@ -1,203 +1,105 @@
 ---
-title: Testing with phospho in Python
+title: Testing with Python
 description: "Test your agent before deploying it to production"
 ---
 
-Evaluate your app's performance before deploying it to production. The testing framework allows you to test your app with historical data or a custom dataset. The output of the test is a report that can be viewed in the phospho dashboard.
+Evaluate your app's performance before deploying it to production. 
+
+The phospho testing framework allows you to test your app with historical data, custom datasets, and custom tests.
+
+The phospho python module **parallelizes** the function calls to speed up the testing process.
 
 
-## Overview
+## Backtest
 
-The testing framework supports two types of testing:
+This source loader uses the logged phospho data to evaluate your app's performance. This is great to quickly have representative data to test with.
 
-- **Backtesting**: Backtesting uses the logged phospho data to evaluate your app's performance. This is great to quickly have representative data to test with.
-- **Dataset**: Dataset testing allows testing with a custom dataset, providing more control over input scenarios. It's also useful when you don't have a lot of historical data.
+```python
+import phospho 
 
-The output of the test is a report that can be viewed in the phospho dashboard. To set up what's in the report, you can specify the metrics you want to evaluate. The two main metrics supported by the module are:
-
-- **Evaluate**: Evaluates the output of the app as success or failure based on the provided inputs (this is the same as [phospho evaluation](/guides/evaluation))
-- **Compare**: Compares the current output of the app with a reference output
-
-## Getting Started
-
-To test your agent, create a new file called `phospho_testing.py`. This file will contain the test cases for your app.
-
-
-```python phospho_testing.py
-import phospho
-from typing import Dict, List
-
-# Create a new test setup
-phospho_test = phospho.PhosphoTest()
-
-# Define the test cases
-@phospho_test.test(
-    source_loader="backtest",
-    source_loader_params={"sample_size": 10},
-    metrics=["evaluate", "compare"],
-)
-def test_my_agent(messages: List[Dict[str, str]]):
-    # Here, call your agent
-    # new_ouput = call_my_agent(messages)
-    # We will just return a str for now
-    return "The response from the agent"
-
-# Run the test
-phospho_test.run(executor_type="parallel")
-```
-
-The test cases are defined as functions with the `@phospho_test.test` decorator.
-
-The `@phospho_test.test` decorator takes the following parameters:
-
-- `source_loader`: The source loader to use for the test. This can be either `backtest` or `dataset`.
-- `source_loader_params`: Parameters for the source loader. These parameters vary depending on the source loader used.
-- `metrics`: The metrics to evaluate. This can be either `evaluate` or `compare`.
-
-
-## Example
-
-```python phospho_testing.py
-import phospho
-from backend import SantaClausAgent
-from typing import Dict, List
-
-# Create a new test setup
 phospho_test = phospho.PhosphoTest()
 
 @phospho_test.test(
-    source_loader="backtest",
-    source_loader_params={"sample_size": 10},
-    metrics=["evaluate", "compare"],
+    source_loader="backtest",  # Load data from logged phospho data
+    source_loader_params={"sample_size": 3},
 )
-def test_santa(messages: List[Dict[str, str]]):
-    santa_claus_agent = SantaClausAgent()
-    return santa_claus_agent.answer(messages)
+def test_backtest(message: phospho.lab.Message) -> str | None:
+    response = client.chat.completions.create(
+        model=model,
+        messages=[
+            {"role": "system", "content": "You are an helpful assistant"},
+            {"role": message.role, "content": message.content},
+        ],
+    )
+    return response.choices[0].message.content
 
-@phospho_test.test(
-    source_loader="dataset",
-    source_loader_params={"path": "golden_dataset.xlsx", "test_n_times": 2},
-    metrics=["evaluate", "compare"],
-)
-def test_santa_dataset(input: str):
-    santa_claus_agent = SantaClausAgent()
-    return santa_claus_agent.answer(messages=[{"role": "user", "content": input}])
-
-# Run the test
-phospho_test.run(executor_type="parallel")
+phospho_test.run()
 ```
 
-In this example, the test_santa function is backtested with 10 samples, while test_santa_dataset is tested with a custom dataset loaded from `golden_dataset.xlsx` repeated twice.
 
-Since LLM generate random responses, testing on a sufficient number of samples is important to get a good idea of the app's performance.
+### Dataset .CSV, .XLSX, .JSON
 
-
-## Sources Loaders
-
-Source loaders are used to load the data for testing.
-
-phospho supports two source loaders: `backtest` and `dataset`.
-
-### Backtest (logged phospho data)
-
-Use the data logged to phospho to evaluate your app's performance.
-
-Decorator Parameter: `source_loader="backtest"`
-Source Loader Parameters: Parameters like `sample_size` can be specified to control the number of samples used for testing.
+To test with a custom dataset, you can use the dataset source loader.
 
 
 ```python
+import phospho 
+
+phospho_test = phospho.PhosphoTest()
+
 @phospho_test.test(
-    source_loader="backtest",
-    source_loader_params={"sample_size": 10},
-    metrics=["evaluate", "compare"],
+    source_loader="dataset", 
+    source_loader_params={"path": "path/to/dataset.csv"},
 )
-def test_santa(messages: List[Dict[str, str]]):
-    santa_claus_agent = SantaClausAgent()
-    return santa_claus_agent.answer(messages)
+def test_backtest(column_a: str, column_b: str) -> str | None:
+    response = client.chat.completions.create(
+        model=model,
+        messages=[
+            {"role": "system", "content": "You are an helpful assistant"},
+            {"role": "user", "content": column_a},
+        ],
+    )
+    return response.choices[0].message.content
+
+phospho_test.run()
 ```
 
-
-### Dataset (custom data)
-
-To test with a custom dataset, you can use the dataset source loader. This lets you load data from a local file.
-
-Decorator Parameter: `source_loader="dataset"`
-
-Source Loader Parameters: Parameters such as `path` to the local file and `test_n_times` for repetition can be specified.
 
 Supported file formats: `csv`, `xlsx`, `json`
 
+<Info>
+The columns of the dataset file should match the function arguments.
+</Info>
+
 Example of a local csv file:
 
-```
-input, output
-"Hello", "Hi! How can I help you?"
+```txt title="path/to/dataset.csv"
+column_a, column_b
+"What's larger, 3.9 or 3.11 ?", "3.11"
 ```
 
-<Note>
-  When testing with the metric `compare`, the dataset must have a column
-  `output` to be used as a reference output. The new output is compared to this
-  reference (better or worse).
-</Note>
-
-Example of a test:
+## Custom tests
 
 ```python
+import phospho 
+
+phospho_test = phospho.PhosphoTest()
+
 @phospho_test.test(
-    source_loader="dataset",
-    source_loader_params={"path": "golden_dataset.csv", "test_n_times": 2},
-    metrics=["evaluate", "compare"],
+    source_loader="dataset", 
+    source_loader_params={"path": "path/to/dataset.csv"},
 )
-def test_santa_dataset(input: str):
-    santa_claus_agent = SantaClausAgent()
-    return santa_claus_agent.answer(messages=[{"role": "user", "content": input}])
-```
+def test_backtest(column_a: str, column_b: str) -> str | None:
+    response = client.chat.completions.create(
+        model=model,
+        messages=[
+            {"role": "system", "content": "You are an helpful assistant"},
+            {"role": "user", "content": column_a},
+        ],
+    )
+    return response.choices[0].message.content
 
-<Note>
-  The columns of the dataset must match the signature of the app function to
-  evaluate. Extra columns will be ignored.
-</Note>
-
-## Metrics
-
-Metrics determine the aspects of agent performance that are evaluated. The metrics currently supported are: `evaluate` and `compare`.
-
-### Evaluate
-
-Rates the output of the app as success or failure based on the provided inputs. This works the same way as [phospho evaluation](/guides/evaluation).
-
-Decorator Parameter: `metrics=["evaluate"]`
-
-```python
-@phospho_test.test(
-    source_loader="backtest",
-    source_loader_params={"sample_size": 10},
-    metrics=["evaluate"],
-)
-def test_santa(messages: List[Dict[str, str]]):
-    santa_claus_agent = SantaClausAgent()
-    return santa_claus_agent.answer(messages)
-```
-
-### Compare
-
-Compares the current output of the app with the reference output, allowing for performance comparison.
-
-- In backtesting, the reference output is the old output that was logged to phospho.
-- In dataset testing, the reference output is the column `output` of the dataset.
-
-Decorator Parameter: `metrics=["compare"]`
-
-```python
-@phospho_test.test(
-    source_loader="backtest",
-    source_loader_params={"sample_size": 10},
-    metrics=["compare"],
-)
-def test_santa(messages: List[Dict[str, str]]):
-    santa_claus_agent = SantaClausAgent()
-    return santa_claus_agent.answer(messages)
+phospho_test.run()
 ```
 
 ## Running the test
