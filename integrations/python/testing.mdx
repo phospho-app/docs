@@ -7,14 +7,32 @@ Evaluate your app's performance before deploying it to production.
 
 The phospho testing framework allows you to test your app with historical data, custom datasets, and custom tests.
 
-The phospho python module **parallelizes** the function calls to speed up the testing process.
+The phospho python module **parallelizes** the function calls to **speed up** the testing process.
+
+## Getting started
+
+To get started, install the phospho python module.
+
+```bash
+pip install -U phospho
+```
+
+Create a new file `phospho_testing.py`:
+
+```python phospho_testing.py
+import phospho
+
+phospho_test = phospho.PhosphoTest()
+```
+
+In this file, you can then write your tests.
 
 
-## Backtest
+## Backtesting
 
-This source loader uses the logged phospho data to evaluate your app's performance. This is great to quickly have representative data to test with.
+To use data from the phospho platform, you can use the backtest source loader.
 
-```python
+```python phospho_testing.py
 import phospho 
 
 phospho_test = phospho.PhosphoTest()
@@ -36,12 +54,12 @@ def test_backtest(message: phospho.lab.Message) -> str | None:
 ```
 
 
-### Dataset .CSV, .XLSX, .JSON
+## Dataset .CSV, .XLSX, .JSON
 
 To test with a custom dataset, you can use the dataset source loader.
 
 
-```python
+```python phospho_testing.py
 import phospho 
 
 phospho_test = phospho.PhosphoTest()
@@ -71,7 +89,7 @@ The columns of the dataset file should match the function arguments.
 
 Example of a local csv file:
 
-```txt title="path/to/dataset.csv"
+```txt path/to/dataset.csv
 column_a, column_b
 "What's larger, 3.9 or 3.11 ?", "3.11"
 ```
@@ -82,7 +100,7 @@ To write custom tests, you can just create a function and decorate it with `@pho
 
 At the end, add `phospho.log` to send the data to phospho for analysis.
 
-```python
+```python phospho_testing.py
 import phospho
 
 phospho_test = phospho.PhosphoTest()
@@ -107,11 +125,11 @@ def test_simple():
     )
 ```
 
-## Running the test
+## Run using python
 
 To run the tests, use the `run` method of the `PhosphoTest` class.
 
-```python
+```python phospho_testing.py
 phospho_test.run()
 ```
 
@@ -120,11 +138,25 @@ The `executor_type` can be either:
 - `parallel_jobs`: all functions are called in parallel.
 - `sequential`: great for debugging.
 
-You can also use the phospho command line interface to run the tests. 
+## Run using the phospho CLI
+
+You can also use the phospho command line interface to run the tests. In the folder where `phospho_testing.py` is located, run:
 
 ```bash
 phospho init # Run this only once
 phospho test
+```
+
+The executor type can be specified with the `--executor-type` flag. 
+
+```bash
+phospho test --executor-type=parallel_jobs
+```
+
+Learn more using the `--help` flag:
+
+```bash
+phospho test --help
 ```
 
 <Card title="phospo CLI" href="/cli" icon="square-terminal">
