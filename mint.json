@@ -191,7 +191,11 @@
     },
     {
       "group": "API Reference",
-      "pages": ["api-reference/introduction", "api-reference/logging"]
+      "pages": [
+        "api-reference/introduction",
+        "api-reference/logging",
+        "api-reference/backtesting"
+      ]
     },
     {
       "group": "Examples",
