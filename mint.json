@@ -194,7 +194,8 @@
       "pages": [
         "api-reference/introduction",
         "api-reference/logging",
-        "api-reference/backtesting"
+        "api-reference/backtesting",
+        "api-reference/query-your-analytics"
       ]
     },
     {
