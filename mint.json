@@ -195,8 +195,7 @@
         "api-reference/introduction",
         "api-reference/backtesting",
         "api-reference/log-messages",
-        "api-reference/post-user-feedback",
-        "api-reference/query-your-analytics"
+        "api-reference/post-user-feedback"
       ]
     },
     {
