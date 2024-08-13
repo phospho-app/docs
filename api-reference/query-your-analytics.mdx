@@ -1,0 +1,38 @@
+---
+openapi: post /projects/{project_id}/query
+title: Query your analytics
+description: Easily query analytics from your phospho project
+---
+
+This is the main endpoint for querying data from phospho.
+It can be used add an analytics dashboard in your product,
+query data for further analysis or export to destinations not yet supported by phospho.
+
+Most of the vizualisations in the phospho dashboard are built using this service.
+
+## Using temporal dimensions
+
+The dimensions to group by can be a combination of temporal and non-temporal fields.
+If the dimension is `month`, `day`, `hour`, or`minute` the data will be grouped by the corresponding time unit from the `created_at` field.
+The time will be formated in UTC time with the corresponding format: `YYYY-MM`fo rmonths, `YYYY-MM-DD HH:mm` for minutes,...
+
+## Filtering
+
+You can filter the data by any field in the response. Use MongoDB-like syntax to filter the data.
+For instance, to filter the data by a start and end date, we will use the following value for the `filters` field of the request:
+
+```json
+// Value of the filters field
+// created_at is a UNIX timestamp in seconds
+{
+  "created_at": {
+    "$gte": 1723495581,
+    "$lt": 1723495681
+  }
+}
+```
+
+## Nested fields
+
+Nested fields are supported (for example, to call the sub-field `model` of the `metadata` field, use `metadata.model`).
+If a nested field is a key in the response, the field name will be `metadata_model` (with the points replaced by underscores).

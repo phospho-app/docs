@@ -193,8 +193,9 @@
       "group": "API Reference",
       "pages": [
         "api-reference/introduction",
-        "api-reference/logging",
-        "api-reference/backtesting"
+        "api-reference/backtesting",
+        "api-reference/log-messages",
+        "api-reference/post-user-feedback"
       ]
     },
     {
