@@ -197,6 +197,10 @@
       "pages": ["api-reference/post-run-backtests"]
     },
     {
+      "group": "Export",
+      "pages": ["api-reference/query-your-analytics"]
+    },
+    {
       "group": "Examples",
       "pages": ["examples/introduction"]
     },
