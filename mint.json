@@ -40,11 +40,6 @@
   },
   "anchors": [
     {
-      "name": "Community",
-      "icon": "discord",
-      "url": "https://discord.gg/axPJjsm65T"
-    },
-    {
       "name": "Github",
       "icon": "github",
       "url": "https://github.com/phospho-app/phospho"
@@ -207,14 +202,13 @@
     },
     {
       "group": "Models API",
-      "pages": ["models/embeddings", "models/multimodal"]
+      "pages": ["models/embeddings"]
     }
   ],
   "footerSocials": {
     "twitter": "https://twitter.com/phospho_app",
     "github": "https://github.com/phospho-app",
-    "linkedin": "https://www.linkedin.com/company/phospho-app/",
-    "discord": "https://discord.gg/m8wzBGQA55"
+    "linkedin": "https://www.linkedin.com/company/phospho-app/"
   },
   "openapi": "https://api.phospho.ai/v3/openapi.json",
   "analytics": {
