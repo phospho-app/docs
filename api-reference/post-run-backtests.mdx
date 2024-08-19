@@ -1,13 +1,13 @@
 ---
-title: Backtesting
+title: "Backtesting"
 description: "Evaluate new system prompt on historical data"
+openapi: post /run/backtest
 ---
 
 Evaluate the performance of a new system prompt on historical data using the backtest endpoint.
 
 This endpoint lets you call an LLM model on multiple messages in **parallel**, **evaluate** the results, and get a performance **report.**
 
-Full API specs: [here](https://api.phospho.ai/v3/redoc#tag/Run/operation/post_run_backtests_run_backtest_post)
 
 # Usage 
 
@@ -20,7 +20,7 @@ To run a backtest, you need to:
 
 # Log data to a phospho project
 
-To log data to a phospho project, you can use the [phospho API](/api-reference/introduction), import a file to the platform, or use one of the [phospho SDK](/http://localhost:3001/getting-started#log-to-phospho).
+To log data to a phospho project, you can use the [phospho API](/api-reference/introduction), import a file to the platform, or use one of the [phospho SDK](/getting-started#log-to-phospho).
 
 # Setup analytics in the project
 
@@ -43,10 +43,6 @@ The backtest endpoint does the following:
 2. Create a system prompt from the `system_prompt_template` and `system_prompt_variables`
 3. Call the LLM model specified in `provider_and_model` with the `OPENAI_API_KEY` set in the request' headers
 4. Log back the results to the phospho project using the `version_id`
-
-<Card href="https://api.phospho.ai/v3/redoc#tag/Run/operation/post_run_backtests_run_backtest_post" title="API specs" >
-Read the full backtest API specs here
-</Card>
 
 ## How does the template work?
 
@@ -86,28 +82,6 @@ async def run_model(message: phospho.lab.Message) -> Optional[str]:
 
 Use the optional `filters` parameter to select which data to use in the backtest.
 
-```json
-{
-  "filters": {
-    "created_at_start": 0, // timestamp in seconds
-    "created_at_end": 0, // timestamp in seconds
-    "event_name": ["string"],
-    "event_id": ["string"],
-    "flag": "string",
-    "metadata": {},
-    "user_id": "string",
-    "last_eval_source": "string",
-    "sentiment": "string",
-    "language": "string",
-    "has_notes": true,
-    "tasks_ids": ["string"],
-    "clustering_id": "string",
-    "clusters_ids": ["string"],
-    "is_last_task": true,
-    "sessions_ids": ["string"]
-  }
-}
-```
 
 # Results
 
