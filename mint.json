@@ -191,12 +191,15 @@
     },
     {
       "group": "API Reference",
-      "pages": [
-        "api-reference/introduction",
-        "api-reference/backtesting",
-        "api-reference/log-messages",
-        "api-reference/post-user-feedback"
-      ]
+      "pages": ["api-reference/introduction"]
+    },
+    {
+      "group": "Log",
+      "pages": ["api-reference/post-log"]
+    },
+    {
+      "group": "Run",
+      "pages": ["api-reference/post-run-backtests"]
     },
     {
       "group": "Examples",
@@ -213,7 +216,7 @@
     "linkedin": "https://www.linkedin.com/company/phospho-app/",
     "discord": "https://discord.gg/m8wzBGQA55"
   },
-  "openapi": "https://api.phospho.ai/v2/openapi.json",
+  "openapi": "https://api.phospho.ai/v3/openapi.json",
   "analytics": {
     "posthog": {
       "apiKey": "phc_EesFKS4CVoyc0URzJN0FOETpg7KipCBEpRvHEvv5mDF",
