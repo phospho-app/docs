@@ -69,6 +69,7 @@
           "group": "Import data",
           "pages": [
             "import-data/import-file",
+            "import-data/api-integration",
             "import-data/import-langsmith",
             "import-data/import-langfuse"
           ]
