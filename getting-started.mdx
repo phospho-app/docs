@@ -14,7 +14,7 @@ This guide will help you get started with the hosted version of [phospho](https:
     </Note>
   </Step>
   <Step title="Import your first messages">
-    Upload a csv file with your text messages (or log to the API).
+    Upload a csv file with text messages (or log to the API).
   </Step>
   <Step title="Run your first clustering">
     Discover the results in your dashboard.
@@ -25,15 +25,15 @@ This guide will help you get started with the hosted version of [phospho](https:
 
 Go to the [phospho platform](https://platform.phospho.ai/). Login or create an account if you don't have one.
 
-We recommend you to use your company email address to create an account. This will allow you to easily invite your team members to collaborate on the same project.
+We recommend you use your company email address to create an account. This will let you easily invite your team members to collaborate on the same project.
 
 ## 2. Import your first messages
 
-There is several ways to import your data to phospho. The easiest way is by uploading a csv file.
+There are several ways to import your data to phospho. The easiest is to upload a file.
 
 ### Format your file
 
-Your CSV or Excel file need to have the following columns:
+Format your `.csv` or `.xlsx` file to have the following columns:
 
 - `input` : the input text data, ususally the user message
 - `output` : the output text, ususally the LLM app response
@@ -41,36 +41,52 @@ Your CSV or Excel file need to have the following columns:
 Additonally, you can add the following columns:
 
 - `task_id`: an id of the task (input/output couple)
-- `session_id`: an id of the session. Messages with the same session_id will be grouped together in a single session
+- `session_id`: an id of the session. Messages with the same session_id will be grouped together
+- `user_id`: the id of the user that sent the message
 - `created_at`: the creation date of the task (format it like `"2021-09-01 12:00:00"`)
+- other columns will be stored as *metadata* and can be used for filtering
 
 The maximum upload size with this method is 500MB.
 
-### Upload your file to the plateform
+### Upload the file to the plateform
 
 Click the setting icon at the top right of the screen and select `Import data`.
 
 ![title](../images/import/import_data.png)
 
-Then click, the **Upload dataset** button and use **Choose file** button to select your file. Select your csv file and click on the **Send file** button.
+Then, click the **Upload dataset** button and use **Choose file** button to select your file. After selecting the file, click on the **Send file** button.
 
-Your tasks will be populated in your project in a minute. You might need to refresh the page to see them.
+Your file will be uploaded and processed in a few minutes, depending on the size of the file.
 
 ## 3. Run your first clustering
 
-You need to have a payment method set up to run a clustering. You can add a payment method in the settings page and claim your free credits.
+<Note>
+You need to have a **payment method** set up to run a clustering. Add a payment method in Settings and claim your free credits.
+</Note>
 
-Now that your data is imported, you can run your first clustering. Go to the dashboard and click on the **Clusters** tab.
-Click on the `Configure clusters detection`button, change the parameters if needed and click on the `Run cluster analysis` button.
-And... that's it! After a few minutes, you will be able to see the clusters of your text messages.
+Now that you imported data, you can run your first clustering. 
 
-Feel free to try again with different parameters or to click the pickaxe icon to breakdown a cluster into smaller clusters.
+Go to the **Clusters** page by clicking on **Clusters** on the sidebar.
 
-Please not that running a clustering will cost you 2 credits per message.
+On top, click on the `Configure clusters detection`button. Change the parameters if needed. Finally, click on the `Run cluster analysis` button.
+
+The clustering will take some times to run. Once it's done, you will see the results on the page.
+
+### Clustering tips 
+
+<Info>Running a clustering costs 2 credits per message.</Info>
+
+- Click on a cluster to see the messages inside.
+- Click on the pickaxe icon to breakdown a cluster into smaller clusters.
+- Try different parameters (filters, scope, user query) to get different results.
+
+Learn more about clustering [here.](/analytics/clustering)
+
+
 
 ## Tired of uploading files? Setup the API
 
-Learn more about how to [log to phospho](/import-data/api-integration) in your app in a few minutes.
+Learn more about how to [log to phospho](/import-data/api-integration) in your app in a few minutes. 
 
 ## Next steps
 
