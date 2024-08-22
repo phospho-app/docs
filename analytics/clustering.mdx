@@ -7,20 +7,33 @@ Clustering lets your group user messages based on their intention. This is great
 
 ## How it works
 
-The phospho clustering uses a combination of **user intent embedding** and **unsupervized clustering algorithms** to group messages together. 
+The phospho clustering uses a combination of **user intent embedding** and **unsupervized clustering algorithms** to group messages together.
 
 The user intent embedding is a representation of the user intention in a high dimensional space. This representation is generated using a deep learning model trained on a large dataset of user messages. [Learn more here.](https://research.phospho.ai/phospho_intent_embed.pdf)
 
 We are constantly evaluating and improving the clustering algorithms to provide the best results.
 
-## How to use it
+## How to run a clustering
 
-To use the clustering feature, you need to have a phospho account and an API key. You can get one by signing up on [phospho.ai](https://platform.phospho.ai). 
+To use the clustering feature, you need to have a phospho account and an API key. You can get one by signing up on [phospho.ai](https://platform.phospho.ai).
 
-1. If not already done, import your data and setup a payment method. 
-2. Then, go to the Clusters tab and click on the "Configure clustering detection" button.
-3. You can filter the messages you want to cluster by setting a date range, a specific tag, and more.
-4. Click on the "Run clustering" button to start the clustering process. The process can take a few minutes depending on the size of your dataset.
+<Steps>
+  <Step title="Import data">
+ If not already done, [import your data](/import-data/import-file) and setup a payment method.
+  </Step>
+
+  <Step title="Configure clustering">
+  Go to the **Clusters** tab and click on the *Configure clustering detection* button.
+  Select the scope of data to cluster: either messages or sessions.
+  Filter the data by setting a date range, a specific tag, and more.
+  </Step>
+
+  <Step title="Run clustering">
+  Click on the *Run cluster analysis* button to start the clustering process. Depending on the number of messages, it can take a few minutes.
+  </Step>
+
+</Steps>
+
 
 <iframe
   className="w-full aspect-video"
@@ -30,9 +43,24 @@ To use the clustering feature, you need to have a phospho account and an API key
 
 ## How to interpret the results
 
-The clustering results are displayed in a table where each row represents a cluster. The table shows the number of messages in the cluster and an automatic summary describing a random sample of messages in the cluster.
+The clustering results are presented in two formats:
 
-Click on a row to see the messages in the cluster.
+- **3D Dot Cloud Graph**: Each point in the graph corresponds to an embedding of a message (or a session). Clusters are distinct groups of these points. 
+
+- **Cluster Cards**: Each cluster is also displayed as a card. The card shows the cluster size and an automatic summary of a random sample of messages. Click on "Explore" in any card to view the messages in the cluster.
+
+## How to run a clustering with a custom instruction?
+
+By default, the clustering is run based on: `user intent` 
+
+You can however modify this instruction in *Advanced settings*. 
+
+Change the clustering instruction to refine how messages are grouped, to provide insights that are more aligned with your needs. You just need to enter the **topic** you want to cluster on.
+
+Examples of what you can enter:
+- For a medical chatbot: `type of disease` 
+- For a customer support chatbot: `type of issue (refund, delivery, etc.)`
+- For a chatbot in the e-commerce industry: `product mentioned` 
 
 ## How to run a custom clustering algorithms?
 
@@ -41,4 +69,3 @@ You can use the user intent embeddings to run your own clustering algorithms. Th
 ## Next steps
 
 Based on the clusters, define more analytics to run on your data in order to never miss a beat on what your users are talking about. Check the [event detection page](/analytics/events) for more information.
-
