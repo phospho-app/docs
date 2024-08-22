@@ -13,15 +13,27 @@ The user intent embedding is a representation of the user intention in a high di
 
 We are constantly evaluating and improving the clustering algorithms to provide the best results.
 
-## How to use it
+## How to run a clustering
 
 To use the clustering feature, you need to have a phospho account and an API key. You can get one by signing up on [phospho.ai](https://platform.phospho.ai).
 
-1. If not already done, import your data and setup a payment method.
-2. Then, go to the Clusters tab and click on the "Configure clustering detection" button.
-3. Select the type of data you want to cluster: either complete sessions or individual messages.
-4. You can filter the data you want to cluster by setting a date range, a specific tag, and more.
-5. Click on the "Run clustering" button to start the clustering process. The process can take a few minutes depending on the size of your dataset.
+<Steps>
+  <Step title="Import data">
+ If not already done, [import your data](/import-data/import-file) and setup a payment method.
+  </Step>
+
+  <Step title="Configure clustering">
+  Go to the **Clusters** tab and click on the *Configure clustering detection* button.
+  Select the scope of data to cluster: either messages or sessions.
+  Filter the data by setting a date range, a specific tag, and more.
+  </Step>
+
+  <Step title="Run clustering">
+  Click on the *Run cluster analysis* button to start the clustering process. Depending on the number of messages, it can take a few minutes.
+  </Step>
+
+</Steps>
+
 
 <iframe
   className="w-full aspect-video"
@@ -33,22 +45,22 @@ To use the clustering feature, you need to have a phospho account and an API key
 
 The clustering results are presented in two formats:
 
-- **3D Dot Cloud Graph**: This visual representation shows the clustering in
-  a three-dimensional space. Each point in the graph corresponds to a message
-  (or a session), and clusters are depicted as distinct groupings of these
-  points. Use this graph to get a high-level overview of how messages (or
-  sessions) are grouped spatially.
+- **3D Dot Cloud Graph**: Each point in the graph corresponds to an embedding of a message (or a session). Clusters are distinct groups of these points. 
 
-- **Cluster Cards**: Each cluster is also displayed as a card below. The
-  card shows the number of messages in the cluster and an automatic summary
-  describing a random sample of messages in the cluster.
-  Click on "Explore" in
-  any card to view the detailed messages within that specific cluster. This will
-  help you analyze the content and context of the messages grouped together.
+- **Cluster Cards**: Each cluster is also displayed as a card. The card shows the cluster size and an automatic summary of a random sample of messages. Click on "Explore" in any card to view the messages in the cluster.
 
-## How to run a clustering with a custom instruction
+## How to run a clustering with a custom instruction?
 
-By default, the clustering is run based on: <i> user intent </i>. You can modify this instruction in <i>Advanced settings</i>. Adjusting the clustering instruction can help refine how messages are grouped, providing insights that are more aligned with your needs.
+By default, the clustering is run based on: `user intent` 
+
+You can however modify this instruction in *Advanced settings*. 
+
+Change the clustering instruction to refine how messages are grouped, to provide insights that are more aligned with your needs. You just need to enter the **topic** you want to cluster on.
+
+Examples of what you can enter:
+- For a medical chatbot: `type of disease` 
+- For a customer support chatbot: `type of issue (refund, delivery, etc.)`
+- For a chatbot in the e-commerce industry: `product mentioned` 
 
 ## How to run a custom clustering algorithms?
 
