@@ -195,7 +195,10 @@
     },
     {
       "group": "Run",
-      "pages": ["api-reference/post-run-backtests"]
+      "pages": [
+        "api-reference/post-run-backtests",
+        "api-reference/post-run-events"
+      ]
     },
     {
       "group": "Export",
