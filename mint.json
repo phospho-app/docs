@@ -93,10 +93,7 @@
             "analytics/sentiment-analysis"
           ]
         },
-        {
-          "group": "Evaluation",
-          "pages": ["analytics/evaluation", "analytics/user-feedback"]
-        }
+        "analytics/user-feedback"
       ]
     },
     {
