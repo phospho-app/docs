@@ -207,7 +207,7 @@
     },
     {
       "group": "Models API",
-      "pages": ["models/embeddings"]
+      "pages": ["models/embeddings", "models/llm"]
     }
   ],
   "footerSocials": {
