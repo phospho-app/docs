@@ -31,7 +31,7 @@ To access these models through the phospho proxy, you need to:
 import openai
 
 from openai import OpenAI
-client = OpenAI(api_key="PHOSPHO_API_KEY", base_url="https://api.phospho.ai/v2/{YOUR_PHOSPHO_PROJECT_ID}/"")
+client = OpenAI(api_key="PHOSPHO_API_KEY", base_url="https://api.phospho.ai/v2/{YOUR_PHOSPHO_PROJECT_ID}/")
 
 completion = client.chat.completions.create(
   model="openai:gpt-4o",
@@ -70,10 +70,66 @@ curl https://api.phospho.ai/v2/{YOUR_PHOSPHO_PROJECT_ID}/chat/completions \
 
 </CodeGroup>
 
-# Anthropic
-
-Docs coming soon.
-
 # Mistral ai
+
+The phospho proxy is Mistral ai compatible. You can use the Mistral client to send requests to the phospho API. Messages sent through the phospho proxy will appear in your phospho dashboard.
+
+Available models:
+
+- `mistral-small-latest`
+- `mistral-small-latest`
+
+To access these models through the phospho proxy, you need to:
+
+- set the server_url to `https://api.phospho.ai/v2/{YOUR_PHOSPHO_PROJECT_ID}/`
+- set the MISTRAL_API_KEY to your phospho API key
+- set the model to the desired model with the prefix `mistral:` ( e.g. `mistral:mistral-large-latest` or `mistral:mistral-small-latest`)
+
+<CodeGroup>
+
+```python mistralai python sdk
+import mistralai
+
+from mistralai import Mistral
+client = Mistral(api_key="PHOSPHO_API_KEY", server_url="https://api.phospho.ai/v2/{YOUR_PHOSPHO_PROJECT_ID}/")
+
+completion = client.chat.complete(
+  model="mistral:mistral-large-latest",
+  messages=[
+    {"role": "system", "content": "You are a helpful assistant."},
+    {"role": "user", "content": "Hello!"}
+  ]
+)
+
+print(completion.choices[0].message)
+
+```
+
+```bash curl
+curl https://api.phospho.ai/v2/{YOUR_PHOSPHO_PROJECT_ID}/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $PHOSPHO_API_KEY" \
+  -d '{
+    "model": "mistral:mistral-large-latest",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful assistant."
+      },
+      {
+        "role": "user",
+        "content": "Hello!"
+      }
+    ]
+  }'
+```
+
+```javascript mistralai javascript sdk
+// Same as for the python SDK
+```
+
+</CodeGroup>
+
+# Anthropic
 
 Docs coming soon.
