@@ -208,7 +208,7 @@
     },
     {
       "group": "Models API",
-      "pages": ["models/embeddings", "models/llm"]
+      "pages": ["models/embeddings", "models/llm", "models/tak"]
     }
   ],
   "footerSocials": {
