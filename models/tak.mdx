@@ -59,7 +59,7 @@ print(completion.choices[0].message)
 
 # Or with streaming
 
-response = openai_client.chat.completions.create(
+response = client.chat.completions.create(
     model='phospho:tak-large',
     messages=[
         {'role': 'user', 'content': "Count to 10"}
