@@ -58,7 +58,9 @@ phospho.init(api_key="phospho-key", project_id="phospho-project-id")
 
 The most minimal way to log a task is to use `phospho.log`.
 
-### Logging text inputs and outputs
+### Log text input and output
+
+phospho is a text analytics tool. You can log any string input and output this way:
 
 ```python
 input_text = "Hello! This is what the user asked to the system"
@@ -68,13 +70,15 @@ output_text = "This is the response showed to the user by the app."
 phospho.log(input=input_text, output=output_text)
 ```
 
-Note that the output is optional. If you don't pass an output, phospho will log `None`.
+The output is optional.
 
-### Logging OpenAI queries and responses
+The input and output logged to phospho are used to perform text analytics. For example, sentiment analysis, intent detection, or evaluation.
+
+### Log OpenAI queries and responses
 
 phospho aims to be battery included. So if you pass something else than a `str` to `phospho.log`, phospho extracts what's usually considered "the input" or "the output".
 
-For example, if you use the OpenAI API:
+For example, you can pass to `phospho.log` the same `input` as the arguments for `openai.chat.completions.create`. And you can pass to `phospho.log` the same `output` as OpenAI's `ChatCompletion` objects.
 
 ```python
 import openai
@@ -107,9 +111,69 @@ input: Explain quantum computers in less than 20 words.
 output: Qubits harness quantum physics for faster, more powerful computation.
 ```
 
+### Log a list of OpenAI messages 
+
+In conversational apps, your conversation history is often a list of messages. You can directly log this list as an input or an output. 
+
+The input, output, and system prompt are automatically extracted based on the messages' role.
+
+```python
+
+# This is your conversation history
+messages = [
+    {"role": "system", "content": "You are a helpful assistant."},
+    {"role": "user", "content": "Explain quantum computers in less than 20 words."},
+]
+
+# Your LLM app code generates a response
+response = openai_client.chat.completions.create(
+    messages=messages,
+    model="gpt-3.5-turbo",
+)
+
+# You append the response to the conversation history
+messages.append({"role": response.choices[0].role, "content": response.choices[0].message.content, } )
+
+# You can log the conversation history as input or output
+log = phospho.log(input=messages, output=messages)
+
+print("input:", log["input"])
+print("output:", log["output"])
+print("system_prompt:", log["system_prompt"]) # system prompt is automatically extracted
+```
+
+Result:
+
+```text
+input: Explain quantum computers in less than 20 words.
+output: Qubits harness quantum physics for faster, more powerful computation.
+system_prompt: You are a helpful assistant.
+```
+
+Note that consecutive messages with the same role are **concatenated** with a newline.
+
+```python
+messages = [
+    {"role": "system", "content": "You are a helpful assistant."},
+    {"role": "user", "content": "Explain quantum computers in less than 20 words."},
+    {"role": "user", "content": "What is the speed of light?"},
+]
+log = phospho.log(input=messages)
+```
+
+Result:
+
+```text
+input: Explain quantum computers in less than 20 words.\nWhat is the speed of light?
+```
+
+If you need more control, consider using custom extractors.
+
 ### Custom extractors
 
-Pass custom extractors to `phospho.log` to extract the input and output from any object. The original object will be converted to a dict (if jsonable) or a string and stored in `raw_input` and `raw_output`.
+Pass custom extractors to `phospho.log` to extract the input and output from any object. The custom extractor is a function that is applied to the input or output before logging. The function should return a string.
+
+The original object is converted to a dict (if jsonable) or a string, and stored in `raw_input` and `raw_output`.
 
 ```python
 phospho.log(
@@ -119,6 +183,13 @@ phospho.log(
     input_to_str_function=lambda x: x["custom_input"],
     output_to_str_fucntion=lambda x: x["custom_output"],
 )
+```
+
+Result:
+
+```text
+input: this is a complex object
+output: which is not a string nor a standard object
 ```
 
 ## Logging additional metadata
