@@ -18,6 +18,8 @@ A task is made of at least two things:
 
 The Task abstraction helps you structure your app and quickly explain what it does to an outsider: "Here's what goes in, here's what goes out."
 
+It's the basic unit of text analytics. You can analyze the input and output of a task to understand the user's intent, the system's performance, or the quality of the response.
+
 ### Examples of tasks
 
 - Call to an LLM (input = query, output = llm response)
@@ -78,7 +80,7 @@ phospho.log(input=input_text, output=output_text)
 
 The output is optional.
 
-The input and output logged to phospho are displayed in the dashboard and used to perform text analytics. For example, sentiment analysis, intent detection, or evaluation.
+The input and output logged to phospho are displayed in the dashboard and used to perform text [analytics.](analytics.mdx)
 
 ## Common use cases
 
@@ -188,7 +190,7 @@ phospho.log(
 )
 ```
 
-```text Result:
+```text Result
 input: this is a complex object
 output: which is not a string nor a standard object
 ```
@@ -289,10 +291,11 @@ If you wrap a function with `phospho.wrap`, phospho automatically logs a task wh
 - The passed arguments are logged as `input`
 - The returned value is logged as `output`
 
+You can still use [custom extractors](#custom-extractors) and log metadata.
+
 ### Use the `@phospho.wrap` decorator
 
 If you want to log every call to a python function, you can use the `@phospho.wrap` decorator. This is a nice pythonic way to structure your LLM app's code.
-You can still use [custom extractors](#custom-extractors) and pass metadata.
 
 ```python
 @phospho.wrap
