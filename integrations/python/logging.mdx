@@ -102,7 +102,7 @@ query = {
     "messages": [{"role": "system", "content": "You are a helpful assistant."},
                  {"role": "user", "content": input_prompt},
     ],
-    "model": "gpt-3.5-turbo",
+    "model": "gpt-4o-mini",
 }
 response = openai_client.chat.completions.create(**query)
 
@@ -135,7 +135,7 @@ messages = [
 # Your LLM app code generates a response
 response = openai_client.chat.completions.create(
     messages=messages,
-    model="gpt-3.5-turbo",
+    model="gpt-4o-mini",
 )
 
 # You append the response to the conversation history
@@ -227,7 +227,7 @@ query = {
     "messages": [{"role": "system", "content": "You are a helpful assistant."},
                  {"role": "user", "content": "Explain quantum computers in less than 20 words."},
     ],
-    "model": "gpt-3.5-turbo",
+    "model": "gpt-4o-mini",
     # Enable streaming on OpenAI
     "stream": True
 }
@@ -285,36 +285,35 @@ for line in response_iterator:
 
 ## Wrap functions with `phospho.wrap`
 
-If you want to log every call to a python function, you can use the `@phospho.wrap` decorator. This is a nice pythonic way to structure your LLM app's code.
-
 If you wrap a function with `phospho.wrap`, phospho automatically logs a task when they are called:
 
 - The passed arguments are logged as `input`
 - The returned value is logged as `output`
 
-You can still use [custom extractors](#custom-extractors) and pass metadata.
-
 ### Use the `@phospho.wrap` decorator
+
+If you want to log every call to a python function, you can use the `@phospho.wrap` decorator. This is a nice pythonic way to structure your LLM app's code.
+You can still use [custom extractors](#custom-extractors) and pass metadata.
 
 ```python
 @phospho.wrap
 def answer(messages: List[Dict[str, str]]) -> Optional[str]:
     response = openai_client.chat.completions.create(
-        model="gpt-3.5-turbo",
+        model="gpt-4o-mini",
         messages=messages,
     )
     return response.choices[0].delta.content
 ```
 
-Like phospho.log, every extra keyword argument is logged as metadata.
-
 ### How to log metadata with phospho.wrap?
+
+Like phospho.log, every extra keyword argument is logged as metadata.
 
 ```python
 @phospho.wrap(metadata={"more": "details"})
 def answer(messages: List[Dict[str, str]]) -> Optional[str]:
     response = openai_client.chat.completions.create(
-        model="gpt-3.5-turbo",
+        model="gpt-4o-mini",
         messages=messages,
     )
     return response.choices[0].delta.content
@@ -322,7 +321,7 @@ def answer(messages: List[Dict[str, str]]) -> Optional[str]:
 
 ### Wrap an imported function with phospho.wrap
 
-If you can't change the function definition, you can wrap it this way.
+If you can't change the function definition, you can wrap it this way:
 
 ```python
 # You can wrap any function call in phospho.wrap
@@ -335,11 +334,11 @@ response = phospho.wrap(
         {"role": "system", "content": "You are a helpful assistant."},
         {"role": "user", "content": "Explain quantum computers in less than 20 words."},
     ],
-    model="gpt-3.5-turbo",
+    model="gpt-4o-mini",
 )
 ```
 
-If you want to wrap all calls to a function, you can override the function definition.
+If you want to wrap all calls to a function, override the function definition with the wrapped version:
 
 ```python
 openai_client.chat.completions.create = phospho.wrap(
@@ -360,7 +359,7 @@ def answer(messages: List[Dict[str, str]]) -> Generator[Optional[str], Any, None
     streaming_response: Stream[
         ChatCompletionChunk
     ] = openai_client.chat.completions.create(
-        model="gpt-3.5-turbo",
+        model="gpt-4o-mini",
         messages=messages,
         stream=True,
     )
