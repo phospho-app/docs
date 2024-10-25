@@ -214,9 +214,9 @@ phospho supports streamed outputs. This is useful when you want to log the outpu
 
 ### Example: OpenAI streaming
 
-Pass `stream=True` to `phospho.log` to handle streaming responses. When iterating over the response, phospho will automatically log each chunk until the iteration is completed.
+Out of the box, phospho supports streaming OpenAI completions. Pass `stream=True` to `phospho.log` to handle streaming responses. 
 
-For example, you can pass streaming OpenAI responses to `phospho.log` the following way:
+When iterating over the response, phospho will automatically concatenate each chunk until the streaming is finished.
 
 ```python
 
@@ -246,7 +246,6 @@ To use this as an `output` in `phospho.log`, you need to:
 
 1. Wrap the generator with `phospho.MutableGenerator` or `phospho.MutableAsyncGenerator` (for async generators) 
 2. Specify a `stop` function that returns `True` when the streaming is finished. This is used to trigger the logging of the task.
-
 
 Here is an example with an [Ollama endpoint](https://ollama.com) that streams responses.
 
