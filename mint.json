@@ -71,7 +71,8 @@
             "import-data/import-file",
             "import-data/api-integration",
             "import-data/import-langsmith",
-            "import-data/import-langfuse"
+            "import-data/import-langfuse",
+            "import-data/tracing"
           ]
         },
         "self-hosting",
