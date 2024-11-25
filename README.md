@@ -1,16 +1,13 @@
-# Mintlify Starter Kit
+# 🧪 phospho documentation
 
-Click on `Use this template` to copy the Mintlify starter kit. The starter kit contains examples including
+This is the user-facing documentation of the [phospho platform](https://platform.phospho.ai)
 
-- Guide pages
-- Navigation
-- Customizations
-- API Reference pages
-- Use of popular components
+- The deployed docs [are available here.](https://docs.phospho.ai/welcome)
+- The open source code of the platform [is available here.](https://github.com/phospho-app/phospho)
 
-### Development
+## Local development
 
-Install the [Mintlify CLI](https://www.npmjs.com/package/mintlify) to preview the documentation changes locally. To install, use the following command
+The docs use Mintlify for deployment. Install the [Mintlify CLI](https://www.npmjs.com/package/mintlify) to preview the documentation changes locally. To install, use the following command
 
 ```
 npm i -g mintlify
@@ -22,17 +19,10 @@ Run the following command at the root of your documentation (where mint.json is)
 mintlify dev
 ```
 
-If this deosn't work, you can run
+To learn how to format the pages and what blocks you can use, [check out the Mintlify docs.](https://mintlify.com/docs/quickstart)
 
-```
-npx mintlify dev
-```
+### Troubleshooting
 
-### Publishing Changes
-
-Install our Github App to autopropagate changes from youre repo to your deployment. Changes will be deployed to production automatically after pushing to the default branch. Find the link to install on your dashboard.
-
-#### Troubleshooting
-
+- `mintlify dev` doesn't run - try `npx mintlify dev`
 - Mintlify dev isn't running - Run `mintlify install` it'll re-install dependencies.
 - Page loads as a 404 - Make sure you are running in a folder with `mint.json`
