@@ -1,18 +1,38 @@
 ---
 title: Self-hosting
-description: "Host phospho on your own infrastructure"
+description: "Host phospho on your own infrastructure using phospho open source"
 ---
 
-The whole phospho platform can be hosted on your own infrastructure. This is useful if you want to keep your data private or if you have specific data compliance requirements.
+The phospho platform can be hosted on your own infrastructure. [The code is open source and available here.](https://github.com/phospho-app/phospho)
 
-The phospho team will handle the deployement, maintenance and continuous updates of the platform on your infrastructure.
+This is useful if you want to keep your data private or if you have specific data compliance requirements.
 
-# Compatible Cloud Providers
+## How to deploy phospho with Docker?
 
-- Google Cloud Platform
-- Amazon Web Services
+The platform can be deployed using Docker. Start by cloning the phospho repository.
+
+```bash
+git clone https://github.com/phospho-app/phospho.git
+```
+
+Once the environment variables are set up, you can then use [Docker compose](https://docs.docker.com/compose/intro/features-uses/) to quickly build and deploy the platform.
+
+```bash
+docker compose up
+```
+
+Please follow [this guide for the complete instructions](https://github.com/phospho-app/phospho/blob/dev/DeploymentGuide.md) on how to setup environment variables.
+
+## How to deploy phospho on the Cloud?
+
+phospho is compatible with any cloud provider thanks to its container-based architecture.
+
+- Google Cloud platform (feel free to refer to the [deployment scripts here](https://github.com/phospho-app/phospho/tree/dev/.github/workflows))
 - Microsoft Azure
+- Amazon Web Services
 
-# Get started
+To get started easily, we recommend you use [Porter.run](https://docs.porter.run/introduction).
 
-To get started, please contact us at [contact@phospho.ai](mailto:contact@phospho.ai)
+### Contact us
+
+To get help, feel free to reach out at [contact@phospho.ai](mailto:contact@phospho.ai)
