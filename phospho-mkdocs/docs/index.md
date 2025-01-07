@@ -24,7 +24,7 @@
 
     Clusterize your text messages in 5 minutes. No code required.
 
-    [:octicons-arrow-right-24: Getting started](/getting-started)
+    [:octicons-arrow-right-24: Getting started](/docs/getting-started)
 
 </div>
 
@@ -47,7 +47,7 @@
 
     Clusterize your text messages in 5 minutes. No code required.
 
-    [:octicons-arrow-right-24: Getting started](/getting-started)
+    [:octicons-arrow-right-24: Getting started](/docs/getting-started)
 
 </div>
 
@@ -61,7 +61,7 @@
 
     Group users' messages based on their intention. **Find out what your users are talking about.**
 
-    [:octicons-arrow-right-24: Clustering](/analytics/clustering)
+    [:octicons-arrow-right-24: Clustering](/docs/analytics/clustering)
 
 -   :material-database-import:{ .lg .middle } __Import data__
 
@@ -69,7 +69,7 @@
 
     Log all the important data of your LLM app. **Get started in minutes.**
 
-    [:octicons-arrow-right-24: Importing data](/getting-started)
+    [:octicons-arrow-right-24: Importing data](/docs/getting-started)
 
 -   :material-tag-multiple:{ .lg .middle } __Automatic tagging__
 
@@ -77,7 +77,7 @@
 
     Automatically annotate your text data and be alerted. **Take action.**
 
-    [:octicons-arrow-right-24: Tagging](/analytics/tagging)
+    [:octicons-arrow-right-24: Tagging](/docs/analytics/tagging)
 
 -   :material-test-tube:{ .lg .middle } __AB Testing__
 
@@ -85,7 +85,7 @@
 
     Run experiments and iterate on your LLM app, while keeping track of performances. **Keep shipping.**
 
-    [:octicons-arrow-right-24: AB Testing](/analytics/ab-testing)
+    [:octicons-arrow-right-24: AB Testing](/docs/analytics/ab-testing)
 
 -   :material-cog-sync:{ .lg .middle } __Flexible evaluation pipeline__
 
@@ -93,7 +93,7 @@
 
     Discover how to run and design a text analytics pipeline using natural language. **No code needed.**
 
-    [:octicons-arrow-right-24: Evaluation pipeline](/analytics/events)
+    [:octicons-arrow-right-24: Evaluation pipeline](/docs/analytics/events)
 
 -   :material-account-details:{ .lg .middle } __User analytics__
 
@@ -101,8 +101,8 @@
 
     Detect user languages, sentiment, and more. **Get to know power users.**
 
-    [:octicons-arrow-right-24: User analytics](/analytics/language)
+    [:octicons-arrow-right-24: User analytics](/docs/analytics/language)
 
 </div>
 
-Eager to see it in action? [:octicons-arrow-right-24: Get started](/getting-started) in minutes.
+Eager to see it in action? [:octicons-arrow-right-24: Get started](/docs/getting-started) in minutes.

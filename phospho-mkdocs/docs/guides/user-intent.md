@@ -8,7 +8,8 @@ The [phospho platform](https://phospho.ai/) allows you to explore user intention
 This guide will show you how to achieve this.
 
 <iframe
-  className="w-full aspect-video"
+  width="100%"
+  height="600px"
   src="https://www.youtube.com/embed/WwvBXJieiW0?si=q--tDY1iqON0GHo5"
   allowFullScreen
 ></iframe>
@@ -17,28 +18,23 @@ Make sure you have [imported your data](/docs/guides/getting-started) before sta
 
 ## Walkthrough
 
-<Steps>
-<Step>
+## 1. Go to the clustering tab
+
 Once on the platform, go to the **clustering** tab in the menu on the left of the screen.
 
 On here, phospho runs various algorithms to analyze your user interactions and detect patterns.
 
 We **group similar interactions** together to help you understand what your users are talking about.
 
-</Step>
-<Step>
+### 2. Run the clustering
 
 Click on **Run cluser detection** to start the process.
 
 ![Clusters](../images/guides/user-intentions/clusters.png)
-
-</Step>
-</Steps>
-
-<Info>
-  Clustering is not yet a continuous process, you will need to re-run it
-  manually to get the latest results.
-</Info>
+ 
+!!! info
+    Clustering is not yet a continuous process, you will need to re-run it
+    manually to get the latest results.
 
 ## How it works
 
@@ -47,13 +43,22 @@ Finaly, we generate a summary of the clusters to help you understand what your u
 
 ## Next steps
 
-<CardGroup>
-  <Card title="LLM as a judge" href="/guides/LLM-judge">
-    Leverage LLm as a judge techniques to analyze your LLM app's performance.
-    **Quick and simple setup**
-  </Card>
-  <Card title="Understand your data" href="/guides/understand-your-data">
-    Get insights on your data through vizualisation, clustering and more.
-    **Quick and easy**
-  </Card>
-</CardGroup>
+<div class="grid cards" markdown>
+
+-   :material-gavel:{ .lg .middle } __LLM as a judge__
+
+    ---
+
+    Leverage LLM as a judge techniques to analyze your LLM app's performance. **Quick and simple setup**
+
+    [:octicons-arrow-right-24: Read more](#)
+
+-   :material-chart-pie:{ .lg .middle } __Understand your data__
+
+    ---
+
+    Get insights on your data through visualization, clustering and more. **Quick and easy**
+
+    [:octicons-arrow-right-24: Read more](#)
+
+</div>

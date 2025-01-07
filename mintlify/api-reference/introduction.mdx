@@ -7,11 +7,11 @@ Most phospho features are available through the API. The base URL of the phospho
 
 If you do not want to use the API directly, we provide several SDKs to make it easier to integrate phospho into your products:
 
-- [Python SDK](/integrations/python/logging)
-- [JavaScript SDK](/integrations/javascript/logging)
-- [Langchain and Langsmith](/integrations/langchain)
-- [Langfuse](/import-data/import-langfuse)
-- [Supabase](/integrations/supabase)
+- [Python SDK](/docs/integrations/python/logging)
+- [JavaScript SDK](/docs/integrations/javascript/logging)
+- [Langchain and Langsmith](/docs/integrations/langchain)
+- [Langfuse](/docs/import-data/import-langfuse)
+- [Supabase](/docs/integrations/supabase)
 
 The API full reference is available [here](https://api.phospho.ai/v3/redoc)
 

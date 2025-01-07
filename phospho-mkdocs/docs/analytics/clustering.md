@@ -19,26 +19,18 @@ We are constantly evaluating and improving the clustering algorithms to provide 
 
 To use the clustering feature, you need to have a phospho account and an API key. You can get one by signing up on [phospho.ai](https://platform.phospho.ai).
 
-<Steps>
-  <Step title="Import data">
- If not already done, [import your data](/import-data/import-file) and setup a payment method.
-  </Step>
+1. **Import data**. If not already done, [import your data](/docs/import-data/import-file) and setup a payment method.
 
-  <Step title="Configure clustering">
-  Go to the **Clusters** tab and click on the *Configure clustering detection* button.
+2. **Configure clustering**. Go to the **Clusters** tab and click on the *Configure clustering detection* button.
   Select the scope of data to cluster: either messages or sessions.
   Filter the data by setting a date range, a specific tag, and more.
-  </Step>
 
-  <Step title="Run clustering">
+3. **Run clustering**.
   Click on the *Run cluster analysis* button to start the clustering process. Depending on the number of messages, it can take a few minutes.
-  </Step>
-
-</Steps>
-
 
 <iframe
-  className="w-full aspect-video"
+  width="100%"
+  height="600px"
   src="https://www.youtube.com/embed/WwvBXJieiW0?si=q--tDY1iqON0GHo5"
   allowFullScreen
 ></iframe>
@@ -66,8 +58,8 @@ Examples of what you can enter:
 
 ## How to run a custom clustering algorithms?
 
-You can use the user intent embeddings to run your own clustering algorithms. The embeddings are available through the API. [Learn more here.](/models/embeddings)
+You can use the user intent embeddings to run your own clustering algorithms. The embeddings are available through the API. [Learn more here.](/docs/models/embeddings)
 
 ## Next steps
 
-Based on the clusters, define more analytics to run on your data in order to never miss a beat on what your users are talking about. Check the [event detection page](/analytics/events) for more information.
+Based on the clusters, define more analytics to run on your data in order to never miss a beat on what your users are talking about. Check the [event detection page](/docs/analytics/events) for more information.

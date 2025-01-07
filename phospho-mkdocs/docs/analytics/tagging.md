@@ -37,10 +37,9 @@ The event description is a natural language description of the tag. Explain how 
 
 In the description, refer to your user as "the user" and to your LLM app as "the assistant".
 
-<Card title="Example of an event description">
-  The user is trying to book a flight. The user asked a question about a flight.
-  Don't include fight suggestions from the agent if the user didn't ask for it.
-</Card>
+!!! example "Example of an event description"
+    > _The user is trying to book a flight. The user asked a question about a flight.
+    Don't include fight suggestions from the agent if the user didn't ask for it._
 
 Manage Tags in the **Analytics** tab. Click delete to delete a tag detector.
 

@@ -77,11 +77,11 @@ Deep dive into the clusters or try different parameters to get different results
 - Click on the pickaxe icon to breakdown a cluster into smaller clusters.
 - Try different parameters (filters, scope, user query) to get different results.
 
-Learn more about clustering [here.](/analytics/clustering)
+Learn more about clustering [here.](/docs/analytics/clustering)
 
 ## Tired of uploading files? Setup the API
 
-Learn more about how to [log to phospho](/import-data/api-integration) in your app in a few minutes.
+Learn more about how to [log to phospho](/docs/import-data/api-integration) in your app in a few minutes.
 
 ## Next steps
 
@@ -93,7 +93,7 @@ Learn more about how to [log to phospho](/import-data/api-integration) in your a
 
     Automatically annotate your text data and be alerted. **Take action.**
 
-    [:octicons-arrow-right-24: Tagging](/analytics/tagging)
+    [:octicons-arrow-right-24: Tagging](/docs/analytics/tagging)
 
 -   :material-cluster:{ .lg .middle } __Unsupervised clustering__
 
@@ -101,7 +101,7 @@ Learn more about how to [log to phospho](/import-data/api-integration) in your a
 
     Group users' messages based on their intention. **Find out what your users are talking about.**
 
-    [:octicons-arrow-right-24: Clustering](/analytics/clustering)
+    [:octicons-arrow-right-24: Clustering](/docs/analytics/clustering)
 
 -   :material-test-tube:{ .lg .middle } __AB Testing__
 
@@ -109,7 +109,7 @@ Learn more about how to [log to phospho](/import-data/api-integration) in your a
 
     Run experiments and iterate on your LLM app, while keeping track of performances. **Keep shipping.**
 
-    [:octicons-arrow-right-24: AB Testing](/analytics/ab-testing)
+    [:octicons-arrow-right-24: AB Testing](/docs/analytics/ab-testing)
 
 -   :material-cog-sync:{ .lg .middle } __Flexible evaluation pipeline__
 
@@ -117,7 +117,7 @@ Learn more about how to [log to phospho](/import-data/api-integration) in your a
 
     Discover how to run and design a text analytics pipeline using natural language. **No code needed.**
 
-    [:octicons-arrow-right-24: Evaluation pipeline](/analytics/events)
+    [:octicons-arrow-right-24: Evaluation pipeline](/docs/analytics/events)
 
 -   :material-account-details:{ .lg .middle } __User analytics__
 
@@ -125,7 +125,7 @@ Learn more about how to [log to phospho](/import-data/api-integration) in your a
 
     Detect user languages, sentiment, and more. **Get to know power users.**
 
-    [:octicons-arrow-right-24: User analytics](/analytics/language)
+    [:octicons-arrow-right-24: User analytics](/docs/analytics/language)
 
 </div>
 

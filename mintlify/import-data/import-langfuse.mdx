@@ -34,4 +34,4 @@ Your data will be synced to your project in a minute.
 
 # Next steps
 
-Default evaluators like language and sentiment will be run on messages. To create more events and to run them on your data, see the [event detection page](/guides/events)
+Default evaluators like language and sentiment will be run on messages. To create more events and to run them on your data, see the [event detection page](/docs/guides/events)

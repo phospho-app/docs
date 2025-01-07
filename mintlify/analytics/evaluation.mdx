@@ -23,10 +23,10 @@ If the information are not available, phospho will use default heuristics.
 
 To improve the automatic evaluation, you can:
 - Label tasks in the phospho webapp. **Invite** your team members to help you!
-- Gather [user feedback](/guides/user-feedback)
-- Pass the `system_prompt (str)` parameter in `metadata` when [logging](/guides/sessions-and-users#metadata)
-- Group tasks in [sessions](/guides/sessions)
-- Override the task evaluations with [the analytics endpoints](/integrations/python/analytics#update-logs-from-a-dataframe)
+- Gather [user feedback](/docs/guides/user-feedback)
+- Pass the `system_prompt (str)` parameter in `metadata` when [logging](/docs/guides/sessions-and-users#metadata)
+- Group tasks in [sessions](/docs/guides/sessions)
+- Override the task evaluations with [the analytics endpoints](/docs/integrations/python/analytics#update-logs-from-a-dataframe)
 
 ## Annotate in the phospho webapp
 
@@ -54,7 +54,7 @@ You can gather annotations any way you want. For example, if you have your own t
 
 Trigger [the API endpoint](https://api.phospho.ai/v2/redoc#tag/Tasks/operation/post_flag_task_tasks__task_id__flag_post) to send your annotations to phospho at scale.
 
-Read the [full guide about user feedback](/guides/user-feedback) to learn more.
+Read the [full guide about user feedback](/docs/guides/user-feedback) to learn more.
 
 ## Visualize the results
 

@@ -13,11 +13,11 @@ AB testing is a method used to compare two versions of a product to determine wh
 
 Comparing on a single criteria is hard, especially for LLM apps. Indeed, the performance of a product can be measured in many ways.
 
-In phosho, the way AB testing is done is by comparing the **[analytics distribution](/guides/events) of two versions**: the candidate one and the control one.
+In phosho, the way AB testing is done is by comparing the **[analytics distribution](/docs/guides/events) of two versions**: the candidate one and the control one.
 
 ## Prerequisites to run an AB test
 
-You need to have setup [event detection](/guides/events) in your project. This will run analytics to measure the performance of your app: 
+You need to have setup [event detection](/docs/guides/events) in your project. This will run analytics to measure the performance of your app: 
 
 - **Tags:** eg. topic of the conversation
 - **Scores:** eg. sentiment of the conversation (between 1 and 5)
@@ -27,7 +27,7 @@ You need to have setup [event detection](/guides/events) in your project. This w
 
 1. Click on the button "Create an AB test" on the phospho platform. If you want, customize the `version_id`, which is the name of the test. 
 
-2. Send data to the platform [by using an SDK, an integration, a file, or more](/getting-started). All new incomming messages will be tagged with the `version_id`. 
+2. Send data to the platform [by using an SDK, an integration, a file, or more](/docs/getting-started). All new incomming messages will be tagged with the `version_id`. 
 
 ## Alternative: Specify the `version_id` in your code
 
@@ -76,7 +76,7 @@ When logging to phospho, add a field `version_id` with the name of your version 
 
 ## Run offline tests
 
-If you want to run offline tests, you can use the [phospho command line interface](/cli). Results of the offline tests are also available in the AB test tab.
+If you want to run offline tests, you can use the [phospho command line interface](/docs/docs/cli). Results of the offline tests are also available in the AB test tab.
 
 <div class="grid cards" markdown>
 

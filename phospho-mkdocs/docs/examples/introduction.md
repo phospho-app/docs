@@ -17,7 +17,7 @@ Set up phospho logging in your app. Run `pip install -U phospho` and get a minim
 
     A simple generic assistant in the CLI, logging to phospho.
 
-    [:octicons-arrow-right-24: View Example](/integrations/python/examples/openai-agent)
+    [:octicons-arrow-right-24: View Example](/docs/integrations/python/examples/openai-agent)
 
 -   :material-crown:{ .lg .middle } __OpenAI agent + Streamlit__
 
@@ -25,7 +25,7 @@ Set up phospho logging in your app. Run `pip install -U phospho` and get a minim
 
     An OpenAI assistant in Streamlit, logging to phospho.
 
-    [:octicons-arrow-right-24: View Example](/integrations/python/examples/openai-streamlit)
+    [:octicons-arrow-right-24: View Example](/docs/integrations/python/examples/openai-streamlit)
 
 -   :material-crown:{ .lg .middle } __url2chat: Chat with any website__
 
@@ -41,7 +41,7 @@ Set up phospho logging in your app. Run `pip install -U phospho` and get a minim
 
     A simple Langchain retrieval chain, logging to phospho.
 
-    [:octicons-arrow-right-24: View Example](/integrations/langchain)
+    [:octicons-arrow-right-24: View Example](/docs/integrations/langchain)
 
 </div>
 
@@ -117,7 +117,7 @@ Run `npm i phospho` and get a minimal, powerful logging system.
 
     Implement phospho logging in your Supabase app.
 
-    [:octicons-arrow-right-24: View Example](/integrations/supabase)
+    [:octicons-arrow-right-24: View Example](/docs/integrations/supabase)
 
 -   :material-discord:{ .lg .middle } __Can't find your example?__
 

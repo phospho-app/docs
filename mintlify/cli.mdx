@@ -34,7 +34,7 @@ This does two things:
 phospho config
 ```
 
-2. It creates a file `phospho_testing.py` in the current directory. You can [edit this file](/python/testing) to customize your tests.
+2. It creates a file `phospho_testing.py` in the current directory. You can [edit this file](/docs/python/testing) to customize your tests.
 
 
 # Run the tests
