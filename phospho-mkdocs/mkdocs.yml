@@ -1,0 +1,4 @@
+site_name: phospho docs
+site_url: https://phospho-app.github.io/docs/
+theme:
+  name: material
