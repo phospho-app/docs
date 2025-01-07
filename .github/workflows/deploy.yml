@@ -9,9 +9,6 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: mkdocs
     steps:
       - uses: actions/checkout@v4
       - name: Configure Git Credentials
@@ -29,4 +26,6 @@ jobs:
           restore-keys: |
             mkdocs-material-
       - run: pip install mkdocs-material
+        working-directory: mkdocs
       - run: mkdocs gh-deploy --force
+        working-directory: mkdocs
