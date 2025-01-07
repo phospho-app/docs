@@ -26,6 +26,6 @@ jobs:
           restore-keys: |
             mkdocs-material-
       - run: pip install mkdocs-material
-        working-directory: mkdocs
+        working-directory: phospho-mkdocs
       - run: mkdocs gh-deploy --force
-        working-directory: mkdocs
+        working-directory: phospho-mkdocs
