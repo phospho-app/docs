@@ -51,20 +51,72 @@ markdown_extensions:
   - pymdownx.blocks.caption
 
 nav:
-  - Platform: 
-    - index.md
-    - getting-started.md
-    - Import data: 
-      - import-data/import-file.md
-      - import-data/api-integration.md
-      - import-data/import-langsmith.md
-      - import-data/import-langfuse.md
-      - import-data/tracing.md
-    - self-hosting.md
-    - cli.md
+  - Platform:
+      - index.md
+      - getting-started.md
+      - Import data:
+          - import-data/import-file.md
+          - import-data/api-integration.md
+          - import-data/import-langsmith.md
+          - import-data/import-langfuse.md
+          - import-data/tracing.md
+      - self-hosting.md
+      - cli.md
+
+      - Analytics:
+        - analytics/ab-test.md
+        - analytics/events.md
+        - analytics/tagging.md
+        - analytics/clustering.md
+        - User analytics:
+            - analytics/sessions-and-users.md
+            - analytics/language.md
+            - analytics/sentiment-analysis.md
+        - analytics/user-feedback.md
+        - analytics/usage-based-billing.md
+
+      - Connectors:
+          - Python:
+              - integrations/python/logging.md
+              - Logging examples in Python:
+                  - integrations/python/examples/openai-agent.md
+                  - integrations/python/examples/openai-streamlit.md
+              - integrations/python/analytics.md
+              - Discover the Lab:
+                  - local/quickstart.md
+                  - local/custom-job.md
+                  - local/optimize.md
+                  - local/llm-provider.md
+              - integrations/python/testing.md
+          - integrations/javascript/logging.md
+          - Langchain & Langsmith:
+              - integrations/langchain.md
+              - import-data/import-langsmith.md
+          - import-data/import-langfuse.md
+          - integrations/supabase.md
+
+      - Integrations:
+          - integrations/argilla.md
+          - integrations/postgresql.md
+          - integrations/powerbi.md
+          - integrations/python/analytics.md
+      
+      - Models API:
+        - models/embeddings.md
+        - models/llm.md
+        - models/tak.md
+
   - Guides:
-    - guides/welcome-guide.md
+      - guides/welcome-guide.md
+      - guides/getting-started.md
+      - guides/LLM-judge.md
+      - guides/user-intent.md
+      - guides/understand-your-data.md
+      - guides/export-dataset-argilla.md
+
   - API Reference:
-    - api-reference/introduction.md
+      - api-reference/introduction.md
+
   - Examples:
-    - examples/introduction.md
+      - examples/introduction.md
+

@@ -5,7 +5,7 @@ description: "Run AB tests in your app to see which version performs better"
 
 AB testing lets you compare different versions of your app to see which one performs better.
 
-<img height="200" src="/images/explore/abtest.jpeg" />
+![AB tests](../images/explore/abtest.jpeg)
 
 ## What is AB testing
 
@@ -35,46 +35,57 @@ Alternatively, you can specify the `version_id` in your code. This will override
 
 When logging to phospho, add a field `version_id` with the name of your version in `metadata`. See the example below:
 
-<CodeGroup>
+=== "Python"
 
-```python Python
-log = phospho.log(
-    input="log this",
-    output="and that",
-    version_id="YOUR_VERSION_ID"
-)
-```
+    ```python
+    log = phospho.log(
+        input="log this",
+        output="and that",
+        version_id="YOUR_VERSION_ID"
+    )
+    ```
 
-```javascript JavaScript
-log = phospho.log({
-  input: "log this",
-  output: "and that",
-  version_id:"YOUR_VERSION_ID",
-});
-```
+=== "Javascript"
 
-```bash HTTP API
-curl -X POST https://api.phospho.ai/v2/log/$PHOSPHO_PROJECT_ID \
--H "Authorization: Bearer $PHOSPHO_API_KEY" \
--H "Content-Type: application/json" \
--d '{
-    "batched_log_events": [
-        {
-            "input": "your_input",
-            "output": "your_output"
-            "metadata": {
-                "version_id": "YOUR_VERSION_ID"
+    ```javascript
+    log = phospho.log({
+    input: "log this",
+    output: "and that",
+    version_id:"YOUR_VERSION_ID",
+    });
+    ```
+
+=== "API"
+
+    ```bash
+    curl -X POST https://api.phospho.ai/v2/log/$PHOSPHO_PROJECT_ID \
+    -H "Authorization: Bearer $PHOSPHO_API_KEY" \
+    -H "Content-Type: application/json" \
+    -d '{
+        "batched_log_events": [
+            {
+                "input": "your_input",
+                "output": "your_output"
+                "metadata": {
+                    "version_id": "YOUR_VERSION_ID"
+                }
             }
-        }
-    ]
-}'
-```
-</CodeGroup>
+        ]
+    }'
+    ```
 
 ## Run offline tests
 
 If you want to run offline tests, you can use the [phospho command line interface](/cli). Results of the offline tests are also available in the AB test tab.
 
-<Card title="phospho CLI" href="/cli" icon="square-terminal">
-Learn more about the phospho command line interface
-</Card>
+<div class="grid cards" markdown>
+
+-   :octicons-terminal-16:{ .lg .middle } __phospho CLI__
+
+    ---
+
+    Learn more about the phospho command line interface
+
+    [:octicons-arrow-right-24: Read more](#)
+
+</div>

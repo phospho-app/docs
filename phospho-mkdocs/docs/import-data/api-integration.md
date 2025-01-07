@@ -212,7 +212,7 @@ Tasks can be grouped into **sessions**. Tasks and Sessions can be attached to **
 
     <div class="grid cards" markdown>
 
-    -   :material-bolt:{ .lg .middle } __Read the supabase guide__
+    -   :material-lightning-bolt:{ .lg .middle } __Read the supabase guide__
 
         ---
 
