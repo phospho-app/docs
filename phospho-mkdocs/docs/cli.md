@@ -51,6 +51,14 @@ Discover the results by following the link in the terminal output or by visiting
 
 Tests are written in Python. Edit the `phospho_testing.py` file to add your tests.
 
-<Card title="phospo testing module" href="/integrations/python/testing" icon="python">
-Learn how to edit phospho tests
-</Card>
+<div class="grid cards" markdown>
+
+-   :material-language-python:{ .lg .middle } __phospho testing module__
+
+    ---
+
+    Learn how to edit phospho tests
+
+    [:octicons-arrow-right-24: Read more](#)
+
+</div>

@@ -51,7 +51,7 @@ Run these examples locally to discover phospho. Just `pip install -U "phospho[la
 
 <div class="grid cards" markdown>
 
--   :material-vial:{ .lg .middle } __Quickstart__
+-   :fontawesome-solid-vial:{ .lg .middle } __Quickstart__
 
     ---
 
@@ -59,7 +59,7 @@ Run these examples locally to discover phospho. Just `pip install -U "phospho[la
 
     [:octicons-arrow-right-24: View Example](https://github.com/phospho-app/phospho/blob/dev/examples/lab/quicksart.ipynb)
 
--   :material-vial:{ .lg .middle } __Create a Custom Job__
+-   :fontawesome-solid-vial:{ .lg .middle } __Create a Custom Job__
 
     ---
 
@@ -67,7 +67,7 @@ Run these examples locally to discover phospho. Just `pip install -U "phospho[la
 
     [:octicons-arrow-right-24: View Example](https://github.com/phospho-app/phospho/blob/dev/examples/lab/custom-job.ipynb)
 
--   :material-vial:{ .lg .middle } __Parallel calls to OpenAI on a dataset__
+-   :fontawesome-solid-vial:{ .lg .middle } __Parallel calls to OpenAI on a dataset__
 
     ---
 
