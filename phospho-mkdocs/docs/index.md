@@ -1,17 +1,108 @@
-# Welcome to MkDocs
+# Welcome to phospho!
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+*phospho* is the open source text analytics platform for LLM apps. Understand your users and turn text into insights.
 
-## Commands
+- Cluster text messages to understand user intents and use cases
+- Tag, score, and classify new messages
+- Set up evaluations to get quantified scores
+- A/B test your LLM app
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+**Keywords:** _clustering, automatic evaluations, A/B tests, user analytics_
 
-## Project layout
+<iframe
+  width="100%"
+  height="600"
+  src="https://www.youtube.com/embed/4QeNPa4xOc8?si=S7Z37Wtw94JCbw0K"
+  allowfullscreen
+></iframe>
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+<div class="grid cards" markdown>
+
+-   :material-play-circle:{ .lg .middle } __Get started now__
+
+    ---
+
+    Clusterize your text messages in 5 minutes. No code required.
+
+    [:octicons-arrow-right-24: Getting started](/getting-started)
+
+</div>
+
+## How does it work?
+
+1. **Import data**  
+   Import messages to phospho (e.g., _what the user asked, what the assistant answered_).
+
+2. **Run analysis**  
+   Cluster messages and run analysis on the messages. No code required.
+
+3. **Explore results**  
+   Visualize results on the phospho dashboard and export analytics results with integrations.
+
+<div class="grid cards" markdown>
+
+-   :material-play-circle:{ .lg .middle } __Get started now__
+
+    ---
+
+    Clusterize your text messages in 5 minutes. No code required.
+
+    [:octicons-arrow-right-24: Getting started](/getting-started)
+
+</div>
+
+## Key features
+
+<div class="grid cards" markdown>
+
+-   :material-message-text:{ .lg .middle } __Cluster messages__
+
+    ---
+
+    Group users' messages based on their intention. **Find out what your users are talking about.**
+
+    [:octicons-arrow-right-24: Clustering](/analytics/clustering)
+
+-   :material-database-import:{ .lg .middle } __Import data__
+
+    ---
+
+    Log all the important data of your LLM app. **Get started in minutes.**
+
+    [:octicons-arrow-right-24: Importing data](/getting-started)
+
+-   :material-tag-multiple:{ .lg .middle } __Automatic tagging__
+
+    ---
+
+    Automatically annotate your text data and be alerted. **Take action.**
+
+    [:octicons-arrow-right-24: Tagging](/analytics/tagging)
+
+-   :material-test-tube:{ .lg .middle } __AB Testing__
+
+    ---
+
+    Run experiments and iterate on your LLM app, while keeping track of performances. **Keep shipping.**
+
+    [:octicons-arrow-right-24: AB Testing](/analytics/ab-testing)
+
+-   :material-cog-sync:{ .lg .middle } __Flexible evaluation pipeline__
+
+    ---
+
+    Discover how to run and design a text analytics pipeline using natural language. **No code needed.**
+
+    [:octicons-arrow-right-24: Evaluation pipeline](/analytics/events)
+
+-   :material-account-details:{ .lg .middle } __User analytics__
+
+    ---
+
+    Detect user languages, sentiment, and more. **Get to know power users.**
+
+    [:octicons-arrow-right-24: User analytics](/analytics/language)
+
+</div>
+
+Eager to see it in action? [:octicons-arrow-right-24: Get started](/getting-started) in minutes.
