@@ -46,67 +46,65 @@
   ],
   "anchors": [
     {
-      "name": "Getting started",
-      "url": "welcome",
-      "icon": "book-open"
+      "name": "Examples",
+      "icon": "image",
+      "url": "examples"
     },
     {
-      "name": "API Reference",
-      "url": "control",
-      "icon": "square-terminal"
+      "name": "API References",
+      "icon": "code",
+      "url": "control"
     }
   ],
   "navigation": [
     {
       "group": "Getting Started",
+      "pages": ["welcome"]
+    },
+    {
+      "group": "Examples",
+      "pages": ["examples/vision", "examples/teleop", "examples/control"]
+    },
+
+    {
+      "group": "API Reference",
       "pages": [
-        "welcome",
         {
-          "group": "Examples",
-          "pages": ["examples/vision", "examples/teleop", "examples/control"]
+          "group": "Control",
+          "icon": "robot",
+          "pages": [
+            "control/move-init",
+            "control/move-teleoperation",
+            "control/move-teleoperation-ws",
+            "control/move-absolute-position",
+            "control/auto",
+            "control/stop-auto",
+            "control/end-effector-state",
+            "control/read-torques",
+            "control/turn-torque",
+            "control/read-joints",
+            "control/write-joints",
+            "control/calibration-sequence"
+          ]
         },
         {
-          "group": "API Reference",
+          "group": "Camera",
+          "icon": "camera",
           "pages": [
-            {
-              "group": "Control",
-              "icon": "robot",
-              "pages": [
-                "control/move-init",
-                "control/move-teleoperation",
-                "control/move-teleoperation-ws",
-                "control/move-absolute-position",
-                "control/auto",
-                "control/stop-auto",
-                "control/end-effector-state",
-                "control/read-torques",
-                "control/turn-torque",
-                "control/read-joints",
-                "control/write-joints",
-                "control/calibration-sequence"
-              ]
-            },
-            {
-              "group": "Camera",
-              "icon": "camera",
-              "pages": [
-                "camera/viz",
-                "camera/video-feed-for-camera",
-                "camera/video-feed-for-depth"
-              ]
-            },
-            {
-              "group": "Recording",
-              "icon": "database",
-              "pages": [
-                "recording/start-recording-episode",
-                "recording/stop-recording-episode",
-                "recording/play-recording"
-              ]
-            }
+            "camera/viz",
+            "camera/video-feed-for-camera",
+            "camera/video-feed-for-depth"
+          ]
+        },
+        {
+          "group": "Recording",
+          "icon": "database",
+          "pages": [
+            "recording/start-recording-episode",
+            "recording/stop-recording-episode",
+            "recording/play-recording"
           ]
         }
-        
       ]
     }
   ],
