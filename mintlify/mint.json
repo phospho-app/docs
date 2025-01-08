@@ -44,6 +44,18 @@
       "url": "https://phospho-app.github.io/docs/"
     }
   ],
+  "anchors": [
+    {
+      "name": "Getting started",
+      "url": "welcome",
+      "icon": "book-open"
+    },
+    {
+      "name": "API Reference",
+      "url": "control",
+      "icon": "square-terminal"
+    }
+  ],
   "navigation": [
     {
       "group": "Getting Started",
@@ -54,9 +66,47 @@
           "pages": ["examples/vision", "examples/teleop", "examples/control"]
         },
         {
-          "group": "API reference",
-          "pages": ["api/setup", "api/move"]
+          "group": "API Reference",
+          "pages": [
+            {
+              "group": "Control",
+              "icon": "robot",
+              "pages": [
+                "control/move-init",
+                "control/move-teleoperation",
+                "control/move-teleoperation-ws",
+                "control/move-absolute-position",
+                "control/auto",
+                "control/stop-auto",
+                "control/end-effector-state",
+                "control/read-torques",
+                "control/turn-torque",
+                "control/read-joints",
+                "control/write-joints",
+                "control/calibration-sequence"
+              ]
+            },
+            {
+              "group": "Camera",
+              "icon": "camera",
+              "pages": [
+                "camera/viz",
+                "camera/video-feed-for-camera",
+                "camera/video-feed-for-depth"
+              ]
+            },
+            {
+              "group": "Recording",
+              "icon": "database",
+              "pages": [
+                "recording/start-recording-episode",
+                "recording/stop-recording-episode",
+                "recording/play-recording"
+              ]
+            }
+          ]
         }
+        
       ]
     }
   ],
@@ -65,7 +115,7 @@
     "github": "https://github.com/phospho-app",
     "linkedin": "https://www.linkedin.com/company/phospho-app/"
   },
-  "openapi": "https://api.phospho.ai/v3/openapi.json",
+  "openapi": "openapi.json",
   "analytics": {
     "posthog": {
       "apiKey": "phc_EesFKS4CVoyc0URzJN0FOETpg7KipCBEpRvHEvv5mDF",
