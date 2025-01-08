@@ -13,7 +13,7 @@
   width="100%"
   height="600"
   src="https://www.youtube.com/embed/4QeNPa4xOc8?si=S7Z37Wtw94JCbw0K"
-  allowfullscreen
+  allowFullScreen
 ></iframe>
 
 <div class="grid cards" markdown>

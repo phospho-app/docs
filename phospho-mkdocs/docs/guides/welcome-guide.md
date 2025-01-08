@@ -11,7 +11,7 @@ Check out this video for a quick introduction to the platform.
   width="100%"
   height="480"
   src="https://www.youtube.com/embed/4QeNPa4xOc8?si=S7Z37Wtw94JCbw0K"
-  allowfullscreen
+  allowFullScreen
 ></iframe>
 
 Monitor interactions between your LLM app and your users. Explore conversation topics and leverage real-time data. Get AI analytics and product-level insights to improve your LLM app.
