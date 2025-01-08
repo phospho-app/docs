@@ -44,18 +44,6 @@
       "url": "https://phospho-app.github.io/docs/"
     }
   ],
-  "anchors": [
-    {
-      "name": "Getting started",
-      "url": "welcome",
-      "icon": "book-open"
-    },
-    {
-      "name": "API Reference",
-      "url": "control",
-      "icon": "square-terminal"
-    }
-  ],
   "navigation": [
     {
       "group": "Getting Started",
