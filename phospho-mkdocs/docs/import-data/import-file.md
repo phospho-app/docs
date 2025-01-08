@@ -32,5 +32,5 @@ Your tasks will be populated in your project in a minute. You might need to refr
 
 # Next steps
 
-- [Run your first clustering](../analytics/clustering)
-- [Run event detection](../analytics/events.mdx)
+- [Run your first clustering](../analytics/clustering.md)
+- [Run event detection](../analytics/events.md)

@@ -42,7 +42,7 @@ In your app, initialize the phospho module. By default, phospho will look for `P
 
 !!! tip
     Learn how to get your api key and project id by [clicking
-    here!](getting-started##1-get-your-phospho-api-key-and-your-project-id)
+    here!](getting-started)
 
 ```javascript
 import { phospho } from "phospho";

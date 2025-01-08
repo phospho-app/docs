@@ -7,7 +7,7 @@ This guide will help you get started with the [phospho platform](https://platfor
 
 1. Create an account on [phospho.ai](https://platform.phospho.ai).
 2. Import your data
-  - From [CSV/Excel](#import-from-a-csv-file)
+  - From [CSV/Excel](#import-from-file)
   - From [LangSmith](#import-from-langsmith)
   - From [LangFuse](#import-from-langfuse)
   - From [API](/docs/getting-started)
@@ -175,7 +175,7 @@ Learn to use the phospho platform with our guides:
 
     Setup LLM as a judge in your application. **Detect events** in your data.
 
-    [:octicons-arrow-right-24: Read more](#)
+    [:octicons-arrow-right-24: Read more](./LLM-judge.md)
 
 -   :material-target:{ .lg .middle } __User Intentions__
 
@@ -183,7 +183,7 @@ Learn to use the phospho platform with our guides:
 
     Detect user intentions and **get a global overview** of your LLM app.
 
-    [:octicons-arrow-right-24: Read more](#)
+    [:octicons-arrow-right-24: Read more](./user-intent.md)
 
 -   :material-chart-pie:{ .lg .middle } __Understand your data__
 
@@ -191,6 +191,6 @@ Learn to use the phospho platform with our guides:
 
     Get insights on your data through visualization, clustering and more. **Quick and easy**
 
-    [:octicons-arrow-right-24: Read more](#)
+    [:octicons-arrow-right-24: Read more](./understand-your-data.md)
 
 </div>
