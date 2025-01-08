@@ -1,16 +1,16 @@
 {
   "metadata": {
     "og:site_name": "docs.phospho.ai",
-    "og:title": "Phospho documentation",
-    "og:description": "Open source text analytics platform for LLM apps, documentation page.",
+    "og:title": "Phospho Junior dev kit documentation",
+    "og:description": "The toolkit for AI robotics",
     "og:url": "https://docs.phospho.ai",
     "og:image": "/logo/light.svg",
     "og:logo": "/logo/logo.svg",
-    "twitter:title": "Phospho documentation",
-    "twitter:description": "Open source text analytics platform for LLM apps, documentation page.",
+    "twitter:title": "Phospho Junior dev kit documentation",
+    "twitter:description": "The toolkit for AI robotics",
     "twitter:url": "https://docs.phospho.ai",
     "twitter:image": "/logo/light.svg",
-    "twitter:site": "@phospho_app"
+    "twitter:site": "@phospho_ai"
   },
   "$schema": "https://mintlify.com/schema.json",
   "name": "phospho",
@@ -31,32 +31,17 @@
   "topbarLinks": [
     {
       "name": "Contact us",
-      "url": "mailto:contact@phospho.app"
+      "url": "mailto:contact@phospho.ai"
     }
   ],
   "topbarCtaButton": {
-    "name": "Go to phospho",
-    "url": "https://platform.phospho.ai"
+    "name": "Buy the Junior dev kit",
+    "url": "https://phospho-ai.notion.site/AI-gets-physical-1708ca0b4c0480668607d5f56a2eb082"
   },
-  "anchors": [
-    {
-      "name": "Github",
-      "icon": "github",
-      "url": "https://github.com/phospho-app/phospho"
-    }
-  ],
   "tabs": [
     {
-      "name": "Guides",
-      "url": "guides"
-    },
-    {
-      "name": "API Reference",
-      "url": "api-reference"
-    },
-    {
-      "name": "Examples",
-      "url": "examples"
+      "name": "(External) phospho platform",
+      "url": "https://phospho-app.github.io/docs/"
     }
   ],
   "navigation": [
@@ -64,152 +49,15 @@
       "group": "Getting Started",
       "pages": [
         "welcome",
-        "getting-started",
         {
-          "group": "Import data",
-          "pages": [
-            "import-data/import-file",
-            "import-data/api-integration",
-            "import-data/import-langsmith",
-            "import-data/import-langfuse",
-            "import-data/tracing"
-          ]
-        },
-        "self-hosting",
-        "cli"
-      ]
-    },
-    {
-      "group": "Analytics",
-      "pages": [
-        "analytics/ab-test",
-        "analytics/events",
-        "analytics/tagging",
-        "analytics/clustering",
-        {
-          "group": "User analytics",
-          "pages": [
-            "analytics/sessions-and-users",
-            "analytics/language",
-            "analytics/sentiment-analysis"
-          ]
-        },
-        "analytics/user-feedback",
-        "analytics/usage-based-billing"
-      ]
-    },
-    {
-      "group": "Connectors",
-      "pages": [
-        {
-          "icon": "python",
-          "group": "Python",
-          "pages": [
-            "integrations/python/logging",
-            {
-              "group": "Logging examples in Python",
-              "pages": [
-                "integrations/python/examples/openai-agent",
-                "integrations/python/examples/openai-streamlit"
-              ]
-            },
-            "integrations/python/analytics",
-            {
-              "group": "Discover the Lab",
-              "pages": [
-                "local/quickstart",
-                "local/custom-job",
-                "local/optimize",
-                "local/llm-provider"
-              ]
-            },
-            "integrations/python/testing"
-          ]
+          "group": "Examples",
+          "pages": ["examples/vision", "examples/teleop", "examples/control"]
         },
         {
-          "icon": "js",
-          "group": "JavaScript",
-          "pages": ["integrations/javascript/logging"]
-        },
-        {
-          "icon": "bird",
-          "group": "Langchain & Langsmith",
-          "pages": ["integrations/langchain", "import-data/import-langsmith"]
-        },
-        {
-          "icon": "pretzel",
-          "group": "Langfuse",
-          "pages": ["import-data/import-langfuse"]
-        },
-        {
-          "icon": "bolt",
-          "group": "Supabase",
-          "pages": ["integrations/supabase"]
+          "group": "API reference",
+          "pages": ["api/setup", "api/move"]
         }
       ]
-    },
-    {
-      "group": "Integrations",
-      "pages": [
-        {
-          "icon": "circle",
-          "group": "Argilla",
-          "pages": ["integrations/argilla"]
-        },
-        {
-          "icon": "database",
-          "group": "PostgreSQL",
-          "pages": ["integrations/postgresql"]
-        },
-        {
-          "icon": "microsoft",
-          "group": "PowerBI",
-          "pages": ["integrations/powerbi"]
-        },
-        {
-          "icon": "teddy-bear",
-          "group": "Pandas",
-          "pages": ["integrations/python/analytics"]
-        }
-      ]
-    },
-    {
-      "group": "Guides",
-      "pages": [
-        "guides/welcome-guide",
-        "guides/getting-started",
-        "guides/LLM-judge",
-        "guides/user-intent",
-        "guides/understand-your-data",
-        "guides/export-dataset-argilla"
-      ]
-    },
-    {
-      "group": "API Reference",
-      "pages": ["api-reference/introduction"]
-    },
-    {
-      "group": "Log",
-      "pages": ["api-reference/post-log"]
-    },
-    {
-      "group": "Run",
-      "pages": [
-        "api-reference/post-run-backtests",
-        "api-reference/post-run-events"
-      ]
-    },
-    {
-      "group": "Export",
-      "pages": ["api-reference/query-your-analytics"]
-    },
-    {
-      "group": "Examples",
-      "pages": ["examples/introduction"]
-    },
-    {
-      "group": "Models API",
-      "pages": ["models/embeddings", "models/llm", "models/tak"]
     }
   ],
   "footerSocials": {
