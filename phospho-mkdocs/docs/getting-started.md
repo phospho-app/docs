@@ -17,7 +17,7 @@ We recommend you use your company email address to create an account. This will 
 
 ## 2. Import your first messages
 
-There are [several ways](./import-data/import-file.mdx) to import your data to phospho. The easiest is to upload a file. Let's see how to do it.
+There are [several ways](./import-data/import-file.md) to import your data to phospho. The easiest is to upload a file. Let's see how to do it.
 
 ### Format your file
 

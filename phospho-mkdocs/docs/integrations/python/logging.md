@@ -48,7 +48,7 @@ In your app, initialize the phospho module. By default, phospho will look for `P
 
 !!! tip
     Learn how to get your api key and project id by [clicking
-    here!](getting-started##1-get-your-phospho-api-key-and-your-project-id)
+    here!](/docs/getting-started)
 
 ```python
 import phospho
@@ -79,7 +79,7 @@ phospho.log(input=input_text, output=output_text)
 
 The output is optional.
 
-The input and output logged to phospho are displayed in the dashboard and used to perform text [analytics.](analytics.mdx)
+The input and output logged to phospho are displayed in the dashboard and used to perform text analytics.
 
 ## Common use cases
 

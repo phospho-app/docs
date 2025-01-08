@@ -1,10 +1,13 @@
-site_name: phospho docs
+site_name: phospho platform docs
 site_url: https://phospho-app.github.io/docs/
+repo_url: https://github.com/phospho-app/phospho
+
 
 theme:
   name: material
   icon:
     logo: fontawesome/solid/vial
+  favicon: favicon.png
   features:
     - content.tabs.link
     - navigation.tabs
@@ -24,6 +27,7 @@ theme:
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
+
 
 plugins:
   - glightbox
@@ -49,6 +53,17 @@ markdown_extensions:
   - admonition
   - pymdownx.details
   - pymdownx.blocks.caption
+
+extra:
+  social:
+    - icon: fontawesome/brands/github 
+      link: https://github.com/phospho-app/
+    - icon: fontawesome/brands/x-twitter 
+      link: https://x.com/phospho_ai
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/company/phospho-app/posts/?feedView=all
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/m8wzBGQA55
 
 nav:
   - Platform:
@@ -119,4 +134,7 @@ nav:
 
   - Examples:
       - examples/introduction.md
+
+  - Go to Platform:
+      - https://platform.phospho.ai
 

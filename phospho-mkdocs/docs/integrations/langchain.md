@@ -31,7 +31,7 @@ export OPENAI_API_KEY=...
 
 !!! tip
     Learn how to get your project id and api key by [clicking
-    here!](getting-started##1-get-your-phospho-api-key-and-your-project-id)
+    here!](getting-started)
 
 Install requirements:
 
