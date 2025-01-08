@@ -1,6 +1,6 @@
-# Welcome to phospho!
+# Welcome to the phospho platform documentation!
 
-*phospho* is the open source text analytics platform for LLM apps. Understand your users and turn text into insights.
+*The phospho platform* is the open source text analytics platform for LLM apps. Understand your users and turn text into insights.
 
 - Cluster text messages to understand user intents and use cases
 - Tag, score, and classify new messages
