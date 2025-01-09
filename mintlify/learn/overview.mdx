@@ -6,8 +6,11 @@ description: "The basics to get started in robotics."
 ## What is a robot made up of?
 
 Your robot is made up of a few key components:
-- **Links**: The rigid plastic parts of the robot that are connected by joints.
+
+![junior](/Images/junior.jpg)
+
 - **Joints/Actuators**: The motors of the robot that allow the links to move relative to each other.
+- **Links**: The rigid plastic parts of the robot that are connected by joints.
 - **End effector**: The last part of the robot that interacts with the environment. i.e. gripper
 - **Sensors**: The robot's eyes and ears. They allow the robot to perceive the world around it.
 - **Controller**: The robot's brain. It processes the sensor data and sends commands to the actuators.
@@ -32,3 +35,10 @@ The policy is what allows the robot to make decisions and take actions based on 
 <Card icon="graduation-cap" title="Learn more" href="/learn/policies">
 Learn more about policies and AI in robotics
 </Card>
+
+## Vocabulary
+
+- **State**: The current configuration of the robot. This includes the positions of the joints, the orientation of the end effector, and any sensor readings.
+- **Action**: The movement or command that the robot takes in response to its state.
+- **Reward**: A value that the robot receives based on its actions. The goal of the robot is to maximize its reward over time.
+- **Environment**: The world in which the robot operates. This includes the objects in the environment, the robot itself, and any other agents.
