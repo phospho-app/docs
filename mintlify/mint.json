@@ -51,9 +51,8 @@
     },
     {
       "group": "Examples",
-      "pages": ["examples/vision", "examples/teleop", "examples/control"]
+      "pages": ["examples/control", "examples/teleop", "examples/vision"]
     },
-
     {
       "group": "API Reference",
       "pages": [
@@ -94,6 +93,10 @@
           ]
         }
       ]
+    }, 
+    {
+      "group": "Learn",
+      "pages": ["learn/overview", "learn/kinematics", "learn/policies"]
     }
   ],
   "footerSocials": {

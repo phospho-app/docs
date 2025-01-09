@@ -9,7 +9,7 @@ Language detection is based on the **user message**, so the interaction below wi
 
 |        User       |              Assistant             |
 |-------------------|------------------------------------|
-| What can you do ? | Je ne peux pas répondre en anglais |
+| What can you do? | Je ne peux pas répondre en anglais |
 
 The language detection method is based on keywords. If the input is very short, the language detection might not be accurate.
 

@@ -1,0 +1,80 @@
+---
+title: "Kinematics"
+description: "How to move a robot arm to a specific position."
+---
+
+We understand **a robot is made up of actuators**, motors that can move to a specific position when given a command.
+
+So how can we give the robot a command to move to a specific position in a 3D space?
+
+
+## Forward kinematics
+
+_Forward kinematics is the process of calculating the position of the end effector given the joint angles of the robot_.
+
+It can be represented as a function f that takes the joint angles q as input and returns the position of the end effector x,y, and z as well as its orientation, $\phi , \theta$ and $\psi$.
+
+$$
+\mathbf{x} = \mathbf{f}(\mathbf{q}) = 
+\begin{bmatrix}
+x \\
+y \\
+z \\
+\phi \\
+\theta \\
+\psi
+\end{bmatrix}
+=
+\begin{bmatrix}
+f_1(q_1, q_2, \dots, q_n) \\
+f_2(q_1, q_2, \dots, q_n) \\
+f_3(q_1, q_2, \dots, q_n) \\
+f_4(q_1, q_2, \dots, q_n) \\
+f_5(q_1, q_2, \dots, q_n) \\
+f_6(q_1, q_2, \dots, q_n)
+\end{bmatrix}
+$$
+
+This is a simple process for a robot with a single joint. We can calculate the position of the end effector using trigonometry.
+
+For a robot with multiple joints, we can use the [Denavit-Hartenberg convention](https://en.wikipedia.org/wiki/Denavit%E2%80%93Hartenberg_parameters) to calculate the position of the end effector. This process allows us to calculate the position of the end effector given the joint angles of the robot.
+We can thus determine the position of the end effector in a 3D coordinate + rotation system.
+
+## Inverse kinematics
+
+_Inverse kinematics is the process of calculating the joint angles of the robot given the position of the end effector._
+
+It can be thought of as the **inverse of forward kinematics**.
+
+$$
+\mathbf{q} = \mathbf{f}^{-1}(\mathbf{x})
+$$
+
+
+It is a more complex process, as it involves solving a system of equations to determine the joint angles of the robot.
+
+<Tip> 
+The inverse kinematics problem doesn't have a single solution for a given position of the end effector. There can be multiple solutions, and the robot can reach the desired position using different joint angles.
+</Tip>
+
+Inverse kinematics is essential for controlling the robot arm. It allows us to move the robot arm to a specific position and orientation in 3D space.
+
+The inverse kinematics problem can be solved as an optimization problem, where we minimize the difference between the desired position of the end effector and the actual position of the end effector. 
+
+<Card icon="graduation-cap" title="Learn more" href="https://en.wikipedia.org/wiki/Inverse_kinematics">
+Learn more about Inverse Kinematics
+</Card>
+
+## Moving a robot
+
+Since we control the actuators themselves, we can move the robot arm to a specific position by sending the joint angles to the actuators.
+
+1. Get the current joint angles by calling the motors.
+
+2. Solve the inverse kinematics problem iteratively to converge towards the desired joint angles.
+
+3. Send the joint angles to the actuators to move the robot arm to the desired position.
+
+The junior dev kit offers two different movements: 
+- **move/absolute**: Move the robot arm to a specific position and orientation in 3D space.
+- **move/relative**: Move the robot arm by a specific distance and rotation in 3D space.

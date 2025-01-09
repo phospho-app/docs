@@ -1,0 +1,50 @@
+---
+title: "Policies"
+description: "What are the latest implementations in AI robotics?"
+---
+
+The junior dev kit was created with the intention of providing a platform for learning and experimenting with AI models in robotics. 
+
+Thanks to recent developments in LLMs (Large Language Models), VLMs (Vision Language Models) have been developed.
+
+Such models work great for robotics as they behave like a brain.
+From an image and a text instruction, the model can predict the next action to take. 
+Such models don't output a text, like ChatGPT would, but an action, like move left.
+
+Essentially, you could tell your robot to "pick up the red ball" and it would do so.
+
+This is a policy, a function that maps the current state of the robot to an action. It tells the robot what to do in a given situation.
+
+# ACT 
+
+[ACT (Action Chunking Transformer)](https://github.com/Shaka-Labs/ACT) is a popular repo that let's you experiment with imitation learning.
+
+It's a great starting point for experimenting with AI in robotics.
+
+You can easily record episodes of your robot performing a task to train a model that will enact this policy.
+
+Such models work with ~30 episodes, and can run on an RTX 3000 series GPU in less than 30 minutes.
+
+This is a great starting point to get your hands dirty with AI in robotics.
+
+# OpenVLA
+
+[OpenVLA](https://github.com/openvla/openvla?tab=readme-ov-file#getting-started) is another great repo.
+
+It's a more advanced model than ACT, and is more suited for complex tasks.
+
+Training such a model requires more data and more computational power.
+
+You'll be looking at ~100 episodes and a few hours of training on an A100 GPU.
+
+See [Nvidia's blog post](https://www.jetson-ai-lab.com/openvla.html) about using OpenVLA for more information.
+
+# Diffusion Transformer
+
+Diffusion transformers are an original approach to policy learning where the model is trained to predict the next action given the current state of the robot.
+
+It "hallucinates" what the robot should do next, and sends out the actions to do.
+
+The currently #1 model in robotics on Hugging Face is a diffusion transformer called [RDT-1b](https://huggingface.co/robotics-diffusion-transformer/rdt-1b).
+
+Fine tuning the model on your own data is expensive but the paper suggests that inference can run very quickly on an RTX 4080.

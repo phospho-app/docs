@@ -1,6 +1,6 @@
 ---
 title: "Welcome!"
-description: "Welcome to the documentation of the phospho Junior dev kit."
+description: "Welcome to the phospho Junior dev kit's documentation."
 ---
 
 The phospho Junior dev kit is a set of tools to kickstart your journey in next-gen AI models, with built-in remote control.
@@ -16,7 +16,7 @@ import requests
 requests.post(
 	"http://localhost:80/move/absolute", 
 	body={
-		"x": 1, "y": 0, "z": 0,                   # Move left
+		"x": 0, "y": 1, "z": 0,                   # Move left
 		"rx": 10, "ry": 0, "rz": 0,               # Rotate
 		"open": 1                                 # Open gripper
 	}

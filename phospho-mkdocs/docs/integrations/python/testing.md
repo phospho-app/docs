@@ -90,7 +90,7 @@ Example of a local csv file:
 
 ```txt
 column_a, column_b
-"What's larger, 3.9 or 3.11 ?", "3.11"
+"What's larger, 3.9 or 3.11?", "3.11"
 ```
 
 ## Custom tests
@@ -111,13 +111,13 @@ def test_simple():
         model="mistral-small",
         messages=[
             {"role": "system", "content": "You are an helpful assistant"},
-            {"role": "user", "content": "What's bigger: 3.11 or 3.9 ?"},
+            {"role": "user", "content": "What's bigger: 3.11 or 3.9?"},
         ],
     )
     response_text = response.choices[0].message.content
     # Use phospho.log to send the data to phospho for analysis
     phospho.log(
-        input="What's bigger: 3.11 or 3.9 ?",
+        input="What's bigger: 3.11 or 3.9?",
         output=response_text,
         # Specify the version_id of the test
         version_id=phospho_test.version_id,

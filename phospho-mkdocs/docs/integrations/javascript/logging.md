@@ -64,7 +64,7 @@ The most minimal way to log a task is to use `phospho.log`.
 ### Logging text inputs and outputs
 
 ```javascript
-const question = "What's the capital of Fashion ?";
+const question = "What's the capital of Fashion?";
 
 const myAgent = (query) => {
   // Here, you'd do complex stuff.
@@ -89,7 +89,7 @@ For example, if you use the OpenAI API:
 
 ```javascript
 // If you pass full OpenAI queries and results to phospho, it will extract the input and output for you.
-const question = "What's the capital of Fashion ?";
+const question = "What's the capital of Fashion?";
 const query = {
   model: "gpt-3.5-turbo",
   temperature: 0,
@@ -156,7 +156,7 @@ For example, you can pass streaming OpenAI responses to `phospho.log` the follow
 
 ```javascript
 // This should also work with streaming
-const question = "What's the capital of Fashion ?";
+const question = "What's the capital of Fashion?";
 const query = {
   model: "gpt-3.5-turbo",
   temperature: 0,
