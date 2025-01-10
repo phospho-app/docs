@@ -9,7 +9,21 @@ The phospho Junior dev kit is a set of tools to kickstart your journey in next-g
 
 Get started with the next level of robotics models: Diffusion transformers, OpenVLA, Cogact...
 
-```python
+<CodeGroup>
+```python Python (coming soon)
+import phosphobot
+
+# Move the real robot
+phosphobot.move.relative(
+    x=0, y=1, z=0,              # Move left
+    rx=10, ry=0, rz=0,          # Rotate
+    gripper=1                   # Open gripper
+)
+
+# Grab image of what the robot sees
+image = phosphobot.get_image()
+```
+```python HTTP API
 import requests
 
 # Control Junior's arm through API calls
@@ -21,7 +35,9 @@ requests.post(
 		"open": 1                                 # Open gripper
 	}
 )
+
 ```
+</CodeGroup>
 
 ## Unleash your creativity
 
