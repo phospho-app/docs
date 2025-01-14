@@ -96,7 +96,7 @@
     }, 
     {
       "group": "Learn",
-      "pages": ["learn/overview", "learn/kinematics", "learn/policies", "learn/simulation"]
+      "pages": ["learn/overview", "learn/kinematics", "learn/policies", "learn/simulation", "learn/ai-models"]
     }
   ],
   "footerSocials": {
