@@ -1,1 +1,1240 @@
-{"openapi":"3.1.0","info":{"title":"FastAPI","version":"0.1.0"},"paths":{"/status":{"get":{"summary":"Status","description":"Get the status of the server.","operationId":"status_status_get","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"$ref":"#/components/schemas/ServerStatus"}}}}}}},"/move/init":{"post":{"tags":["control"],"summary":"Initialize Robot","description":"Initialize the robot to its initial position before starting the teleoperation.","operationId":"move_init_move_init_post","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"$ref":"#/components/schemas/StatusResponse"}}}}}}},"/move/teleop":{"post":{"tags":["control"],"summary":"Teleoperation Control","description":"Update the robot position based on the received teleoperation data.","operationId":"move_teleoperation_move_teleop_post","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/AppControlData"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"$ref":"#/components/schemas/StatusResponse"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/move/absolute":{"post":{"tags":["control"],"summary":"Move to Absolute Position","description":"Move the robot to an absolute position specified by the end-effector.","operationId":"move_to_absolute_position_move_absolute_post","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/EndEffectorPosition"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"$ref":"#/components/schemas/StatusResponse"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/move/relative":{"post":{"tags":["control"],"summary":"Move to Relative Position","description":"Move the robot to a relative position based on received delta values.","operationId":"move_relative_move_relative_post","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/OpenVLAControlData"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"$ref":"#/components/schemas/StatusResponse"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/move/mimick":{"post":{"tags":["control"],"summary":"Mimick Leader Robot","description":"Mimick the movements of a leader robot to a follower robot for a specified duration.","operationId":"mimicking_robots_move_mimick_post","parameters":[{"name":"duration","in":"query","required":true,"schema":{"type":"integer","title":"Duration"}},{"name":"environment","in":"query","required":false,"schema":{"enum":["simu","real"],"type":"string","default":"simu","title":"Environment"}}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"$ref":"#/components/schemas/StatusResponse"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/auto/start":{"post":{"tags":["control"],"summary":"Start Automatic Control","description":"Start automatic control of the robot using OpenVLA model outputs.","operationId":"start_auto_auto_start_post","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/AutoControlRequest"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"$ref":"#/components/schemas/StatusResponse"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/auto/stop":{"post":{"tags":["control"],"summary":"Stop Automatic Control","description":"Stop the automatic control process.","operationId":"stop_auto_auto_stop_post","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"$ref":"#/components/schemas/StatusResponse"}}}}}}},"/end-effector/read":{"post":{"tags":["control"],"summary":"Read End-Effector Position","description":"Retrieve the position, orientation, and open status of the robot's end effector.","operationId":"end_effector_read_end_effector_read_post","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"$ref":"#/components/schemas/EndEffectorPosition"}}}}}}},"/torque/read":{"post":{"tags":["control"],"summary":"Read Torque","description":"Read the current torque of the robot's joints.","operationId":"read_torque_torque_read_post","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"$ref":"#/components/schemas/TorqueReadResponse"}}}}}}},"/torque/toggle":{"post":{"tags":["control"],"summary":"Toggle Torque","description":"Enable or disable the torque of the robot.","operationId":"toggle_torque_torque_toggle_post","parameters":[{"name":"torque_status","in":"query","required":true,"schema":{"type":"boolean","title":"Torque Status"}}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"$ref":"#/components/schemas/StatusResponse"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/joints/read":{"post":{"tags":["control"],"summary":"Read Joint Positions","description":"Read the current positions of the robot's joints in radians and motor units.","operationId":"read_joints_joints_read_post","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"$ref":"#/components/schemas/JointsReadResponse"}}}}}}},"/joints/write":{"post":{"tags":["control"],"summary":"Write Joint Positions","description":"Move the robot's joints to the specified angles.","operationId":"write_joints_joints_write_post","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/JointsWriteRequest"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"$ref":"#/components/schemas/StatusResponse"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/calibrate":{"post":{"tags":["control"],"summary":"Calibrate Robot","description":"Start the calibration sequence for the robot.","operationId":"calibrate_calibrate_post","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"$ref":"#/components/schemas/CalibrateResponse"}}}}}}},"/viz":{"get":{"tags":["camera"],"summary":"Cameras overview","description":"Page with an overview of the connected cameras. Open this page in the chrome browser: http://localhost:80/viz","operationId":"viz_viz_get","responses":{"200":{"description":"HTML page displaying camera overview.","content":{"text/html":{"schema":{"type":"string"}}}}}}},"/video/{camera_id}":{"get":{"tags":["camera"],"summary":"Video Feed For Camera","description":"Stream video feed of the specified `camera_id`.","operationId":"video_feed_for_camera_video__camera_id__get","parameters":[{"name":"camera_id","in":"path","required":true,"schema":{"anyOf":[{"type":"integer"},{"type":"null"}],"title":"Camera Id"}}],"responses":{"200":{"description":"Streaming video feed of the specified camera."},"404":{"description":"Camera not available"},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/video/depth":{"get":{"tags":["camera"],"summary":"Video Feed For Depth","description":"Returns the depth feed from the realsense camera.","operationId":"video_feed_for_depth_video_depth_get","responses":{"200":{"description":"Streaming depth feed from the realsense camera."},"404":{"description":"Camera not available"}}}},"/video/realsense":{"get":{"tags":["camera"],"summary":"Video Realsense","description":"Stream video feed from realsense camera.","operationId":"video_realsense_video_realsense_get","responses":{"200":{"description":"Streaming video feed from the realsense camera."},"404":{"description":"Camera not available"}}}},"/recording/start":{"post":{"tags":["recording"],"summary":"Start Recording Episode","description":"Asynchronously start recording an episode in the background.\nSame output format as OpenVLA.","operationId":"start_recording_episode_recording_start_post","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"$ref":"#/components/schemas/StatusResponse"}}}}}}},"/recording/stop":{"post":{"tags":["recording"],"summary":"Stop Recording Episode","description":"Stop the recording of the episode. The data is saved to disk.","operationId":"stop_recording_episode_recording_stop_post","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"$ref":"#/components/schemas/RecordingStopResponse"}}}}}}},"/recording/play":{"post":{"tags":["recording"],"summary":"Play Recording","description":"Play a recorded episode.","operationId":"play_recording_recording_play_post","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/RecordingPlayRequest"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"$ref":"#/components/schemas/StatusResponse"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}}},"components":{"schemas":{"AllCamerasStatus":{"properties":{"video_cameras_ids":{"items":{"type":"integer"},"type":"array","title":"Video Cameras Ids","description":"List of available video cameras ids"},"realsense_available":{"type":"boolean","title":"Realsense Available","description":"True if a RealSense camera is available","default":false}},"type":"object","title":"AllCamerasStatus","description":"Description of the status of all cameras. Use this to know which camera to stream."},"AppControlData":{"properties":{"x":{"type":"number","title":"X"},"y":{"type":"number","title":"Y"},"z":{"type":"number","title":"Z"},"rx":{"type":"number","title":"Rx","description":"Absolute Pitch in degrees"},"ry":{"type":"number","title":"Ry","description":"Absolute Yaw in degrees"},"rz":{"type":"number","title":"Rz","description":"Absolute Roll in degrees"},"open":{"type":"number","title":"Open","description":"0 for closed, 1 for open"}},"type":"object","required":["x","y","z","rx","ry","rz","open"],"title":"AppControlData","description":"Type of data sent by the Metaquest app."},"AutoControlRequest":{"properties":{"instruction":{"type":"string","title":"Instruction","description":"Prompt to be followed by the robot"}},"type":"object","required":["instruction"],"title":"AutoControlRequest","description":"Launch an auto control with a request to the OpenVLA server."},"CalibrateResponse":{"properties":{"status":{"type":"string","enum":["success","error","in_progress"],"title":"Status","description":"Status of the calibration. Ends when status is success or error."},"message":{"type":"string","title":"Message"},"current_step":{"type":"integer","title":"Current Step"},"total_nb_steps":{"type":"integer","title":"Total Nb Steps"}},"type":"object","required":["status","message","current_step","total_nb_steps"],"title":"CalibrateResponse","description":"Response from the calibration endpoint."},"EndEffectorPosition":{"properties":{"x":{"type":"number","title":"X"},"y":{"type":"number","title":"Y"},"z":{"type":"number","title":"Z"},"rx":{"type":"number","title":"Rx","description":"Absolute Pitch in degrees"},"ry":{"type":"number","title":"Ry","description":"Absolute Yaw in degrees"},"rz":{"type":"number","title":"Rz","description":"Absolute Roll in degrees"},"open":{"type":"number","title":"Open","description":"0 for closed, 1 for open"}},"type":"object","required":["x","y","z","rx","ry","rz","open"],"title":"EndEffectorPosition","description":"End effector position for a movement in absolute frame."},"HTTPValidationError":{"properties":{"detail":{"items":{"$ref":"#/components/schemas/ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"},"JointsReadResponse":{"properties":{"angles_rad":{"items":{"type":"number"},"type":"array","title":"Angles Rad","description":"A list of length 7, with the position of each joint in radian."},"angles_motor_units":{"items":{"type":"integer"},"type":"array","title":"Angles Motor Units","description":"A list of length 7, with the position of each joint in motor units."}},"type":"object","required":["angles_rad","angles_motor_units"],"title":"JointsReadResponse","description":"Response to read the joints of the robot."},"JointsWriteRequest":{"properties":{"angles":{"items":{"type":"number"},"type":"array","title":"Angles","description":"A list of length 7, with the position of each joint in radian."},"unit":{"type":"string","enum":["rad","motor_units","degrees"],"title":"Unit","description":"The unit of the angles. Defaults to radian.","default":"rad"}},"type":"object","required":["angles"],"title":"JointsWriteRequest","description":"Request to set the joints of the robot."},"OpenVLAControlData":{"properties":{"x":{"type":"number","title":"X"},"y":{"type":"number","title":"Y"},"z":{"type":"number","title":"Z"},"rx":{"type":"number","title":"Rx","description":"Relative Pitch in radian"},"ry":{"type":"number","title":"Ry","description":"Relative Yaw in radian"},"rz":{"type":"number","title":"Rz","description":"Relative Roll in radian"},"open":{"type":"number","title":"Open"}},"type":"object","required":["x","y","z","rx","ry","rz","open"],"title":"OpenVLAControlData","description":"Type of action ordered by OpenVLA\n- delta on position\n- delta orientation (euler angles, radian)\n- float to close/open the gripper"},"RecordingPlayRequest":{"properties":{"episode_path":{"type":"string","title":"Episode Path","description":"Path to the .json file to play."}},"type":"object","required":["episode_path"],"title":"RecordingPlayRequest","description":"Request to play a recorded episode."},"RecordingStopResponse":{"properties":{"episode_path":{"type":"string","title":"Episode Path","description":"Path to the .json file where the episode is saved."}},"type":"object","required":["episode_path"],"title":"RecordingStopResponse","description":"Response when the recording is stopped. The episode is saved in the given path."},"ServerStatus":{"properties":{"status":{"type":"string","enum":["ok","error"],"title":"Status"},"name":{"type":"string","title":"Name"},"robots":{"items":{"type":"string"},"type":"array","title":"Robots"},"cameras":{"$ref":"#/components/schemas/AllCamerasStatus"}},"type":"object","required":["status","name"],"title":"ServerStatus","description":"Contains the status of the app"},"StatusResponse":{"properties":{"status":{"type":"string","const":"ok","title":"Status","default":"ok"}},"type":"object","title":"StatusResponse","description":"Default response."},"TorqueReadResponse":{"properties":{"current_torque":{"items":{"type":"number"},"type":"array","title":"Current Torque","description":"A list of length 7, with the current torque of each joint."}},"type":"object","required":["current_torque"],"title":"TorqueReadResponse","description":"Response to read the torque of the robot."},"ValidationError":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"}}}}
+{
+  "openapi": "3.1.0",
+  "info": { "title": "FastAPI", "version": "0.1.0" },
+  "paths": {
+    "/status": {
+      "get": {
+        "summary": "Status",
+        "description": "Get the status of the server.",
+        "operationId": "status_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ServerStatus" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/move/init": {
+      "post": {
+        "tags": ["control"],
+        "summary": "Initialize Robot",
+        "description": "Initialize the robot to its initial position before starting the teleoperation.",
+        "operationId": "move_init_move_init_post",
+        "parameters": [
+          {
+            "name": "robot_id",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "default": 0, "title": "Robot Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/StatusResponse" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/move/teleop": {
+      "post": {
+        "tags": ["control"],
+        "summary": "Teleoperation Control",
+        "description": "Update the robot position based on the received teleoperation data.",
+        "operationId": "move_teleoperation_move_teleop_post",
+        "parameters": [
+          {
+            "name": "robot_id",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "default": 0, "title": "Robot Id" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/AppControlData" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/StatusResponse" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/move/absolute": {
+      "post": {
+        "tags": ["control"],
+        "summary": "Move to Absolute Position",
+        "description": "Move the robot to an absolute position specified by the end-effector.",
+        "operationId": "move_to_absolute_position_move_absolute_post",
+        "parameters": [
+          {
+            "name": "robot_id",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "default": 0, "title": "Robot Id" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/EndEffectorPosition" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/StatusResponse" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/move/relative": {
+      "post": {
+        "tags": ["control"],
+        "summary": "Move to Relative Position",
+        "description": "Move the robot to a relative position based on received delta values.",
+        "operationId": "move_relative_move_relative_post",
+        "parameters": [
+          {
+            "name": "robot_id",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "default": 0, "title": "Robot Id" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/OpenVLAControlData" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/StatusResponse" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/move/mimick": {
+      "post": {
+        "tags": ["control"],
+        "summary": "Mimick Leader Robot",
+        "description": "Mimick the movements of a leader robot to a follower robot for a specified duration.",
+        "operationId": "mimicking_robots_move_mimick_post",
+        "parameters": [
+          {
+            "name": "duration",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "integer", "title": "Duration" }
+          },
+          {
+            "name": "environment",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": ["simu", "real"],
+              "type": "string",
+              "default": "simu",
+              "title": "Environment"
+            }
+          },
+          {
+            "name": "robot_id",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "default": 0, "title": "Robot Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/StatusResponse" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auto/start": {
+      "post": {
+        "tags": ["control"],
+        "summary": "Start Automatic Control",
+        "description": "Start automatic control of the robot using OpenVLA model outputs.",
+        "operationId": "start_auto_auto_start_post",
+        "parameters": [
+          {
+            "name": "robot_id",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "default": 0, "title": "Robot Id" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/AutoControlRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/StatusResponse" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auto/stop": {
+      "post": {
+        "tags": ["control"],
+        "summary": "Stop Automatic Control",
+        "description": "Stop the automatic control process.",
+        "operationId": "stop_auto_auto_stop_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/StatusResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/end-effector/read": {
+      "post": {
+        "tags": ["control"],
+        "summary": "Read End-Effector Position",
+        "description": "Retrieve the position, orientation, and open status of the robot's end effector.",
+        "operationId": "end_effector_read_end_effector_read_post",
+        "parameters": [
+          {
+            "name": "robot_id",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "default": 0, "title": "Robot Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/EndEffectorPosition" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/voltage/read": {
+      "post": {
+        "tags": ["control"],
+        "summary": "Read Voltage",
+        "description": "Read the current voltage of the robot's motors.",
+        "operationId": "read_voltage_voltage_read_post",
+        "parameters": [
+          {
+            "name": "robot_id",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "default": 0, "title": "Robot Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/VoltageReadResponse" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/torque/read": {
+      "post": {
+        "tags": ["control"],
+        "summary": "Read Torque",
+        "description": "Read the current torque of the robot's joints.",
+        "operationId": "read_torque_torque_read_post",
+        "parameters": [
+          {
+            "name": "robot_id",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "default": 0, "title": "Robot Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/TorqueReadResponse" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/torque/toggle": {
+      "post": {
+        "tags": ["control"],
+        "summary": "Toggle Torque",
+        "description": "Enable or disable the torque of the robot.",
+        "operationId": "toggle_torque_torque_toggle_post",
+        "parameters": [
+          {
+            "name": "torque_status",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "boolean", "title": "Torque Status" }
+          },
+          {
+            "name": "robot_id",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "default": 0, "title": "Robot Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/StatusResponse" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/joints/read": {
+      "post": {
+        "tags": ["control"],
+        "summary": "Read Joint Positions",
+        "description": "Read the current positions of the robot's joints in radians and motor units.",
+        "operationId": "read_joints_joints_read_post",
+        "parameters": [
+          {
+            "name": "robot_id",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "default": 0, "title": "Robot Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/JointsReadResponse" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/joints/write": {
+      "post": {
+        "tags": ["control"],
+        "summary": "Write Joint Positions",
+        "description": "Move the robot's joints to the specified angles.",
+        "operationId": "write_joints_joints_write_post",
+        "parameters": [
+          {
+            "name": "robot_id",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "default": 0, "title": "Robot Id" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/JointsWriteRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/StatusResponse" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/calibrate": {
+      "post": {
+        "tags": ["control"],
+        "summary": "Calibrate Robot",
+        "description": "Start the calibration sequence for the robot.",
+        "operationId": "calibrate_calibrate_post",
+        "parameters": [
+          {
+            "name": "robot_id",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "default": 0, "title": "Robot Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/CalibrateResponse" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/video/{camera_id}": {
+      "get": {
+        "tags": ["camera"],
+        "summary": "Video Feed For Camera",
+        "description": "Stream video feed of the specified camera.",
+        "operationId": "video_feed_for_camera_video__camera_id__get",
+        "parameters": [
+          {
+            "name": "camera_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "anyOf": [
+                { "type": "integer" },
+                { "type": "string" },
+                { "type": "null" }
+              ],
+              "title": "Camera Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Streaming video feed of the specified camera."
+          },
+          "404": { "description": "Camera not available" },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recording/start": {
+      "post": {
+        "tags": ["recording"],
+        "summary": "Start Recording Episode",
+        "description": "Asynchronously start recording an episode in the background.\nOutput format is chosen when stopping the recording.",
+        "operationId": "start_recording_episode_recording_start_post",
+        "parameters": [
+          {
+            "name": "robot_id",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "default": 0, "title": "Robot Id" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/RecordingStartRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/StatusResponse" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recording/stop": {
+      "post": {
+        "tags": ["recording"],
+        "summary": "Stop Recording Episode",
+        "description": "Stop the recording of the episode. The data is saved to disk to the user home directory, in the `phosphobot` folder.",
+        "operationId": "stop_recording_episode_recording_stop_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/RecordingStopRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecordingStopResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recording/play": {
+      "post": {
+        "tags": ["recording"],
+        "summary": "Play Recording",
+        "description": "Play a recorded episode.",
+        "operationId": "play_recording_recording_play_post",
+        "parameters": [
+          {
+            "name": "robot_id",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "default": 0, "title": "Robot Id" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/RecordingPlayRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/StatusResponse" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin": {
+      "get": {
+        "tags": ["pages"],
+        "summary": "Sevr Admin Page",
+        "operationId": "sevr_admin_page_admin_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "text/html": { "schema": { "type": "string" } } }
+          }
+        }
+      }
+    },
+    "/admin/form": {
+      "post": {
+        "tags": ["pages"],
+        "summary": "Submit Token",
+        "operationId": "submit_token_admin_form_post",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_submit_token_admin_form_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/browse": {
+      "get": {
+        "tags": ["pages"],
+        "summary": "Browse",
+        "operationId": "browse_browse_get",
+        "parameters": [
+          {
+            "name": "path",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "default": "", "title": "Path" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "text/html": { "schema": { "type": "string" } } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/download": {
+      "get": {
+        "tags": ["pages"],
+        "summary": "Download Folder",
+        "operationId": "download_folder_download_get",
+        "parameters": [
+          {
+            "name": "folder_path",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string", "title": "Folder Path" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/viz": {
+      "get": {
+        "tags": ["pages"],
+        "summary": "Cameras overview",
+        "description": "Page with an overview of the connected cameras. Open this page in the chrome browser.",
+        "operationId": "viz_viz_get",
+        "responses": {
+          "200": {
+            "description": "HTML page displaying camera overview.",
+            "content": { "text/html": { "schema": { "type": "string" } } }
+          }
+        }
+      }
+    },
+    "/activate-hotspot": {
+      "post": {
+        "tags": ["networking"],
+        "summary": "Activate Hotspot",
+        "operationId": "activate_hotspot_activate_hotspot_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          }
+        }
+      }
+    },
+    "/connect-to-network": {
+      "post": {
+        "tags": ["networking"],
+        "summary": "Connect To Network",
+        "operationId": "connect_to_network_connect_to_network_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/NetworkCredentials" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AllCamerasStatus": {
+        "properties": {
+          "video_cameras_ids": {
+            "items": { "type": "integer" },
+            "type": "array",
+            "title": "Video Cameras Ids",
+            "description": "List of available video cameras ids"
+          },
+          "realsense_available": {
+            "type": "boolean",
+            "title": "Realsense Available",
+            "description": "True if a RealSense camera is available",
+            "default": false
+          },
+          "is_stereo_camera_available": {
+            "type": "boolean",
+            "title": "Is Stereo Camera Available",
+            "description": "True if a stereo camera is available",
+            "default": false
+          }
+        },
+        "type": "object",
+        "title": "AllCamerasStatus",
+        "description": "Description of the status of all cameras. Use this to know which camera to stream."
+      },
+      "AppControlData": {
+        "properties": {
+          "x": { "type": "number", "title": "X" },
+          "y": { "type": "number", "title": "Y" },
+          "z": { "type": "number", "title": "Z" },
+          "rx": {
+            "type": "number",
+            "title": "Rx",
+            "description": "Absolute Pitch in degrees"
+          },
+          "ry": {
+            "type": "number",
+            "title": "Ry",
+            "description": "Absolute Yaw in degrees"
+          },
+          "rz": {
+            "type": "number",
+            "title": "Rz",
+            "description": "Absolute Roll in degrees"
+          },
+          "open": {
+            "type": "number",
+            "title": "Open",
+            "description": "0 for closed, 1 for open"
+          },
+          "source": {
+            "type": "string",
+            "enum": ["left", "right"],
+            "title": "Source",
+            "description": "Which hand the data comes from. Can be left or right.",
+            "default": "right"
+          }
+        },
+        "type": "object",
+        "required": ["x", "y", "z", "rx", "ry", "rz", "open"],
+        "title": "AppControlData",
+        "description": "Type of data sent by the Metaquest app."
+      },
+      "AutoControlRequest": {
+        "properties": {
+          "type_of_model": {
+            "type": "string",
+            "enum": ["openvla", "act"],
+            "title": "Type Of Model",
+            "description": "Type of model, either OpenVLA or ACT"
+          },
+          "instruction": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Instruction",
+            "description": "Prompt to be followed by the robot when using OpenVLA"
+          }
+        },
+        "type": "object",
+        "required": ["type_of_model", "instruction"],
+        "title": "AutoControlRequest",
+        "description": "Launch an auto control with a request to the OpenVLA or ACT server."
+      },
+      "Body_submit_token_admin_form_post": {
+        "properties": { "token": { "type": "string", "title": "Token" } },
+        "type": "object",
+        "required": ["token"],
+        "title": "Body_submit_token_admin_form_post"
+      },
+      "CalibrateResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": ["success", "error", "in_progress"],
+            "title": "Status",
+            "description": "Status of the calibration. Ends when status is success or error."
+          },
+          "message": { "type": "string", "title": "Message" },
+          "current_step": { "type": "integer", "title": "Current Step" },
+          "total_nb_steps": { "type": "integer", "title": "Total Nb Steps" }
+        },
+        "type": "object",
+        "required": ["status", "message", "current_step", "total_nb_steps"],
+        "title": "CalibrateResponse",
+        "description": "Response from the calibration endpoint."
+      },
+      "EndEffectorPosition": {
+        "properties": {
+          "x": { "type": "number", "title": "X" },
+          "y": { "type": "number", "title": "Y" },
+          "z": { "type": "number", "title": "Z" },
+          "rx": {
+            "type": "number",
+            "title": "Rx",
+            "description": "Absolute Pitch in degrees"
+          },
+          "ry": {
+            "type": "number",
+            "title": "Ry",
+            "description": "Absolute Yaw in degrees"
+          },
+          "rz": {
+            "type": "number",
+            "title": "Rz",
+            "description": "Absolute Roll in degrees"
+          },
+          "open": {
+            "type": "number",
+            "title": "Open",
+            "description": "0 for closed, 1 for open"
+          }
+        },
+        "type": "object",
+        "required": ["x", "y", "z", "rx", "ry", "rz", "open"],
+        "title": "EndEffectorPosition",
+        "description": "End effector position for a movement in absolute frame."
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": { "$ref": "#/components/schemas/ValidationError" },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "JointsReadResponse": {
+        "properties": {
+          "angles_rad": {
+            "items": { "type": "number" },
+            "type": "array",
+            "title": "Angles Rad",
+            "description": "A list of length 7, with the position of each joint in radian."
+          },
+          "angles_motor_units": {
+            "items": { "type": "integer" },
+            "type": "array",
+            "title": "Angles Motor Units",
+            "description": "A list of length 7, with the position of each joint in motor units."
+          }
+        },
+        "type": "object",
+        "required": ["angles_rad", "angles_motor_units"],
+        "title": "JointsReadResponse",
+        "description": "Response to read the joints of the robot."
+      },
+      "JointsWriteRequest": {
+        "properties": {
+          "angles": {
+            "items": { "type": "number" },
+            "type": "array",
+            "title": "Angles",
+            "description": "A list of length 7, with the position of each joint in radian."
+          },
+          "unit": {
+            "type": "string",
+            "enum": ["rad", "motor_units", "degrees"],
+            "title": "Unit",
+            "description": "The unit of the angles. Defaults to radian.",
+            "default": "rad"
+          }
+        },
+        "type": "object",
+        "required": ["angles"],
+        "title": "JointsWriteRequest",
+        "description": "Request to set the joints of the robot."
+      },
+      "NetworkCredentials": {
+        "properties": {
+          "ssid": { "type": "string", "title": "Ssid" },
+          "password": { "type": "string", "title": "Password" }
+        },
+        "type": "object",
+        "required": ["ssid", "password"],
+        "title": "NetworkCredentials"
+      },
+      "OpenVLAControlData": {
+        "properties": {
+          "x": { "type": "number", "title": "X" },
+          "y": { "type": "number", "title": "Y" },
+          "z": { "type": "number", "title": "Z" },
+          "rx": {
+            "type": "number",
+            "title": "Rx",
+            "description": "Relative Pitch in radian"
+          },
+          "ry": {
+            "type": "number",
+            "title": "Ry",
+            "description": "Relative Yaw in radian"
+          },
+          "rz": {
+            "type": "number",
+            "title": "Rz",
+            "description": "Relative Roll in radian"
+          },
+          "open": { "type": "number", "title": "Open" }
+        },
+        "type": "object",
+        "required": ["x", "y", "z", "rx", "ry", "rz", "open"],
+        "title": "OpenVLAControlData",
+        "description": "Type of action ordered by OpenVLA\n- delta on position\n- delta orientation (euler angles, radian)\n- float to close/open the gripper"
+      },
+      "RecordingPlayRequest": {
+        "properties": {
+          "episode_path": {
+            "type": "string",
+            "title": "Episode Path",
+            "description": "Path to the .json file to play."
+          }
+        },
+        "type": "object",
+        "required": ["episode_path"],
+        "title": "RecordingPlayRequest",
+        "description": "Request to play a recorded episode."
+      },
+      "RecordingStartRequest": {
+        "properties": {
+          "dataset_name": {
+            "type": "string",
+            "title": "Dataset Name",
+            "description": "Name of the dataset to save the episode in.",
+            "default": "example_dataset"
+          },
+          "episode_format": {
+            "type": "string",
+            "enum": ["json", "lerobot_v2"],
+            "title": "Episode Format",
+            "description": "Format to save the episode.\n`json` is compatible with OpenVLA and stores videos as a series of npy.\n`lerobot_v2` is compatible with [lerobot training.](https://docs.phospho.ai/learn/ai-models)",
+            "default": "lerobot_v2"
+          },
+          "video_codec": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": ["avc1", "hev1", "mp4v", "hvc1", "avc3", "av01", "vp09"]
+              },
+              { "type": "null" }
+            ],
+            "title": "Video Codec",
+            "description": "Codec to use for the video saving. Defaults to None."
+          }
+        },
+        "type": "object",
+        "title": "RecordingStartRequest",
+        "description": "Request to start the recording of an episode."
+      },
+      "RecordingStopRequest": {
+        "properties": {
+          "save": {
+            "type": "boolean",
+            "title": "Save",
+            "description": "Whether to save the episode to disk. Defaults to True.",
+            "default": true
+          }
+        },
+        "type": "object",
+        "title": "RecordingStopRequest",
+        "description": "Request to stop the recording of the episode."
+      },
+      "RecordingStopResponse": {
+        "properties": {
+          "episode_folder_path": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Episode Folder Path",
+            "description": "Path to the folder where is be saved the episode."
+          }
+        },
+        "type": "object",
+        "required": ["episode_folder_path"],
+        "title": "RecordingStopResponse",
+        "description": "Response when the recording is stopped. The episode is saved in the given path."
+      },
+      "ServerStatus": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": ["ok", "error"],
+            "title": "Status"
+          },
+          "name": { "type": "string", "title": "Name" },
+          "robots": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Robots"
+          },
+          "cameras": { "$ref": "#/components/schemas/AllCamerasStatus" },
+          "version_id": {
+            "type": "string",
+            "title": "Version Id",
+            "description": "Current version of the teleoperation server",
+            "default": "0.2.34"
+          }
+        },
+        "type": "object",
+        "required": ["status", "name"],
+        "title": "ServerStatus",
+        "description": "Contains the status of the app"
+      },
+      "StatusResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "ok",
+            "title": "Status",
+            "default": "ok"
+          }
+        },
+        "type": "object",
+        "title": "StatusResponse",
+        "description": "Default response."
+      },
+      "TorqueReadResponse": {
+        "properties": {
+          "current_torque": {
+            "items": { "type": "number" },
+            "type": "array",
+            "title": "Current Torque",
+            "description": "A list of length 7, with the current torque of each joint."
+          }
+        },
+        "type": "object",
+        "required": ["current_torque"],
+        "title": "TorqueReadResponse",
+        "description": "Response to read the torque of the robot."
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": { "anyOf": [{ "type": "string" }, { "type": "integer" }] },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": { "type": "string", "title": "Message" },
+          "type": { "type": "string", "title": "Error Type" }
+        },
+        "type": "object",
+        "required": ["loc", "msg", "type"],
+        "title": "ValidationError"
+      },
+      "VoltageReadResponse": {
+        "properties": {
+          "current_voltage": {
+            "items": { "type": "number" },
+            "type": "array",
+            "title": "Current Voltage",
+            "description": "A list of length 7, with the current voltage of each joint."
+          }
+        },
+        "type": "object",
+        "required": ["current_voltage"],
+        "title": "VoltageReadResponse",
+        "description": "Response to read the torque of the robot."
+      }
+    }
+  }
+}
