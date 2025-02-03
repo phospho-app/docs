@@ -546,7 +546,7 @@
       "get": {
         "tags": ["camera"],
         "summary": "Video Feed For Camera",
-        "description": "Stream video feed of the specified camera.",
+        "description": "Stream video feed of the specified camera. If no camera id is provided, the default camera is used. If the camera id is 'realsense' or 'depth', the realsense camera is used.",
         "operationId": "video_feed_for_camera_video__camera_id__get",
         "parameters": [
           {
@@ -815,11 +815,12 @@
         }
       }
     },
-    "/activate-hotspot": {
+    "/network/hotspot": {
       "post": {
         "tags": ["networking"],
         "summary": "Activate Hotspot",
-        "operationId": "activate_hotspot_activate_hotspot_post",
+        "description": "Endpoint to activate the hotspot on the Raspberry Pi.",
+        "operationId": "activate_hotspot_network_hotspot_post",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -828,11 +829,12 @@
         }
       }
     },
-    "/connect-to-network": {
+    "/network/connect": {
       "post": {
         "tags": ["networking"],
-        "summary": "Connect To Network",
-        "operationId": "connect_to_network_connect_to_network_post",
+        "summary": "Switch To Network",
+        "description": "Endpoint to connect phosphobot to a new network.",
+        "operationId": "switch_to_network_network_connect_post",
         "requestBody": {
           "content": {
             "application/json": {
@@ -950,10 +952,10 @@
       },
       "CalibrateResponse": {
         "properties": {
-          "status": {
+          "calibration_status": {
             "type": "string",
-            "enum": ["success", "error", "in_progress"],
-            "title": "Status",
+            "enum": ["error", "success", "in_progress"],
+            "title": "Calibration Status",
             "description": "Status of the calibration. Ends when status is success or error."
           },
           "message": { "type": "string", "title": "Message" },
@@ -961,7 +963,12 @@
           "total_nb_steps": { "type": "integer", "title": "Total Nb Steps" }
         },
         "type": "object",
-        "required": ["status", "message", "current_step", "total_nb_steps"],
+        "required": [
+          "calibration_status",
+          "message",
+          "current_step",
+          "total_nb_steps"
+        ],
         "title": "CalibrateResponse",
         "description": "Response from the calibration endpoint."
       },
