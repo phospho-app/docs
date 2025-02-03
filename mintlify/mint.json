@@ -51,7 +51,12 @@
     },
     {
       "group": "Examples",
-      "pages": ["examples/control", "examples/teleop", "examples/vision", "examples/ai-models"]
+      "pages": [
+        "examples/control",
+        "examples/teleop",
+        "examples/vision",
+        "examples/ai-models"
+      ]
     },
     {
       "group": "API Reference",
@@ -77,11 +82,7 @@
         {
           "group": "Camera",
           "icon": "camera",
-          "pages": [
-            "camera/viz",
-            "camera/video-feed-for-camera",
-            "camera/video-feed-for-depth"
-          ]
+          "pages": ["camera/video-feed-for-camera"]
         },
         {
           "group": "Recording",
@@ -93,10 +94,16 @@
           ]
         }
       ]
-    }, 
+    },
     {
       "group": "Learn",
-      "pages": ["learn/overview", "learn/kinematics", "learn/policies", "learn/simulation", "learn/ai-models"]
+      "pages": [
+        "learn/overview",
+        "learn/kinematics",
+        "learn/policies",
+        "learn/simulation",
+        "learn/ai-models"
+      ]
     }
   ],
   "footerSocials": {
