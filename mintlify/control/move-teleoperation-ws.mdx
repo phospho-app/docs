@@ -16,7 +16,8 @@ description: "High frequency control of the robot arm via WebSocket connection f
 ```json
 {
   "nb_actions_received": 5,
-  "is_object_gripped": false
+  "is_object_gripped": false,
+  "is_object_gripped_source": "left" // or "right"
 }
 ```
 </ResponseExample>
@@ -45,7 +46,8 @@ The client sends control data in JSON format, which includes the following field
   "rx": 45.0,
   "ry": 30.0,
   "rz": 90.0,
-  "open": 1
+  "open": 1,
+  "source": "left" // or "right"
 }
 ```
 
@@ -59,7 +61,8 @@ Status updates are sent back to the client every second or when there is a chang
 ```json
 {
   "nb_actions_received": 5,
-  "is_object_gripped": false
+  "is_object_gripped": false,
+  "is_object_gripped_source": "left"
 }
 ```
 
