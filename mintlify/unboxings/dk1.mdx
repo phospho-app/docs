@@ -5,7 +5,7 @@ description: "Unbox and setup your phospho Junior dev kit."
 
 In this guide, we will unbox and setup the phospho Junior dev kit [available here](https://robots.phospho.ai).
 
-# What's in the box?
+## What's in the box?
 
 <Info>phospho dev kits are shipped with EU plugs.</Info>
 
@@ -23,7 +23,7 @@ In this guide, we will unbox and setup the phospho Junior dev kit [available her
     - 1x Raspberry Power USB-C power cable
     - 1x Micro SD card adapter
 
-# 1. Attach the SO-100 arm
+## 1. Attach the SO-100 arm
 
 Find a table and fix the SO-100 robot arm using the 2 table clamps in the kit (see image below). 
 
@@ -31,7 +31,7 @@ Find a table and fix the SO-100 robot arm using the 2 table clamps in the kit (s
 
 ![SO-100 fixed using clamps](/assets/so100clamps.jpg)
 
-# 2. Plug everything together
+## 2. Plug everything together
 
 In this order:
 
@@ -42,23 +42,23 @@ In this order:
 
 ![Full setup](/assets/pdk1_plugged.jpg)
 
-# 3. Connect your control module to your home wifi
+## 3. Connect your control module to your home wifi
 
 When you plugged the control module, its LED should be blinking green. This means it is in **hotspot** mode. We need to connect it to your home wifi.
 
-## Connect to the control module hotspot
+### Connect to the control module hotspot
 
 Using your computer or phone, connect to the control module's wifi network:
 - WiFi SSID: `phosphobot` (look for it in your wifi networks)
 - password: `phosphobot123`
 
-## Access the control module dashboard
+### Access the control module dashboard
 
 In your browser, go to [phosphobot.local](http://phosphobot.local). This is the dashboard to control and setup your control module.
 
 _On Android, we recommend using the Chrome browser._
 
-## Connect to your home wifi
+### Connect to your home wifi
 
 1. Go to `Manage Network`. Enter the network name (WiFi SSID) and password of your wifi network. 
 
@@ -66,9 +66,9 @@ _On Android, we recommend using the Chrome browser._
 The network name is cAsE sEnSiTiVe and should be exactly as seen on your device/router. Double-check for typos.
 </Warning>
 
-2. The control module will now connect to your wifi network. If the connection is successful, the LED becomes solid green.
+2. The control module will now connect to your wifi network. If the connection is successful, the LED becomes **solid green.**
 
-3. Connect your computer back to your wifi network (the one you entered in the control module). 
+3. Connect your computer back to your home wifi network (the one you entered in the dashboard). 
 
 4. Reload the page [phosphobot.local](http://phosphobot.local) to access the control module dashboard and send your first command.
 
@@ -81,14 +81,14 @@ icon="bluetooth"
 
 Using the **BTBerryWifi** app, you can use bluetooth to connect the control module to your home wifi.
 
-## Step 1: Download the BTBerryWifi app
+### Step 1: Download the BTBerryWifi app
 
 Download the _BTBerryWifi_ app for your smartphone:
 
 - on **iPhone,** [download the app from the AppStore.](https://apps.apple.com/us/app/btberrywifi/id1596978011)
 - on **Android,** [download the apk here.](https://drive.google.com/drive/folders/12l5lCZS4T8wHfdSLyCGM-hrzh64EM-zo?usp=sharing) Install it with sideloading. _Note: the free version of the Android app only works for 7 days._
 
-## Step 2: Reboot the control module
+### Step 2: Reboot the control module
 
 1. Long press the _power button_ of the control module until the LED turns red.
 2. Press the _power button_ again and keep it pressed until the LED turns green.
@@ -98,7 +98,7 @@ Download the _BTBerryWifi_ app for your smartphone:
 Make sure no device is connected to the control module through Wifi.
 </Warning>
 
-## Step 3: Connect to Wifi with BTBerryWifi
+### Step 3: Connect to Wifi with BTBerryWifi
 
 <Info>For reference, here's the link to the [full user guide](https://www.btberrywifi.com/).</Info>
 
@@ -132,7 +132,7 @@ Then enter the Wifi password and press connect.
 
 </Accordion>
 
-# 4. Send your first command
+## 4. Send your first command
 
 When your control module is connected to your home WiFi, you can now send your first command to the robot arm.
 
@@ -144,16 +144,16 @@ When your control module is connected to your home WiFi, you can now send your f
 
 3. Your robot arm moves to the default position. _It's alive!_ 🎉
 
-# What's next?
+## What's next?
 
 - Explore the rest of the documentation and try out the [example scripts.](/examples)
 - Join [our Discord](https://discord.gg/cbkggY6NSK) and send us a pic of your setup! 💚
 
-## Automatic updates
+### Automatic updates
 
-Every time the control module is powered on, it will check for updates and install them automatically.
+Every time the control module is powered on, it will check for updates and install them automatically. They will be available the next time you power it on.
 
-## Support
+### Support
 
 We're constantly shipping updates to improve your experience, add new features, and fix issues.
 
