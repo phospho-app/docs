@@ -47,7 +47,7 @@
   "navigation": [
     {
       "group": "Getting Started",
-      "pages": ["welcome"]
+      "pages": ["welcome", "unboxings/dk1"]
     },
     {
       "group": "Examples",

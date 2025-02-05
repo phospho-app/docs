@@ -1,0 +1,59 @@
+---
+title: "Dev Kit Unboxing"
+description: "Get started with your dev kit"
+---
+
+In this guide, we will unbox and setup the phospho Junior dev kit available [here](https://robots.phospho.ai).
+
+<Info>phospho dev kits are shipped with EU plugs, so you might need an adapter.</Info>
+
+# Attach the SO-100 arm
+
+Find a table and fix the SO-100 robot arm using the 2 table clamps in the kit (see image below). Make sure the arm is well fixed and won't move.
+
+![SO-100 fixed using clamps](/assets/so100clamps.jpg)
+
+# Plug everything together
+
+In this order:
+- Plug the SO-100 to the power supply using the black 12V power supply.
+- Plug the USB-C cable to the SO-100 and to one of the 4 control module front USB port (use the USB-C to USB adapter in the kit).
+- Plug the camera to one of the 4 control module front USB port.
+- Plug the control module (with the Raspberry Pi) to the power supply (this goes into the USB-C port on the side).
+
+Below is a pic of the setup you should have at this point.
+![Full setup](/assets/pdk1_plugged.jpg)
+
+# Connect your control module to your wifi
+
+The LED on the control module should blink green. The control module will generate a wifi network called `phosphobot` with password `phosphobot123`.
+Connect to the `phosphobot` network from a computer or phone. In your browser, go to [phosphobot.local](http://phosphobot.local). 
+This is the dashboard to control and setup your control module.
+
+Go to `Network Management`. Enter the Network Name and Password of your wifi network (be careful the Network Name should be exactly as seen on your device/router).
+
+The control module will connect to your wifi network. If the connection is successful, the LED should be solid green.
+If it fails, restart the control module using the button next to the led or unplug/replug it. Start over this section.
+
+Connect your computer back to your wifi network (the one you entered in the control module). You should be able to access the control module dashboard at `phosphobot.local`.
+
+# Send your first command
+
+<Warning>Make sure the robot is well fixed and that the area around it is clear before sending any command.</Warning>
+
+Go to the interactive API docs of the control module at [phosphobot.local/docs](http://phosphobot.local/docs). You can now send your first command to the robot.
+Trigger the `/move/init` endpoint to initialize the robot (click `Try it out` and then `Execute`). Be careful, the robot will move.
+
+# What's next?
+
+- Explore the rest of the documentation and try out the example scripts.
+- Send us a pic of your setup on Discord (join it [here](https://discord.gg/cbkggY6NSK)) 💚
+
+## Automatic updates
+
+Every time the control module is powered on, it will check for updates and install them automatically.
+
+## Bugs and issues
+
+If you encounter any issues, check that the control module is up do date (reboot it to make sure it is). 
+If the issue persists, please report them on the phospho Discord server (join it [here](https://discord.gg/cbkggY6NSK)).
