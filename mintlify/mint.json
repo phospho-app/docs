@@ -47,7 +47,7 @@
   "navigation": [
     {
       "group": "Getting Started",
-      "pages": ["welcome"]
+      "pages": ["welcome", "test"]
     },
     {
       "group": "Examples",
