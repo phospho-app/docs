@@ -45,7 +45,7 @@ time.sleep(2)
 
 # We move it to the top left corner of the square
 call_to_api(
-    "relative", {"x": 0, "y": -0.03, "z": 0.03, "rx": 0, "ry": 0, "rz": 0, "open": 0}
+    "relative", {"x": 0, "y": -3, "z": 0.03, "rx": 0, "ry": 0, "rz": 0, "open": 0}
 )
 print("Moving to top left corner")
 time.sleep(0.2)
@@ -55,28 +55,28 @@ time.sleep(0.2)
 for _ in range(NUMBER_OF_SQUARES):
     # Move to the top right corner
     call_to_api(
-        "relative", {"x": 0, "y": 0.03, "z": 0, "rx": 0, "ry": 0, "rz": 0, "open": 0}
+        "relative", {"x": 0, "y": 3, "z": 0, "rx": 0, "ry": 0, "rz": 0, "open": 0}
     )
     print("Moving to top right corner")
     time.sleep(0.2)
 
     # Move to the bottom right corner
     call_to_api(
-        "relative", {"x": 0, "y": 0, "z": -0.03, "rx": 0, "ry": 0, "rz": 0, "open": 0}
+        "relative", {"x": 0, "y": 0, "z": -3, "rx": 0, "ry": 0, "rz": 0, "open": 0}
     )
     print("Moving to bottom right corner")
     time.sleep(0.2)
 
     # Move to the bottom left corner
     call_to_api(
-        "relative", {"x": 0, "y": -0.03, "z": 0, "rx": 0, "ry": 0, "rz": 0, "open": 0}
+        "relative", {"x": 0, "y": -3, "z": 0, "rx": 0, "ry": 0, "rz": 0, "open": 0}
     )
     print("Moving to bottom left corner")
     time.sleep(0.2)
 
     # Move to the top left corner
     call_to_api(
-        "relative", {"x": 0, "y": 0, "z": 0.03, "rx": 0, "ry": 0, "rz": 0, "open": 0}
+        "relative", {"x": 0, "y": 0, "z": 3, "rx": 0, "ry": 0, "rz": 0, "open": 0}
     )
     print("Moving to top left corner")
     time.sleep(0.2)
@@ -132,8 +132,8 @@ time.sleep(2)
 # 2 - We move the robot in a circle with a diameter of 4 cm
 for _ in range(NUMBER_OF_CIRCLES):
     for step in range(NUMBER_OF_STEPS):
-        position_y: float = 4 * math.sin(2 * math.pi * step / NUMBER_OF_STEPS) * 0.01
-        position_z: float = 4 * math.cos(2 * math.pi * step / NUMBER_OF_STEPS) * 0.01
+        position_y: float = 4 * math.sin(2 * math.pi * step / NUMBER_OF_STEPS) 
+        position_z: float = 4 * math.cos(2 * math.pi * step / NUMBER_OF_STEPS) 
         call_to_api(
             "absolute",
             {
@@ -198,8 +198,8 @@ time.sleep(2)
 # 2 - We move the robot in a circle with a diameter of 4 cm
 for _ in range(NUMBER_OF_CIRCLES):
     for step in range(NUMBER_OF_STEPS):
-        position_y: float = 4 * math.sin(2 * math.pi * step / NUMBER_OF_STEPS) * 0.01
-        position_z: float = 4 * math.cos(2 * math.pi * step / NUMBER_OF_STEPS) * 0.01
+        position_y: float = 4 * math.sin(2 * math.pi * step / NUMBER_OF_STEPS) 
+        position_z: float = 4 * math.cos(2 * math.pi * step / NUMBER_OF_STEPS) 
         call_to_api(
             "absolute",
             {
