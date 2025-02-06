@@ -48,3 +48,13 @@ It "hallucinates" what the robot should do next, and sends out the actions to do
 The currently #1 model in robotics on Hugging Face is a diffusion transformer called [RDT-1b](https://huggingface.co/robotics-diffusion-transformer/rdt-1b).
 
 Fine tuning the model on your own data is expensive but the paper suggests that inference can run very quickly on an RTX 4080.
+
+# LeRobot Integration
+
+You can find LeRobot configuration policies [here](https://github.com/huggingface/lerobot/tree/main/lerobot/common/policies).
+That includes the following architectures:
+- act
+- diffusion
+- pi0
+- tdmpc
+- vqbet

@@ -146,13 +146,13 @@ Then enter the Wifi password and press connect.
 
 </Accordion>
 
-## 4. Send your first command
+## 4. Send your first commands
 
 When your control module is connected to your home WiFi, you can now send your first command to the robot arm.
 
 <Warning>Make sure the robot is well fixed and the area around is clear before sending any command.</Warning>
 
-1. Go to the interactive API docs of the control module at [phosphobot.local/docs](http://phosphobot.local/docs). 
+1. Go to the interactive API docs of the control module at [phosphobot.local/docs](http://phosphobot.local/docs).
 
 2. Trigger the `/move/init` endpoint to initialize the robot (click `Try it out` and then `Execute`). 
 
@@ -160,9 +160,56 @@ When your control module is connected to your home WiFi, you can now send your f
 
 4. Now, you can call the `/move/absolute` endpoint to move the robot to a specific position. The distances are in centimeters, and the angles in degrees.
 
+## 5. Setup your Metaquest App
+The phospho dev kit is delivered with a [Metaquest](https://www.meta.com/fr/quest/quest-3/?srsltid=AfmBOoqPSrSx_ABUZwNg30PYExXeJ_mTx3yyaK6Y_juZif_BlfcdpTjw) app for teleoperation. In this section, we will setup the app on your Metaquest headset.
+
+1. Accept the invitation to the Alpha program from Meta
+After your order has been processed and you’ve accepted usage terms, you will receive **a mail** with an invite to the Alpha program of the phospho teleop app. 
+Follow the instructions in the email to link your Meta account to the Alpha program.
+
+2. Make sure your Meta Quest is powered on and connected to Wifi
+Once you’ve linked your account, the Meta Quest will automatically download the app. This can take a moment. 
+<Info> The Meta Quest connects to the Teleoperation server through a shared wifi connection. </Info>
+
+3. Open the phospho teleop app from the library
+Once downloading is done, you can open the software library on the Meta Quest.
+In the list of All apps, you’ll see the *phospho teleop* app. This app is automatically updated with the latest releases.
+
+<Card
+  title="Explore teleoperation"
+  icon="robot"
+  iconType="regular"
+  href="/example/teleoperation"
+>
+  Try to teleoperate the robot by following this **guide**.
+</Card>
+
 ## What's next?
 
-- Explore the rest of the documentation and try out the [example scripts.](/examples)
+- Try to record your first dataset with teleoperation and upload it to HuggingFace.
+- Train your AI models and build your own program to make the robots move with API calls.
+- Use Vision models to interact with the robots
+
+<iframe
+  width="710"
+  height="315"
+  src="https://www.youtube.com/embed/lpCpK0SSS1Y"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+></iframe>
+
+<Card
+  title="Explore ai-models"
+  icon="gamepad"
+  iconType="regular"
+  href="/examples/ai-models"
+>
+  Discover here the potential of the phospho dev kit.
+</Card>
+
+- Learn more about [AI in robotics.](/learn/overview)
 - Join [our Discord](https://discord.gg/cbkggY6NSK) and send us a pic of your setup! 💚
 
 ### Automatic updates

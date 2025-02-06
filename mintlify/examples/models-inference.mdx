@@ -1,0 +1,68 @@
+---
+title: "Robotics models"
+description: "Test AI models with the phospho Junior dev kit such as ACT or OpenVLA"
+---
+
+With a phospho dev kit, you can use a model you have trained or any model from the HuggingFace hub to control the robot in a few lines of code.
+
+# Action Chunking with Transformers (ACT)
+
+In this example, we will use Pytorch and [Le Robot](https://github.com/huggingface/lerobot) to load an [ACT](https://arxiv.org/abs/2304.13705) model.
+
+We wil use the phospho Junior dev kit to get the image and joint state of the robot and send back the predicted actions to make it move.
+
+Install  the dependencies:
+```bash
+pip install torch torchvision torchaudio numpy
+```
+
+Also, install Le Robot:
+```bash
+git clone https://github.com/huggingface/lerobot.git
+cd lerobot
+pip install -e .
+```
+
+Then, you can use the following code to load a model and have your model control the robot:
+
+```python act.py
+import torch
+import phosphobot
+from lerobot.common.utils.utils import init_hydra_config
+from lerobot.common.policies.factory import make_policy
+import numpy as np
+
+# Load policy
+policy_path = "path/to/model"  # Replace with your model path (local or HF)
+hydra_cfg = init_hydra_config(f"{policy_path}/config.yaml")
+policy = make_policy(hydra_cfg=hydra_cfg, pretrained_policy_name_or_path=policy_path)
+policy.eval()
+
+# Get inputs from your robot
+image = phosphobot.get_image()  # Your RGB image
+joint_state = phosphobot.joints.read()  # Your joint state
+
+# Process for inference
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+with torch.no_grad():
+    image_tensor = torch.from_numpy(image).float().to(device)
+    image_tensor = image_tensor.unsqueeze(0).unsqueeze(0).permute(0, 1, 4, 2, 3)
+    state_tensor = torch.from_numpy(joint_state).float().view(1, 6).to(device)
+    
+    # Inference happens here
+    actions = policy.model({
+        "observation.images": image_tensor,
+        "observation.state": state_tensor
+    })
+    
+predicted_action = actions[0].cpu().numpy()
+
+# Send the action to your robot
+# Make it a list 
+phosphobot.joints.write(predicted_action.tolist())
+```
+
+# OpenVLA 
+
+<Note> Comming very soon</Note>
+More info on OpenVLA [here](https://openvla.github.io).

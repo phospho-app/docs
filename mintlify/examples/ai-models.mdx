@@ -1,68 +1,118 @@
 ---
-title: "Robotics models"
-description: "Test AI models with the phospho Junior dev kit such as ACT or OpenVLA"
+title: "Train AI models"
+description: "How to train AI models for robotics applications."
 ---
 
-With a phospho dev kit, you can use a model you have trained or any model from the HuggingFace hub to control the robot in a few lines of code.
+phospho dev kit makes it easy to train robotics AI models with LeRobot from Huggingface.
 
-# Action Chunking with Transformers (ACT)
+## What is LeRobot?
 
-In this example, we will use Pytorch and [Le Robot](https://github.com/huggingface/lerobot) to load an [ACT](https://arxiv.org/abs/2304.13705) model.
+![LeRobot logo](https://cdn-uploads.huggingface.co/production/uploads/631ce4b244503b72277fc89f/MNkMdnJqyPvOAEg20Mafg.png)
 
-We wil use the phospho Junior dev kit to get the image and joint state of the robot and send back the predicted actions to make it move.
+LeRobot is a platform designed to facilitate access to real-world robotics by providing models, datasets, and tools in PyTorch, to make robotics more accessible for everyone. 
 
-Install  the dependencies:
-```bash
-pip install torch torchvision torchaudio numpy
-```
+It focuses on state-of-the-art approaches in imitation learning and reinforcement learning, offering pretrained models, human-collected demonstration datasets, and simulated environments. 
 
-Also, install Le Robot:
-```bash
-git clone https://github.com/huggingface/lerobot.git
-cd lerobot
-pip install -e .
-```
+- [LeRobot github](https://github.com/huggingface/lerobot)
+- [LeRobot on Huggingface](https://huggingface.co/lerobot)
+- [AI models for robotics](https://huggingface.co/models?pipeline_tag=robotics&sort=trending)
 
-Then, you can use the following code to load a model and have your model control the robot:
+## Step by step guide
 
-```python act.py
-import torch
-import phosphobot
-from lerobot.common.utils.utils import init_hydra_config
-from lerobot.common.policies.factory import make_policy
-import numpy as np
+In this guide, we will use the Phospho Junior Dev Kit to record a dataset and upload it to Hugging Face.  
+<Warning>Make sure you have already completed the [Installation Guide](/unboxings/dk1).</Warning>  
 
-# Load policy
-policy_path = "path/to/model"  # Replace with your model path (local or HF)
-hydra_cfg = init_hydra_config(f"{policy_path}/config.yaml")
-policy = make_policy(hydra_cfg=hydra_cfg, pretrained_policy_name_or_path=policy_path)
-policy.eval()
+## Prerequisites  
 
-# Get inputs from your robot
-image = phosphobot.get_image()  # Your RGB image
-joint_state = phosphobot.joints.read()  # Your joint state
+- To automatically upload your dataset, you need a Hugging Face account. If you don’t have one, please create it [here](https://huggingface.co/join).  
+- You need a device for training your model. We recommend using a GPU for faster training.  
+<Warning>You need a Meta Quest 3 headset to use the teleoperation application.</Warning>  
+- Ensure that your control module is turned on and connected to the robot arm and camera.  
 
-# Process for inference
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-with torch.no_grad():
-    image_tensor = torch.from_numpy(image).float().to(device)
-    image_tensor = image_tensor.unsqueeze(0).unsqueeze(0).permute(0, 1, 4, 2, 3)
-    state_tensor = torch.from_numpy(joint_state).float().view(1, 6).to(device)
-    
-    # Inference happens here
-    actions = policy.model({
-        "observation.images": image_tensor,
-        "observation.state": state_tensor
-    })
-    
-predicted_action = actions[0].cpu().numpy()
+## 1. Set up your Hugging Face token  
 
-# Send the action to your robot
-# Make it a list 
-phosphobot.joints.write(predicted_action.tolist())
-```
+1. First, create an access token for your Hugging Face account. Log in to your Hugging Face account, go to your profile, and click **Access Token** in the sidebar.  
 
-# OpenVLA 
+2. Select the **Write** option to grant write access to your account. This is necessary for creating new datasets and uploading files. Name your token and click **Create**.  
 
-<Note> Comming very soon</Note>
-More info on OpenVLA [here](https://openvla.github.io).
+![Create HF Token](/assets/create-hf-token.png)  
+
+3. Copy the token and save it in a secure place. You will need it later.  
+
+4. Access the control module server at `phosphobot.local:80/admin`, paste the token, and save it.  
+
+![Select Phosphobot server](/assets/hf-admin-page.png)  
+
+## 2. Start teleoperation and recording  
+
+1. Go to the Meta Quest Store, search for the **Phospho Teleop** application, and download it.  
+
+2. Open the application. You should see a screen displaying **Phoshobot** along with the server ping. Click the **Connect** button.  
+<Warning>Ensure that you are connected to the same network as the control module.</Warning>  
+
+![Select Phosphobot server](/assets/changeme-unity-server.png)  
+
+3. Upon connecting, you should see the main camera feed if a camera is connected. You can move various assets in the metaverse as needed.  
+   - Press the `A` button once to start teleoperation and begin moving your controller.  
+   - Press the `A` button again to stop the teleoperation; the robot will stop.  
+
+4. Start recording by pressing the `B` button. You can leave the default settings for your first attempt.  
+   - Press the `B` button again to stop the recording.  
+
+5. Continue teleoperating and stop the recording when you're done.  
+
+6. The recording is automatically saved in **LeRobot** format and uploaded to your Hugging Face account. You can check it in your profile.  
+
+## 3. Train your first model  
+
+1. On the device where you want to run the training, install the [Phosphobot package](https://github.com/phospho-app/phosphobot):  
+
+   ```bash
+   pip install --upgrade phosphobot
+   ```
+
+2. Clone the [LeRobot repository](https://github.com/huggingface/lerobot) and install it:  
+
+   ```bash
+   git clone https://github.com/huggingface/lerobot.git
+   cd lerobot
+   pip install -e .  # Requires Python 3.10+
+   ```
+
+3. *(Optional)* If you want to use Weights & Biases for tracking training metrics, log in with:  
+
+   ```bash
+   wandb login
+   ```
+
+4. Launch the training script with the following command in the `lerobot` repository (change the device to `cuda` if you have an NVIDIA GPU or `cpu` if you don’t have a GPU).  
+   Ensure that your `lerobot` virtual environment is activated.  
+
+   ```bash
+   sudo python lerobot/scripts/train.py \
+     --dataset.repo_id=<HF_USERNAME>/<DATASET_NAME> \
+     --policy.type=<act or diffusion or tdmpc or vqbet> \
+     --output_dir=outputs/train/phoshobot_test \
+     --job_name=phosphobot_test \
+     --device=mps \
+     --wandb.enable=true
+   ```
+
+5. You will find your trained model in `lerobot/outputs/train/`.  
+
+## What's next?  
+
+- Explore the rest of the documentation and try out the [example scripts](/examples).  
+- Join [our Discord](https://discord.gg/cbkggY6NSK) and send us a picture of your setup! 💚  
+
+### Automatic updates  
+
+Every time the control module is powered on, it will check for updates and install them automatically. Updates will be available the next time you power it on.  
+
+### Support  
+
+We’re constantly rolling out updates to improve your experience, add new features, and fix issues.  
+
+If you encounter any issues, first reboot the control module to ensure it is up to date. *The version ID is displayed on the dashboard.*  
+
+If the issue persists, [reach out to us on our Discord](https://discord.gg/cbkggY6NSK). Our team of engineers is here to help!

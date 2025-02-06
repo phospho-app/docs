@@ -50,6 +50,17 @@
       "pages": ["welcome", "unboxings/dk1"]
     },
     {
+      "group": "Learn",
+      "pages": [
+        "learn/overview",
+        {
+          "group": "AI models",
+          "pages": ["learn/ai-models", "learn/policies"]
+        },
+        "learn/kinematics"
+      ]
+    },
+    {
       "group": "Examples",
       "pages": [
         "examples/control",
@@ -93,16 +104,6 @@
             "recording/play-recording"
           ]
         }
-      ]
-    },
-    {
-      "group": "Learn",
-      "pages": [
-        "learn/overview",
-        "learn/kinematics",
-        "learn/policies",
-        "learn/simulation",
-        "learn/ai-models"
       ]
     }
   ],
