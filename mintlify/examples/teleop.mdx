@@ -3,11 +3,8 @@ title: "Teleoperation"
 description: "How to control the robot arm with a Meta Quest 3"
 ---
 
-Connect to the junior dev kit through Wifi in the phospho Meta Quest app.
 
 Move in real time. Record datasets. Start training AI models.
-
-
 <iframe 
     className="w-full aspect-video"
     src="https://www.youtube.com/embed/j73ixL-oQaQ?si=WdI6jKNAnjlY9yUI" 
@@ -16,6 +13,27 @@ Move in real time. Record datasets. Start training AI models.
     allowFullScreen>
 </iframe>
 
+## Prerequisites
+Connect to the junior dev kit through Wifi in the phospho Meta Quest app.
+<Warning>Make sure you have already completed the [Installation Guide](/unboxings/dk1) and that you have a [MetaQuest](https://www.meta.com/fr/quest/quest-3/?srsltid=AfmBOorMLUmJKFQr35ssCi1DDqSNgpHk0sLHqo_tHG8kgclCYbMToAPa)</Warning>
+
+![MetaQuest controler button names](/assets/names_buttons.jpg)  
+
+1. Open the application. You should see a screen displaying **Phoshobot** along with the server ping. Click with the `Trigger Button` to the **Connect** button.  
+<Warning>Ensure that you are connected to the same network as the control module.</Warning>  
+
+![Select Phosphobot server](/assets/changeme-unity-server.png)  
+
+2. Upon connecting, you should see the main camera feed if a camera is connected. You can move with the `Grip Button` various assets in the metaverse as needed.  
+   - Press the `A` button once to start teleoperation and begin moving your controller. The robot will naturally follow the movement of your controller. Press the `Trigger Button` close the gripper.
+   - Press the `A` button again to stop the teleoperation; the robot will stop.  
+
+3. Start recording by pressing the `B` button. You can leave the default settings for your first attempt.  
+   - Press the `B` button again to stop the recording.  
+
+4. Continue teleoperating and stop the recording when you're done.  
+
+5. The recording is automatically saved in **LeRobot** format and uploaded to your Hugging Face account. You can check it in your profile.  
 
 ## Chess
 
@@ -40,6 +58,16 @@ Record datasets. Train AI models.
     referrerPolicy="strict-origin-when-cross-origin" 
     allowFullScreen>
 </iframe>
+
+<Card
+  title="Explore teleoperation"
+  icon="robot"
+  iconType="regular"
+  href="/example/ai-models">
+    Find here a guide to teleoperate the robot arm and train your first AI model.
+</Card>
+
+
 
 
 

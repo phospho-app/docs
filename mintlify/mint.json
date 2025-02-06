@@ -54,7 +54,7 @@
       "pages": [
         "learn/overview",
         {
-          "group": "Train AI models",
+          "group": "AI models",
           "pages": ["learn/ai-models", "learn/policies"]
         },
         "learn/kinematics"
