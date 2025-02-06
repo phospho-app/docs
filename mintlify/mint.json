@@ -47,7 +47,18 @@
   "navigation": [
     {
       "group": "Getting Started",
-      "pages": ["welcome", "unboxings/dk1", "quickstart/record-upload-train"]
+      "pages": ["welcome", "unboxings/dk1"]
+    },
+    {
+      "group": "Learn",
+      "pages": [
+        "learn/overview",
+        {
+          "group": "Train AI models",
+          "pages": ["learn/ai-models", "learn/policies"]
+        },
+        "learn/kinematics"
+      ]
     },
     {
       "group": "Examples",
@@ -93,16 +104,6 @@
             "recording/play-recording"
           ]
         }
-      ]
-    },
-    {
-      "group": "Learn",
-      "pages": [
-        "learn/overview",
-        "learn/kinematics",
-        "learn/policies",
-        "learn/simulation",
-        "learn/ai-models"
       ]
     }
   ],
