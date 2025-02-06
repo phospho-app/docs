@@ -155,7 +155,9 @@
           "required": true,
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/OpenVLAControlData" }
+              "schema": {
+                "$ref": "#/components/schemas/RelativeEndEffectorPosition"
+              }
             }
           }
         },
@@ -508,6 +510,40 @@
         }
       }
     },
+    "/move/hello": {
+      "post": {
+        "tags": ["control"],
+        "summary": "Make the robot say hello (test endpoint)",
+        "description": "Make the robot say hello by waving its end effector. (Test endpoint)",
+        "operationId": "say_hello_move_hello_post",
+        "parameters": [
+          {
+            "name": "robot_id",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "default": 0, "title": "Robot Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/StatusResponse" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
     "/calibrate": {
       "post": {
         "tags": ["control"],
@@ -699,6 +735,19 @@
         }
       }
     },
+    "/": {
+      "get": {
+        "tags": ["pages"],
+        "summary": "Home",
+        "operationId": "home__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "text/html": { "schema": { "type": "string" } } }
+          }
+        }
+      }
+    },
     "/admin": {
       "get": {
         "tags": ["pages"],
@@ -815,11 +864,25 @@
         }
       }
     },
+    "/network": {
+      "get": {
+        "tags": ["pages"],
+        "summary": "Serve Network Page",
+        "description": "Serve the network management page",
+        "operationId": "serve_network_page_network_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "text/html": { "schema": { "type": "string" } } }
+          }
+        }
+      }
+    },
     "/network/hotspot": {
       "post": {
         "tags": ["networking"],
         "summary": "Activate Hotspot",
-        "description": "Endpoint to activate the hotspot on the Raspberry Pi.",
+        "description": "Endpoint to activate the hotspot on the Raspberry Pi.\nReturns immediately and performs setup in the background.",
         "operationId": "activate_hotspot_network_hotspot_post",
         "responses": {
           "200": {
@@ -833,7 +896,7 @@
       "post": {
         "tags": ["networking"],
         "summary": "Switch To Network",
-        "description": "Endpoint to connect phosphobot to a new network.",
+        "description": "Endpoint to connect phosphobot to a new network.\nReturns immediately and performs connection in the background.\nWill fallback to the hotspot if it fails to connect.",
         "operationId": "switch_to_network_network_connect_post",
         "requestBody": {
           "content": {
@@ -974,9 +1037,21 @@
       },
       "EndEffectorPosition": {
         "properties": {
-          "x": { "type": "number", "title": "X" },
-          "y": { "type": "number", "title": "Y" },
-          "z": { "type": "number", "title": "Z" },
+          "x": {
+            "type": "number",
+            "title": "X",
+            "description": "X position in centimeters"
+          },
+          "y": {
+            "type": "number",
+            "title": "Y",
+            "description": "Y position in centimeters"
+          },
+          "z": {
+            "type": "number",
+            "title": "Z",
+            "description": "Z position in centimeters"
+          },
           "rx": {
             "type": "number",
             "title": "Rx",
@@ -1001,7 +1076,7 @@
         "type": "object",
         "required": ["x", "y", "z", "rx", "ry", "rz", "open"],
         "title": "EndEffectorPosition",
-        "description": "End effector position for a movement in absolute frame."
+        "description": "End effector position for a movement in absolute frame.\nAll zeros means the initial position, that you get by calling /move/init"
       },
       "HTTPValidationError": {
         "properties": {
@@ -1064,33 +1139,6 @@
         "required": ["ssid", "password"],
         "title": "NetworkCredentials"
       },
-      "OpenVLAControlData": {
-        "properties": {
-          "x": { "type": "number", "title": "X" },
-          "y": { "type": "number", "title": "Y" },
-          "z": { "type": "number", "title": "Z" },
-          "rx": {
-            "type": "number",
-            "title": "Rx",
-            "description": "Relative Pitch in radian"
-          },
-          "ry": {
-            "type": "number",
-            "title": "Ry",
-            "description": "Relative Yaw in radian"
-          },
-          "rz": {
-            "type": "number",
-            "title": "Rz",
-            "description": "Relative Roll in radian"
-          },
-          "open": { "type": "number", "title": "Open" }
-        },
-        "type": "object",
-        "required": ["x", "y", "z", "rx", "ry", "rz", "open"],
-        "title": "OpenVLAControlData",
-        "description": "Type of action ordered by OpenVLA\n- delta on position\n- delta orientation (euler angles, radian)\n- float to close/open the gripper"
-      },
       "RecordingPlayRequest": {
         "properties": {
           "episode_path": {
@@ -1129,6 +1177,12 @@
             ],
             "title": "Video Codec",
             "description": "Codec to use for the video saving. Defaults to None."
+          },
+          "freq": {
+            "type": "integer",
+            "title": "Freq",
+            "description": "Records steps of the robot at this frequency. Defaults to 10.",
+            "default": 10
           }
         },
         "type": "object",
@@ -1161,6 +1215,45 @@
         "title": "RecordingStopResponse",
         "description": "Response when the recording is stopped. The episode is saved in the given path."
       },
+      "RelativeEndEffectorPosition": {
+        "properties": {
+          "x": {
+            "type": "number",
+            "title": "X",
+            "description": "Delta X position in centimeters"
+          },
+          "y": {
+            "type": "number",
+            "title": "Y",
+            "description": "Delta Y position in centimeters"
+          },
+          "z": {
+            "type": "number",
+            "title": "Z",
+            "description": "Delta Z position in centimeters"
+          },
+          "rx": {
+            "type": "number",
+            "title": "Rx",
+            "description": "Relative Pitch in degrees"
+          },
+          "ry": {
+            "type": "number",
+            "title": "Ry",
+            "description": "Relative Yaw in degrees"
+          },
+          "rz": {
+            "type": "number",
+            "title": "Rz",
+            "description": "Relative Roll in degrees"
+          },
+          "open": { "type": "number", "title": "Open" }
+        },
+        "type": "object",
+        "required": ["x", "y", "z", "rx", "ry", "rz", "open"],
+        "title": "RelativeEndEffectorPosition",
+        "description": "Relative end effector position for a movement in relative frame.\nUseful for OpenVLA-like control."
+      },
       "ServerStatus": {
         "properties": {
           "status": {
@@ -1179,7 +1272,7 @@
             "type": "string",
             "title": "Version Id",
             "description": "Current version of the teleoperation server",
-            "default": "0.2.34"
+            "default": "0.2.43"
           }
         },
         "type": "object",
