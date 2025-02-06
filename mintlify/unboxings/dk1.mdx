@@ -64,7 +64,7 @@ _On Android, we recommend using the Chrome browser._
 
 ### Connect to your home wifi
 
-1. Go to `Manage Network`. Enter the network name (WiFi SSID) and password of your wifi network. 
+1. Go to `Network Management`. Enter the network name (WiFi SSID) and password of your wifi network. 
 
 <Warning>
 The network name is cAsE sEnSiTiVe and should be exactly as seen on your device/router. Double-check for typos.
@@ -78,7 +78,9 @@ If you see a slow LED blinking pattern, this means the setup failed. Reboot the 
 
 3. Connect your computer back to your home wifi network (the one you entered in the dashboard). 
 
-4. You're done! Reload the page [phosphobot.local](http://phosphobot.local) to access the control module dashboard and send your first command.
+4. Reload the page [phosphobot.local](http://phosphobot.local) to access the control module dashboard. 
+
+5. You're done! Click on "Make robot say hello" to test the connection. Everything works? Great! You're ready to send your first commands.
 
 If this fails, restart the control module by keeping pressed the button next to the LED. Then, start over this section.
 
@@ -138,7 +140,9 @@ Then enter the Wifi password and press connect.
 
 <Note>This step may fail if you're trying to connect to a Wifi hotspot. If this happens to you, look into how to flash your own SD card (guide coming soon).</Note>
 
-5. You're done. The control module is now connected to wifi. Now, access the control module dashboard on the URL [phosphobot.local](http://phosphobot.local) to send your first command. 
+5. The control module is now connected to wifi. Access the control module dashboard on the URL [phosphobot.local](http://phosphobot.local). 
+
+6. You're done! Click on "Make robot say hello" to test the connection. Everything works? Great! You're ready to send your first commands.
 
 </Accordion>
 
@@ -153,6 +157,8 @@ When your control module is connected to your home WiFi, you can now send your f
 2. Trigger the `/move/init` endpoint to initialize the robot (click `Try it out` and then `Execute`). 
 
 3. Your robot arm moves to the default position. _It's alive!_ 🎉
+
+4. Now, you can call the `/move/absolute` endpoint to move the robot to a specific position. The distances are in centimeters, and the angles in degrees.
 
 ## What's next?
 

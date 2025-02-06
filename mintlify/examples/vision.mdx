@@ -67,7 +67,7 @@ def wave_motion():
                 "absolute",
                 {
                     "x": 0,
-                    "y": 0.02 * (-1) ** i,
+                    "y": 2 * (-1) ** i,
                     "z": 0,
                     "rx": -90,
                     "ry": 0,
@@ -211,8 +211,8 @@ def map_to_robot_coordinates(hand_x, hand_y):
     We match the hand x coordinate to the robot y coordinate
     And the hand y coordinate to the robot z coordinate
     """
-    robot_y = ((0.5 - hand_x) * 2) * (WORKSPACE_Y / 2)
-    robot_z = ((0.5 - hand_y) * 2) * (WORKSPACE_Z / 2)
+    robot_y = ((0.5 - hand_x) * 2) * (WORKSPACE_Y / 2) * 100
+    robot_z = ((0.5 - hand_y) * 2) * (WORKSPACE_Z / 2) * 100
     return robot_y, robot_z
 
 
@@ -252,7 +252,7 @@ try:
                 call_to_api(
                     "absolute",
                     {
-                        "x": -0.05,
+                        "x": -5,
                         "y": robot_y,
                         "z": robot_z,
                         "rx": 0,
@@ -377,33 +377,33 @@ class RockPaperScissorsGame:
         # Move to closed fist position
         self.call_to_api(
             "absolute",
-            {"x": 0, "y": 0, "z": 0.05, "rx": 0, "ry": 0, "rz": 0, "open": 0},
+            {"x": 0, "y": 0, "z": 5, "rx": 0, "ry": 0, "rz": 0, "open": 0},
         )
 
     def make_paper_gesture(self):
         # Move to open hand position
         self.call_to_api(
             "absolute",
-            {"x": 0, "y": 0, "z": 0.05, "rx": 0, "ry": 0, "rz": 0, "open": 1},
+            {"x": 0, "y": 0, "z": 5, "rx": 0, "ry": 0, "rz": 0, "open": 1},
         )
 
     def make_scissors_gesture(self):
         # Move to scissors position
         self.call_to_api(
             "absolute",
-            {"x": 0, "y": 0, "z": 0.05, "rx": 0, "ry": -45, "rz": 0, "open": 0.5},
+            {"x": 0, "y": 0, "z": 5, "rx": 0, "ry": -45, "rz": 0, "open": 0.5},
         )
 
     def move_up_down(self, times=3):
         for step in range(times + 1):
             self.call_to_api(
                 "absolute",
-                {"x": 0, "y": 0, "z": 0.04, "rx": 0, "ry": 0, "rz": 0, "open": 0},
+                {"x": 0, "y": 0, "z": 4, "rx": 0, "ry": 0, "rz": 0, "open": 0},
             )
             time.sleep(0.25)
             self.call_to_api(
                 "absolute",
-                {"x": 0, "y": 0, "z": -0.04, "rx": 0, "ry": 0, "rz": 0, "open": 0},
+                {"x": 0, "y": 0, "z": -4, "rx": 0, "ry": 0, "rz": 0, "open": 0},
             )
             time.sleep(0.25)
             print(times - step)
