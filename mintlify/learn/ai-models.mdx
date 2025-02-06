@@ -17,9 +17,46 @@ It focuses on state-of-the-art approaches in imitation learning and reinforcemen
 - [LeRobot on Huggingface](https://huggingface.co/lerobot)
 - [AI models for robotics](https://huggingface.co/models?pipeline_tag=robotics&sort=trending)
 
-## Step by step tutorial 
+## Guide
 
-This tutorial will take you from recording a dataset with the phospho dev kit to training a model using LeRobot.
+If you haven't done so yet, check out our [Quickstart Guide](quickstart/record-upload-train) to record, upload, and train a model.
+
+To train your AI model, you need to install phosphobot and LeRobot in your device:
+```bash
+pip install --upgrade phosphobot
+git clone https://github.com/huggingface/lerobot.git
+cd lerobot
+pip install -e .  # Requires Python 3.10+
+```
+
+(Optional) If you want to use Weights & Biases for tracking training metrics, log in with:  
+
+```bash
+wandb login
+```
+
+Finally, launch the training script with the following command in the `lerobot` repository (change the device to `cuda` if you have an NVIDIA GPU or `cpu` if you don’t have a GPU).  
+Ensure that your `lerobot` virtual environment is activated.  
+
+```bash
+sudo python lerobot/scripts/train.py \
+    --dataset.repo_id=<HF_USERNAME>/<DATASET_NAME> \
+    --policy.type=<act or diffusion or tdmpc or vqbet> \
+    --output_dir=outputs/train/phoshobot_test \
+    --job_name=phosphobot_test \
+    --device=mps \
+    --wandb.enable=true
+```
+
+You will find your trained model in `lerobot/outputs/train/`.
+
+
+
+
+
+
+
+
 
 <Info>
 Coming soon!
