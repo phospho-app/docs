@@ -62,12 +62,7 @@
     },
     {
       "group": "Examples",
-      "pages": [
-        "examples/control",
-        "examples/teleop",
-        "examples/vision",
-        "examples/ai-models"
-      ]
+      "pages": ["examples/control", "examples/teleop", "examples/vision"]
     },
     {
       "group": "API Reference",
