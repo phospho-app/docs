@@ -9,6 +9,8 @@ This is the user-facing documentation of the [phospho platform](https://platform
 
 The docs use Mintlify for deployment. Install the [Mintlify CLI](https://www.npmjs.com/package/mintlify) to preview the documentation changes locally. To install, use the following command
 
+Use node version 18. Install with nvm.
+
 ```
 npm i -g mintlify
 ```
