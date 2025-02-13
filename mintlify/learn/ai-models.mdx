@@ -1,68 +1,79 @@
 ---
-title: "Train AI models"
-description: "How to train AI models for robotics applications."
+title: "Training AI models for robotics"
+description: "A guide to training AI models for robotics applications."
 ---
 
-phospho dev kit makes it easy to train robotics AI models with LeRobot from Huggingface.
+The phospho dev kit makes it easy to train robotics AI models with **LeRobot** from Hugging Face.
 
 ## What is LeRobot?
 
 ![LeRobot logo](https://cdn-uploads.huggingface.co/production/uploads/631ce4b244503b72277fc89f/MNkMdnJqyPvOAEg20Mafg.png)
 
-LeRobot is a platform designed to facilitate access to real-world robotics by providing models, datasets, and tools in PyTorch, to make robotics more accessible for everyone.
+LeRobot is a platform designed to make real-world robotics more accessible for everyone. It provides pre-trained models, datasets, and tools in PyTorch.
 
-It focuses on state-of-the-art approaches in imitation learning and reinforcement learning, offering pretrained models, human-collected demonstration datasets, and simulated environments. 
+It focuses on state-of-the-art approaches in **imitation learning** and **reinforcement learning**. 
 
-- [LeRobot github](https://github.com/huggingface/lerobot)
-- [LeRobot on Huggingface](https://huggingface.co/lerobot)
+With LeRobot, you get access to:
+- Pretrained models for robotics applications
+- Human-collected demonstration datasets
+- Simulated environments to test and refine AI models
+
+Useful links:
+- [LeRobot on GitHub](https://github.com/huggingface/lerobot)
+- [LeRobot on Hugging Face](https://huggingface.co/lerobot)
 - [AI models for robotics](https://huggingface.co/models?pipeline_tag=robotics&sort=trending)
 
 ## Step by step guide
 
-In this guide, we will use the Phospho Junior Dev Kit to record a dataset and upload it to Hugging Face.  
+In this guide, we will use the phospho Junior dev kit to record a dataset and upload it to Hugging Face.  
 
-<Note>Make sure you have already completed the [Installation Guide](/unboxings/dk1).</Note>  
+<Note>Before starting, make sure you have already completed the [Installation Guide](/unboxings/dk1).</Note>  
 
 ## Prerequisites  
 
-- To automatically upload your dataset, you need a Hugging Face account. If you don’t have one, please create it [here](https://huggingface.co/join).  
-- You need a device for training your model. We recommend using a GPU for faster training.  
-<Info>The phospho teleo app requires a Meta Quest 2, Pro, 3 or 3s to run</Info>  
-- Ensure that your control module is turned on and connected to the robot arm and camera.  
+- A **Hugging Face account** to automatically upload your dataset (Sign up [here](https://huggingface.co/join) if you don't have one)
+- A **device for training your model**. We recommend using a **GPU** for faster training.  
+- The **control module powered on** and connected to the **robot arm** and **camera**.  
+<Info>The phospho teleo app requires a **Meta Quest 2, Pro, 3 or 3s** to run</Info>  
 
 ## 1. Set up your Hugging Face token  
+*To upload datasets, you need a Hugging Face token with write access. Follow these steps to generate one:*
 
-1. First, create an access token for your Hugging Face account. Log in to your Hugging Face account, go to your profile, and click **Access Token** in the sidebar.  
+1. Log in to your Hugging Face account
+2. Go to **Profile** and click **Access Tokens** in the sidebar.  
 
-2. Select the **Write** option to grant write access to your account. This is necessary for creating new datasets and uploading files. Name your token and click **Create**.  
+3. Select the **Write** option to grant write access to your account. This is necessary for creating new datasets and uploading files. Name your token and click **Create token**.  
 
 ![Create HF Token](/assets/create-hf-token.png)  
 
-3. Copy the token and save it in a secure place. You will need it later.  
+4. **Copy the token** and **save it** in a secure place. You will need it later.  
 
-4. Access the control module server at `phosphobot.local:80/admin`, paste the token, and save it.  
+5. Open a browser and access `phosphobot.local:80/admin` to access the control module server. 
+
+6. **Paste the Hugging Face token**, and **save it**.  
 
 ![Select Phosphobot server](/assets/hf-admin-page.png)  
 
 ## 2. Start teleoperation and recording  
 
-1. Go to the Meta Quest Store, search for the **Phospho Teleop** application, and download it.  
+1. Download the **phospho teleop** app from the **Meta Quest Store**.  
 
-2. Open the application. You should see a screen displaying **Phoshobot** along with the server ping. Click the **Connect** button.  
+2. Open the app. You should see a screen displaying **phoshobot** along with the server ping. Click **Connect**.  
 <Warning>Ensure that you are connected to the same network as the control module.</Warning>  
 
 ![Select Phosphobot server](/assets/changeme-unity-server.png)  
 
 3. Upon connecting, you should see the main camera feed if a camera is connected. You can move various assets in the metaverse as needed.  
-   - Press the `A` button once to start teleoperation and begin moving your controller.  
-   - Press the `A` button again to stop the teleoperation; the robot will stop.  
 
-4. Start recording by pressing the `B` button. You can leave the default settings for your first attempt.  
-   - Press the `B` button again to stop the recording.  
+4. - Press `A` **once** to **start teleoperation** and begin moving your controller.  
+   - Press `A` **again** to **stop teleoperation**. The robot will stop.  
 
-5. Continue teleoperating and stop the recording when you're done.  
+5. - Press `B` to **start recording**. You can leave the default settings for your first attempt.  
+   - Press `B` again to **stop the recording**.  
 
-6. The recording is automatically saved in **LeRobot** format and uploaded to your Hugging Face account. You can check it in your profile.  
+6. Continue teleoperating and stop the recording when you're done.  
+
+7. The recording is automatically saved in **LeRobot** format and uploaded to your Hugging Face account. You can check it in your profile.  
 
 ## 3. Train your first model  
 
@@ -80,14 +91,13 @@ In this guide, we will use the Phospho Junior Dev Kit to record a dataset and up
    pip install -e .  # Requires Python 3.10+
    ```
 
-3. *(Optional)* If you want to use Weights & Biases for tracking training metrics, log in with:  
+3. *(Optional)* If you want to use **Weights & Biases** for tracking training metrics, log in with:  
 
    ```bash
    wandb login
    ```
 
-4. Launch the training script with the following command in the `lerobot` repository (change the device to `cuda` if you have an NVIDIA GPU or `cpu` if you don’t have a GPU).  
-   Ensure that your `lerobot` virtual environment is activated.  
+4. Run the training script with the following command in the `lerobot` repository (Set --device=mps for Apple Silicon (Mac M1/M2), `cuda` if you have an NVIDIA GPU or `cpu` if you don’t have a GPU). Ensure that your `lerobot` virtual environment is activated.  
 
    ```bash
    sudo python lerobot/scripts/train.py \
@@ -99,7 +109,7 @@ In this guide, we will use the Phospho Junior Dev Kit to record a dataset and up
      --wandb.enable=true
    ```
 
-5. You will find your trained model in `lerobot/outputs/train/`.  
+5. Your trained model will be saved in `lerobot/outputs/train/`.  
 
 ## What's next?  
 
@@ -114,6 +124,6 @@ Every time the control module is powered on, it will check for updates and insta
 
 We’re constantly rolling out updates to improve your experience, add new features, and fix issues.  
 
-If you encounter any issues, first reboot the control module to ensure it is up to date. *The version ID is displayed on the dashboard.*  
+If you encounter any issues, first **reboot the control module** to ensure it is up to date. *The version ID is displayed on the dashboard.*  
 
 If the issue persists, [reach out to us on our Discord](https://discord.gg/cbkggY6NSK). Our team of engineers is here to help!

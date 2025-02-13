@@ -1,5 +1,5 @@
 ---
-title: "Basic concepts"
+title: "Core Robotics Concepts"
 description: "The basics to get started in robotics."
 ---
 
@@ -11,26 +11,24 @@ Your robot is made up of a few key components:
 
 - **Joints/Actuators**: The motors of the robot that allow the links to move relative to each other.
 - **Links**: The rigid plastic parts of the robot that are connected by joints.
-- **End effector**: The last part of the robot that interacts with the environment. i.e. gripper
+- **End effector**: The last part of the robot that interacts with the environment (e.g., a gripper).
 - **Sensors**: The robot's eyes and ears. They allow the robot to perceive the world around it.
 - **Controller**: The robot's brain. It processes the sensor data and sends commands to the actuators.
 
-The hard part is making sure all these components work together to achieve a goal.
-How do you make the robot move to a specific position? How do you make it pick up an object?
+The main challenge is coordinating all these components to perform specific tasks.
+How do we program the robot to move to a specific position or grasp an object?
 
 <Card icon="graduation-cap" title="Learn more" href="/learn/kinematics">
 Learn more about kinematics
 </Card>
 
-## What is a policy ?
+## What is a policy?
 
-A policy is a function that maps the current state of the robot to an action. It tells the robot what to do in a given situation.
+A policy defines how the robot makes decisions and takes actions based on its environment. It is a function that maps the current state of the robot to an action. In concrete terms, it tells the robot what to do in a given situation.
 
 For example, a policy for a robot vacuum cleaner might be:
 - If the robot detects dirt, move towards it.
 - If the robot detects a wall, turn left.
-
-The policy is what allows the robot to make decisions and take actions based on its environment.
 
 <Card icon="graduation-cap" title="Learn more" href="/learn/policies">
 Learn more about policies and AI in robotics
@@ -39,6 +37,6 @@ Learn more about policies and AI in robotics
 ## Vocabulary
 
 - **State**: The current configuration of the robot. This includes the positions of the joints, the orientation of the end effector, and any sensor readings.
-- **Action**: The movement or command that the robot takes in response to its state.
-- **Reward**: A value that the robot receives based on its actions. The goal of the robot is to maximize its reward over time.
+- **Action**: The movement or command the robot executes in response to its current state.
+- **Reward**: A numerical value assigned based on how well the robot's action achieves its objective. The robot's goal is to maximize this reward over time.
 - **Environment**: The world in which the robot operates. This includes the objects in the environment, the robot itself, and any other agents.
