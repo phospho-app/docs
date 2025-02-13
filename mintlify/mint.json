@@ -62,7 +62,14 @@
     },
     {
       "group": "Examples",
-      "pages": ["examples/control", "examples/teleop", "examples/vision"]
+      "pages": [
+        "examples/control",
+        "examples/vision",
+        {
+          "group": "Teleoperation",
+          "pages": ["examples/teleop", "examples/teleop-from-anywhere"]
+        }
+      ]
     },
     {
       "group": "API Reference",
