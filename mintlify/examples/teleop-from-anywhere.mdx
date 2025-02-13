@@ -1,36 +1,30 @@
 ---
 title: "Teleoperation from anywhere in the world"
-description: "How to control your robot from anywhere in the world with ngrok"
+description: "Control your robot over the internet using ngrok"
 ---
-
-Control your robot from anywhere in the world using ngrok. 
-
-This guide will walk you through the steps to securely allow people to control your robot over the internet.
-
 
 ## Prerequisites
 
-Before starting, ensure you have the following:
+Before starting, make sure you have the following:
 
-1. A **control module** set up, connected to the internet, and running with the phosphobot server. [Learn how to set up your control module](/unboxings/dk1).
-2. An ngrok account. [Sign up here](https://ngrok.com/) if you don’t have one. Alternative: Cloudflare Tunnel.
-3. The ngrok CLI installed on your machine. [Download it here](https://ngrok.com/download).
+1. A **control module** set up, connected to the internet, and running the phosphobot server. [Learn how to set up your control module](/unboxings/dk1).
+2. An **ngrok account**. [Sign up here](https://ngrok.com/) (*or use an alternative like Cloudflare Tunnel*).
+3. The **ngrok CLI** installed on your device. [Download it here](https://ngrok.com/download)
 
-## 1. Install and Authenticate ngrok
+## 1. Authenticate ngrok
 
-1. **Download ngrok**: If you haven’t already, download and install the ngrok CLI from the [official website](https://ngrok.com/download).
-2. **Authenticate ngrok**: Open a terminal and run the following command to link your ngrok account:
+To use ngrok, you need to authenticate your account. Open a terminal and run the following command: 
 
    ```bash
    ngrok authtoken YOUR_AUTH_TOKEN
    ```
 
-   Replace `YOUR_AUTH_TOKEN` with the token provided in your ngrok dashboard.
+   Replace `YOUR_AUTH_TOKEN` with the token provided in your **ngrok dashboard**.
 
 
-## 2. Tunnel Your Local Server
+## 2. Create an ngrok Tunnel for Your Local Server
 
-1. Turn on your control module to run the phosphobot server.
+1. Turn on your control module and ensure your phosphobot server is running.
 
 2. SSH into your phosphobot. By default, the password is `password123`
 
@@ -44,34 +38,33 @@ ssh phosphobot@phosphobot.local
    ngrok http 80
    ```
 
-   This command tells ngrok to forward traffic from the internet to your local server running on port 80.
+   *This command tells ngrok to forward traffic from the internet to your local server running on port 80.*
 
-4. Once the tunnel is active, ngrok will display a forwarding URL in the terminal. It will look something like this:
+4. Once the tunnel is active, ngrok will display a forwarding URL in the terminal, such as:
 
    ```
    Forwarding  https://abc123.ngrok.io -> http://localhost:80
    ```
 
-   This URL is now publicly accessible from anywhere in the world. It will remain active while the ngrok tunnel is running. Turn off the control module to stop the tunnel.
+   This URL is publicly accessible from anywhere in the world and will remain active while the ngrok tunnel is running. Turn off the control module to stop the tunnel.
 
 ## 3. Access Your Teleoperation App Remotely
 
-1. Copy the `https://` URL provided by ngrok (e.g., `https://abc123.ngrok.io`).
-2. Share this URL with anyone who needs to access your teleoperation app.
-3. Open the URL in a browser to access the Admin panel.
-4. In the Meta Quest app, connect to the server using the ngrok URL in the **Settings** window.
+1. Copy the ngrok `https://` URL displayed in your terminal (e.g., `https://abc123.ngrok.io`).
+2. Share this URL with users who need remote access to your teleoperation app.
+3. Open the URL in a browser to access the **Admin panel**.
+4. In the Meta Quest app, go to `Settings` and enter the **ngrok URL** to connect.
 
 <Note>Ensure your local server remains running while the ngrok tunnel is active. Closing the server will break the connection.</Note>
 
 
-## 4. Secure Your Tunnel (Optional)
+## 4. Secure Your Tunnel
 
-<Warning>By default, anyone with the URL control your robot and access the datasets. Secure the endpoint to restrict access.</Warning>
+<Warning>By default, ngrok tunnels are public, meaning anyone with the URL can control your robot and access datasets. </Warning>
 
-
-By default, ngrok tunnels are public. If you want to restrict access:
-
-1. Add basic authentication to your tunnel by running:
+**To secure you tunnel**:
+1. **Add basic authentication**
+Run the following command to require a username and password to access the tunnel:
 
    ```bash
    ngrok http 80 --auth "username:password"
@@ -79,15 +72,17 @@ By default, ngrok tunnels are public. If you want to restrict access:
 
    Replace `username` and `password` with your desired credentials.
 
-2. Alternatively, you can restrict access to specific IP addresses using ngrok’s IP restrictions feature in the dashboard.
+2. Alternatively, you can **restrict access to specific IP addresses**.
+   - Go to the **ngrok dashboard** 
+   - Use the **IP restrictions feature** in the dashboard.
 
 
 ## 5. Monitor Traffic (Optional)
 
-Ngrok provides a web interface to monitor traffic and inspect requests:
+Ngrok provides a web interface to inspect traffic and requests. To access it:
 
 1. Open your browser and go to `http://localhost:4040`.
-2. Here, you can see detailed logs of incoming requests and responses.
+2. Here, you can view **detailed logs** of incoming requests and responses.
 
 
 ## What’s Next?
@@ -103,5 +98,5 @@ Now that your teleoperation app is accessible remotely, you can:
   icon="robot"
   iconType="regular"
   href="/learn/ai-models">
-    Learn how to use the datasets you record to train your first AI model.
+    Learn how to use your recorded datasets to train your first AI model.
 </Card>
