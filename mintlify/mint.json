@@ -64,9 +64,11 @@
       "group": "Examples",
       "pages": [
         "examples/control",
-        "examples/teleop",
         "examples/vision",
-        "examples/ai-models"
+        {
+          "group": "Teleoperation",
+          "pages": ["examples/teleop", "examples/teleop-from-anywhere"]
+        }
       ]
     },
     {
