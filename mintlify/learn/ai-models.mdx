@@ -1,9 +1,9 @@
 ---
-title: "Training AI models for robotics"
-description: "A guide to training AI models for robotics applications."
+title: "Train robotics AI models"
+description: "A guide to training AI models that control robots"
 ---
 
-The phospho dev kit makes it easy to train robotics AI models with **LeRobot** from Hugging Face.
+The phospho dev kit makes it easy to train robotics AI models by integrating with **LeRobot** from Hugging Face.
 
 ## What is LeRobot?
 
@@ -33,11 +33,12 @@ In this guide, we will use the phospho Junior dev kit to record a dataset and up
 
 - A **Hugging Face account** to automatically upload your dataset (Sign up [here](https://huggingface.co/join) if you don't have one)
 - A **device for training your model**. We recommend using a **GPU** for faster training.  
-- The **control module powered on** and connected to the **robot arm** and **camera**.  
-<Info>The phospho teleo app requires a **Meta Quest 2, Pro, 3 or 3s** to run</Info>  
+- The **control module powered on** and connected to the **robot arm** and **camera**. 
+- The **[phospho teleo app](/examples/teleop)** installed on your **Meta Quest 2, Pro, 3 or 3s** 
 
 ## 1. Set up your Hugging Face token  
-*To upload datasets, you need a Hugging Face token with write access. Follow these steps to generate one:*
+
+To upload datasets, you need a Hugging Face token with write access. Follow these steps to generate one:
 
 1. Log in to your Hugging Face account
 2. Go to **Profile** and click **Access Tokens** in the sidebar.  
@@ -54,9 +55,9 @@ In this guide, we will use the phospho Junior dev kit to record a dataset and up
 
 ![Select Phosphobot server](/assets/hf-admin-page.png)  
 
-## 2. Start teleoperation and recording 
+## 2. Record a dataset by teleoperating the robot
 
-<Info>Make sure you have already completed the [Installation Guide](/unboxings/dk1#5-set-up-your-meta-quest-app) and that you have a [MetaQuest](https://www.meta.com/fr/quest/quest-3/?srsltid=AfmBOorMLUmJKFQr35ssCi1DDqSNgpHk0sLHqo_tHG8kgclCYbMToAPa)</Info>
+<Info>Make sure you have already completed the [Installation Guide](/unboxings/dk1#5-set-up-your-meta-quest-app) and that you have a [Meta Quest](https://www.meta.com/fr/quest/quest-3/?srsltid=AfmBOorMLUmJKFQr35ssCi1DDqSNgpHk0sLHqo_tHG8kgclCYbMToAPa)</Info>
 
 1. Go to the Meta Quest Store, search for the **Phospho Teleop** application. 
 
@@ -65,17 +66,17 @@ In this guide, we will use the phospho Junior dev kit to record a dataset and up
 
 ![Select Phosphobot server](/assets/changeme-unity-server.png)  
 
-3. Upon connecting, you should see the main camera feed if a camera is connected. You can move various assets in the metaverse as needed.  
+3. After connecting, you should see the main camera feed if a camera is connected. You can move various assets in the metaverse as needed.  
 
-4. - Press `A` **once** to **start teleoperation** and begin moving your controller.  
-   - Press `A` **again** to **stop teleoperation**. The robot will stop.  
+   - Press `A` **once** to **start teleoperation**. Move your controller in the space to move the robot. 
+   - Press `B` to **start recording**.   
+   - Press `B` **again** to **stop the recording**.  
+   - Press `A` **again** to **stop teleoperation**. The robot will stop moving.
 
-5. - Press `B` to **start recording**. You can leave the default settings for your first attempt.  
-   - Press `B` again to **stop the recording**.  
+6. Control the robot arm. Start the recording. Perform the manipulation. Stop the recording when you're done.  
+   The recording is automatically saved in **LeRobot v2** format and uploaded to your Hugging Face account. You can check it in your profile.  
 
-6. Continue teleoperating and stop the recording when you're done.  
-
-7. The recording is automatically saved in **LeRobot** format and uploaded to your Hugging Face account. You can check it in your profile.  
+To change the dataset name and recording settings, go to your admin panel and go to the **Admin settings** page. 
 
 ## 3. Train your first model  
 
@@ -115,17 +116,7 @@ In this guide, we will use the phospho Junior dev kit to record a dataset and up
 
 ## What's next?  
 
-- Explore the rest of the documentation and try out the [example scripts](/examples).  
-- Join [our Discord](https://discord.gg/cbkggY6NSK) and send us a picture of your setup! 💚  
+- Join [our Discord](https://discord.gg/cbkggY6NSK) and send us a video of your robot! 💚 
+- Share your trained models on Hugging Face and help others get started with robotics AI.
+- Explore the rest of the documentation and try out the [example scripts](/examples). 
 
-### Automatic updates  
-
-Every time the control module is powered on, it will check for updates and install them automatically. Updates will be available the next time you power it on.  
-
-### Support  
-
-We’re constantly rolling out updates to improve your experience, add new features, and fix issues.  
-
-If you encounter any issues, first **reboot the control module** to ensure it is up to date. *The version ID is displayed on the dashboard.*  
-
-If the issue persists, [reach out to us on our Discord](https://discord.gg/cbkggY6NSK). Our team of engineers is here to help!
