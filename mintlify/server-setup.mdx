@@ -2,118 +2,76 @@
 title: "Installing phosphobot"
 description: "How to set up phosphobot for free and control your robot arm"
 ---
-<Info> 
-Prerequisites:
-- A device (Raspberry Pi, Mac, or Linux) connected to the Internet.
-- A robot plugged into the device.
-- For Mac users, make sure [Homebrew](https://brew.sh/) is installed.
-</Info>
 
-## 1. Install phosphobot
-Open a terminal and run the following command:
+
+## Install phosphobot
+
+The quickest way to get started is to use the install script. In a terminal, run the following command:
+
 ```bash
 curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | bash
 ```
-_This command downloads and runs an installation script from the official repository._
-
-## 2. Run phosphobot
+Then, run the phosphobot server:
 
 ```bash 
 phosphobot run
 ```
-<Info>We use sudo to bind to the port `80` to keep things simple. But you can change the port using the `--port` flag.</Info>
 
-## 3. Access the web interface
-
-Open a web browser and navigate to `localhost` (or `phosphobot.local` if you're using a Raspberry Pi). 
-You should now see the **phosphobot dashboard**.
+On the same computer, open a web browser and navigate to `localhost`. You should now see the **phosphobot dashboard**.
 
 ![phosphobot dashboard](/assets/phosphobot-dashboard.jpg)
 
-Click on `Make robot say hello` to test the connection. Everything works? Great! **You're ready to send your first commands.**
+<Note> 
+To continue your setup, you need a SO-100 robot arm plugged to your computer. If you don't have one, you can buy a kit [here](https://robots.phospho.ai/).
+</Note>
 
-## 4. Send your first commands
-
-<Warning>Make sure the robot is well fixed and the area around is clear before sending any command.</Warning>
-
-1. Go to the interactive API docs of the control module at [phosphobot.local/docs](http://phosphobot.local/docs). This page lets you send commands to the robot arm.
-
-2. Trigger the `/move/init` endpoint to initialize the robot (click `Try it out` and then press `Execute`).
-
-3. Your robot arm moves to the default position. _It's alive!_ 🎉
-
-4. Now, you can call the `/move/absolute` endpoint to move the robot to a specific position. The distances are in centimeters, and the angles in degrees.
-
-<Info>If you assembled your robot arm yourself, you may need to **calibrate it**. Follow the guide in the [Support section](#support) at the end of this page for detailed instructions.</Info>
-
-## 5. Set up your Meta Quest App
-The phospho dev kit is delivered with a [Meta Quest](https://www.meta.com/fr/quest/quest-3/?srsltid=AfmBOoqPSrSx_ABUZwNg30PYExXeJ_mTx3yyaK6Y_juZif_BlfcdpTjw) app for teleoperation. In this section, we will set up the app on your Meta Quest headset.
-
-1. After purchasing your phospho dev kit, you’ll receive an **email invitation** to the Meta Alpha program of the phospho teleop app. Follow the email instructions to link your Meta account to the Alpha program.
-
-2. Make sure your **Meta Quest headset** is **turned on** and **connected to WiFi**. Once you’ve linked your account, the Meta Quest will automatically download the app. This can take a moment.
-
-<Info>The Meta Quest connects to the Teleoperation server through a shared WiFi connection. </Info>
-
-3. Open the phospho teleop app from the library. Once downloading is done, you can open the software library on the Meta Quest. In the list of All apps, you’ll see the *phospho teleop* app. This app is automatically updated with the latest releases.
+- If you bought the [phospho dev kit](https://robots.phospho.ai/), click on `Make robot say hello` to test the connection. 
+- If you built your own robot arm, you should first [calibrate it](/server-setup#calibrate-your-robot-arm).
+- Everything works? Great! **You're ready to send your first commands.**
 
 <Card
-  title="Explore teleoperation"
+  title="Send your first commands"
   icon="robot"
   iconType="regular"
-  href="/example/teleop"
+  href="/control-robot"
 >
-  Follow this **guide** to teleoperate the robot.
+  Discover how to control your robot arm from the phosphobot dashboard.
 </Card>
 
-## Updates
-- If you're using a **Raspberry Pi**, every time the control module is powered on, it will check for updates and install them automatically. They will be available the next time you power it on.
-- On **Mac**, run the following command:
+## MacOS
+
+Use [Homebrew](https://brew.sh/) to install phosphobot:
+
+```bash
+brew tap phospho-app/phosphobot
+brew install phosphobot
+```
+To **update phosphobot**, run the following command:
 ```bash
 brew update 
 brew upgrade phosphobot
+``` 
+
+## Linux (APT)
+
+On Linux, we use apt to distribute the software and you need additional packages. That's why you need to run the install script with sudo:
+
+```bash 
+curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | sudo bash
 ```
-- On **Linux**, run the following command:
+To **update phosphobot**, run the following command:
 ```bash
 sudo apt update
 sudo apt upgrade phosphobot
 ```
 
-## What's next?
+## Raspberry Pi
 
-- Try to record your **first dataset** with [teleoperation](/examples/teleop) and upload it to Hugging Face.
-- [Train your AI models](/learn/ai-models).
-- Build your own program to make the robot move with [API calls](/learn/api-calls).
-- Use [Vision models](/learn/vision) to interact with the robot.
+phosphobot on Raspberry Pi has advanced features to make it easier to use (led ticking, bluetooth connection, extra dependencies already installed).
 
-<iframe
-    className="w-full aspect-video"
-  src="https://www.youtube.com/embed/lpCpK0SSS1Y"
-  title="YouTube video player"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-  allowfullscreen
-></iframe>
-
-<Card
-  title="Explore ai-models"
-  icon="gamepad"
-  iconType="regular"
-  href="/learn/ai-models"
+<Accordion title="Setup your Raspberry Pi"
+icon="raspberry-pi"
 >
-  Discover the potential of the phospho dev kit here.
-</Card>
-
-- Learn more about [AI in robotics.](/learn/overview)
-- Join [our Discord](https://discord.gg/cbkggY6NSK) and send us a pic of your setup! 💚
-
-
-## Specific cases
-
-### Raspberry Pi
-
-#### 1. Setup a new image on Raspberry Pi
-
 
 <Info>*If you already have a setup Raspberry Pi, you can skip this part*</Info>
 
@@ -124,9 +82,9 @@ Insert an **SD card** into your main computer.
 
 Run the Raspberry Pi imager. 
 
-- Select your Raspberry Pi model (the version in the dev kit is Raspberry Pi 5)
-- Select the Raspberry Pi OS (64 bit)
-- Select your SD card
+- Select your Raspberry Pi model (the version in the dev kit is Raspberry Pi 5).
+- Select the Raspberry Pi OS (64 bit)?
+- Select your SD card?
 
 Then, click **Next** on the bottom right.
 
@@ -138,9 +96,9 @@ When the window pops up asking for OS customisation, select **Edit Settings**.
 
 In general settings :
 
-- Set hostname to `phosphobot`
-- Set username and password to `phosphobot` and `password123` (example)
-- Configure wireless LAN: add your Wifi network name, password, and country. Be careful: tHiS iS cAsE sEnSiTiVe !
+- Set hostname to `phosphobot`?
+- Set username and password to `phosphobot` and `password123` (example).
+- Configure wireless LAN: add your Wifi network name, password, and country. Be careful: tHiS iS cAsE sEnSiTiVe!
 
 ![Raspberry Pi General Settings](/assets/Rpi-general-settings.jpg)
 
@@ -154,9 +112,10 @@ When writing is finished, take out the SD card from your computer.
 
 Insert the microSD into the Raspberry Pi when it’s turned off.
 
-#### 2. Install the teleoperation server on Raspberry Pi
+</Accordion>
 
-- **SSH into the Raspberry Pi**
+
+**1. SSH into the Raspberry Pi**
 
 SSH (Secure Shell) allows you to access the Raspberry Pi remotely from your main computer through the terminal.
 
@@ -174,7 +133,7 @@ When asked about the authenticity of host phosphobot.local, type `yes` to accept
 
 And when asked for password, enter `password123` . 
 
-- **Install the software**
+**2. Install the software**
 
 When you’ve successfully SSH in the Raspberry Pi, run this to install the teleoperation server :
 
@@ -190,89 +149,21 @@ curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install
 
 After that, the installation script will download install dependencies. It can take a few minutes depending on your connection speed. 
 
-#### 3. Reboot the Raspberry Pi
 
-Once the installation is complete, reboot your Raspberry Pi.
+**3. Once the installation is complete, reboot your Raspberry Pi.**
 ```bash
 sudo reboot
 ```
-<Accordion title="Having trouble?"
-description="Use your phone's Bluetooth to connect the control module to your WiFi"
-icon="Bluetooth"
->
 
-Using the **BTBerryWiFi** app, you can use Bluetooth to connect the control module to your home WiFi. 
+<Note>Every time the control module is powered on, it will check for updates and install them automatically. They will be available the next time you power it on.</Note>
 
-_Special thanks to its creator Norm Frenette for this awesome app!_
 
-### Step 1: Download the BTBerryWiFi app
+## Windows
 
-Download the _BTBerryWiFi_ app for your smartphone:
-
-- on **iPhone,** [download the app from the AppStore.](https://apps.apple.com/us/app/btberrywifi/id1596978011)
-- on **Android,** [download the app here.](https://drive.google.com/drive/folders/12l5lCZS4T8wHfdSLyCGM-hrzh64EM-zo?usp=sharing) Install it with sideloading. _Note: the free version of the Android app only works for 7 days._
-
-### Step 2: Reboot the control module
-
-1. Long press the _power button_ of the control module until the LED turns red.
-2. Press the _power button_ again and keep it pressed until the LED turns green.
-3. Wait for the control module to boot up. When the LED blinks green slowly and regularly, your control module is ready for pairing.
-
-<Warning>
-Make sure no device is connected to the control module through WiFi.
-</Warning>
-
-### Step 3: Connect to WiFi with BTBerryWiFi
-
-<Info>For reference, here's the link to the [full user guide](https://www.btberrywifi.com/).</Info>
-
-1. Launch **BTBerryWiFi.** Accept the authorization request to use Bluetooth. Click on the button "Scan for Raspberry Pi".
-
-2. Wait for _phosphobot_ to show up in the list below, then select it. 
-
-<Note>Sometimes, you can see _no_name_ instead of _phosphobot_ in the list. If so, select _no name_ and carry on.</Note>
-
-![Select phosphobot](/assets/rpi-1.png)
-
-If no device shows up: close the app, turn Bluetooth off and on on your smartphone, and reboot the control module. Then start again.
-
-3. Wait for your smartphone to pair with the control module, then for the WiFi access points to appear. This can take up to a minute.
-
-![Wait for connection](/assets/rpi-2.png)
-
-If you stay stuck on this screen for longer than 2 minutes, close the app, turn Bluetooth off and on on your smartphone, and reboot the control module. Then start again.
-
-4. Select your home WiFi in the list. Then, enter the WiFi password. This will connect the control module to the WiFi network.
-
-![Select a WiFi network](/assets/rpi-3.png)
-
-Then enter the WiFi password and press connect.
-
-![Enter password](/assets/rpi-4.png)
-
-<Note>This step may fail if you're trying to connect to a WiFi hotspot. If this happens to you, learn how to flash your own SD card [using this guide.](https://phospho-ai.notion.site/How-to-setup-the-Raspberry-Pi-with-phospho-teleop-server-1848ca0b4c0480c28281eadb5d1245ee?pvs=4)</Note>
-
-5. The control module is now connected to WiFi. Access the control module dashboard on the URL [phosphobot.local](http://phosphobot.local). 
-
-6. You're done! Click on "Make robot say hello" to test the connection. Everything works? Great! You're ready to send your first commands.
-
-</Accordion>
-
-### Linux
-
-If you see a "Permission Denied" error, try running the commands with sudo:
-1. Install phosphobot
-```bash 
-curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | sudo bash
-```
-2. Run phosphobot
-```bash
-sudo phosphobot run
-```
-### Windows
+We don't offer prebuilt binaries for Windows, but we've successfully used **WSL (Windows Subsystem for Linux)** and an alternative. 
 
 - Follow [this guide](https://learn.microsoft.com/en-us/windows/wsl/install) to install Linux on Windows using WSL.
-- Then, follow the [Linux setup guide](/server-setup#linux) to install the teleoperation server.
+- Then, follow the [Linux (APT) setup guide](/server-setup#linux) to install the teleoperation server.
 
 ## Support
 
@@ -311,25 +202,5 @@ red is x, green is y, blue is z
 After moving to position 2, call the endpoint one last time to **finish** the calibration sequence.
 
 Your calibration is saved in the `phosphobot/calibration` folder of your home directory. You can edit this file in a text editor to further refine the calibration.
-
-
-
-</Accordion>
-
-<Accordion title="Leader arm support"
-icon="robot"
-> 
-
-<Info>You **do not** need a leader arm to use the Meta Quest app.</Info>
-
-But if you have a leader arm, we offer some basic support.
-
-1. Plug the leader arm and run the server with the special flag (replace USB_PORT with the actual usb port of the device. Run `phosphobot info` to get it.) 
-```bash
-sudo phosphobot serve --leader-arm=<USB_PORT>
-```
-2. Calibrate the leader arm the same way you calibrated the robot arm.
-
-3. Then use the endpoint `/move/mimick` to control the robot arm
 
 </Accordion>
