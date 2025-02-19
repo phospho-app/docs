@@ -47,7 +47,16 @@
   "navigation": [
     {
       "group": "Getting Started",
-      "pages": ["welcome","server-setup","unboxings/dk1","control-robot"]
+      "pages": ["welcome","installation","quickstart", "unboxings/dk1"]
+    },
+    {
+      "group": "Basic Usage",
+      "pages": [
+        "basic-usage/teleop",
+        "basic-usage/dataset-recording",
+        "basic-usage/training",
+        "basic-usage/inference"
+      ]
     },
     {
       "group": "Learn",

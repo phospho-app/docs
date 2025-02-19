@@ -1,8 +1,9 @@
 ---
-title: "Installation"
-description: "How to set up phosphobot for free and control your robot arm"
+title: "Quickstart"
+description: "How to set up phosphobot and control your robot arm"
 ---
 
+Now that you have phospshobot installed, let's set it up and start controlling your robot arm.
 
 ## Install phosphobot
 
@@ -11,6 +12,9 @@ The quickest way to get started is to use the install script. In a terminal, run
 ```bash
 curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | bash
 ```
+
+For other installation methods, see the [installation guide](/installation).
+
 Then, run the phosphobot server:
 
 ```bash 
@@ -26,14 +30,14 @@ To continue your setup, you need a SO-100 robot arm plugged to your computer. If
 </Note>
 
 - If you bought the [phospho dev kit](https://robots.phospho.ai/), click on `Make robot say hello` to test the connection. 
-- If you built your own robot arm, you should first [calibrate it](/server-setup#calibrate-your-robot-arm).
+- If you built your own robot arm, you should first [calibrate it](/installation#support).
 - Everything works? Great! **You're ready to send your first commands.**
 
 <Card
   title="Send your first commands"
   icon="robot"
   iconType="regular"
-  href="/control-robot"
+  href="/basic-usage/teleop"
 >
   Discover how to control your robot arm from the phosphobot dashboard.
 </Card>
@@ -163,13 +167,13 @@ sudo reboot
 We don't offer prebuilt binaries for Windows, but we've successfully used **WSL (Windows Subsystem for Linux)** and an alternative. 
 
 - Follow [this guide](https://learn.microsoft.com/en-us/windows/wsl/install) to install Linux on Windows using WSL.
-- Then, follow the [Linux (APT) setup guide](/server-setup#linux) to install the teleoperation server.
+- Then, follow the [Linux (APT) setup guide](/installation#linux) to install the teleoperation server.
 
 ## Support
 
 We're constantly shipping updates to improve your experience, add new features, and fix issues.
 
-If you experience issues, [reach out to us on our Discord](https://discord.gg/cbkggY6NSK). Our engineers are happy to help!
+If you experience issues, [reach out to us on our Discord](https://discord.gg/cbkggY6NSK). We are happy to help!
 
 <Accordion title="Calibrate your robot arm" 
 icon="robot"
