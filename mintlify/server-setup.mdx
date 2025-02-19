@@ -1,0 +1,206 @@
+---
+title: "Installing phosphobot"
+description: "How to set up phosphobot for free and control your robot arm"
+---
+
+
+## Install phosphobot
+
+The quickest way to get started is to use the install script. In a terminal, run the following command:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | bash
+```
+Then, run the phosphobot server:
+
+```bash 
+phosphobot run
+```
+
+On the same computer, open a web browser and navigate to `localhost`. You should now see the **phosphobot dashboard**.
+
+![phosphobot dashboard](/assets/phosphobot-dashboard.jpg)
+
+<Note> 
+To continue your setup, you need a SO-100 robot arm plugged to your computer. If you don't have one, you can buy a kit [here](https://robots.phospho.ai/).
+</Note>
+
+- If you bought the [phospho dev kit](https://robots.phospho.ai/), click on `Make robot say hello` to test the connection. 
+- If you built your own robot arm, you should first [calibrate it](/server-setup#calibrate-your-robot-arm).
+- Everything works? Great! **You're ready to send your first commands.**
+
+<Card
+  title="Send your first commands"
+  icon="robot"
+  iconType="regular"
+  href="/control-robot"
+>
+  Discover how to control your robot arm from the phosphobot dashboard.
+</Card>
+
+## MacOS
+
+Use [Homebrew](https://brew.sh/) to install phosphobot:
+
+```bash
+brew tap phospho-app/phosphobot
+brew install phosphobot
+```
+To **update phosphobot**, run the following command:
+```bash
+brew update 
+brew upgrade phosphobot
+``` 
+
+## Linux (APT)
+
+On Linux, we use apt to distribute the software and you need additional packages. That's why you need to run the install script with sudo:
+
+```bash 
+curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | sudo bash
+```
+To **update phosphobot**, run the following command:
+```bash
+sudo apt update
+sudo apt upgrade phosphobot
+```
+
+## Raspberry Pi
+
+phosphobot on Raspberry Pi has advanced features to make it easier to use (led ticking, bluetooth connection, extra dependencies already installed).
+
+<Accordion title="Setup your Raspberry Pi"
+icon="raspberry-pi"
+>
+
+<Info>*If you already have a setup Raspberry Pi, you can skip this part*</Info>
+
+
+Download and install the [Raspberry Pi imager](https://www.raspberrypi.com/software/) on your main computer.
+
+Insert an **SD card** into your main computer.
+
+Run the Raspberry Pi imager. 
+
+- Select your Raspberry Pi model (the version in the dev kit is Raspberry Pi 5).
+- Select the Raspberry Pi OS (64 bit)?
+- Select your SD card?
+
+Then, click **Next** on the bottom right.
+
+![Raspberry Pi Imager](/assets/Rpi-imager.jpg)
+
+When the window pops up asking for OS customisation, select **Edit Settings**. 
+
+![Raspberry Pi OS Customisation](/assets/Rpi-OS-customisation.jpg)
+
+In general settings :
+
+- Set hostname to `phosphobot`?
+- Set username and password to `phosphobot` and `password123` (example).
+- Configure wireless LAN: add your Wifi network name, password, and country. Be careful: tHiS iS cAsE sEnSiTiVe!
+
+![Raspberry Pi General Settings](/assets/Rpi-general-settings.jpg)
+
+In the Services settings, make sure SSH is enabled. 
+
+![Raspberry Pi SSH enabled](/assets/Rpi-SSH-enabled.jpg)
+
+Then hit Save and hit Yes to use the OS customization settings. Write the image to the SD card. 
+
+When writing is finished, take out the SD card from your computer. 
+
+Insert the microSD into the Raspberry Pi when it’s turned off.
+
+</Accordion>
+
+
+**1. SSH into the Raspberry Pi**
+
+SSH (Secure Shell) allows you to access the Raspberry Pi remotely from your main computer through the terminal.
+
+Turn on the Raspberry Pi by plugging it to a power source. Wait for it to boot (look for the LED pattern)
+
+Then, open a terminal and SSH into your Raspberry Pi. If you’ve followed the previous part, this means running on your computer this command :
+
+```bash
+ssh phosphobot@phosphobot.local
+```
+
+*If you didn’t follow the previous part, the username@hostname.local and password may be different.*
+
+When asked about the authenticity of host phosphobot.local, type `yes` to accept.
+
+And when asked for password, enter `password123` . 
+
+**2. Install the software**
+
+When you’ve successfully SSH in the Raspberry Pi, run this to install the teleoperation server :
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | sudo bash
+```
+
+**Your Raspberry Pi should be connected to the internet.**
+
+- When prompted `btberrywifi install location`, **leave blank**.
+- When prompted `bluetooth password`, **leave blank**
+- When prompted `Enter your country code`, specify your country code (eg: US, FR…)
+
+After that, the installation script will download install dependencies. It can take a few minutes depending on your connection speed. 
+
+
+**3. Once the installation is complete, reboot your Raspberry Pi.**
+```bash
+sudo reboot
+```
+
+<Note>Every time the control module is powered on, it will check for updates and install them automatically. They will be available the next time you power it on.</Note>
+
+
+## Windows
+
+We don't offer prebuilt binaries for Windows, but we've successfully used **WSL (Windows Subsystem for Linux)** and an alternative. 
+
+- Follow [this guide](https://learn.microsoft.com/en-us/windows/wsl/install) to install Linux on Windows using WSL.
+- Then, follow the [Linux (APT) setup guide](/server-setup#linux) to install the teleoperation server.
+
+## Support
+
+We're constantly shipping updates to improve your experience, add new features, and fix issues.
+
+If you experience issues, [reach out to us on our Discord](https://discord.gg/cbkggY6NSK). Our engineers are happy to help!
+
+<Accordion title="Calibrate your robot arm" 
+icon="robot"
+>
+
+<Info>This step is only relevant if you built your own robot arm: the [assembled robots](https://robots.phospho.ai) that we ship are **already calibrated**.</Info>
+
+Your SO-100 robot should be automatically detected by the teleoperation server. However, you still need to **calibrate** it to make it work properly.
+
+First, make sure to be able to securely catch your robot, as calibration disable torque. This can make your robot fall.
+
+Then, call the API endpoint `/calibrate`  to start the calibration sequence. In the HTTP response body, you’ll see instructions. Follow the instructions and keep calling the API until you see status “success”.
+
+![Calibration](/assets/Calibration.jpg)
+
+Move your robot arm according to the instructions : first, to position 1, then to position 2. 
+
+**Position 1:** Arm is facing **forward**. Gripper is fully **closed**. 
+
+![Calibration Position 1](/assets/Calibration-position-1.jpg)
+
+red is x, green is y, blue is z
+
+**Position 2:** Arm is twisted to its **left**. Gripper is fully **open**.
+
+![Calibration Position 1](/assets/Calibration-position-2.jpg)
+
+red is x, green is y, blue is z
+
+After moving to position 2, call the endpoint one last time to **finish** the calibration sequence.
+
+Your calibration is saved in the `phosphobot/calibration` folder of your home directory. You can edit this file in a text editor to further refine the calibration.
+
+</Accordion>

@@ -1,5 +1,5 @@
 ---
-title: "Getting started"
+title: "Unboxing your Junior dev kit"
 description: "Unbox and set up your phospho Junior dev kit."
 ---
 
@@ -83,9 +83,13 @@ If the LED **blinks slowly** (1-second intervals), it means the connection faile
 
 4. Reload the page [phosphobot.local](http://phosphobot.local) to access the control module dashboard. 
 
-5. You're done! Click on "Make robot say hello" to test the connection. Everything works? Great! You're ready to send your first commands.
+5. You're done! Click on `Make robot say hello`to test the connection. Everything works? Great! You're ready to send your first commands.
 
 If this fails, restart the control module by long-pressing the button next to the LED. Then, start over this section.
+
+<Note>
+Every time the control module is powered on, it will check for updates and install them automatically. They will be available the next time you power it on.
+</Note>
 
 <Accordion title="Having trouble?"
 description="Use your phone's Bluetooth to connect the control module to your WiFi"
@@ -149,45 +153,23 @@ Then enter the WiFi password and press connect.
 
 </Accordion>
 
-## 4. Send your first commands
 
-When your control module is connected to your home WiFi, you can now send your first command to the robot arm.
-
-<Warning>Make sure the robot is well fixed and the area around is clear before sending any command.</Warning>
-
-1. Go to the interactive API docs of the control module at [phosphobot.local/docs](http://phosphobot.local/docs). This page lets you send commands to the robot arm.
-
-2. Trigger the `/move/init` endpoint to initialize the robot (click `Try it out` and then press `Execute`).
-
-3. Your robot arm moves to the default position. _It's alive!_ 🎉
-
-4. Now, you can call the `/move/absolute` endpoint to move the robot to a specific position. The distances are in centimeters, and the angles in degrees.
-
-## 5. Set up your Meta Quest App
-The phospho dev kit is delivered with a [Meta Quest](https://www.meta.com/fr/quest/quest-3/?srsltid=AfmBOoqPSrSx_ABUZwNg30PYExXeJ_mTx3yyaK6Y_juZif_BlfcdpTjw) app for teleoperation. In this section, we will set up the app on your Meta Quest headset.
-
-1. After purchasing your phospho dev kit, you’ll receive an **email invitation** to the Meta Alpha program of the phospho teleop app. Follow the email instructions to link your Meta account to the Alpha program.
-
-2. Make sure your **Meta Quest headset** is **turned on** and **connected to WiFi**. Once you’ve linked your account, the Meta Quest will automatically download the app. This can take a moment.
-
-<Info>The Meta Quest connects to the Teleoperation server through a shared WiFi connection. </Info>
-
-3. Open the phospho teleop app from the library. Once downloading is done, you can open the software library on the Meta Quest. In the list of All apps, you’ll see the *phospho teleop* app. This app is automatically updated with the latest releases.
-
-<Card
-  title="Explore teleoperation"
-  icon="robot"
-  iconType="regular"
-  href="/example/teleop"
->
-  Follow this **guide** to teleoperate the robot.
-</Card>
 
 ## What's next?
 
-- Try to record your first dataset with teleoperation and upload it to Hugging Face.
-- Train your AI models and build your own program to make the robot move with API calls.
-- Use Vision models to interact with the robot
+<Card
+  title="Send your first commands"
+  icon="robot"
+  iconType="regular"
+  href="/control-robot"
+>
+  Discover how to control your robot arm from the phosphobot dashboard.
+</Card>
+
+- Try to record your **first dataset** with [teleoperation](/examples/teleop) and upload it to Hugging Face.
+- [Train your AI models](/learn/ai-models).
+- Build your own program to make the robot move with [API calls](/learn/api-calls).
+- Use [Vision models](/learn/vision) to interact with the robot.
 
 <iframe
     className="w-full aspect-video"
@@ -210,11 +192,7 @@ The phospho dev kit is delivered with a [Meta Quest](https://www.meta.com/fr/que
 - Learn more about [AI in robotics.](/learn/overview)
 - Join [our Discord](https://discord.gg/cbkggY6NSK) and send us a pic of your setup! 💚
 
-### Automatic updates
-
-Every time the control module is powered on, it will check for updates and install them automatically. They will be available the next time you power it on.
-
-### Support
+## Support
 
 We're constantly shipping updates to improve your experience, add new features, and fix issues.
 
