@@ -50,8 +50,7 @@ brew install phosphobot
 ```
 To **update phosphobot**, run the following command:
 ```bash
-brew update 
-brew upgrade phosphobot
+brew update && brew upgrade phosphobot
 ``` 
 
 ## Linux (APT)
@@ -63,8 +62,7 @@ curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install
 ```
 To **update phosphobot**, run the following command:
 ```bash
-sudo apt update
-sudo apt upgrade phosphobot
+sudo apt update && sudo apt install --only-upgrade phosphobot
 ```
 
 ## Raspberry Pi
@@ -167,26 +165,13 @@ We don't offer prebuilt binaries for Windows, but we've successfully used **WSL 
 - Follow [this guide](https://learn.microsoft.com/en-us/windows/wsl/install) to install Linux on Windows using WSL.
 - Then, follow the [Linux (APT) setup guide](/installation#linux) to install the teleoperation server.
 
-# Updates
-
-We're shipping updates to improve your experience, add new features, and fix issues on a daily basis.
-Keep your installation up-to-date to benefit from the latest improvements.
-
-On mac:
-
-```bash
-brew update
-brew upgrade phosphobot
-```
-
-On Linux:
-
-```bash
-sudo apt upgrade -y phosphobot
-```
-
-If you use the control module of the dev kit, simply restart it, updates will be installed automatically.
-
 ## Support
 
-If you experience issues, [reach out to us on our Discord](https://discord.gg/cbkggY6NSK). We are happy to help!
+<Card
+  title="Discord"
+  icon="discord"
+  iconType="regular"
+  href="https://discord.gg/cbkggY6NSK"
+>
+  Join the Discord to ask questions, get help from others and get updates
+</Card>
