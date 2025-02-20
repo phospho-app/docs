@@ -49,7 +49,7 @@ On the device where you want to run the training, install the [Phosphobot packag
      --wandb.enable=true
    ```
 
-5. Your trained model will be saved in `lerobot/outputs/train/`.  
+5. Your trained model is saved in `lerobot/outputs/train/`.  
 
 ## Pi0 (Pi-Zero)
 
@@ -80,7 +80,7 @@ GIT_LFS_SKIP_SMUDGE=1 uv sync
 uv run wandb login
 ```
 
-By default, our training config will use the `PLB/Orange-brick-in-black-box` SO-100 dataset.
+By default, our training config uses the `PLB/Orange-brick-in-black-box` SO-100 dataset.
 Make sure you dataset has a correct task description for each task in the dataset (in our dataset, it's _"Put the orange brick in the black pot"_).
 Edit the config file `src/openpi/training/config.py` to change the dataset to your own.
 
