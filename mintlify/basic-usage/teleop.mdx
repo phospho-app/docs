@@ -1,11 +1,24 @@
 ---
 title: "Control your robot"
-description: "How to control your robot arm from the phosphobot dashboard"
+description: "Teleoperate a real robot"
 ---
 
-<Note> Before continuing, make sure you have followed the [phosphobot installation guide](/server-setup). </Note>
+<Info> Before continuing, make sure you have [installed the software](/installation) and completed the [quickstart](/quickstart). </Info>
 
-## Send your first commands
+You can control your robot arm:
+- through the HTTP API
+- with the Meta Quest app
+- using a leader arm
+
+<iframe 
+    className="w-full aspect-video"
+    src="https://www.youtube.com/embed/j73ixL-oQaQ?si=WdI6jKNAnjlY9yUI" 
+    title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+    referrerPolicy="strict-origin-when-cross-origin" 
+    allowFullScreen>
+</iframe>
+
+## Send your first commands to the API
 
 Once your control module is connected to your home WiFi, you can send your first command to the robot arm.
 
@@ -19,7 +32,10 @@ Once your control module is connected to your home WiFi, you can send your first
 
 4. Now, you can call the `/move/absolute` endpoint to move the robot to a specific position. The distances are in centimeters, and the angles in degrees.
 
-## Set up your Meta Quest App
+# Meta Quest app
+
+## Set up your Meta Quest app
+
 The phospho dev kit is delivered with a [Meta Quest](https://www.meta.com/fr/quest/quest-3/?srsltid=AfmBOoqPSrSx_ABUZwNg30PYExXeJ_mTx3yyaK6Y_juZif_BlfcdpTjw) app for teleoperation. In this section, we will set up the app on your Meta Quest headset.
 
 1. After purchasing your phospho dev kit, you’ll receive an **email invitation** to the Meta Alpha program of the phospho teleop app. Follow the email instructions to link your Meta account to the Alpha program.
@@ -30,46 +46,28 @@ The phospho dev kit is delivered with a [Meta Quest](https://www.meta.com/fr/que
 
 3. Open the phospho teleop app from the library. Once downloading is done, you can open the software library on the Meta Quest. In the list of All apps, you’ll see the *phospho teleop* app. This app is automatically updated with the latest releases.
 
-<Card
-  title="Explore teleoperation"
-  icon="robot"
-  iconType="regular"
-  href="/example/teleop"
->
-  Follow this **guide** to teleoperate the robot.
-</Card>
 
-## What's next?
+## Use the Meta Quest app
 
-- Try to record your **first dataset** with [teleoperation](/examples/teleop) and upload it to Hugging Face.
-- [Train your AI models](/learn/ai-models).
-- Build your own program to make the robot move with [API calls](/learn/api-calls).
-- Use [Vision models](/learn/vision) to interact with the robot.
+<Info>Make sure the Meta QUest is connected to the same WiFi that the computer running the phosphobot server.</Info>
 
-<iframe
-    className="w-full aspect-video"
-  src="https://www.youtube.com/embed/lpCpK0SSS1Y"
-  title="YouTube video player"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-  allowfullscreen
-></iframe>
+Connect to the junior dev kit through WiFi in the phospho Meta Quest app. 
 
-<Card
-  title="Explore ai-models"
-  icon="gamepad"
-  iconType="regular"
-  href="/learn/ai-models"
->
-  Discover the potential of the phospho dev kit here.
-</Card>
+1. In the Meta Quest, open the phospho teleop application. You should see a screen displaying **phosphobot** along with the server ping. Click the **Connect** button using the `Trigger Button`.   
 
-- Learn more about [AI in robotics.](/learn/overview)
-- Join [our Discord](https://discord.gg/cbkggY6NSK) and send us a pic of your setup! 💚
+![Select Phosphobot server](/assets/changeme-unity-server.png)  
 
-<Accordion title="Leader arm support"
-icon="robot"
-> 
+2. After connecting, you should see the main camera feed if a camera is connected. Move the windows with the `Grip button` to organize your space.  
+
+![Meta Quest controller button names](/assets/names_buttons.jpg) 
+
+3. Press `A` once to start teleoperation and begin moving your controller.  
+   - The robot will naturally follow the movement of your controller. Press the `Trigger button` to close the gripper.
+   - Press `A` again to stop the teleoperation. The robot will stop. 
+
+You just teleoperated your robot arm! 🎉 
+
+# Using a leader arm
 
 <Info>You **do not** need a leader arm to use the Meta Quest app.</Info>
 
@@ -83,5 +81,7 @@ sudo phosphobot serve --leader-arm=<USB_PORT>
 
 3. Then use the endpoint `/move/mimick` to control the robot arm
 
-</Accordion>
+## What's next?
 
+- [Record your first dataset](/basic-usage/dataset-recording) with teleoperation and upload it to Hugging Face.
+- Join [our Discord](https://discord.gg/cbkggY6NSK) and send us a pic of your setup! 💚

@@ -1,5 +1,5 @@
 ---
-title: "Installing phosphobot"
+title: "Installation"
 description: "How to set up phosphobot for free and control your robot arm"
 ---
 
@@ -17,6 +17,8 @@ Then, run the phosphobot server:
 phosphobot run
 ```
 
+It can take up to 15 seconds for the server to start for the first time because of macOS security settings.
+
 On the same computer, open a web browser and navigate to `localhost`. You should now see the **phosphobot dashboard**.
 
 ![phosphobot dashboard](/assets/phosphobot-dashboard.jpg)
@@ -26,14 +28,14 @@ To continue your setup, you need a SO-100 robot arm plugged to your computer. If
 </Note>
 
 - If you bought the [phospho dev kit](https://robots.phospho.ai/), click on `Make robot say hello` to test the connection. 
-- If you built your own robot arm, you should first [calibrate it](/server-setup#calibrate-your-robot-arm).
+- If you built your own robot arm, you should first [calibrate it](/installation#support).
 - Everything works? Great! **You're ready to send your first commands.**
 
 <Card
   title="Send your first commands"
   icon="robot"
   iconType="regular"
-  href="/control-robot"
+  href="/basic-usage/teleop"
 >
   Discover how to control your robot arm from the phosphobot dashboard.
 </Card>
@@ -48,8 +50,7 @@ brew install phosphobot
 ```
 To **update phosphobot**, run the following command:
 ```bash
-brew update 
-brew upgrade phosphobot
+brew update && brew upgrade phosphobot
 ``` 
 
 ## Linux (APT)
@@ -61,8 +62,7 @@ curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install
 ```
 To **update phosphobot**, run the following command:
 ```bash
-sudo apt update
-sudo apt upgrade phosphobot
+sudo apt update && sudo apt install --only-upgrade phosphobot
 ```
 
 ## Raspberry Pi
@@ -163,44 +163,15 @@ sudo reboot
 We don't offer prebuilt binaries for Windows, but we've successfully used **WSL (Windows Subsystem for Linux)** and an alternative. 
 
 - Follow [this guide](https://learn.microsoft.com/en-us/windows/wsl/install) to install Linux on Windows using WSL.
-- Then, follow the [Linux (APT) setup guide](/server-setup#linux) to install the teleoperation server.
+- Then, follow the [Linux (APT) setup guide](/installation#linux) to install the teleoperation server.
 
 ## Support
 
-We're constantly shipping updates to improve your experience, add new features, and fix issues.
-
-If you experience issues, [reach out to us on our Discord](https://discord.gg/cbkggY6NSK). Our engineers are happy to help!
-
-<Accordion title="Calibrate your robot arm" 
-icon="robot"
+<Card
+  title="Discord"
+  icon="discord"
+  iconType="regular"
+  href="https://discord.gg/cbkggY6NSK"
 >
-
-<Info>This step is only relevant if you built your own robot arm: the [assembled robots](https://robots.phospho.ai) that we ship are **already calibrated**.</Info>
-
-Your SO-100 robot should be automatically detected by the teleoperation server. However, you still need to **calibrate** it to make it work properly.
-
-First, make sure to be able to securely catch your robot, as calibration disable torque. This can make your robot fall.
-
-Then, call the API endpoint `/calibrate`  to start the calibration sequence. In the HTTP response body, you’ll see instructions. Follow the instructions and keep calling the API until you see status “success”.
-
-![Calibration](/assets/Calibration.jpg)
-
-Move your robot arm according to the instructions : first, to position 1, then to position 2. 
-
-**Position 1:** Arm is facing **forward**. Gripper is fully **closed**. 
-
-![Calibration Position 1](/assets/Calibration-position-1.jpg)
-
-red is x, green is y, blue is z
-
-**Position 2:** Arm is twisted to its **left**. Gripper is fully **open**.
-
-![Calibration Position 1](/assets/Calibration-position-2.jpg)
-
-red is x, green is y, blue is z
-
-After moving to position 2, call the endpoint one last time to **finish** the calibration sequence.
-
-Your calibration is saved in the `phosphobot/calibration` folder of your home directory. You can edit this file in a text editor to further refine the calibration.
-
-</Accordion>
+  Join the Discord to ask questions, get help from others and get updates
+</Card>

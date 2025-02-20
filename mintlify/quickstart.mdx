@@ -1,0 +1,121 @@
+---
+title: "Quickstart"
+description: "How to set up phosphobot and control your robot arm"
+---
+
+If you haven't already, install phosphobot on your computer. See the [installation guide](/installation) for more information.
+
+# Setup the hardware
+
+<Info> This is the generic quickstart. For the dev kit unboxing, see the [dev kit unboxing guide](/unboxings/dk1). </Info>
+
+## Attach the SO-100 arm
+
+Find a table and fix the SO-100 robot arm using the 2 table clamps in the kit (see image below). 
+
+<Warning>Make sure the arm is securely fastened and won't move. Clear away any clutter that could get in the way of the arm's movement.</Warning>
+
+![SO-100 fixed using clamps](/assets/so100clamps.jpg)
+
+## Plug everything together
+
+In this order:
+
+1. Plug the _SO-100 robot arm_ into the power supply using the **black** 12V power supply.
+2. Plug one end of the **USB-C cable** into the _SO-100 robot arm_ and the other into your computer (laptop, raspberry pi, etc).
+3. If you have additional cameras, plug them into your computer
+
+Below is an example of a full setup with a SO-100 arm, a stereoscopic camera plugged on a Raspberry Pi.
+
+![Full setup](/assets/pdk1_plugged.jpg)
+
+# Launch the server
+
+<Info> If you change the hardware connected to the computer runing the server, you have to restart the server. </Info>
+
+Once everything is connected and powered on, run the following command to start the phosphobot server:
+
+```bash
+phosphobot run
+```
+
+It can take up to 15 seconds for the server to start for the first time because of macOS security settings.
+
+## Check everything is setup properly
+
+Go to the dashboard (at `localhost` if you are running the server on your laptop or `phosphobot.local` if it's a Raspberry Pi on your network) 
+in your web browser.
+
+![phosphobot dashboard](/assets/phosphobot-dashboard.jpg)
+
+Go to _Camera 0verview_ to check if the cameras are detected.
+Go to _API Documentation_ to check if the API is running. Read the current robot position with the [/joints/read](/control/read-joints) endpoint.
+
+## Calibrate the robot
+
+<Info>This step is only relevant if you built your own robot arm: the [assembled robots](https://robots.phospho.ai) that we ship are **already calibrated**.</Info>
+
+Your SO-100 robot should be automatically detected by the teleoperation server. However, you still need to **calibrate** it to make it work properly.
+
+First, make sure to be able to securely catch your robot, as calibration disable torque. This can make your robot fall.
+
+Then, call the API endpoint `/calibrate`  to start the calibration sequence. In the HTTP response body, you’ll see instructions. Follow the instructions and keep calling the API until you see status “success”.
+
+![Calibration](/assets/Calibration.jpg)
+
+Move your robot arm according to the instructions : first, to position 1, then to position 2. 
+
+**Position 1:** Arm is facing **forward**. Gripper is fully **closed**. 
+
+![Calibration Position 1](/assets/Calibration-position-1.jpg)
+
+red is x, green is y, blue is z
+
+**Position 2:** Arm is twisted to its **left**. Gripper is fully **open**.
+
+![Calibration Position 1](/assets/Calibration-position-2.jpg)
+
+red is x, green is y, blue is z
+
+After moving to position 2, call the endpoint one last time to **finish** the calibration sequence.
+
+Your calibration is saved in the `phosphobot/calibration` folder of your home directory. You can edit this file in a text editor to further refine the calibration.
+
+
+# Send your first command
+
+Your robot is now ready to receive commands! 
+
+In the dashboard, click the _Make robot say hello_ button to make the robot arm move.
+
+You can also directly use the API to send commands to the robot. 
+For example, use the [/move/absolute](/control/move-absolute-position) endpoint to move the robot to a specific position.
+
+# Next steps
+
+Tou can now [control your robot](/basic-usage/teleop), [record your first dataset](/basic-usage/dataset-recording) and [train an AI model](/basic-usage/training) to make the robot move by itself.
+
+<Card
+  title="Control your robot"
+  icon="gamepad"
+  iconType="regular"
+  href="/basic-usage/teleop"
+>
+  Teleoperate a real robot
+</Card>
+<Card
+  title="Record a dataset"
+  icon="database"
+  iconType="regular"
+  href="/basic-usage/dataset-recording"
+>
+  How to record a dataset with your robot
+</Card>
+<Card
+  title="Train an AI model"
+  icon="brain"
+  iconType="regular"
+  href="/basic-usage/dataset-recording"
+>
+  How to train an AI model from a dataset you recorded
+</Card>

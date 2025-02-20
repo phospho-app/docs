@@ -1,81 +1,81 @@
 ---
-title: "Welcome!"
-description: "Welcome to the phospho Junior dev kit's documentation."
+title: "Introduction"
+description: "An absurdly simple way to train AI models for real-world robots, built for ML engineers."
 ---
 
-The phospho Junior dev kit is a set of tools to kickstart your journey in next-gen AI models, with built-in remote control.
+Phospho is how ML engineers make real robots intelligent. 
+We provide the hardware, libraries, and remote control capabilities so developers can collect data, 
+train AI models and deploy applications to real robots in minutes instead of months.
 
-## Exit the simulation. Train real-life AI robotics models.
+# Highlights
 
-Get started with the next level of robotics models: Diffusion transformers, OpenVLA, Cogact...
+- 🕹️ Teleoperate robots to capture datasets in minutes
+- ⚡ Train AI models such as ACT or π0 with one command
+- 🦾 Compatible with the SO-100 arm 
+- 🚪 Dev-friendly API
+- 🤗 Fully compatible with LeRobot and HuggingFace
+- 🖥️ Runs on macOS, Linux and Windows
+- 🥽 Meta Quest app for teleoperation
+- 📸 Supports most cameras (classic, depth, stereo)
+- 🔌 Extend it with your own robots and cameras
 
-<CodeGroup>
-```python Python (coming soon)
-import phosphobot
+# Installation
 
-# Move the real robot
-phosphobot.move.relative(
-    x=0, y=1, z=0,              # Move left
-    rx=10, ry=0, rz=0,          # Rotate
-    gripper=1                   # Open gripper
-)
+In a terminal, run the following command:
 
-# Grab image of what the robot sees
-image = phosphobot.get_image()
+```bash macOS and Linux
+curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | bash
 ```
-```python HTTP API
-import requests
+Then, fire up the the server:
 
-# Control Junior's arm through API calls
-requests.post(
-	"http://localhost:80/move/absolute", 
-	json={
-		"x": 0, "y": 1, "z": 0,                   # Move left
-		"rx": 10, "ry": 0, "rz": 0,               # Rotate
-		"open": 1                                 # Open gripper
-	}
-)
-
+```bash 
+phosphobot run
 ```
-</CodeGroup>
 
-## Unleash your creativity
+On macOS, it can take up to 15 seconds for the server to start for the first time because of macOS security settings.
 
-Looking to upskill in AI robotics? Just have fun? Check out our examples below.
+# Updates
 
-<iframe 
-    className="w-full aspect-video"
-    src="https://www.youtube.com/embed/rOkV3PCJgEU?si=CqU6hRiALBmrti0i" 
-    title="YouTube video player" 
-    frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-    referrerPolicy="strict-origin-when-cross-origin" 
-    allowFullScreen>
-</iframe>
- 
-###
+We're shipping updates to improve your experience, add new features, and fix issues on a daily basis.
+Keep your installation up-to-date to benefit from the latest improvements.
+
+On Mac:
+
+```bash
+brew update && brew upgrade phosphobot
+```
+
+On Linux:
+
+```bash
+sudo apt update && sudo apt install --only-upgrade phosphobot
+```
+
+If you use the control module of the dev kit, simply restart it, updates will be installed automatically.
+
+# Next step
 
 <Card
-  title="Explore examples"
+  title="Quickstart"
   icon="play"
   iconType="regular"
-  href="/examples"
+  href="/quickstart"
 >
-  See more examples videos
+  How to set up phosphobot and control your robot arm
 </Card>
-
-## Built in remote control
-
-Use the Meta Quest app to control Junior's movements in real-time. Collect data to train your own models.
-
-<iframe
-  className="w-full aspect-video"
-  src="https://www.youtube.com/embed/e_gu-HebhfY"
-  allowFullScreen
-></iframe>
-
-
-## About phospho
-
-We are [phospho](https://phospho.ai/), a team of engineers dedicated to accelerate the adoption of the latest AI technologies. 
-
-Looking for the phospho text analytics platform docs? [They are available here.](https://phospho-app.github.io/docs/) 
+<Card
+  title="Installation"
+  icon="download"
+  iconType="regular"
+  href="/quickstart"
+>
+  How to set up phosphobot and control your robot arm
+</Card>
+<Card
+  title="Discord"
+  icon="discord"
+  iconType="regular"
+  href="https://discord.gg/cbkggY6NSK"
+>
+  Join the Discord to ask questions, get help from others and get updates (we ship almost daily)
+</Card>
