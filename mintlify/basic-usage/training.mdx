@@ -81,6 +81,7 @@ uv run wandb login
 ```
 
 By default, our training config will use the `PLB/Orange-brick-in-black-box` SO-100 dataset.
+Make sure you dataset has a correct task description for each task in the dataset (in our dataset, it's _"Put the orange brick in the black pot"_).
 Edit the config file `src/openpi/training/config.py` to change the dataset to your own.
 
 Then, you can train your model using the following command:
@@ -102,3 +103,7 @@ huggingface-cli upload USERNAME/your-model-name \
   ~/path/to/folder/ \
   --repo-type model
 ```
+
+# Next steps
+
+Test the model you just trained on your robot. See the [Use AI models](/basic-usage/inference) page for more information.
