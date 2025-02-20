@@ -992,9 +992,9 @@
         "properties": {
           "type_of_model": {
             "type": "string",
-            "enum": ["openvla", "act"],
+            "enum": ["openvla", "act", "pi0"],
             "title": "Type Of Model",
-            "description": "Type of model, either OpenVLA or ACT"
+            "description": "Type of model, either OpenVLA, ACT or pi0 (pi-zero)"
           },
           "instruction": {
             "anyOf": [{ "type": "string" }, { "type": "null" }],

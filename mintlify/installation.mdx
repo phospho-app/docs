@@ -17,6 +17,8 @@ Then, run the phosphobot server:
 phosphobot run
 ```
 
+It can take up to 15 seconds for the server to start for the first time because of macOS security settings.
+
 On the same computer, open a web browser and navigate to `localhost`. You should now see the **phosphobot dashboard**.
 
 ![phosphobot dashboard](/assets/phosphobot-dashboard.jpg)
@@ -165,42 +167,26 @@ We don't offer prebuilt binaries for Windows, but we've successfully used **WSL 
 - Follow [this guide](https://learn.microsoft.com/en-us/windows/wsl/install) to install Linux on Windows using WSL.
 - Then, follow the [Linux (APT) setup guide](/installation#linux) to install the teleoperation server.
 
+# Updates
+
+We're shipping updates to improve your experience, add new features, and fix issues on a daily basis.
+Keep your installation up-to-date to benefit from the latest improvements.
+
+On mac:
+
+```bash
+brew update
+brew upgrade phosphobot
+```
+
+On Linux:
+
+```bash
+sudo apt upgrade -y phosphobot
+```
+
+If you use the control module of the dev kit, simply restart it, updates will be installed automatically.
+
 ## Support
 
-We're constantly shipping updates to improve your experience, add new features, and fix issues.
-
 If you experience issues, [reach out to us on our Discord](https://discord.gg/cbkggY6NSK). We are happy to help!
-
-<Accordion title="Calibrate your robot arm" 
-icon="robot"
->
-
-<Info>This step is only relevant if you built your own robot arm: the [assembled robots](https://robots.phospho.ai) that we ship are **already calibrated**.</Info>
-
-Your SO-100 robot should be automatically detected by the teleoperation server. However, you still need to **calibrate** it to make it work properly.
-
-First, make sure to be able to securely catch your robot, as calibration disable torque. This can make your robot fall.
-
-Then, call the API endpoint `/calibrate`  to start the calibration sequence. In the HTTP response body, you’ll see instructions. Follow the instructions and keep calling the API until you see status “success”.
-
-![Calibration](/assets/Calibration.jpg)
-
-Move your robot arm according to the instructions : first, to position 1, then to position 2. 
-
-**Position 1:** Arm is facing **forward**. Gripper is fully **closed**. 
-
-![Calibration Position 1](/assets/Calibration-position-1.jpg)
-
-red is x, green is y, blue is z
-
-**Position 2:** Arm is twisted to its **left**. Gripper is fully **open**.
-
-![Calibration Position 1](/assets/Calibration-position-2.jpg)
-
-red is x, green is y, blue is z
-
-After moving to position 2, call the endpoint one last time to **finish** the calibration sequence.
-
-Your calibration is saved in the `phosphobot/calibration` folder of your home directory. You can edit this file in a text editor to further refine the calibration.
-
-</Accordion>

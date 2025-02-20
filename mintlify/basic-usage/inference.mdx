@@ -2,3 +2,33 @@
 title: "Use AI models"
 description: "Let a trained AI model control your robot"
 ---
+
+So you just trained an AI model and now you want to use it to control your robot. 
+
+# Setup an inference server
+
+This server will do the model inference. It can be on the same machine or at a remote location (try to chose the closest location).
+
+<Info> This part of the docs is a work in progress. </Info>
+
+# Update the inference Settings
+
+If you haven't already, start the phosphobot server.
+
+```bash
+phosphobot run
+```
+
+In your browser, in the phospshobot dashboard, go to the Admin Settings. 
+Update the _Inference Settings_ with the URL (or IP adress) and port of your inference server.
+
+# Start automatic control 
+
+<Warning> Make sure the robot is in a safe position before starting the automatic control. </Warning>
+
+Use the [/auto/start](/control/auto) endpoint to start the automatic control. 
+The phospshobot server will call the inference server to get the next action to take.
+
+# Stop automatic control
+
+Use the [/auto/stop](/control/stop-auto) endpoint to stop the automatic control.

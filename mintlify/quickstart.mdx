@@ -3,11 +3,13 @@ title: "Quickstart"
 description: "How to set up phosphobot and control your robot arm"
 ---
 
+If you haven't already, install phosphobot on your computer. See the [installation guide](/installation) for more information.
+
 # Setup the hardware
 
 <Info> This is the generic quickstart. For the dev kit unboxing, see the [dev kit unboxing guide](/unboxings/dk1). </Info>
 
-## 1. Attach the SO-100 arm
+## Attach the SO-100 arm
 
 Find a table and fix the SO-100 robot arm using the 2 table clamps in the kit (see image below). 
 
@@ -15,7 +17,7 @@ Find a table and fix the SO-100 robot arm using the 2 table clamps in the kit (s
 
 ![SO-100 fixed using clamps](/assets/so100clamps.jpg)
 
-## 2. Plug everything together
+## Plug everything together
 
 In this order:
 
@@ -36,6 +38,8 @@ Once everything is connected and powered on, run the following command to start 
 ```bash
 phosphobot run
 ```
+
+It can take up to 15 seconds for the server to start for the first time because of macOS security settings.
 
 ## Check everything is setup properly
 
@@ -84,8 +88,9 @@ Your robot is now ready to receive commands!
 
 In the dashboard, click the _Make robot say hello_ button to make the robot arm move.
 
-You can also directly use the API to send commands to the robot.
+You can also directly use the API to send commands to the robot. 
+For example, use the [/move/absolute](/control/move-absolute-position) endpoint to move the robot to a specific position.
 
 # Next steps
 
-TODO
+Tou can now [control your robot](/basic-usage/teleop), [record your first dataset](/basic-usage/dataset-recording) and [train an AI model](/basic-usage/training) to make the robot move by itself.
