@@ -7,9 +7,19 @@ So you just trained an AI model and now you want to use it to control your robot
 
 # Setup an inference server
 
-This server will do the model inference. It can be on the same machine or at a remote location (try to chose the closest location).
+First, you need to setup an inference server. This servers runs on a beefy machine that can run the AI model. It can be your own machine, a cloud server, or a dedicated server. 
 
-<Info> This part of the docs is a work in progress. </Info>
+<Note>If you chose a remote location, chose the closest location to minimize latency.</Note>
+
+To setup the inference server, follow the instructions in the link below:
+
+<Card
+    title="Setup the inference server"
+    icon="server"
+    href="https://github.com/phospho-app/phosphobot/tree/main/inference"
+>
+    How to setup the inference server?
+</Card>
 
 # Update the inference Settings
 
@@ -20,14 +30,16 @@ phosphobot run
 ```
 
 In your browser, in the phospshobot dashboard, go to the Admin Settings. 
-Update the _Inference Settings_ with the URL (or IP adress) and port of your inference server.
+
+Update the _Inference Settings_ with the URL (or IP adress) and port of your inference server. This is the address where the phosphobot server sends the images to get the next action to take.
 
 # Start automatic control 
 
 <Warning> Make sure the robot is in a safe position before starting the automatic control. </Warning>
 
 Use the [/auto/start](/control/auto) endpoint to start the automatic control. 
-The phospshobot server will call the inference server to get the next action to take.
+
+The phospshobot server calls the inference server to get the next action to take.
 
 # Stop automatic control
 
