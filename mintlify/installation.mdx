@@ -8,9 +8,25 @@ description: "How to set up phosphobot for free and control your robot arm"
 
 The quickest way to get started is to use the install script. In a terminal, run the following command:
 
-```bash
+<CodeGroup>
+
+```bash macOS
 curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | bash
 ```
+
+```bash Linux
+curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | sudo bash
+```
+
+```bash Windows
+# In a WSL terminal:
+curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | sudo bash
+# Learn more about Windows Subsystem for Linux: https://learn.microsoft.com/en-us/windows/wsl/install
+```
+
+</CodeGroup>
+
+
 Then, run the phosphobot server:
 
 ```bash 

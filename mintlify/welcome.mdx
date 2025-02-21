@@ -14,7 +14,7 @@ train AI models and deploy applications to real robots in minutes instead of mon
 - 🦾 Compatible with the SO-100 arm 
 - 🚪 Dev-friendly API
 - 🤗 Fully compatible with LeRobot and HuggingFace
-- 🖥️ Runs on macOS, Linux and Windows
+- 🖥️ Runs on macOS, Linux and Windows (WSL)
 - 🥽 Meta Quest app for teleoperation
 - 📸 Supports most cameras (classic, depth, stereo)
 - 🔌 Extend it with your own robots and cameras
@@ -23,9 +23,24 @@ train AI models and deploy applications to real robots in minutes instead of mon
 
 In a terminal, run the following command:
 
-```bash macOS and Linux
+<CodeGroup>
+
+```bash macOS
 curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | bash
 ```
+
+```bash Linux
+curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | sudo bash
+```
+
+```bash Windows
+# In a WSL terminal:
+curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | sudo bash
+# Learn more about Windows Subsystem for Linux: https://learn.microsoft.com/en-us/windows/wsl/install
+```
+
+</CodeGroup>
+
 Then, fire up the the server:
 
 ```bash 
