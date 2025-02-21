@@ -40,6 +40,10 @@
   },
   "tabs": [
     {
+      "name": "Github",
+      "url": "https://github.com/phospho-app/phosphobot"
+    },
+    {
       "name": "(External) phospho platform",
       "url": "https://phospho-app.github.io/docs/"
     }
@@ -62,11 +66,9 @@
       "group": "Learn",
       "pages": [
         "learn/overview",
-        {
-          "group": "AI models",
-          "pages": ["learn/ai-models", "learn/policies"]
-        },
-        "learn/kinematics"
+        "learn/kinematics",
+        "learn/policies",
+        "learn/ai-models"
       ]
     },
     {
@@ -74,10 +76,8 @@
       "pages": [
         "examples/control",
         "examples/vision",
-        {
-          "group": "Teleoperation",
-          "pages": ["examples/teleop", "examples/teleop-from-anywhere"]
-        }
+        "examples/teleop",
+        "examples/teleop-from-anywhere"
       ]
     },
     {
@@ -121,6 +121,8 @@
   "footerSocials": {
     "twitter": "https://twitter.com/phospho_ai",
     "github": "https://github.com/phospho-app/phosphobot",
+    "youtube": "https://www.youtube.com/@phospho_ai",
+    "website": "https://robots.phospho.ai",
     "linkedin": "https://www.linkedin.com/company/phospho-app/"
   },
   "openapi": "openapi.json",
