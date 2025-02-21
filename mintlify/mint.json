@@ -47,7 +47,7 @@
   "navigation": [
     {
       "group": "Getting Started",
-      "pages": ["welcome","installation","quickstart", "unboxings/dk1"]
+      "pages": ["welcome", "installation", "quickstart", "unboxings/dk1"]
     },
     {
       "group": "Basic Usage",
@@ -120,7 +120,7 @@
   ],
   "footerSocials": {
     "twitter": "https://twitter.com/phospho_ai",
-    "github": "https://github.com/phospho-app",
+    "github": "https://github.com/phospho-app/phosphobot",
     "linkedin": "https://www.linkedin.com/company/phospho-app/"
   },
   "openapi": "openapi.json",
