@@ -1,9 +1,13 @@
 ---
-title: "Record a dataset"
-description: "How to record a dataset with your robot"
+title: "Record a robotics dataset"
+description: "How to record a robotics dataset with your robot?"
 ---
 
-The easiest way to record datasets is to use the phospho Meta Quest app to control your robot arm over WiFi. For remote control, see the [teleoperation from anywhere in the world](examples/teleop-from-anywhere) page.
+The easiest way to record datasets is to use the phospho Meta Quest app to control your robot arm. 
+
+Recorded datasets are saved in the `lerobot_v2` format from **[LeRobot](https://huggingface.co/lerobot)** and uploaded to your HuggingFace account.
+
+Use the [Start Recording Episode](/recording/start-recording-episode) and [Stop Recording Episode](/recording/stop-recording-episode) endpoints to start and stop recording episodes.
 
 <iframe 
     className="w-full aspect-video"
@@ -14,8 +18,6 @@ The easiest way to record datasets is to use the phospho Meta Quest app to contr
 </iframe>
 
 Alternatively, you can implement your own dataset recording logic on top of the phospshobot API. 
-Use the [Start Recording Episode](/recording/start-recording-episode) and 
-[Stop Recording Episode](/recording/stop-recording-episode) endpoints to start and stop recording episodes.
 
 ## Prerequisites
 
@@ -50,7 +52,10 @@ Connect to the junior dev kit through WiFi in the phospho Meta Quest app.
 
 1. In the Meta Quest, open the phospho teleop application. You should see a screen displaying **phosphobot** along with the server ping. Click the **Connect** button using the `Trigger Button`.  
 
-<Note>Make sure you're connected to the same WiFi as the control module.</Note>  
+<Note>
+Make sure you're connected to the same WiFi as the control module.
+To control the robot over the internet, see the [teleoperation from anywhere in the world](examples/teleop-from-anywhere) guide.
+</Note>  
 
 ![Select Phosphobot server](/assets/changeme-unity-server.png)  
 
@@ -66,6 +71,8 @@ Connect to the junior dev kit through WiFi in the phospho Meta Quest app.
 5. Continue teleoperating and stop the recording when you're done.  
 
 6. The recording is automatically saved in **LeRobot** format and uploaded to your HuggingFace account. 
+
+
 
 
 ## Check your dataset
