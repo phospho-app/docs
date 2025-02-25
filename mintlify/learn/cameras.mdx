@@ -1,0 +1,31 @@
+---
+title: "Cameras"
+description: "Overview on cameras in phospho dev kits"
+---
+
+## Cameras in Robotics
+
+Most robotics models rely on data from one or more cameras to make decisions. The images, along with additional information such as joint positions, are fed into the model during both training and inference. 
+The number of FPS (frames per second), the mp4 codec as well as the video resolution can be configured for recording.
+
+### Mono Cameras
+
+Any basic camera pluged to the phosphobot server can be used for recording. They are detected automatically and will all be used by default.
+
+### Stereo Cameras
+
+Stereo Cameras are made of two lenses that capture two images of the same scene from slightly different angles. These images can be used for depth perception.
+
+![stereo_cam](/assets/stereo_cam.png)
+
+### Realsense Cameras
+
+The phospho dev kit also supports the integration of Intel RealSense cameras. These cameras can directly return a depth map in addition to the color image.
+![depth_image](/assets/depth_image.png)
+
+### More Cameras
+
+Anybody can contribute to add new types of cameras to the phospho dev kits by creating a new camera class inheriting from `BaseCamera`.
+<Card icon="handshake-angle" title="Contribute" href="https://github.com/phospho-app/phosphobot">
+Join the community and build new cameras for the phospho dev kits.
+</Card>
