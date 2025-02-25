@@ -51,12 +51,7 @@
   "navigation": [
     {
       "group": "Getting Started",
-      "pages": [
-        "welcome",
-        "installation",
-        "quickstart",
-        "unboxings/dk1"
-      ]
+      "pages": ["welcome", "installation", "quickstart", "unboxings/dk1"]
     },
     {
       "group": "Basic Usage",
@@ -72,6 +67,7 @@
       "pages": [
         "learn/overview",
         "learn/kinematics",
+        "learn/cameras",
         "learn/policies",
         "learn/ai-models"
       ]
@@ -109,9 +105,7 @@
         {
           "group": "Camera",
           "icon": "camera",
-          "pages": [
-            "camera/video-feed-for-camera"
-          ]
+          "pages": ["camera/video-feed-for-camera"]
         },
         {
           "group": "Recording",
