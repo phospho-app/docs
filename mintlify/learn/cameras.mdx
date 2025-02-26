@@ -1,29 +1,49 @@
 ---
 title: "Cameras"
-description: "Overview on cameras in phospho dev kits"
+description: "What kind of cameras are used in robotics ?"
 ---
 
 ## Cameras in Robotics
 
 Most robotics models rely on data from one or more cameras to make decisions. The images, along with additional information such as joint positions, are fed into the model during both training and inference. 
-The number of FPS (frames per second), the mp4 codec as well as the video resolution can be configured for recording.
 
-### Mono Cameras
+### Generic Cameras
 
-Any basic camera pluged to the phosphobot server can be used for recording. They are detected automatically and will all be used by default.
+Most cameras pluged to the phosphobot server can be used for recording. 
+We use the powerful OpenCV library to detected them automatically. By default all available cameras are used for recording.
+
+<Card icon="graduation-cap" title="OpenCV" href="https://opencv.org/">
+Check the OpenCV project
+</Card>
 
 ### Stereo Cameras
 
-Stereo Cameras are made of two lenses that capture two images of the same scene from slightly different angles. These images can be used for depth perception.
-
+Stereo Cameras are made of two lenses that capture two images of the same scene from slightly different angles.
 ![stereo_cam](/assets/stereo_cam.png)
+The shift between the two images is used to calculate the depth of the scene. The greater the shift, the closer the object is to the camera.
+
+<Card icon="graduation-cap" title="Depth from Stereo Images" href="https://docs.opencv.org/4.x/dd/d53/tutorial_py_depthmap.html">
+Learn how to compute a depth map from stereo images 
+</Card>
 
 ### Realsense Cameras
 
-The phospho dev kit also supports the integration of Intel RealSense cameras. These cameras can directly return a depth map in addition to the color image.
+The phospho dev kit also supports the integration of Intel RealSense cameras.
+We use [python bindings of Intel Realsense SDK 2.0](https://github.com/IntelRealSense/librealsense/tree/master) to interact with this type of camera.
+
+![depth_camera](/assets/depth_camera.png)
+
+Realsense depth cameras can directly return a depth map in addition to the color image.
 ![depth_image](/assets/depth_image.png)
 
-### More Cameras
+<Card icon="camera" title="Intel Realsense" href="https://www.intelrealsense.com/">
+Check the available Intel RealSense cameras here
+</Card>
+
+
+### Phosphobot
+Every camera runs on its own thread. We create mp4 videos with [OpenCV](https://opencv.org/) from the captured RGB frames. The number of FPS (frames per second), the mp4 codec as well as the video resolution can be configured for recording. 
+![recording_parameters](/assets/recording_parameters.png)
 
 Anybody can contribute to add new types of cameras to the phospho dev kits by creating a new camera class inheriting from `BaseCamera`.
 <Card icon="handshake-angle" title="Contribute" href="https://github.com/phospho-app/phosphobot">
