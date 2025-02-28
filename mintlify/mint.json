@@ -69,7 +69,8 @@
         "learn/kinematics",
         "learn/cameras",
         "learn/policies",
-        "learn/ai-models"
+        "learn/ai-models",
+        "learn/build-so100"
       ]
     },
     {
@@ -124,7 +125,8 @@
     "github": "https://github.com/phospho-app/phosphobot",
     "youtube": "https://www.youtube.com/@phospho_ai",
     "website": "https://robots.phospho.ai",
-    "linkedin": "https://www.linkedin.com/company/phospho-app/"
+    "linkedin": "https://www.linkedin.com/company/phospho-app/",
+    "discord": "https://discord.gg/cbkggY6NSK"
   },
   "openapi": "openapi.json",
   "analytics": {
