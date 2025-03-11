@@ -17,6 +17,16 @@ For now, we support the following models:
 
 ## ACT (Action Chunking Transformer)
 
+### Running on replicate
+
+To make it easier to train your model, we provide a training script that you can run on the **Replicate** platform, a cloud service that provides GPU instances and scripts to train your AI models and run inference.
+
+Check out our pipeline here: [Replicate ACT pipeline](https://replicate.com/phospho-app/act-policy)
+
+You'll need to provide a Hugging Face dataset ID and token on which to train the policy.
+
+### Running on your local machine (You need a GPU with at least 16GB of memory)
+
 On the device where you want to run the training, install the [Phosphobot package](https://github.com/phospho-app/phosphobot):  
 
    ```bash
@@ -45,7 +55,7 @@ On the device where you want to run the training, install the [Phosphobot packag
      --policy.type=<act or diffusion or tdmpc or vqbet> \
      --output_dir=outputs/train/phoshobot_test \
      --job_name=phosphobot_test \
-     --device=mps \
+     --device=mps \ # mps or cuda 
      --wandb.enable=true
    ```
 
