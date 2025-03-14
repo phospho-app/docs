@@ -133,18 +133,27 @@ The values are tuned for each joint based on its mass properties and mechanical 
 ### Mathematical Analysis
 
 <Accordion title="Impedance Control Relationship">
-The virtual displacement method can be understood as a form of impedance control. In traditional impedance control, the relationship between force and position is:
-F=K(xdes−x)+Bx˙F = K(x_{des} - x) + B\dot{x}F=K(xdes​−x)+Bx˙
-Where KK
-K is stiffness and BB
-B is damping.
+
+The virtual displacement method can be understood as a **form of impedance control**. In traditional impedance control, the relationship between force and position is:
+
+$$
+F= K(x_{des} - x) + B\dot{x}F
+$$
+
+Where:
+- **$$x_{des}$$** is the desired position
+- **$$x$$** is the current position
+- **$$K$$** is stiffness
+- **$$B$$** is damping
 
 Our approach inverts this relationship:
-xdes=x+K−1Fx_{des} = x + K^{-1}Fxdes​=x+K−1F
-In our case, FF
-F is the gravity force, and K−1K^{-1}
-K−1 is represented by the α\alpha
-α parameter.
+$$
+x_{des}=x+K^{−1}Fx_{des}
+$$
+
+In our case:
+- F is the **gravity force**
+- $$K^{-1}$$ is represented by the $$\alpha$$ parameter.
 
 </Accordion>
 
