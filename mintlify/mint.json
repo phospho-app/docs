@@ -51,7 +51,12 @@
   "navigation": [
     {
       "group": "Getting Started",
-      "pages": ["welcome", "installation", "quickstart", "unboxings/dk1"]
+      "pages": [
+        "welcome",
+        "installation",
+        "quickstart",
+        "unboxings/dk1"
+      ]
     },
     {
       "group": "Basic Usage",
@@ -70,7 +75,8 @@
         "learn/cameras",
         "learn/policies",
         "learn/ai-models",
-        "learn/build-so100"
+        "learn/build-so100",
+        "learn/gravity-compensation"
       ]
     },
     {
@@ -106,7 +112,9 @@
         {
           "group": "Camera",
           "icon": "camera",
-          "pages": ["camera/video-feed-for-camera"]
+          "pages": [
+            "camera/video-feed-for-camera"
+          ]
         },
         {
           "group": "Recording",
