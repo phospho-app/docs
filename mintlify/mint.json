@@ -1,12 +1,12 @@
 {
   "metadata": {
     "og:site_name": "docs.phospho.ai",
-    "og:title": "Phospho Junior dev kit documentation",
+    "og:title": "Phospho dev kit documentation",
     "og:description": "The toolkit for AI robotics",
     "og:url": "https://docs.phospho.ai",
     "og:image": "/logo/light.svg",
     "og:logo": "/logo/logo.svg",
-    "twitter:title": "Phospho Junior dev kit documentation",
+    "twitter:title": "Phospho dev kit documentation",
     "twitter:description": "The toolkit for AI robotics",
     "twitter:url": "https://docs.phospho.ai",
     "twitter:image": "/logo/light.svg",
@@ -51,12 +51,7 @@
   "navigation": [
     {
       "group": "Getting Started",
-      "pages": [
-        "welcome",
-        "installation",
-        "quickstart",
-        "unboxings/dk1"
-      ]
+      "pages": ["welcome", "installation", "quickstart", "unboxings/dk1"]
     },
     {
       "group": "Basic Usage",
@@ -112,9 +107,7 @@
         {
           "group": "Camera",
           "icon": "camera",
-          "pages": [
-            "camera/video-feed-for-camera"
-          ]
+          "pages": ["camera/video-feed-for-camera"]
         },
         {
           "group": "Recording",
