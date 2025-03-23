@@ -9,10 +9,10 @@ Here is how to do it with minimum effort.
 
 # Setup an inference server
 
-First, you need to setup an inference server. This servers runs on a beefy machine that can run the AI model. It can be your own machine, a cloud server, or a dedicated server.
+First, you need to setup an inference server. This server runs on a beefy machine that can run the AI model. It can be your own machine, a cloud server, or a dedicated server.
 
 <Note>
-  If you chose a remote location, chose the closest location to minimize
+  If you choose a remote location, chose the closest location to minimize
   latency.
 </Note>
 
@@ -29,11 +29,9 @@ To setup the inference server, follow the instructions in the link below:
 # Call your inference server from a python script
 
 We provide clients for ACT servers and Pi0 servers.
-You can implement the `ActionModel` class with you own logic [here](phosphobot/am/models.py).
+You can implement the `ActionModel` class with your own logic [here](phosphobot/am/models.py).
 
-At this point, go to your phosphobot dashboard > docs and launch the auto/start endpoint that will communicate with the inference server to automatically control the robot.
-
-You can stop at any time by calling the auto/stop endpoint.
+We also provide classes for ACT and pi0 inference server.
 
 ## Example script for ACT
 
@@ -133,3 +131,5 @@ while True:
         # Wait to respect frequency control (30 Hz)
         time.sleep(1 / 30)
 ```
+
+For more information, check out the implementation [here](https://github.com/phospho-app/phosphobot/blob/main/phosphobot/am/models.py).
