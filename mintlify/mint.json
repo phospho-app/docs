@@ -67,11 +67,11 @@
       "pages": [
         "learn/overview",
         "learn/kinematics",
-        "learn/cameras",
-        "learn/policies",
         "learn/ai-models",
-        "learn/build-so100",
-        "learn/gravity-compensation"
+        "learn/policies",
+        "learn/gravity-compensation",
+        "learn/cameras",
+        "learn/build-so100"
       ]
     },
     {
