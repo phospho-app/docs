@@ -9,7 +9,31 @@ $$
 \pi: S \rightarrow A
 $$
 
-Policies are the core concept in **reinforcement learning** (learning from rewards) and **imitation learning** (learning by mimicking data). 
+The policy is basically the AI model that controls the robot. It can be as simple as a **hard-coded rule** or as complex as a **deep neural network**. 
+
+
+<Accordion title="Old school robotics">
+The traditional way to control robots is to use **hard-coded rules**. For example, you could write a program that tells the robot to move left when it sees a red ball. 
+
+For that, you detect red pixels in the camera feed and send a command to the motors to move left.
+
+This approach is the one used in **industrial robots** and **simple home robots**. It's simple and efficient, but it's not very flexible. You need to write a new program for every new task.
+</Accordion>
+
+<Accordion title="Reinforcement Learning (RL)">
+**Reinforcement Learning (RL)** is a popular approach to train AI models for robotics. In RL, the robot learns by interacting with the environment and receiving rewards. It's like teaching a child to ride a bike by giving them feedback on their performance.
+
+Usually, the environment is a [simulation.](./kinematics#simulation)
+
+It's mainly used for walking robots that need to learn how to balance themselves.
+</Accordion>
+
+<Accordion title="Imitation Learning">
+**Imitation Learning** is a popular approach to train AI models for robotics. In imitation learning, the robot learns by mimicking human demonstrations. It's like teaching a child to ride a bike by showing them how it's done.
+
+Usually, the demonstrations are collected by **teleoperating** the robot. The robot learns to mimic the actions of the human operator. It's mainly used for tasks that require human-like dexterity, such as picking up objects.
+</Accordion>
+
 
 # Vision-Language Action Models (VLAs)
 
@@ -17,17 +41,21 @@ The latest paradigm since 2024 in AI robotics are **[Vision-Language Action Mode
 
 - VLA models are particularly well-suited for robotics because **they function as a brain**. 
 - VLA process both **images** and **text** instructions to predict the next **action**.
-- Unlike traditional AI models that generate text (like ChatGPT), these models output actions, such as *move left*.
+- VLA were trained using **internet-scale data**, so they have some **common sense**.
 
-Essentially, you could prompt your robot to "pick up the red ball" and it would do so.
+Unlike traditional AI models that generate text (like ChatGPT), these models output actions, such as *move left*.
+
+Essentially, with VLA, you could prompt your robot to "pick up the red ball" and it would do so.
 
 The [phospho dev kit](https://robots.phospho.ai) helps you learn and experiment with the latest AI robotics models and VLAs.
 
 # What robotics AI models are there for SO-100 robot arms?
 
-Today, **there is no one-size-fits-all model for robotics.** To get the best reuslts, you need to **train** models on your own data, for your specific robot and task.
+In 2025, **there is no one-size-fits-all model for robotics.** To get the best reuslts, you need to **train** models on your own data, for your specific robot and task.
 
-However, here is a list of **popular AI robotics models** that you can train with the phospho dev kit, which are known to work well with the SO-100 robot arm.
+However, it never has been easier to do so and it's much cheaper than it used to be. It used to take months and thousands of recording hours to train a model. Now, it can be done in a few hours on a GPU with a few dozen episodes.
+
+To get started, here is a list of **popular AI robotics models** you can train with the phospho dev kit, which are known to work well with the SO-100 robot arm.
 
 ## ACT (Action Chunking Transformer)
 
@@ -56,7 +84,9 @@ However, here is a list of **popular AI robotics models** that you can train wit
 
 ## gr00t-n1 by Nvidia
 
-[GR00T-N1 (Generalist Robot 00 Technology)](https://github.com/NVIDIA/Isaac-GR00T) is NVIDIA's foundation model for humanoid robots. It's a performant models, trained on lots of data, which is ideal for fine tuning. The mode weights [are available on Hugging Face.](https://huggingface.co/nvidia/GR00T-N1-2B). For details, see their [paper on arxiv](https://arxiv.org/abs/2503.14734)
+[GR00T-N1 (Generalist Robot 00 Technology)](https://github.com/NVIDIA/Isaac-GR00T) is NVIDIA's foundation model for humanoid robots. It's a performant models, trained on lots of data, which is ideal for fine tuning. The mode weights [are available on Hugging Face](https://huggingface.co/nvidia/GR00T-N1-2B). 
+
+GR00T-N1 combines both [VLA](#openvla) for language understanding and [Diffusion transformers](#diffusion-transformers) for fine grained controls. For details, see their [paper on arxiv](https://arxiv.org/abs/2503.14734)
 
 ![GR00T-N1 model architecture](/assets/policies-gr00t.png)
 
