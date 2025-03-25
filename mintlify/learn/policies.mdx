@@ -9,8 +9,11 @@ $$
 \pi: S \rightarrow A
 $$
 
-The policy is basically the AI model that controls the robot. It can be as simple as a **hard-coded rule** or as complex as a **deep neural network**. 
+- $$S$$ the state can be the camera feed, the position of the robot, or the text instructions. It depends on the sensors available.
+- $$A$$ the actions depends on the robot. For example, it can be high level instructions ("move left", "move right"), or the state of the joints (angles of servomotors).
+- $$\pi$$ the policy is basically the AI model that controls the robot. It can be as simple as a **hard-coded rule** or as complex as a **deep neural network**. 
 
+Finding a good policy is the job of a good robotics researcher.
 
 <Accordion title="Old school robotics">
 The traditional way to control robots is to use **hard-coded rules**. For example, you could write a program that tells the robot to move left when it sees a red ball. 
