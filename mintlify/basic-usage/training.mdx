@@ -3,35 +3,49 @@ title: "Train a robotics AI model"
 description: "How to train a robotics AI model with a dataset?"
 ---
 
-You just [recorded a dataset](/basic-usage/dataset-recording) and now you want to train an AI model to control your robot. 
-Here's how you can do it.
+To train an AI model for your robot, you need a robotics dataset. For that, you need to have first [recorded a dataset](/basic-usage/dataset-recording).
 
-<Note>Don't have a dataset? Use one of ours: `PLB/Orange-brick-in-black-box`</Note>
+<Info>Don't have a dataset? Use one of ours: `PLB/Orange-brick-in-black-box`</Info>
 
-You dataset is saved in the **LeRobot** format and uploaded to your Hugging Face account. 
-Any training script compatible with this dataset format can be used to train your AI model.
+## Dataset format and training scripts
 
-For now, we support the following models:
-- [ACT](/basic-usage/training#act-action-chunking-transformer) (Action Chunking Transformer) trained using LeRobot training scripts
-- [pi0](/basic-usage/training#pi0-pi-zero) trained using openpi by Physical intelligence
+The standard dataset format for robotics is the [LeRobot v2 format by HuggingFace](https://huggingface.co/lerobot). This format is compatible with the **ACT** (Action Chunking Transformer) model and other models. Every dataset recorded with phosphobot is LeRobot v2 compatible and pushed to the Hugging Face dataset hub with your token.
 
-## ACT (Action Chunking Transformer)
+This means that **any training script compatible with the LeRobot v2 dataset format can be used to train your AI model.**
 
-### Running on replicate
+As of now, we sucessfuly trained the following models with the LeRobot v2 dataset format:
+- [ACT](https://github.com/Shaka-Labs/ACT) (Action Chunking Transformer) trained using LeRobot training scripts
+- [gr00t-n1](https://github.com/NVIDIA/Isaac-GR00T) by NVIDIA
+- [pi0](https://github.com/Physical-Intelligence/openpi) trained using openpi by Physical intelligence
 
-To make it easier to train your model, we provide a training script that you can run on the **Replicate** platform, a cloud service that provides GPU instances and scripts to train your AI models and run inference.
+As more models are released, we will update this list with relevant repos and tutorials.
 
-Check out our pipeline here: [Replicate ACT pipeline](https://replicate.com/phospho-app/act-policy)
+## Cloud training
 
-You'll need to provide a Hugging Face dataset ID and token on which to train the policy.
+To train your model, you can use [Replicate](http://replicate.com). Replicate provides GPU instances to train AI models in one click. 
 
-### Running on your local machine
+<CardGroup>
+<Card
+  title="Train ACT on Replicate"
+  icon="rocket"
+  iconType="regular"
+  href="https://replicate.com/phospho-app/act-policy"
+>
+  The ACT model mimicks one behavior at a time
+</Card>
+<Card
+  title="Train gr00t-n1 on Replicate"
+  icon="rocket"
+  iconType="regular"
+  href="https://replicate.com/phospho-app/gr00t-policy"
+>
+  The gr00t-N1 model is a promptable model by NVIDIA
+</Card>
+</CardGroup>
 
-<Warning>
-You need a GPU with at least 16GB of memory to train the model.
-</Warning>
+## How to train the ACT (Action Chunking Transformer) model with LeRobot?
 
-On the device where you want to run the training, install the [Phosphobot package](https://github.com/phospho-app/phosphobot):  
+1. On the device where you want to run the training, install the [phosphobot python module](https://github.com/phospho-app/phosphobot):  
 
    ```bash
    pip install --upgrade phosphobot
@@ -51,7 +65,11 @@ On the device where you want to run the training, install the [Phosphobot packag
    wandb login
    ```
 
-4. Run the training script with the following command in the `lerobot` repository (Set --device=mps for Apple Silicon (Mac M1/M2), `cuda` if you have an NVIDIA GPU or `cpu` if you don’t have a GPU). Ensure that your `lerobot` virtual environment is activated.  
+4. Run the training script with the following command in the `lerobot` repository. Ensure that your `lerobot` virtual environment is activated.  
+
+<Warning>
+You need a GPU with at least 16GB of memory to train the ACT model.
+</Warning>
 
    ```bash
    sudo python lerobot/scripts/train.py \
@@ -59,46 +77,56 @@ On the device where you want to run the training, install the [Phosphobot packag
      --policy.type=<act or diffusion or tdmpc or vqbet> \
      --output_dir=outputs/train/phoshobot_test \
      --job_name=phosphobot_test \
-     --device=mps \ # mps or cuda 
+     --device=mps \ # mps, cpu or cuda 
      --wandb.enable=true
    ```
 
+- For Apple Silicon (Mac M1, M2) set `--device=mps`
+- For NVIDIA GPU set `--device=cuda`
+- For CPU set `--device=cpu`
+
+
 5. Your trained model is saved in `lerobot/outputs/train/`.  
 
-## Pi0 (Pi-Zero)
+## How to train the Pi0 (Pi-Zero) model with the SO-100 robot arm? 
 
-We added support for the SO-100 arm in this fork of the openpi repository. 
-For a full fine-tuning of the model, you will need at least 70GB of GPU memory (we recommend using a A100 (80GB) / H100).
+To train the Pi0 model, you need to use the openpi repository with a few tweaks for the SO-100 robot arm compatibility. We added support for the SO-100 arm in this fork of the openpi repository. 
+
+1. Clone our custom openpi repository and install it:
 
 ```bash
 git clone https://github.com/phospho-app/openpi.git
 cd openpi
 ```
-Install UV if you don't have it already:
+
+2. Install UV if you don't have it already:
 
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
 source $HOME/.local/bin/env
 ```
 
-Setup the environment using uv:
+3. Setup the environment using uv:
 
 ```bash
 GIT_LFS_SKIP_SMUDGE=1 uv sync
 ```
 
-*(Optional)* If you want to use **Weights & Biases** for tracking training metrics, log in with:  
+4. *(Optional)* If you want to use **Weights & Biases** for tracking training metrics, log in with:  
 
 ```bash
 # Get your auth token at https://wandb.ai/authorize
 uv run wandb login
 ```
 
-By default, our training config uses the `PLB/Orange-brick-in-black-box` SO-100 dataset.
-Make sure you dataset has a correct task description for each task in the dataset (in our dataset, it's _"Put the orange brick in the black pot"_).
-Edit the config file `src/openpi/training/config.py` to change the dataset to your own.
+5. Edit the config file `src/openpi/training/config.py` to change the dataset to your own.
 
-Then, you can train your model using the following command:
+By default, the training config uses the `PLB/Orange-brick-in-black-box` SO-100 dataset.
+
+<Note>Make sure you dataset has a correct task description for each task in the dataset. Eg: in the `PLB/Orange-brick-in-black-box` dataset, it's _"Put the orange brick in the black pot"_</Note>
+
+
+6. Start the training:
 
 ```bash
 uv run scripts/compute_norm_stats.py --config-name pi0_so100
@@ -106,7 +134,11 @@ uv run scripts/compute_norm_stats.py --config-name pi0_so100
 XLA_PYTHON_CLIENT_MEM_FRACTION=0.9 uv run scripts/train.py pi0_so100 --exp-name=pi0_so100_blackbox --overwrite
 ```
 
-Once training is done, push your model to Hugging Face:
+<Warning>
+You need a GPU with at least 70GB of memory to train the pi0 model. We recommend using a A100 (80GB) or a H100.
+</Warning>
+
+7. Once training is done, push your model to Hugging Face:
 
 ```bash
 huggingface-cli login  # Follow the authentication steps

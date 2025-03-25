@@ -1,23 +1,39 @@
 ---
-title: "Policies"
-description: "What are the latest implementations in AI robotics?"
+title: " Policies"
+description: "What are the latest AI robotics models?"
 ---
 
-The phospho dev kit was designed to provide a platform for learning and experimenting with AI models in robotics.
+A **policy** is the brain of your robot. It tells the robot what to do in a given situation. Mathematically, it's a function $$\pi$$ that maps the current **state** $$S$$ of the robot to an **action** $$A$$.
 
-With recent advancements in Large Language Models (LLMs), new **Vision-Language Models (VLMs)** have emerged.
+$$
+\pi: S \rightarrow A
+$$
 
-- These models are particularly well-suited for robotics because **they function as a brain**. 
-- They process both **images** and **text** instructions to predict the next **action**.
+Policies are the core concept in **reinforcement learning** (learning from rewards) and **imitation learning** (learning by mimicking data). 
+
+# Vision-Language Action Models (VLAs)
+
+The latest paradigm since 2024 in AI robotics are **[Vision-Language Action Models](https://arxiv.org/abs/2406.09246) (VLAs)**. They leverage **[Large Language Models](https://en.wikipedia.org/wiki/Large_language_model) (LLMs)** to understand and act on human instructions. You may also hear about [VLM](https://huggingface.co/blog/vlms) (Vision-Language Models).
+
+- VLA models are particularly well-suited for robotics because **they function as a brain**. 
+- VLA process both **images** and **text** instructions to predict the next **action**.
 - Unlike traditional AI models that generate text (like ChatGPT), these models output actions, such as *move left*.
 
-Essentially, you could tell your robot to "pick up the red ball" and it would do so.
+Essentially, you could prompt your robot to "pick up the red ball" and it would do so.
 
-So, what is a **policy**? It is a function that maps the current **state** of the robot to an **action**. It tells the robot what to do in a given situation.
+The [phospho dev kit](https://robots.phospho.ai) helps you learn and experiment with the latest AI robotics models and VLAs.
 
-# ACT 
+# What robotics AI models are there for SO-100 robot arms?
 
-[ACT (Action Chunking Transformer)](https://github.com/Shaka-Labs/ACT) is a popular repo that lets you experiment with imitation learning.
+Here is a list of popular AI robotics models that you can train with the phospho dev kit. 
+
+Exploring these models will help you understand what architectures exist and how they leverage LLMs. 
+
+## ACT (Action Chunking Transformer)
+
+[ACT (Action Chunking Transformer)](https://github.com/Shaka-Labs/ACT) is a popular repo that lets you experiment with imitation learning. The idea is that cameras' images are projected into an embeddings space, and then decoded as an action sequence. Learn more [here](https://arxiv.org/abs/2406.09246).
+
+![ACT model architecture](/assets/policies-act.png)
 
 **How it works**:
 - You record episodes of your robot performing a task.
@@ -27,12 +43,60 @@ So, what is a **policy**? It is a function that maps the current **state** of th
 - Typically requires ~30 episodes for training
 - Can run on an RTX 3000 series GPU in less than 30 minutes.
 - This is a great starting point to get your hands dirty with AI in robotics.
+- You don't need prompts to train the model.
 
-# OpenVLA
+<Card
+  title="Train ACT on Replicate"
+  icon="rocket"
+  iconType="regular"
+  href="https://replicate.com/phospho-app/act-policy"
+>
+  The ACT model mimicks one behavior at a time
+</Card>
 
-[OpenVLA](https://github.com/openvla/openvla?tab=readme-ov-file#getting-started) is another great repo.
+## gr00t-n1 by Nvidia
 
-It's a more advanced model designed for **complex robotics tasks**.
+[GR00T-N1 (Generalist Robot 00 Technology)](https://github.com/NVIDIA/Isaac-GR00T) is NVIDIA's foundation model for humanoid robots. It's a performant models, trained on lots of data, which is ideal for fine tuning. The mode weights [are available on Hugging Face.](https://huggingface.co/nvidia/GR00T-N1-2B). For details, see their [paper on arxiv](https://arxiv.org/abs/2503.14734)
+
+![GR00T-N1 model architecture](/assets/policies-gr00t.png)
+
+**Key features:**
+- Processes natural language instructions, camera feeds, and sensor data to generate actions.
+- Based on denoizing of the action space, kind of like a Diffusion transformer.
+- Trained on a massive datasets of human movements, 3D environments, and AI-generated data.
+
+**Why use GR00T-N1?**
+- Typically requires ~50 episodes for training.
+- Supports prompting and zero-shot learning for tasks not explicitly seen during training.
+- Small model size (2B parameters) for efficient fine-tuning and fast inference on Nvidia Jetson devices.
+
+<Card
+  title="Train gr00t-n1 on Replicate"
+  icon="rocket"
+  iconType="regular"
+  href="https://replicate.com/phospho-app/gr00t-policy"
+>
+  The gr00t-N1 model is a promptable model by NVIDIA
+</Card>
+
+## pi0 (pi-zero) by Physical Intelligence
+
+[pi0](https://github.com/Physical-Intelligence/openpi) refers to a family VLA model by Physical Intelligence, that contains the **π₀** (pi0, pi-Zero) model, a flow-based diffusion vision-language-action model (VLA) and the **π₀-FAST** (pi0-FAST) model, an autoregressive VLA, based on the FAST action tokenizer.
+
+The weight of pi0 are open sourced [on Huggingface](https://huggingface.co/blog/pi0)
+
+![pi0 model architecture](/assets/policies-pi0.png)
+
+**Key differences with GR00T-N1:**
+- pi0-FAST is autoregressive, while GR00T-N1 is diffusion-based.
+- The tooling is less dependent on Nvidia hardware
+- Results are more reproducible (better for research)
+
+## OpenVLA
+
+[OpenVLA](https://github.com/openvla/openvla?tab=readme-ov-file#getting-started) is a great repo to learn about Vision Language Action models. VLA are advanced model designed for **complex robotics tasks**, which includes an LLM in its architecture.
+
+![OpenVLA model architecture](/assets/policies-openvla.png)
 
 **Key differences with ACT:**
 - Training such a model requires more data and computational power.
@@ -41,21 +105,21 @@ It's a more advanced model designed for **complex robotics tasks**.
 
 For more details, check out [Nvidia's blog post](https://www.jetson-ai-lab.com/openvla.html) on OpenVLA.
 
-# Diffusion Transformer
+## Diffusion Transformers
 
-**Diffusion transformers** offer a unique approach to policy learning. 
+**Diffusion transformers** are a family of models based on the **diffusion process**. Instead of deterministically mapping states to actions, the model **hallucinates** (generates) the **most probable next action** based on **patterns learned from data**. There exists small and large models in this family.
 
-Instead of deterministically mapping states to actions, the model **hallucinates** (generates) the **most probable next action** based on **patterns learned from data**.
+![Diffusion transformer model architecture](/assets/policies-rdt.png)
 
 **Why consider Diffusion Transformers?**
 - The currently **#1 model in robotics** on Hugging Face is a diffusion transformer called [RDT-1b](https://huggingface.co/robotics-diffusion-transformer/rdt-1b).
 - Fine tuning the model on your own data is expensive but inference is fast. 
+- The model is promptable
 
 # LeRobot Integration
 
-LeRobot supports multiple policy architectures for robotics. You can find them [here](https://github.com/huggingface/lerobot/tree/main/lerobot/common/policies).
+[LeRobot is a github repo by Hugging Face](https://github.com/huggingface/lerobot/tree/main/lerobot/common/policies) which implements training scripts for various policies in a standardized way. Supported policies include:
 
-They include:
 - act
 - diffusion
 - pi0
@@ -65,4 +129,3 @@ They include:
 # Other models
 
 - AutoRT by Google DeepMind (closed weight model). [Implementation on Github](https://github.com/kyegomez/AutoRT)
-- pi0 by Physical Intelligence. [Weights on Huggingface](https://huggingface.co/blog/pi0)
