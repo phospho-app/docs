@@ -87,7 +87,7 @@ To get started, here is a list of **popular AI robotics models** you can train w
 
 ## gr00t-n1 by Nvidia
 
-[GR00T-N1 (Generalist Robot 00 Technology)](https://github.com/NVIDIA/Isaac-GR00T) is NVIDIA's foundation model for humanoid robots. It's a performant models, trained on lots of data, which is ideal for fine tuning. The mode weights [are available on Hugging Face](https://huggingface.co/nvidia/GR00T-N1-2B). 
+[GR00T-N1 (Generalist Robot 00 Technology)](https://github.com/NVIDIA/Isaac-GR00T) is NVIDIA's foundation model for robots. It's a performant models, trained on lots of data, which is ideal for fine tuning. The mode weights [are available on Hugging Face](https://huggingface.co/nvidia/GR00T-N1-2B). 
 
 GR00T-N1 combines both [VLA](#openvla) for language understanding and [Diffusion transformers](#diffusion-transformers) for fine grained controls. For details, see their [paper on arxiv](https://arxiv.org/abs/2503.14734)
 
@@ -112,18 +112,18 @@ GR00T-N1 combines both [VLA](#openvla) for language understanding and [Diffusion
   The gr00t-N1 model is a promptable model by NVIDIA
 </Card>
 
-## pi0 (pi-zero) by Physical Intelligence
+## pi0 by Physical Intelligence
 
-[pi0](https://github.com/Physical-Intelligence/openpi) refers to a family VLA model by Physical Intelligence, that contains the **π₀** (pi0, pi-Zero) model, a flow-based diffusion vision-language-action model (VLA) and the **π₀-FAST** (pi0-FAST) model, an autoregressive VLA, based on the FAST action tokenizer.
-
-The weight of pi0 are open sourced [on Huggingface](https://huggingface.co/blog/pi0)
+[pi0](https://github.com/Physical-Intelligence/openpi), also written as **π₀** or pi zero, is a a flow-based diffusion vision-language-action model (VLA) by Physical Intelligence. The weight of pi0 are open sourced [on Huggingface](https://huggingface.co/blog/pi0)
 
 ![pi0 model architecture](/assets/policies-pi0.png)
 
-**Key differences with GR00T-N1:**
-- pi0-FAST is autoregressive, while GR00T-N1 is diffusion-based.
-- The tooling is less dependent on Nvidia hardware
-- Results are more reproducible (better for research)
+## pi0-FAST by Physical Intelligence
+
+[pi0 FAST](https://github.com/Physical-Intelligence/openpi), also written as **π₀-FAST** or pi zero FAST, is an autoregressive VLA, based on the FAST action tokenizer. It's made by Physical Intelligence.
+
+![pi0 model architecture](/assets/policies-pi0-fast.png)
+
 
 ## OpenVLA
 
