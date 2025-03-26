@@ -129,7 +129,7 @@
     "linkedin": "https://www.linkedin.com/company/phospho-app/",
     "discord": "https://discord.gg/cbkggY6NSK"
   },
-  "openapi": "openapi.json",
+  "openapi": "openapi.yml",
   "analytics": {
     "posthog": {
       "apiKey": "phc_EesFKS4CVoyc0URzJN0FOETpg7KipCBEpRvHEvv5mDF",
