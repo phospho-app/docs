@@ -94,8 +94,6 @@
             "control/move-teleoperation",
             "control/move-teleoperation-ws",
             "control/move-absolute-position",
-            "control/auto",
-            "control/stop-auto",
             "control/end-effector-state",
             "control/read-torques",
             "control/turn-torque",
