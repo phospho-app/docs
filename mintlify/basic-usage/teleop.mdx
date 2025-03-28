@@ -16,7 +16,7 @@ You can control your robot arm:
 - using a leader arm
 
 
-## How to control the SO-100 with a keyboard?
+### How to control the SO-100 with a keyboard?
 
 Use `phosphobot` to control your SO-100 robot arm with your keyboard, using the `arrow keys` to move the robot arm in the desired direction.
 
@@ -31,7 +31,7 @@ Go to `localhost` in your web browser to access the phosphobot dashboard. Go to 
 </iframe>
 
 
-## Send your first commands to the API
+### Send your first commands to the API
 
 Once your control module is connected to your home WiFi, you can send your first command to the robot arm.
 
@@ -45,7 +45,7 @@ Once your control module is connected to your home WiFi, you can send your first
 
 4. Now, you can call the `/move/absolute` endpoint to move the robot to a specific position. The distances are in centimeters, and the angles in degrees.
 
-# Meta Quest app
+## Meta Quest app
 
 <iframe 
     className="w-full aspect-video"
@@ -55,7 +55,7 @@ Once your control module is connected to your home WiFi, you can send your first
     allowFullScreen>
 </iframe>
 
-## Set up your Meta Quest app
+### Set up your Meta Quest app
 
 The phospho dev kit is delivered with a [Meta Quest](https://www.meta.com/fr/quest/quest-3/?srsltid=AfmBOoqPSrSx_ABUZwNg30PYExXeJ_mTx3yyaK6Y_juZif_BlfcdpTjw) app for teleoperation. In this section, we will set up the app on your Meta Quest headset.
 
@@ -68,7 +68,7 @@ The phospho dev kit is delivered with a [Meta Quest](https://www.meta.com/fr/que
 3. Open the phospho teleop app from the library. Once downloading is done, you can open the software library on the Meta Quest. In the list of All apps, you’ll see the *phospho teleop* app. This app is automatically updated with the latest releases.
 
 
-## Use the Meta Quest app
+### Use the Meta Quest app
 
 <Info>Make sure the Meta Quest is connected to the same WiFi that the computer running the phosphobot server.</Info>
 
@@ -88,7 +88,7 @@ Connect to the dev kit through WiFi in the phospho Meta Quest app.
 
 You just teleoperated your robot arm! 🎉 
 
-# Using a leader arm
+## Using a leader arm
 
 <Info>You **do not** need a leader arm to use the Meta Quest app.</Info>
 
@@ -102,7 +102,7 @@ sudo phosphobot serve --leader-arm=<USB_PORT>
 
 3. Then use the endpoint `/move/mimick` to control the robot arm
 
-## What's next?
+### What's next?
 
 <Card
   title="Record a dataset"
