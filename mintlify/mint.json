@@ -51,13 +51,7 @@
   "navigation": [
     {
       "group": "Getting Started",
-      "pages": [
-        "welcome",
-        "installation",
-        "quickstart",
-        "unboxings/dk1",
-        "unboxings/dk2"
-      ]
+      "pages": ["welcome", "installation"]
     },
     {
       "group": "Basic Usage",
@@ -69,15 +63,23 @@
       ]
     },
     {
-      "group": "Learn",
+      "group": "Learn about robotics",
       "pages": [
         "learn/overview",
         "learn/kinematics",
         "learn/ai-models",
         "learn/policies",
         "learn/gravity-compensation",
-        "learn/cameras",
-        "learn/build-so100"
+        "learn/cameras"
+      ]
+    },
+    {
+      "group": "Hardware",
+      "pages": [
+        "unboxings/dk2",
+        "so-100/quickstart",
+        "unboxings/dk1",
+        "so-100/build"
       ]
     },
     {

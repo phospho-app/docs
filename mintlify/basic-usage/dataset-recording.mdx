@@ -7,8 +7,6 @@ The easiest way to record datasets is to use the phospho Meta Quest app to contr
 
 Recorded datasets are saved in the `lerobot_v2` format from **[LeRobot](https://huggingface.co/lerobot)** and uploaded to your HuggingFace account.
 
-Use the [Start Recording Episode](/recording/start-recording-episode) and [Stop Recording Episode](/recording/stop-recording-episode) endpoints to start and stop recording episodes.
-
 <iframe 
     className="w-full aspect-video"
     src="https://www.youtube.com/embed/AQ-xgCTdj_w?si=NDTtX1nISABjzmbA" 
@@ -17,49 +15,49 @@ Use the [Start Recording Episode](/recording/start-recording-episode) and [Stop 
     allowFullScreen>
 </iframe>
 
-Alternatively, you can implement your own dataset recording logic on top of the phospshobot API. 
+Alternatively, you can implement your own dataset recording logic on top of the phospshobot API. Use the [Start Recording Episode](/recording/start-recording-episode) and [Stop Recording Episode](/recording/stop-recording-episode) endpoints to start and stop recording episodes. You can also read the [joints positions](/control/read-joints).
 
-## Prerequisites
+## 1. Prerequisites
 
-<Info>Make sure you have already managed to [teleoperate your robot](/basic-usage/teleop)</Info>
+1. Install [the phosphobot software](/installation) 
+2. **Connect your cameras to the computer.** Start the phosphobot server.
 
-In the phosphobot dashboard, add your HuggingFace token if you haven't already. You can find it in your HuggingFace account settings.
+  ```bash
+  phosphobot run
+  ```
 
-Connect your arm to the the computer that will be running the phosphobot server using a cable.
+3. Complete the [quickstart](/so-100/quickstart) and check that you can [control your robot](/basic-usage/teleop).
+4.  Add your Hugging Face token in the phosphobot dashboard. If you don't have one a Hugging Face account or token, you can create [one here for free](https://huggingface.co). We will use Hugging Face to synchronize the datasets and models.
 
-Connect any additional cameras to the computer. phospshobot will look for all cameras connected to the computer, 
-including the built-in cameras such as the webcam.
+## 2. Set your dataset name and parameters
 
-Once everything is connected and powered on, run the following command to start the phosphobot server:
+Go to the _Admin Page_ of your phospshobot dashboard. You can adjust settings. The most important are:
 
-```bash
-phosphobot run
-```
-
-If you change the connected cameras, you have to restart the server.
-
-## Set your dataset name and parameters
-
-Go to the _Admin Page_ of your phospshobot dashboard. 
-In the User settings, you can set the dataset name and parameters for the next recording.
+- **Dataset Name**: The name of the dataset you want to record.
+- **Task**: A text description of the task you're about to record. For example: _"Pick up the lego brick and put it in the box"_. This helps you remember what you recorded and is used by some AI models to understand the task.
+- **Camera**: The cameras you want to record. By default, all cameras are recorded. You can select the cameras to record in the Admin settings.
 
 
-## Record a dataset
+## 3. Control the robot in the Meta Quest app
 
-Connect to the dev kit through WiFi in the phospho Meta Quest app.
+The easiest way to record a dataset is to use the Meta Quest app.
 
-![Meta Quest controller button names](/assets/names_buttons.jpg)  
 
-1. In the Meta Quest, open the phospho teleop application. You should see a screen displaying **phosphobot** along with the server ping. Click the **Connect** button using the `Trigger Button`.  
 
-<Note>
-Make sure you're connected to the same WiFi as the phosphobot server.
-To control the robot over the internet, see the [teleoperation from anywhere in the world](examples/teleop-from-anywhere) guide.
-</Note>  
+1. In the Meta Quest, open the phospho teleop application. Wait a moment, then you should see a row displaying **phosphobot** or your computer name. Click the **Connect** button using the `Trigger Button`.  
+  - Make sure you're connected to the **same WiFi** as the phosphobot server. 
+  - If you don't see the server, check the IP address of the server in the phosphobot dashboard and enter it manually.
 
 ![Select Phosphobot server](/assets/changeme-unity-server.png)  
 
-2. After connecting, you should see the main camera feed if a camera is connected. Move the windows with the `Grip button` to organize your space.  
+![Meta Quest controller button names](/assets/names_buttons.jpg)
+
+2. After connecting, you'll see the list of connected cameras and recording options.
+  - Move the windows with the `Grip button` to organize your space.
+  - Enable preview to see the camera feed. Check the **camera angles** and adjust their positions if needed. 
+
+<Info>We recommend **disabling** the camera preview to save bandwidth.</Info>
+
 3. Press `A` once to start teleoperation and begin moving your controller.  
    - The robot will naturally follow the movement of your controller. Press the `Trigger button` to close the gripper.
    - Press `A` again to stop the teleoperation. The robot will stop.  
@@ -68,28 +66,25 @@ To control the robot over the internet, see the [teleoperation from anywhere in 
    - Press `B` again to stop the recording.
    - Press `Y` (left controller) to discard the recording.
 
-5. Continue teleoperating and stop the recording when you're done.  
+5. Continue teleoperating and stop the recording by pressing `B` when you're done.  
 
-6. The recording is automatically saved in **LeRobot** format and uploaded to your HuggingFace account. 
+6. The recording is automatically saved in **LeRobot v2** format and **uploaded to your HuggingFace account.**
 
+## 4. Check your dataset
 
+Datasets are saved on the computer running the phosphobot server at `~/phosphobot/recordings/DATASET_NAME` folder in the phosphobot directory. Explore the recordings in the phosphobot dashboard using the _Dataset Browser_.
 
+If you added your Hugging Face token in the dashboard, the recorded datasets are **automatically uploaded to your HuggingFace account.**
 
-## Check your dataset
+Go to your [Hugging Face profile](https://huggingface.co) to see the uploaded datasets.
 
-Datasets are saved on the computer running the phosphobot server at `~/phosphobot/recordings/DATASET_NAME` folder in the phosphobot directory.
-You can check all the recordings through the phosphobot dashboard in the _File Browser_.
+## 5. Visualize your dataset
 
-If you added your HuggingFace token in the dashboard, 
-the recorded datasets are automatically uploaded to your HuggingFace account.
-Go to your HuggingFace profile to see the uploaded datasets.
-
-## Visualize your dataset
-
-Once your dataset is uplaoded to HuggingFace, 
-you can visualize it using the [LeRobot Dataset Visualizer](https://huggingface.co/spaces/lerobot/visualize_dataset).
+Once your dataset is uplaoded to HuggingFace, you can view it using the [LeRobot Dataset Visualizer](https://huggingface.co/spaces/lerobot/visualize_dataset).
 
 ![LeRobot dataset visualizer](/assets/lerobot_dataset_viz.png) 
+
+Looking good? You're ready to train your AI model!
 
 # What's next
 
