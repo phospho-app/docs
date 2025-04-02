@@ -51,7 +51,13 @@
   "navigation": [
     {
       "group": "Getting Started",
-      "pages": ["welcome", "installation", "quickstart", "unboxings/dk1"]
+      "pages": [
+        "welcome",
+        "installation",
+        "quickstart",
+        "unboxings/dk1",
+        "unboxings/dk2"
+      ]
     },
     {
       "group": "Basic Usage",
