@@ -3,7 +3,7 @@ title: "Train robotics AI models"
 description: "A guide to training AI models that control robots"
 ---
 
-The phospho dev kit makes it easy to train robotics AI models by integrating with **LeRobot** from Hugging Face.
+The phospho starter pack makes it easy to train robotics AI models by integrating with **LeRobot** from Hugging Face.
 
 ## What is LeRobot?
 
@@ -25,7 +25,7 @@ Useful links:
 
 ## Step by step guide
 
-In this guide, we will use the phospho dev kit to record a dataset and upload it to Hugging Face.  
+In this guide, we will use the phospho starter pack to record a dataset and upload it to Hugging Face.  
 
 <Note>Before starting, make sure you have already completed the [Installation Guide](/unboxings/dk1).</Note>  
 
@@ -33,8 +33,8 @@ In this guide, we will use the phospho dev kit to record a dataset and upload it
 
 - A **Hugging Face account** to automatically upload your dataset (Sign up [here](https://huggingface.co/join) if you don't have one)
 - A **device for training your model**. We recommend using a **GPU** for faster training.  
-- The **control module powered on** and connected to the **robot arm** and **camera**. 
-- The **[phospho teleo app](/examples/teleop)** installed on your **Meta Quest 2, Pro, 3 or 3s** 
+- The **phosphobot server is running** and connected to the **robot arm** and **camera**. 
+- The **[phosphobot teleoperation app](/examples/teleop)** is installed on your **Meta Quest 2, Pro, 3 or 3s** 
 
 ## 1. Set up your Hugging Face token  
 
@@ -49,7 +49,7 @@ To upload datasets, you need a Hugging Face token with write access. Follow thes
 
 4. **Copy the token** and **save it** in a secure place. You will need it later.  
 
-5. Open a browser and access `phosphobot.local:80/admin` to access the control module server. 
+5. Make sure the phosphobot server is running. Open a browser and access `localhost` or `phosphobot.local` if you're using the control module. Then go to the Admin settings.
 
 6. **Paste the Hugging Face token**, and **save it**.  
 
@@ -62,7 +62,7 @@ To upload datasets, you need a Hugging Face token with write access. Follow thes
 1. Go to the Meta Quest Store, search for the **Phospho Teleop** application. 
 
 2. Open the app. You should see a screen displaying **phoshobot** along with the server ping. Click **Connect**.  
-<Warning>Ensure that you are connected to the same network as the control module.</Warning>  
+<Warning>Ensure that you are connected to the same network as the phosphobot server.</Warning>  
 
 ![Select Phosphobot server](/assets/changeme-unity-server.png)  
 

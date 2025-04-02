@@ -33,11 +33,11 @@ Go to `localhost` in your web browser to access the phosphobot dashboard. Go to 
 
 ### Send your first commands to the API
 
-Once your control module is connected to your home WiFi, you can send your first command to the robot arm.
+Once your phosphobot server is running, you can send your first command to the robot arm.
 
 <Warning>Make sure the robot is well fixed and the area around is clear before sending any command.</Warning>
 
-1. Go to the interactive API docs of the control module at [phosphobot.local/docs](http://phosphobot.local/docs). This page lets you send commands to the robot arm.
+1. Go to the interactive API docs on the phosphobot dashboard: [localhost/docs](localhost/docs). On the control module, the address [phosphobot.local/docs](http://phosphobot.local/docs). This page lets you send commands to the robot arm.
 
 2. Trigger the `/move/init` endpoint to initialize the robot (click `Try it out` and then press `Execute`).
 
@@ -57,9 +57,9 @@ Once your control module is connected to your home WiFi, you can send your first
 
 ### Set up your Meta Quest app
 
-The phospho dev kit is delivered with a [Meta Quest](https://www.meta.com/fr/quest/quest-3/?srsltid=AfmBOoqPSrSx_ABUZwNg30PYExXeJ_mTx3yyaK6Y_juZif_BlfcdpTjw) app for teleoperation. In this section, we will set up the app on your Meta Quest headset.
+The phospho starter pack is shipped with a [Meta Quest](https://www.meta.com/fr/quest/quest-3/?srsltid=AfmBOoqPSrSx_ABUZwNg30PYExXeJ_mTx3yyaK6Y_juZif_BlfcdpTjw) app for teleoperation. In this section, we will set up the app on your Meta Quest headset.
 
-1. After purchasing your phospho dev kit, you’ll receive an **email invitation** to the Meta Alpha program of the phospho teleop app. Follow the email instructions to link your Meta account to the Alpha program.
+1. After purchasing your phospho starter pack, you'll receive an **email invitation** to the Meta Alpha program of the phospho teleop app. Follow the email instructions to link your Meta account to the Alpha program.
 
 2. Make sure your **Meta Quest headset** is **turned on** and **connected to WiFi**. Once you’ve linked your account, the Meta Quest will automatically download the app. This can take a moment.
 
@@ -90,17 +90,15 @@ You just teleoperated your robot arm! 🎉
 
 ## Using a leader arm
 
-<Info>You **do not** need a leader arm to use the Meta Quest app.</Info>
+<Info>The leader arm is optional.</Info>
 
-But if you have a leader arm, we offer some basic support.
+If you have a leader arm, we offer some basic support.
 
-1. Plug the leader arm and run the server with the special flag (replace USB_PORT with the actual usb port of the device. Run `phosphobot info` to get it.) 
-```bash
-sudo phosphobot serve --leader-arm=<USB_PORT>
-```
+1. Plug the leader arm. 
+
 2. Calibrate the leader arm the same way you calibrated the robot arm.
 
-3. Then use the endpoint `/move/mimick` to control the robot arm
+3. Go to the phosphobot dashboard, in the **Control** page and click on the **Leader Arm** section.
 
 ### What's next?
 
