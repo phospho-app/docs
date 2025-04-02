@@ -5,11 +5,11 @@ description: "How to make an AI model control your robot?"
 
 You just [trained an AI model](/basic-usage/training) and now you want to use it to control your robot.
 
-Here is how to do it with minimum effort.
+Let's see how you can do that.
 
-# Setup an inference server
+## Setup an inference server
 
-First, you need to setup an inference server. This server runs on a beefy machine that can run the AI model. It can be your own machine, a cloud server, or a dedicated server.
+First, you need to setup an inference server. This server runs on a beefy machine with a GPU that can run the AI model. It can be your own machine, a cloud server, or a dedicated server.
 
 <Note>
   If you choose a remote location, chose the closest location to minimize
@@ -26,14 +26,17 @@ To setup the inference server, follow the instructions in the link below:
   How to setup the inference server?
 </Card>
 
-# Call your inference server from a python script
+## Call your inference server from a python script
 
-We provide clients for ACT servers and Pi0 servers.
-You can implement the `ActionModel` class with your own logic [here](phosphobot/am/models.py).
+Open a terminal and run the [phosphobot server.](/installation)
 
-We also provide classes for ACT and pi0 inference server.
+```bash
+phosphobot run
+```
 
-## Example script for ACT
+Then, create a new python file called `inference.py`. Inside, copy the content of an example script below.
+
+### Example script for ACT
 
 ```python
 from phosphobot.camera import AllCameras
@@ -82,7 +85,7 @@ while True:
         time.sleep(1 / 30)
 ```
 
-## Example script for Pi0
+### Example script for Pi0
 
 ```python
 from phosphobot.camera import AllCameras
@@ -132,4 +135,33 @@ while True:
         time.sleep(1 / 30)
 ```
 
+### Other models
+
+You can implement the `ActionModel` class with your own logic [here](phosphobot/am/models.py).
+
 For more information, check out the implementation [here](https://github.com/phospho-app/phosphobot/blob/main/phosphobot/am/models.py).
+
+## Run the script
+
+To run the script, install the phosphobot python module.
+
+```bash
+pip install phosphobot
+```
+
+Then, run the script.
+
+```bash
+python your_script.py
+```
+
+## What's next?
+
+<Card
+  title="Discord"
+  icon="discord"
+  iconType="regular"
+  href="https://discord.gg/cbkggY6NSK"
+>
+  Join the Discord to ask questions, get help from others and get updates (we ship almost daily)
+</Card>

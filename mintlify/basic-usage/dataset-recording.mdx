@@ -17,25 +17,41 @@ Recorded datasets are saved in the `lerobot_v2` format from **[LeRobot](https://
 
 Alternatively, you can implement your own dataset recording logic on top of the phospshobot API. Use the [Start Recording Episode](/recording/start-recording-episode) and [Stop Recording Episode](/recording/stop-recording-episode) endpoints to start and stop recording episodes. You can also read the [joints positions](/control/read-joints).
 
-## 1. Prerequisites
+## Prerequisites
 
-1. Install [the phosphobot software](/installation) 
-2. **Connect your cameras to the computer.** Start the phosphobot server.
+1. You need an assembled **SO-100** robot arm and **cameras**. Get the [phosphot starter pack here](https://robots.phospho.ai).
+2. Install [the phosphobot software](/installation) 
+3. **Connect your cameras to the computer.** Start the phosphobot server.
 
   ```bash
   phosphobot run
   ```
+4. Complete the [quickstart](/so-100/quickstart) and check that you can [control your robot](/basic-usage/teleop).
+5. You have the **[phosphobot teleoperation app](/examples/teleop)** is installed on your **Meta Quest 2, Pro, 3 or 3s** 
 
-3. Complete the [quickstart](/so-100/quickstart) and check that you can [control your robot](/basic-usage/teleop).
-4.  Add your Hugging Face token in the phosphobot dashboard. If you don't have one a Hugging Face account or token, you can create [one here for free](https://huggingface.co). We will use Hugging Face to synchronize the datasets and models.
+# 1. Set up your Hugging Face token
+
+To sync datasets, you need a Hugging Face token with write access. Follow these steps to generate one:
+
+1. Log in to your Hugging Face account. You can create [one here for free](https://huggingface.co)
+2. Go to **Profile** and click **Access Tokens** in the sidebar.  
+3. Select the **Write** option to grant write access to your account. This is necessary for creating new datasets and uploading files. Name your token and click **Create token**.  
+
+4. **Copy the token** and **save it** in a secure place. You will need it later.  
+
+5. Make sure the phosphobot server is running. Open a browser and access `localhost` or `phosphobot.local` if you're using the control module. Then go to the Admin Configuration.
+
+6. **Paste the Hugging Face token**, and **save it**.  
+
+![Paste your huggingface token here](/assets/admin-settings-huggingface.png)
 
 ## 2. Set your dataset name and parameters
 
-Go to the _Admin Page_ of your phospshobot dashboard. You can adjust settings. The most important are:
+Go to the _Admin Configuration_ page of your phospshobot dashboard. You can adjust settings. The most important are:
 
 - **Dataset Name**: The name of the dataset you want to record.
 - **Task**: A text description of the task you're about to record. For example: _"Pick up the lego brick and put it in the box"_. This helps you remember what you recorded and is used by some AI models to understand the task.
-- **Camera**: The cameras you want to record. By default, all cameras are recorded. You can select the cameras to record in the Admin settings.
+- **Camera**: The cameras you want to record. By default, all cameras are recorded. You can select the cameras to record in the Admin Configuration.
 
 
 ## 3. Control the robot in the Meta Quest app
@@ -78,7 +94,7 @@ Go to your [Hugging Face profile](https://huggingface.co) to see the uploaded da
 
 ## 5. Visualize your dataset
 
-Once your dataset is uplaoded to HuggingFace, you can view it using the [LeRobot Dataset Visualizer](https://huggingface.co/spaces/lerobot/visualize_dataset).
+Once your dataset is uploaded to HuggingFace, you can view it using the [LeRobot Dataset Visualizer](https://huggingface.co/spaces/lerobot/visualize_dataset).
 
 ![LeRobot dataset visualizer](/assets/lerobot_dataset_viz.png) 
 

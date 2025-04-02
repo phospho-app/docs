@@ -27,56 +27,81 @@ Useful links:
 
 In this guide, we will use the phospho starter pack to record a dataset and upload it to Hugging Face.  
 
-<Note>Before starting, make sure you have already completed the [Installation Guide](/unboxings/dk1).</Note>  
-
 ## Prerequisites  
 
-- A **Hugging Face account** to automatically upload your dataset (Sign up [here](https://huggingface.co/join) if you don't have one)
-- A **device for training your model**. We recommend using a **GPU** for faster training.  
-- The **phosphobot server is running** and connected to the **robot arm** and **camera**. 
-- The **[phosphobot teleoperation app](/examples/teleop)** is installed on your **Meta Quest 2, Pro, 3 or 3s** 
+1. You need an assembled **SO-100** robot arm and **cameras**. Get the [phosphot starter pack here](https://robots.phospho.ai).
+2. Install [the phosphobot software](/installation) 
+3. **Connect your cameras to the computer.** Start the phosphobot server.
+
+  ```bash
+  phosphobot run
+  ```
+4. Complete the [quickstart](/so-100/quickstart) and check that you can [control your robot](/basic-usage/teleop).
+5. You have the **[phosphobot teleoperation app](/examples/teleop)** is installed on your **Meta Quest 2, Pro, 3 or 3s** 
+6. You have a **device to train your model**. We recommend using a **GPU** for faster training.  
 
 ## 1. Set up your Hugging Face token  
 
-To upload datasets, you need a Hugging Face token with write access. Follow these steps to generate one:
+To sync datasets, you need a Hugging Face token with write access. Follow these steps to generate one:
 
-1. Log in to your Hugging Face account
+1. Log in to your Hugging Face account. You can create [one here for free](https://huggingface.co)
 2. Go to **Profile** and click **Access Tokens** in the sidebar.  
-
 3. Select the **Write** option to grant write access to your account. This is necessary for creating new datasets and uploading files. Name your token and click **Create token**.  
-
-![Create HF Token](/assets/create-hf-token.png)  
 
 4. **Copy the token** and **save it** in a secure place. You will need it later.  
 
-5. Make sure the phosphobot server is running. Open a browser and access `localhost` or `phosphobot.local` if you're using the control module. Then go to the Admin settings.
+5. Make sure the phosphobot server is running. Open a browser and access `localhost` or `phosphobot.local` if you're using the control module. Then go to the Admin Configuration.
 
 6. **Paste the Hugging Face token**, and **save it**.  
 
-![Select Phosphobot server](/assets/hf-admin-page.png)  
+![Paste your huggingface token here](/assets/admin-settings-huggingface.png)
 
-## 2. Record a dataset by teleoperating the robot
 
-<Info>Make sure you have already completed the [Installation Guide](/unboxings/dk1#5-set-up-your-meta-quest-app) and that you have a [Meta Quest](https://www.meta.com/fr/quest/quest-3/?srsltid=AfmBOorMLUmJKFQr35ssCi1DDqSNgpHk0sLHqo_tHG8kgclCYbMToAPa)</Info>
+## 2. Set your dataset name and parameters
 
-1. Go to the Meta Quest Store, search for the **Phospho Teleop** application. 
+Go to the _Admin Configuration_ page of your phospshobot dashboard. You can adjust settings. The most important are:
 
-2. Open the app. You should see a screen displaying **phoshobot** along with the server ping. Click **Connect**.  
-<Warning>Ensure that you are connected to the same network as the phosphobot server.</Warning>  
+- **Dataset Name**: The name of the dataset you want to record.
+- **Task**: A text description of the task you're about to record. For example: _"Pick up the lego brick and put it in the box"_. This helps you remember what you recorded and is used by some AI models to understand the task.
+- **Camera**: The cameras you want to record. By default, all cameras are recorded. You can select the cameras to record in the Admin Configuration.
 
-![Select Phosphobot server](/assets/changeme-unity-server.png)  
 
-3. After connecting, you should see the main camera feed if a camera is connected. You can move various assets in the metaverse as needed.  
+## 3. Control the robot in the Meta Quest app
 
-   - Press `A` **once** to **start teleoperation**. Move your controller in the space to move the robot. 
-   - Press `B` to **start recording**.   
-   - Press `B` **again** to **stop the recording**.  
-   - Press `A` **again** to **stop teleoperation**. The robot will stop moving.
+The easiest way to record a dataset is to use the Meta Quest app.
 
-6. Control the robot arm. Start the recording. Perform the manipulation. Stop the recording when you're done.  
-   The recording is automatically saved in **LeRobot v2** format and uploaded to your Hugging Face account. You can check it in your profile.  
+1. In the Meta Quest, open the phospho teleop application. Wait a moment, then you should see a row displaying **phosphobot** or your computer name. Click the **Connect** button using the `Trigger Button`.  
+  - Make sure you're connected to the **same WiFi** as the phosphobot server. 
+  - If you don't see the server, check the IP address of the server in the phosphobot dashboard and enter it manually.
 
-To change the dataset name and recording settings, go to your admin panel and go to the **Admin settings** page. 
+![Select Phosphobot server](/assets/meta-quest-server-list.png)
+
+![Meta Quest controller button names](/assets/names_buttons.jpg)
+
+2. After connecting, you'll see the list of connected cameras and recording options.
+  - Move the windows with the `Grip button` to organize your space.
+  - Enable preview to see the camera feed. Check the **camera angles** and adjust their positions if needed. 
+
+<Info>We recommend **disabling** the camera preview to save bandwidth.</Info>
+
+3. Press `A` once to start teleoperation and begin moving your controller.  
+   - The robot will naturally follow the movement of your controller. Press the `Trigger button` to close the gripper.
+   - Press `A` again to stop the teleoperation. The robot will stop.  
+
+4. Press `B` to start recording. You can leave the default settings for your first attempt.  
+   - Press `B` again to stop the recording.
+   - Press `Y` (left controller) to discard the recording.
+
+5. Continue teleoperating and stop the recording by pressing `B` when you're done.  
+
+6. The recording is automatically saved in **LeRobot v2** format and **uploaded to your HuggingFace account.**
+
+
+Go to your [Hugging Face profile](https://huggingface.co) to see the uploaded datasets. 
+
+You can view it using the [LeRobot Dataset Visualizer](https://huggingface.co/spaces/lerobot/visualize_dataset).
+
+![LeRobot dataset visualizer](/assets/lerobot_dataset_viz.png) 
 
 ## 3. Train your first model  
 
@@ -143,11 +168,25 @@ You need a GPU with at least 16GB of memory to train the model.
 
 5. Your trained model will be saved in `lerobot/outputs/train/`.  
 
-6. For inference scripts, you can head to our opensource GitHub repo, under the `inference` folder: [here](https://github.com/phospho-app/phosphobot)
+## What's next?
 
-## What's next?  
+Next, you can use the trained model to control your robot. Head to our [guide](/basic-usage/inference) to get started!
 
-- Join [our Discord](https://discord.gg/cbkggY6NSK) and send us a video of your robot! 💚 
-- Share your trained models on Hugging Face and help others get started with robotics AI.
-- Explore the rest of the documentation and try out the [example scripts](/examples). 
-
+<CardGroup>
+<Card
+  title="Use an AI model"
+  icon="rocket"
+  iconType="regular"
+  href="/basic-usage/inference"
+>
+  Let a trained AI model control your robot
+</Card>
+<Card
+  title="Discord"
+  icon="discord"
+  iconType="regular"
+  href="https://discord.gg/cbkggY6NSK"
+>
+  Join the Discord to ask questions, get help from others and get updates (we ship almost daily)
+</Card>
+</CardGroup>
