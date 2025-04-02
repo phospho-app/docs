@@ -5,47 +5,90 @@ description: "What kind of cameras are used in robotics ?"
 
 ## Cameras in Robotics
 
-Most robotics models rely on data from one or more cameras to make decisions. The images, along with additional information such as joint positions, are fed into the model during both training and inference. 
+Cameras are the eyes of your robot. 
+
+Robots may rely on one or more camera to make decisions. The images, along with additional information such as joint positions, are fed into the model during both training and inference. 
+
+There exist different types of cameras and phosphobot supports most of them.
 
 ### Generic Cameras
 
-Most cameras pluged to the phosphobot server can be used for recording. 
-We use the powerful OpenCV library to detected them automatically. By default all available cameras are used for recording.
+phosphobot uses the powerful [OpenCV](https://opencv.org/) library to detect cameras automatically. This open source library supports most of the generic cameras available. phosphobot ships with its own binary of OpenCV, so you don't need to install it separately.  
 
-<Card icon="graduation-cap" title="OpenCV" href="https://opencv.org/">
-Check the OpenCV project
-</Card>
+Placement of cameras matter. In robotics datasets, there are two main types of camera setups:
+
+1. **Context cameras**: These cameras are placed to capture the environment and objects around the robot. These context cameras can be placed on the robot (e.g. on the head, on the body) or in the environment (e.g. on the walls, on the ceiling).
+
+2. **Wrist cameras**: These cameras are placed on the wrists (hands) of the robot. They help with fine-grained manipulation tasks, so that the robot can see if it's holding an object correctly. The [phosphobot starter pack](https://robots.phospho.ai) comes with two wrist cameras, one for each arm.
+
+
+![phospho dev kit wrist camera](/assets/wrist-camera.jpg)
+
+Adding more cameras usually helps to improve AI accuracy. However, it requires more compute at inference time (slower models) and makes the real-life setup more cumbersome. Usually, one context camera and two wrist cameras are a good trade-off.
 
 ### Stereo Cameras
 
 Stereo Cameras are made of two lenses that capture two images of the same scene from slightly different angles.
 ![stereo_cam](/assets/stereo_cam.png)
+
 The shift between the two images is used to calculate the depth of the scene. The greater the shift, the closer the object is to the camera.
+
+![Example of a stereo cam depth reconstructions](/assets/stereo_cam_example.jpg)
 
 <Card icon="graduation-cap" title="Depth from Stereo Images" href="https://docs.opencv.org/4.x/dd/d53/tutorial_py_depthmap.html">
 Learn how to compute a depth map from stereo images 
 </Card>
 
-### Realsense Cameras
+In deep learning models, however, you usually feed directly the two images to the model. The model learns to extract the depth information by itself.
 
-The phospho dev kit also supports the integration of Intel RealSense cameras.
-We use [python bindings of Intel Realsense SDK 2.0](https://github.com/IntelRealSense/librealsense/tree/master) to interact with this type of camera.
 
-![depth_camera](/assets/depth_camera.png)
+### Depth cameras (Realsense Cameras)
 
-Realsense depth cameras can directly return a depth map in addition to the color image.
-![depth_image](/assets/depth_image.png)
+Depth cameras are a type of camera that can directly return a depth map in addition to the color image. This is generally achieved used infrared light and a sensor that measures the time it takes for the light to bounce back to the camera. This technique is called **Time of Flight** and is usually more reliable than stereo cameras.
+
+This is an example of a depth image:
+
+![The depth image of an Intel Realsense camera](/assets/depth_image.png)
+
+Intel RealSense cameras are a popular choice for depth cameras. They are more complex than standard cameras. For example, they embark more sensors (infrared, color) and an **processor** used to compute the depth map. This means they are pricier than standard cameras and are more difficult to set up.
+
+![Depth camera, model Intel Realsense](/assets/depth_camera.png)
 
 <Card icon="camera" title="Intel Realsense" href="https://www.intelrealsense.com/">
-Check the available Intel RealSense cameras here
+Learn more about Intel RealSense cameras
 </Card>
 
+phosphobot software supports Intel RealSense cameras using the [Intel Realsense SDK 2.0](https://github.com/IntelRealSense/librealsense/tree/master).
 
-### Phosphobot
-Every camera runs on its own thread. We create mp4 videos with [OpenCV](https://opencv.org/) from the captured RGB frames. The number of FPS (frames per second), the mp4 codec as well as the video resolution can be configured for recording. 
-![recording_parameters](/assets/recording_parameters.png)
+
+## Dataset Recording
+
+When [recording a dataset](/basic-usage/dataset-recording) with phosphobot, the images are saved in a mp4 video file using OpenCV. The number of FPS (frames per second), the mp4 codec as well as the video resolution can be configured for recording in the Admin Settings. 
+
+By default, all available cameras are recorded. But you can disable some of them in the Admin Settings. This is helpful if you don't want to record your laptop camera or if Apple's iPhone camera records inside your pocket. 
+
+![Recording parameters](/assets/recording_parameters.png)
 
 Anybody can contribute to add new types of cameras to the phospho dev kits by creating a new camera class inheriting from `BaseCamera`.
+
 <Card icon="handshake-angle" title="Contribute" href="https://github.com/phospho-app/phosphobot">
-Join the community and build new cameras for the phospho dev kits.
+Join the community and add support for more cameras for the phospho dev kits.
 </Card>
+
+## Troubleshooting Cameras
+
+Every camera vendor has its own SDK and drivers. This can lead to compatibility issues. Here are some tips:
+
+1. Run `phosphobot` with `sudo` to avoid permission issues.
+
+```
+sudo phosphobot run
+```
+
+2. Use **virtual cameras** to avoid compatibility issues. Virtual cameras let you record your computer screen or a specific window. This is helpful as a workaround when your camera is not detected by phosphobot. 
+
+<Card icon="camera-movie" title="Virtual cameras in OBS" href="https://obsproject.com/kb/virtual-camera-guide">
+Check OBS Studio guide to create virtual cameras
+</Card>
+
+3. Ask for help on the [phospho Discord](https://docs.phospho.ai/welcome), along with your camera model, your operating system (MacOS, Linux, Windows...) and what you have tried so far. We'll get this working together!
