@@ -8,31 +8,39 @@ To train an AI model for your robot, you need a robotics dataset. For that, you 
 <Note>Don't have a dataset? Use one of ours: `PLB/simple-lego-pickup-mono-2`</Note>
 
 You can **train an AI model (VLA) directly from your phosphobot dashboard**. 
-Training will be run on the phospho cloud, so you don't need to worry about the GPUs.
 
-Alternatively, you can train your model using the following scripts on your own machine:
-- [ACT](/basic-usage/training#act-action-chunking-transformer) (Action Chunking Transformer) trained using LeRobot training scripts
-- [pi0](/basic-usage/training#pi0-pi-zero) trained using openpi by Physical intelligence
 
-## Training on the phospho cloud
+## One-click training from the phosphobot dashboard
 
-Training will be run on the phospho cloud, so you don't need to worry about the GPUs. 
-You will need to create a phospho account and login.
+You can fine-tune [Nvidia GR00T-N1-2B](https://huggingface.co/nvidia/GR00T-N1-2B) on your dataset right from the phosphobot dashboard. This is the easiest way to train a AI robotics model.
 
-If you haven't already, launch the phosphobot server:
+1. Launch the phosphobot server and go to the phosphobot dashboard in your browser: [http://localhost](http://localhost)
 
-```bash
-phosphobot run
-```
+  ```bash
+  phosphobot run
+  ```
 
-and go to the dashboard in your browser at [http://localhost](http://localhost).
+2. Create a phospho account by clicking on the **Sign Up** button in the top right corner. 
+3. _(If not already done)_ Add your Hugging Face token in the **Admin Settings** tab with **Write authorization**. This will sync your datasets to Hugging Face. Then, record a dataset using teleoperation. [Read the full guide here](/basic-usage/dataset-recording#1-set-up-your-hugging-face-token).
+4. In the **AI Training and Control** section, enter the the name of your dataset on Hugging Face (example: `PLB/simple-lego-pickup-mono-2`). 
 
-In the **AI Training and Control** section, input the the name of your dataset (example: `PLB/simple-lego-pickup-mono-2`) and hit the **Train AI Model** button. 
-And boom, your model will start training.
+![phosphobot training cloud](/assets/phosphobot-aitraining.png)
 
-Training can take up to 3 hours. You can view the training and trained models in the **View Trained Models** tab.
 
-Your model will be upled to the phospho secondary HuggingFace page: [phospho-app](https://huggingface.co/phospho-app) and named something like `phospho-app/YOUR_DATASET_NAME-A_RANDOM_ID`.
+5. Hit the **Train AI Model** button. Your model starts training. Training can take up to 3 hours. Follow the training using the button **View trained models**. 
+
+Your trained model is uploaded to HuggingFace [on the phospho-app account](https://huggingface.co/phospho-app). Its name is something like `phospho-app/YOUR_DATASET_NAME-A_RANDOM_ID`.
+
+Next up, you can start controlling your robot with the trained model.
+
+<Card
+  title="Use a robotics AI model"  
+  icon="brain-circuit"
+  iconType="regular"
+  href="/basic-usage/inference"
+>
+  Let a trained AI model control your robot
+</Card>
 
 ## Training on your own machine
 
@@ -156,8 +164,8 @@ huggingface-cli upload USERNAME/your-model-name \
 Test the model you just trained on your robot. See the [Use AI models](/basic-usage/inference) page for more information.
 
 <Card
-  title="Use an AI model"
-  icon="rocket"
+  title="Use a robotics AI model"
+  icon="brain-circuit"
   iconType="regular"
   href="/basic-usage/inference"
 >
