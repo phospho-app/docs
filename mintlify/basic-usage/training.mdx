@@ -6,26 +6,41 @@ description: "How to train a robotics AI model with a dataset?"
 You just [recorded a dataset](/basic-usage/dataset-recording) and now you want to train an AI model to control your robot. 
 Here's how you can do it.
 
-<Note>Don't have a dataset? Use one of ours: `PLB/Orange-brick-in-black-box`</Note>
+<Note>Don't have a dataset? Use one of ours: `PLB/simple-lego-pickup-mono-2`</Note>
 
 You dataset is saved in the **LeRobot** format and uploaded to your Hugging Face account. 
 Any training script compatible with this dataset format can be used to train your AI model.
 
-For now, we support the following models:
+You can train an AI model (VLA) directly from your phosphobot dashboard. 
+Training will be run on the phospho cloud, so you don't need to worry about the GPUs.
+
+Alternatively, you can train your model using the following scripts on your own machine:
 - [ACT](/basic-usage/training#act-action-chunking-transformer) (Action Chunking Transformer) trained using LeRobot training scripts
 - [pi0](/basic-usage/training#pi0-pi-zero) trained using openpi by Physical intelligence
 
-## ACT (Action Chunking Transformer)
+## Training on the phospho cloud
 
-### Running on replicate
+Training will be run on the phospho cloud, so you don't need to worry about the GPUs. 
+You will need to create a phospho account and login.
 
-To make it easier to train your model, we provide a training script that you can run on the **Replicate** platform, a cloud service that provides GPU instances and scripts to train your AI models and run inference.
+If you haven't already, launch the phosphobot server:
 
-Check out our pipeline here: [Replicate ACT pipeline](https://replicate.com/phospho-app/act-policy)
+```bash
+phosphobot run
+```
 
-You'll need to provide a Hugging Face dataset ID and token on which to train the policy.
+and go to the dashboard in your browser at [http://localhost](http://localhost).
 
-### Running on your local machine
+In the **AI Training and Control** section, input the the name of your dataset (example: `PLB/simple-lego-pickup-mono-2`) and hit the **Train AI Model** button. 
+And boom, your model will start training.
+
+Training can take up to 3 hours. You can view the training and trained models in the **View Trained Models** tab.
+
+Your model will be upled to the phospho secondary HuggingFace page: [phospho-app](https://huggingface.co/phospho-app) and named something like `phospho-app/YOUR_DATASET_NAME-A_RANDOM_ID`.
+
+## Training on your own machine
+
+### ACT (Action Chunking Transformer)
 
 <Warning>
 You need a GPU with at least 16GB of memory to train the model.
@@ -64,6 +79,14 @@ On the device where you want to run the training, install the [Phosphobot packag
    ```
 
 5. Your trained model is saved in `lerobot/outputs/train/`.  
+
+#### Running on replicate
+
+To make it easier to train your model, we provide a training script that you can run on the **Replicate** platform, a cloud service that provides GPU instances and scripts to train your AI models and run inference.
+
+Check out our pipeline here: [Replicate ACT pipeline](https://replicate.com/phospho-app/act-policy)
+
+You'll need to provide a Hugging Face dataset ID and token on which to train the policy.
 
 ## Pi0 (Pi-Zero)
 
