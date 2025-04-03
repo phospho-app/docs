@@ -5,6 +5,8 @@ description: "A guide to training AI models that control robots"
 
 The phospho starter pack makes it easy to train robotics AI models by integrating with **LeRobot** from Hugging Face.
 
+In this guide, we'll show you how to train the ACT (Action Chunking Transformer) model using the phospho starter pack and LeRobot by Hugging Face.
+
 ## What is LeRobot?
 
 ![LeRobot logo](https://cdn-uploads.huggingface.co/production/uploads/631ce4b244503b72277fc89f/MNkMdnJqyPvOAEg20Mafg.png)
@@ -122,7 +124,7 @@ You can view it using the [LeRobot Dataset Visualizer](https://huggingface.co/sp
 
 ![LeRobot dataset visualizer](/assets/lerobot_dataset_viz.png) 
 
-## 3. Train your first model  
+## 3. Train your first ACT model  
 
 ### Cloud training
 
@@ -187,19 +189,81 @@ You need a GPU with at least 16GB of memory to train the model.
 
 5. Your trained model will be saved in `lerobot/outputs/train/`.  
 
+## 4. Control your ROBOT with ACT
+
+Clone the phosphobot repository to get the inference script. You can use the `git` command to clone the repository:
+
+```bash
+git clone https://github.com/phospho-app/phosphobot.git
+```
+
+If you use pip, just run
+
+```bash
+cd phosphobot/inference
+pip install .
+python ACT/inference.py --model_id=<YOUR_HF_DATASET_NAME>
+```
+
+This will load your model and create an /act endpoint that expects the robot's current position and images. If using a local model, you can pass the path of a local model instead of a HF model with the "--model_id=..." flag.
+
+This inference script is intended to run on a machine with a GPU, separately from your phosphobot installation.
+
+```python
+from phosphobot.camera import AllCameras
+from phosphobot.api.client import PhosphoApi
+from phosphobot.am import ACT
+
+import time
+import numpy as np
+
+# Connect to the phosphobot server
+client = PhosphoApi(base_url="http://localhost:80")
+
+# Get a camera frame
+allcameras = AllCameras()
+
+# Need to wait for the cameras to initialize
+time.sleep(1)
+
+# Instantiate the model
+model = ACT(
+  server_url="YOUR_SERVER_URL",
+  server_port="YOUR_SERVER_PORT",
+)
+
+# Get the frames from the cameras
+# We will use this model: LegrandFrederic/Orange-brick-in-black-box
+# It requires 3 cameras as you can see in the config.json
+# https://huggingface.co/LegrandFrederic/Orange-brick-in-black-box/blob/main/config.json
+
+while True:
+    images = [
+        allcameras.get_rgb_frame(camera_id=0, resize=(240, 320)),
+        allcameras.get_rgb_frame(camera_id=1, resize=(240, 320)),
+        allcameras.get_rgb_frame(camera_id=2, resize=(240, 320)),
+    ]
+
+    # Get the robot state
+    state = client.control.read_joints()
+
+    inputs = {"state": np.array(state.angles_rad), "images": np.array(images)}
+
+    # Go through the model
+    actions = model(inputs)
+
+    for action in actions:
+        # Send the new joint postion to the robot
+        client.control.write_joints(angles=action.tolist())
+        # Wait to respect frequency control (30 Hz)
+        time.sleep(1 / 30)
+```
+
 ## What's next?
 
 Next, you can use the trained model to control your robot. Head to our [guide](/basic-usage/inference) to get started!
 
 <CardGroup>
-<Card
-  title="Use an AI model"
-  icon="rocket"
-  iconType="regular"
-  href="/basic-usage/inference"
->
-  Let a trained AI model control your robot
-</Card>
 <Card
   title="Policies"
   icon="brain-circuit"
