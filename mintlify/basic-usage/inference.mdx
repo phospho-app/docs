@@ -5,18 +5,58 @@ description: "How to make an AI model control your robot?"
 
 You just [trained an AI model](/basic-usage/training) and now you want to use it to control your robot. Let's see how you can do that.
 
-<Note>
-We are about to release a new feature that will allow you to control your robot directly from the phosphobot dashboard. Stay tuned!
-</Note>
+<Warning>
+Disclaimer: Letting an AI control your robot carries risk. Clear the area from pets, people and objects. You are the only one **responsible** for any damage caused to your robot or the environment.
+</Warning>
 
-## Setup an inference server
+
+## Control your robot from the phosphobot dashboard
+
+If you finetuned a GR00T-N1-2B model and pushed it to huggingface, you can use it directly from the phosphobot dashboard.
+
+<Note>You can fine tune the model in a single click from the dashboard. [Go here to learn how.](/basic-usage/training)</Note>
+
+1. **Connect your robots and your cameras** to your computer. **Run the phosphobot server** and go to the phosphobot dashboard in your browser: [http://localhost](http://localhost)
+
+  ```bash
+  phosphobot run
+  ```
+  
+2. Create a phospho account or log in by clicking on the **Sign in** button in the top right corner. 
+3. _(If not already done)_ Add your Hugging Face token in the **Admin Settings** tab with **Write authorization**. [Read the full guide here](/basic-usage/dataset-recording#1-set-up-your-hugging-face-token).
+4. In the **AI Training and Control** section, enter the instruction you want to give the robot and click on **Go to AI Control**. Accept the disclaimer. You'll be redirected to the AI Control page.
+
+![phosphobot ai control panel](/assets/phosphobot-ai-control.png)
+
+5. In the **Model ID**, enter the name of your model on Hugging Face (example: `phospho-app/YOUR_DATASET_NAME-A_RANDOM_ID`). Double check the camera angles so that they match the ones you used to record the dataset.
+
+6. Click on **Start AI Control**. Please wait: the first time, starting a GPU instance and loading the model can take up to 60 seconds. Then the robot will start moving. 
+
+You can pause, resume, and stop the AI control at any time by clicking on the control buttons. 
+
+You can edit the **Instruction** field to change the instruction and run it again to see how the robot reacts.
+
+<Card
+  title="Discord"
+  icon="discord"
+  iconType="regular"
+  href="https://discord.gg/cbkggY6NSK"
+>
+  Join the Discord to ask questions and share your demos!
+</Card>
+
+## How to control your robot in Python?
+
+If you're using a different model or want more fine-grained control, you can use the `phosphobot` python module to control your robot with an AI model.
+
+### 1. Setup an inference server
 
 First, you need to setup an inference server. This server runs on a beefy machine with a GPU that can run the AI model. It can be your own machine, a cloud server, or a dedicated server.
 
-<Note>
+<Info>
   If you choose a remote location, chose the closest location to minimize
   latency.
-</Note>
+</Info>
 
 To setup the inference server, follow the instructions in the link below:
 
@@ -28,7 +68,8 @@ To setup the inference server, follow the instructions in the link below:
   How to setup the inference server?
 </Card>
 
-## Call your inference server from a python script
+### 2. Call your inference server from a python script
+
 
 Open a terminal and run the [phosphobot server.](/installation)
 
@@ -37,6 +78,14 @@ phosphobot run
 ```
 
 Then, create a new python file called `inference.py`. Inside, copy the content of an example script below.
+
+
+<AccordionGroup>
+
+<Accordion
+  title="ACT"
+>
+  
 
 ### Example script for ACT
 
@@ -86,6 +135,10 @@ while True:
         # Wait to respect frequency control (30 Hz)
         time.sleep(1 / 30)
 ```
+</Accordion>
+<Accordion
+  title="Pi0"
+>
 
 ### Example script for Pi0
 
@@ -136,7 +189,11 @@ while True:
         # Wait to respect frequency control (30 Hz)
         time.sleep(1 / 30)
 ```
+</Accordion>
 
+<Accordion
+  title="gr00t-n1"
+>
 ### Example script for gr00t-n1
 
 You need to install the `torch` and `zmq` libraries.
@@ -191,6 +248,10 @@ while True:
         # Wait to respect frequency control (30 Hz)
         time.sleep(1 / 30)
 ```
+</Accordion>
+<Accordion
+  title="Other models"
+>
 
 ### Other models
 
@@ -198,19 +259,20 @@ You can implement the `ActionModel` class with your own logic [here](phosphobot/
 
 For more information, check out the implementation [here](https://github.com/phospho-app/phosphobot/blob/main/phosphobot/am/models.py).
 
-## Run the script
+</Accordion>
 
-To run the script, install the phosphobot python module.
+
+</AccordionGroup>
+
+To run the script, install the phosphobot python module. Then, run the script.
 
 ```bash
 pip install phosphobot
-```
-
-Then, run the script.
-
-```bash
 python your_script.py
 ```
+
+
+
 
 ## What's next?
 
