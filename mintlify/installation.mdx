@@ -1,8 +1,15 @@
 ---
-title: "Installation"
-description: "How to set up phosphobot for free and control your robot arm"
+title: "Install phosphobot"
+description: "How to set up phosphobot for free and control your robot arm in simulation and in real life."
 ---
 
+<iframe 
+    className="w-full aspect-video"
+    src="https://www.youtube.com/embed/AQ-xgCTdj_w?si=NDTtX1nISABjzmbA" 
+    title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+    referrerPolicy="strict-origin-when-cross-origin" 
+    allowFullScreen>
+</iframe>
 
 ## Install phosphobot
 
@@ -33,19 +40,12 @@ Then, run the phosphobot server:
 phosphobot run
 ```
 
-It can take up to 15 seconds for the server to start for the first time because of macOS security settings.
+It can take up to 15 seconds for the server to start.
 
 On the same computer, open a web browser and navigate to `localhost`. You should now see the **phosphobot dashboard**.
 
-![phosphobot dashboard](/assets/phosphobot-dashboard.jpg)
+![phosphobot dashboard](/assets/phosphobot-dashboard.png)
 
-<Note> 
-To continue your setup, you need a SO-100 robot arm plugged to your computer. If you don't have one, you can buy a kit [here](https://robots.phospho.ai/).
-</Note>
-
-- If you bought the [phospho dev kit](https://robots.phospho.ai/), send API requests or use `Keyboard Control` to test the connection with the robot. 
-- If you built your own robot arm, you should first [calibrate it](/installation#support).
-- Everything works? Great! **You're ready to send your first commands.**
 
 <Card
   title="Send your first commands"
@@ -53,7 +53,7 @@ To continue your setup, you need a SO-100 robot arm plugged to your computer. If
   iconType="regular"
   href="/basic-usage/teleop"
 >
-  Discover how to control your robot arm from the phosphobot dashboard.
+  Discover how to control your robot arm from the dashboard and from the Meta Quest app.
 </Card>
 
 ## MacOS

@@ -7,7 +7,7 @@ description: "Control your robot over the internet using ngrok"
 
 Before starting, make sure you have the following:
 
-1. A **control module** set up, connected to the internet, and running the phosphobot server. [Learn how to set up your control module](/unboxings/dk1).
+1. A **phosphobot server** set up and connected to the internet. [Learn how to set up your control module](/unboxings/dk1).
 2. An **ngrok account**. [Sign up here](https://ngrok.com/) (*or use an alternative like Cloudflare Tunnel*).
 3. The **ngrok CLI** installed on your device. [Download it here](https://ngrok.com/download)
 
@@ -22,9 +22,9 @@ To use ngrok, you need to authenticate your account. Open a terminal and run the
    Replace `YOUR_AUTH_TOKEN` with the token provided in your **ngrok dashboard**.
 
 
-## 2. Create an ngrok Tunnel for Your Local Server
+## 2. Create an ngrok Tunnel for your control module
 
-1. Turn on your control module and ensure your phosphobot server is running.
+1. Ensure your phosphobot server is running and connected to the internet. If you're using the control module, turn it on.
 
 2. SSH into your phosphobot. By default, the password is `password123`
 
@@ -46,7 +46,7 @@ ssh phosphobot@phosphobot.local
    Forwarding  https://abc123.ngrok.io -> http://localhost:80
    ```
 
-   This URL is publicly accessible from anywhere in the world and will remain active while the ngrok tunnel is running. Turn off the control module to stop the tunnel.
+   This URL is publicly accessible from anywhere in the world and will remain active while the ngrok tunnel is running. Turn off the server to stop the tunnel.
 
 ## 3. Access Your Teleoperation App Remotely
 
@@ -85,7 +85,7 @@ Ngrok provides a web interface for inspecting traffic and requests. To access it
 2. Here, you can view **detailed logs** of incoming requests and responses.
 
 
-## What’s Next?
+## What's Next?
 
 Now that your teleoperation app is accessible remotely, you can:
 

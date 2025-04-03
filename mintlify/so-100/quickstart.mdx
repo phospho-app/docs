@@ -1,13 +1,20 @@
 ---
-title: "Quickstart"
-description: "How to set up phosphobot and control your robot arm"
+title: "SO-100 quickstart"
+description: "How to set up phosphobot and control your SO-100 robot arm"
 ---
 
 If you haven't already, install phosphobot on your computer. See the [installation guide](/installation) for more information.
 
 # Setup the hardware
 
-<Info> This is the generic quickstart. For the dev kit unboxing, see the [dev kit unboxing guide](/unboxings/dk1). </Info>
+## Get your SO-100 robot arm
+
+The SO-100 robot arm is a 6-DOF robotic arm with a 1-DOF gripper. It’s a popular robot arm for AI robotics, with many users.
+
+The SO-100 robot arm is [open source](https://github.com/TheRobotStudio/SO-ARM100) and can be built using off-the-shelf components and 3D printed parts.
+
+- If you want to build your own SO-100 robot arm, you can follow the [assembly guide](https://robots.phospho.ai/docs/so-100/build).
+- If you're looking to buy SO-100 robot arm already assembled, you can get a starter pack [on our shop](https://robots.phospho.ai).
 
 ## Attach the SO-100 arm
 
@@ -31,7 +38,7 @@ Below is an example of a full setup with a SO-100 arm, a stereoscopic camera plu
 
 # Launch the server
 
-<Info> If you change the hardware connected to the computer running the server, you have to restart the server. </Info>
+<Info> If you change the cameras connected to the computer running the server, you have to restart the server. </Info>
 
 Once everything is connected and powered on, run the following command to start the phosphobot server:
 
@@ -46,7 +53,7 @@ It can take up to 15 seconds for the server to start for the first time because 
 Go to the dashboard (at `localhost` if you are running the server on your laptop or `phosphobot.local` if it's a Raspberry Pi on your network) 
 in your web browser.
 
-![phosphobot dashboard](/assets/phosphobot-dashboard.jpg)
+![phosphobot dashboard](/assets/phosphobot-dashboard.png)
 
 Go to _Camera 0verview_ to check if the cameras are detected.
 Go to _API Documentation_ to check if the API is running. Read the current robot position with the [/joints/read](/control/read-joints) endpoint.
@@ -123,7 +130,7 @@ Tou can now [control your robot](/basic-usage/teleop), [record your first datase
   title="Train an AI model"
   icon="brain"
   iconType="regular"
-  href="/basic-usage/dataset-recording"
+  href="/basic-usage/training"
 >
   How to train an AI model from a dataset you recorded
 </Card>

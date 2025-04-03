@@ -21,7 +21,7 @@ Run the following command at the root of your documentation (where mint.json is)
 mintlify dev
 ```
 
-To learn how to format the pages and what blocks you can use, [check out the Mintlify docs.](https://mintlify.com/docs/quickstart)
+To learn how to format the pages and what blocks you can use, [check out the Mintlify docs.](https://mintlify.com/docs/so-100/quickstart)
 
 ### Troubleshooting
 
