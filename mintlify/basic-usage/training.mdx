@@ -7,10 +7,7 @@ To train an AI model for your robot, you need a robotics dataset. For that, you 
 
 <Note>Don't have a dataset? Use one of ours: `PLB/simple-lego-pickup-mono-2`</Note>
 
-You can **train an AI model (VLA) directly from your phosphobot dashboard**. 
-
-
-## One-click training from the phosphobot dashboard
+## Train GR00T-N1-2B in one click from the phosphobot dashboard
 
 You can fine-tune [Nvidia GR00T-N1-2B](https://huggingface.co/nvidia/GR00T-N1-2B) on your dataset right from the phosphobot dashboard. This is the easiest way to train a AI robotics model.
 
@@ -22,6 +19,12 @@ You can fine-tune [Nvidia GR00T-N1-2B](https://huggingface.co/nvidia/GR00T-N1-2B
 
 2. Create a phospho account or log in by clicking on the **Sign in** button in the top right corner. 
 3. _(If not already done)_ Add your Hugging Face token in the **Admin Settings** tab with **Write authorization**. This will sync your datasets to Hugging Face. Then, record a dataset using teleoperation. [Read the full guide here](/basic-usage/dataset-recording#1-set-up-your-hugging-face-token).
+
+<Info>
+Garbage in, garbage out. Our tests show that training works with about 30 episodes. It's better for the task to be specific. Have good lighting and similar setup.
+</Info>
+
+
 4. In the **AI Training and Control** section, enter the the name of your dataset on Hugging Face (example: `PLB/simple-lego-pickup-mono-2`). 
 
 ![phosphobot training cloud](/assets/phosphobot-aitraining.png)
@@ -33,14 +36,25 @@ Your trained model is uploaded to HuggingFace [on the phospho-app account](https
 
 Next up, you can start controlling your robot with the trained model.
 
+<CardsGroup>
 <Card
-  title="Use a robotics AI model"  
+  title="Control your robot with a trained AI model"
   icon="brain-circuit"
   iconType="regular"
   href="/basic-usage/inference"
 >
   Let a trained AI model control your robot
 </Card>
+<Card
+  title="Discord"
+  icon="discord"
+  iconType="regular"
+  href="https://discord.gg/cbkggY6NSK"
+>
+  Join the Discord for support and updates (we ship almost daily)
+</Card>
+
+</CardsGroup>
 
 ## Training on your own machine
 
