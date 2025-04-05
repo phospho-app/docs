@@ -126,23 +126,36 @@ You can view it using the [LeRobot Dataset Visualizer](https://huggingface.co/sp
 
 ## 4. Train your first model  
 
-### Train in one click with phosphobot cloud
+### Train GR00T-N1-2B in one click with phosphobot cloud
 
 To train a model, you can use the phosphobot cloud. This is the quickest way to train a model.
 
+This also lets you control your robot very easily. 
+
 ![phosphobot training cloud](/assets/phosphobot-aitraining.png)
 
+<CardGroup>
 <Card
   title="Train with phosphobot cloud"
   icon="vial"
   iconType="regular"
   href="/basic-usage/training"
 >
-  Train your AI robotics model with phosphobot cloud
+  Learn how to train a model with phosphobot cloud
 </Card>
 
+<Card
+title="Control your robot with GR00T-N1-2B"
+  icon="vial"
+  iconType="regular"
+  href="/basic-usage/inference"
+>
+  Learn about controlling your robot with GR00T-N1-2B and phosphobot cloud
+</Card>
+</CardGroup>
 
-### Running on your local machine 
+
+### Train an ACT model locally 
 
 <Warning>
 You need a GPU with at least 16GB of memory to train the model.
@@ -182,7 +195,7 @@ You need a GPU with at least 16GB of memory to train the model.
 
 5. Your trained model will be saved in `lerobot/outputs/train/`.  
 
-## 5. Control your ROBOT with ACT
+## 5. Control your robot with the ACT model
 
 Clone the phosphobot repository to get the inference script. You can use the `git` command to clone the repository:
 
