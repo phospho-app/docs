@@ -16,9 +16,45 @@ Move in real time. Record datasets. Start training AI models.
 
 
 ## Prerequisites
-Connect to the dev kit through WiFi in the phospho Meta Quest app.
 
-<Info>Make sure you have already completed the [Installation Guide](/unboxings/dk1#5-set-up-your-meta-quest-app) and that you have a [Meta Quest](https://www.meta.com/fr/quest/quest-3/?srsltid=AfmBOorMLUmJKFQr35ssCi1DDqSNgpHk0sLHqo_tHG8kgclCYbMToAPa)</Info>
+1. You need an assembled **SO-100** robot arm. Get the [phosphot starter pack here](https://robots.phospho.ai).
+2. Install [the phosphobot software](/installation) on your computer.
+
+  <CodeGroup>
+
+  ```bash macOS
+  curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | bash
+  ```
+
+  ```bash Linux
+  curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | sudo bash
+  ```
+
+  ```bash Windows
+  # In a WSL terminal:
+  curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | sudo bash
+  # Learn more about Windows Subsystem for Linux: https://learn.microsoft.com/en-us/windows/wsl/install
+  ```
+
+  </CodeGroup>
+
+3. Connct robots to your computer. Start the phosphobot server.
+
+  ```bash
+  phosphobot run
+  ```
+
+4. Complete the [quickstart](/so-100/quickstart) and check that you can [control your robot](/basic-usage/teleop).
+5. The **[phosphobot teleoperation app](/examples/teleop)** is installed on your **Meta Quest 2, Pro, 3 or 3s**. 
+    1. If you bought the [starter pack](https://robots.phospho.ai), you should have received a link to download the app. Please [reach out](contact@phsopho.ai) if not. 
+    2. If you didn't buy our product, we provide access to the app for a reasonable fee to cover our development costs. [Reach out to the phospho team on Discord](https://discord.gg/cbkggY6NSK) to get access. 
+
+
+## Step by step guide
+
+Connect to the dev kit through WiFi in the **phospho teleoperation** Meta Quest app.
+
+<Info>The app works with a [Meta Quest](https://www.meta.com/fr/quest/quest-3/?srsltid=AfmBOorMLUmJKFQr35ssCi1DDqSNgpHk0sLHqo_tHG8kgclCYbMToAPa). Compatible models: Pro, 2, 3, 3s.</Info>
 
 ![Meta Quest controller button names](/assets/names_buttons.jpg)  
 
@@ -26,7 +62,7 @@ Connect to the dev kit through WiFi in the phospho Meta Quest app.
 
 <Note>Make sure you're connected to the same WiFi as the phosphobot server or the control module</Note>  
 
-![Select Phosphobot server](/assets/changeme-unity-server.png)  
+![Select Phosphobot server](/assets/meta-quest-server-list.png)  
 
 2. After connecting, you should see the main camera feed if a camera is connected. Move the windows with the `Grip button` to organize your space.  
 3. Press `A` once to start teleoperation and begin moving your controller.  
