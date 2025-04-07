@@ -67,6 +67,7 @@
       "pages": [
         "learn/overview",
         "learn/kinematics",
+        "learn/lerobot-dataset",
         "learn/ai-models",
         "learn/policies",
         "learn/gravity-compensation",
