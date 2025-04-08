@@ -5,10 +5,10 @@ components:
       properties:
         cameras_to_disable:
           anyOf:
-            - items:
-                type: integer
-              type: array
-            - type: "null"
+          - items:
+              type: integer
+            type: array
+          - type: 'null'
           title: Cameras To Disable
         dataset_name:
           title: Dataset Name
@@ -24,13 +24,13 @@ components:
           type: string
         video_codec:
           enum:
-            - avc1
-            - hev1
-            - mp4v
-            - hvc1
-            - avc3
-            - av01
-            - vp09
+          - avc1
+          - hev1
+          - mp4v
+          - hvc1
+          - avc3
+          - av01
+          - vp09
           title: Video Codec
           type: string
         video_size:
@@ -39,23 +39,33 @@ components:
           title: Video Size
           type: array
       required:
-        - dataset_name
-        - freq
-        - episode_format
-        - cameras_to_disable
-        - video_codec
-        - video_size
-        - task_instruction
+      - dataset_name
+      - freq
+      - episode_format
+      - cameras_to_disable
+      - video_codec
+      - video_size
+      - task_instruction
       title: AdminSettingsResponse
       type: object
+    AdminSettingsTokenResponse:
+      description: 'To each provider is assigned a bool, which is True
+
+        if the token is set and valid.'
+      properties:
+        huggingface:
+          default: false
+          title: Huggingface
+          type: boolean
+      title: AdminSettingsTokenResponse
+      type: object
     AllCamerasStatus:
-      description:
-        Description of the status of all cameras. Use this to know which
+      description: Description of the status of all cameras. Use this to know which
         camera to stream.
       properties:
         cameras_status:
           items:
-            $ref: "#/components/schemas/SingleCameraStatus"
+            $ref: '#/components/schemas/SingleCameraStatus'
           title: Cameras Status
           type: array
         is_stereo_camera_available:
@@ -99,14 +109,14 @@ components:
           default: right
           description: Which hand the data comes from. Can be left or right.
           enum:
-            - left
-            - right
+          - left
+          - right
           title: Source
           type: string
         timestamp:
           anyOf:
-            - type: number
-            - type: "null"
+          - type: number
+          - type: 'null'
           description: Unix timestamp with milliseconds
           title: Timestamp
         x:
@@ -119,27 +129,17 @@ components:
           title: Z
           type: number
       required:
-        - x
-        - y
-        - z
-        - rx
-        - ry
-        - rz
-        - open
+      - x
+      - y
+      - z
+      - rx
+      - ry
+      - rz
+      - open
       title: AppControlData
       type: object
-    Body_sync_dataset_dataset_sync_post:
-      properties:
-        path:
-          title: Path
-          type: string
-      required:
-        - path
-      title: Body_sync_dataset_dataset_sync_post
-      type: object
     BrowseFilesResponse:
-      description:
-        Represents a response for browsing directories or items in a robotic
+      description: Represents a response for browsing directories or items in a robotic
         system.
       properties:
         directoryTitle:
@@ -159,17 +159,17 @@ components:
           type: array
         items:
           items:
-            $ref: "#/components/schemas/ItemInfo"
+            $ref: '#/components/schemas/ItemInfo'
           title: Items
           type: array
         tokenError:
           anyOf:
-            - type: string
-            - type: "null"
+          - type: string
+          - type: 'null'
           title: Tokenerror
       required:
-        - directoryTitle
-        - items
+      - directoryTitle
+      - items
       title: BrowseFilesResponse
       type: object
     BrowserFilesRequest:
@@ -179,7 +179,7 @@ components:
           title: Path
           type: string
       required:
-        - path
+      - path
       title: BrowserFilesRequest
       type: object
     CalibrateResponse:
@@ -188,9 +188,9 @@ components:
         calibration_status:
           description: Status of the calibration. Ends when status is success or error.
           enum:
-            - error
-            - success
-            - in_progress
+          - error
+          - success
+          - in_progress
           title: Calibration Status
           type: string
         current_step:
@@ -203,11 +203,42 @@ components:
           title: Total Nb Steps
           type: integer
       required:
-        - calibration_status
-        - message
-        - current_step
-        - total_nb_steps
+      - calibration_status
+      - message
+      - current_step
+      - total_nb_steps
       title: CalibrateResponse
+      type: object
+    ConfirmRequest:
+      properties:
+        access_token:
+          title: Access Token
+          type: string
+        refresh_token:
+          title: Refresh Token
+          type: string
+      required:
+      - access_token
+      - refresh_token
+      title: ConfirmRequest
+      type: object
+    DatasetListResponse:
+      description: List of datasets
+      properties:
+        local_datasets:
+          items:
+            type: string
+          title: Local Datasets
+          type: array
+        pushed_datasets:
+          items:
+            type: string
+          title: Pushed Datasets
+          type: array
+      required:
+      - pushed_datasets
+      - local_datasets
+      title: DatasetListResponse
       type: object
     DeleteEpisodeRequest:
       description: Request to delete an episode.
@@ -219,14 +250,14 @@ components:
           title: Path
           type: string
       required:
-        - path
-        - episode_id
+      - path
+      - episode_id
       title: DeleteEpisodeRequest
       type: object
     EndEffectorPosition:
-      description: "End effector position for a movement in absolute frame.
+      description: 'End effector position for a movement in absolute frame.
 
-        All zeros means the initial position, that you get by calling /move/init"
+        All zeros means the initial position, that you get by calling /move/init'
       properties:
         open:
           description: 0 for closed, 1 for open
@@ -257,20 +288,29 @@ components:
           title: Z
           type: number
       required:
-        - x
-        - y
-        - z
-        - rx
-        - ry
-        - rz
-        - open
+      - x
+      - y
+      - z
+      - rx
+      - ry
+      - rz
+      - open
       title: EndEffectorPosition
+      type: object
+    ForgotPasswordRequest:
+      properties:
+        email:
+          title: Email
+          type: string
+      required:
+      - email
+      title: ForgotPasswordRequest
       type: object
     HTTPValidationError:
       properties:
         detail:
           items:
-            $ref: "#/components/schemas/ValidationError"
+            $ref: '#/components/schemas/ValidationError'
           title: Detail
           type: array
       title: HTTPValidationError
@@ -282,12 +322,11 @@ components:
           title: Token
           type: string
       required:
-        - token
+      - token
       title: HuggingFaceTokenRequest
       type: object
     ItemInfo:
-      description:
-        Contains the information of the items in a directory used in the
+      description: Contains the information of the items in a directory used in the
         browser page
       properties:
         absolute_path:
@@ -295,8 +334,8 @@ components:
           type: string
         browseUrl:
           anyOf:
-            - type: string
-            - type: "null"
+          - type: string
+          - type: 'null'
           title: Browseurl
         canDeleteDataset:
           default: false
@@ -304,14 +343,23 @@ components:
           type: boolean
         deleteDatasetAction:
           anyOf:
-            - type: string
-            - type: "null"
+          - type: string
+          - type: 'null'
           title: Deletedatasetaction
         downloadUrl:
           anyOf:
-            - type: string
-            - type: "null"
+          - type: string
+          - type: 'null'
           title: Downloadurl
+        huggingfaceUrl:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Huggingfaceurl
+        is_dataset_dir:
+          default: false
+          title: Is Dataset Dir
+          type: boolean
         is_dir:
           title: Is Dir
           type: boolean
@@ -323,58 +371,67 @@ components:
           type: string
         previewUrl:
           anyOf:
-            - type: string
-            - type: "null"
+          - type: string
+          - type: 'null'
           title: Previewurl
       required:
-        - name
-        - path
-        - absolute_path
-        - is_dir
+      - name
+      - path
+      - absolute_path
+      - is_dir
       title: ItemInfo
       type: object
     JointsReadResponse:
       description: Response to read the joints of the robot.
       properties:
         angles_motor_units:
-          description:
-            A list of length 7, with the position of each joint in motor
+          description: A list of length 6, with the position of each joint in motor
             units.
           items:
             type: integer
           title: Angles Motor Units
           type: array
         angles_rad:
-          description: A list of length 7, with the position of each joint in radian.
+          description: A list of length 6, with the position of each joint in radian.
           items:
             type: number
           title: Angles Rad
           type: array
       required:
-        - angles_rad
-        - angles_motor_units
+      - angles_rad
+      - angles_motor_units
       title: JointsReadResponse
       type: object
     JointsWriteRequest:
       description: Request to set the joints of the robot.
       properties:
         angles:
-          description: A list of length 7, with the position of each joint in radian.
+          description: A list with the position of each joint in radian.
           items:
             type: number
           title: Angles
           type: array
+        joints_ids:
+          anyOf:
+          - items:
+              type: integer
+            type: array
+          - type: 'null'
+          description: 'If set, only set the joints with these ids. If None, set all
+            joints.Example: ''angles''=[1,1,1], ''joints_ids''=[0,1,2] will set the
+            first 3 joints to 1 radian.'
+          title: Joints Ids
         unit:
           default: rad
           description: The unit of the angles. Defaults to radian.
           enum:
-            - rad
-            - motor_units
-            - degrees
+          - rad
+          - motor_units
+          - degrees
           title: Unit
           type: string
       required:
-        - angles
+      - angles
       title: JointsWriteRequest
       type: object
     LeaderFollower:
@@ -387,16 +444,15 @@ components:
           type: boolean
         gravity_compensation_values:
           anyOf:
-            - additionalProperties:
-                type: integer
-              type: object
-            - type: "null"
+          - additionalProperties:
+              type: integer
+            type: object
+          - type: 'null'
           default:
             elbow: 50
             shoulder: 100
             wrist: 10
-          description:
-            Gravity compensation pourcentage values for shoulder, elbow,
+          description: Gravity compensation pourcentage values for shoulder, elbow,
             and wrist joints (0-100%)
           title: Gravity Compensation Values
         invert_controls:
@@ -406,8 +462,8 @@ components:
           type: boolean
         robot_order:
           default:
-            - 58FA0811789
-            - 58FA0826529
+          - 58FA0811789
+          - 58FA0826529
           description: List of robot serial numbers in the order of leader, follower
           items:
             type: string
@@ -415,12 +471,66 @@ components:
           type: array
       title: LeaderFollower
       type: object
+    LoginCredentials:
+      properties:
+        email:
+          title: Email
+          type: string
+        password:
+          title: Password
+          type: string
+      required:
+      - email
+      - password
+      title: LoginCredentials
+      type: object
+    ModelStatus:
+      properties:
+        model_status:
+          enum:
+          - Done
+          - In progress
+          - Not started
+          title: Model Status
+          type: string
+        model_url:
+          title: Model Url
+          type: string
+      required:
+      - model_url
+      - model_status
+      title: ModelStatus
+      type: object
+    ModelTrainingConfig:
+      properties:
+        creation_date:
+          title: Creation Date
+          type: string
+        dataset_name:
+          title: Dataset Name
+          type: string
+        model_name:
+          title: Model Name
+          type: string
+        model_type:
+          title: Model Type
+          type: string
+        url:
+          title: Url
+          type: string
+      required:
+      - model_name
+      - dataset_name
+      - url
+      - creation_date
+      - model_type
+      title: ModelTrainingConfig
+      type: object
     MoveAbsoluteRequest:
-      description:
-        "Move the robot to an absolute position. All zeros means the initial
+      description: 'Move the robot to an absolute position. All zeros means the initial
         position,
 
-        that you get by calling /move/init."
+        that you get by calling /move/init.'
       properties:
         max_trials:
           default: 10
@@ -434,8 +544,7 @@ components:
           type: number
         orientation_tolerance:
           default: 0.2
-          description:
-            Increase max_trials and decrease tolerance to get more precision.Orientation
+          description: Increase max_trials and decrease tolerance to get more precision.Orientation
             tolerance is the euclidean distance between the target and the current
             orientation.
           minimum: 0.0
@@ -443,8 +552,7 @@ components:
           type: number
         position_tolerance:
           default: 0.03
-          description:
-            Increase max_trials and decrease tolerance to get more precision.Position
+          description: Increase max_trials and decrease tolerance to get more precision.Position
             tolerance is the euclidean distance between the target and the current
             position.
           minimum: 0.0
@@ -475,13 +583,13 @@ components:
           title: Z
           type: number
       required:
-        - x
-        - y
-        - z
-        - rx
-        - ry
-        - rz
-        - open
+      - x
+      - y
+      - z
+      - rx
+      - ry
+      - rz
+      - open
       title: MoveAbsoluteRequest
       type: object
     NetworkCredentials:
@@ -493,8 +601,8 @@ components:
           title: Ssid
           type: string
       required:
-        - ssid
-        - password
+      - ssid
+      - password
       title: NetworkCredentials
       type: object
     RecordingPlayRequest:
@@ -502,11 +610,11 @@ components:
       properties:
         episode_path:
           anyOf:
-            - type: string
-            - type: "null"
+          - type: string
+          - type: 'null'
           description: Path to the .json or .parquet file of the episode to play.
           examples:
-            - ~/phosphobot/lerobot_v2/example_dataset/chunk-000/episode_000000.json
+          - ~/phosphobot/lerobot_v2/example_dataset/chunk-000/episode_000000.json
           title: Episode Path
       title: RecordingPlayRequest
       type: object
@@ -515,129 +623,116 @@ components:
       properties:
         branch_path:
           anyOf:
-            - type: string
-            - type: "null"
-          description:
-            Path to the branch to push the dataset to, in addition to the
+          - type: string
+          - type: 'null'
+          description: Path to the branch to push the dataset to, in addition to the
             main branch. If set to None, only push to the main branch. Defaults to
             None.
           title: Branch Path
         cameras_ids_to_record:
           anyOf:
-            - items:
-                type: integer
-              type: array
-            - type: "null"
-          description:
-            List of camera ids to record. If set to None, records all available
+          - items:
+              type: integer
+            type: array
+          - type: 'null'
+          description: List of camera ids to record. If set to None, records all available
             cameras.
           examples:
-            - - 0
-              - 1
+          - - 0
+            - 1
           title: Cameras Ids To Record
         dataset_name:
           anyOf:
-            - type: string
-            - type: "null"
-          description:
-            Name of the dataset to save the episode in.If None, defaults
+          - type: string
+          - type: 'null'
+          description: Name of the dataset to save the episode in.If None, defaults
             to the value set in Admin Configuration.
           examples:
-            - example_dataset
+          - example_dataset
           title: Dataset Name
         episode_format:
           anyOf:
-            - enum:
-                - json
-                - lerobot_v2
-              type: string
-            - type: "null"
-          description: "Format to save the episode.
+          - enum:
+            - json
+            - lerobot_v2
+            type: string
+          - type: 'null'
+          description: 'Format to save the episode.
 
             `json` is compatible with OpenVLA and stores videos as a series of npy.
 
             `lerobot_v2` is compatible with [lerobot training.](https://docs.phospho.ai/learn/ai-models).If
-            None, defaults to the value set in Admin Configuration."
+            None, defaults to the value set in Admin Configuration.'
           examples:
-            - lerobot_v2
+          - lerobot_v2
           title: Episode Format
         freq:
           anyOf:
-            - type: integer
-            - type: "null"
-          description:
-            Records steps of the robot at this frequency.If None, defaults
+          - type: integer
+          - type: 'null'
+          description: Records steps of the robot at this frequency.If None, defaults
             to the value set in Admin Configuration.
           examples:
-            - 30
+          - 30
           title: Freq
         instruction:
           anyOf:
-            - type: string
-            - type: "null"
-          description:
-            A text describing the recorded task. If set to None, defaults
+          - type: string
+          - type: 'null'
+          description: A text describing the recorded task. If set to None, defaults
             to the value set in Admin Configuration.
           examples:
-            - Pick up the orange brick and put it in the black box.
+          - Pick up the orange brick and put it in the black box.
           title: Instruction
         robot_serials_to_ignore:
           anyOf:
-            - items:
-                type: string
-              type: array
-            - type: "null"
-          description:
-            List of robot indexes to ignore. If set to None, records all
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          description: List of robot indexes to ignore. If set to None, records all
             available robots.
           examples:
-            - - 1
+          - - 1
           title: Robot Serials To Ignore
         target_video_size:
           anyOf:
-            - maxItems: 2
-              minItems: 2
-              prefixItems:
-                - type: integer
-                - type: integer
-              type: array
-            - type: "null"
-          description:
-            Target video size for the recording, all videos in the dataset
+          - maxItems: 2
+            minItems: 2
+            prefixItems:
+            - type: integer
+            - type: integer
+            type: array
+          - type: 'null'
+          description: Target video size for the recording, all videos in the dataset
             should have the same size. If set to None, defaults to the value set in
             Admin Configuration.
           examples:
-            - - 320
-              - 240
+          - - 320
+            - 240
           title: Target Video Size
         video_codec:
           anyOf:
-            - enum:
-                - avc1
-                - hev1
-                - mp4v
-                - hvc1
-                - avc3
-                - av01
-                - vp09
-              type: string
-            - type: "null"
-          description:
-            Codec to use for the video saving.If None, defaults to the
+          - enum:
+            - avc1
+            - hev1
+            - mp4v
+            - hvc1
+            - avc3
+            - av01
+            - vp09
+            type: string
+          - type: 'null'
+          description: Codec to use for the video saving.If None, defaults to the
             value set in Admin Configuration.
           examples:
-            - mp4v
+          - mp4v
           title: Video Codec
       title: RecordingStartRequest
       type: object
     RecordingStopRequest:
       description: Request to stop the recording of the episode.
       properties:
-        recording_is_already_stopped:
-          default: false
-          description: Whether the recording is stopped. Default to False.
-          title: Recording Is Already Stopped
-          type: boolean
         save:
           default: true
           description: Whether to save the episode to disk. Defaults to True.
@@ -646,32 +741,30 @@ components:
       title: RecordingStopRequest
       type: object
     RecordingStopResponse:
-      description:
-        Response when the recording is stopped. The episode is saved in
+      description: Response when the recording is stopped. The episode is saved in
         the given path.
       properties:
         episode_folder_path:
           anyOf:
-            - type: string
-            - type: "null"
+          - type: string
+          - type: 'null'
           description: Path to the folder where the episode is saved.
           title: Episode Folder Path
         episode_index:
           anyOf:
-            - type: integer
-            - type: "null"
+          - type: integer
+          - type: 'null'
           description: Index of the recorded episode in the dataset.
           title: Episode Index
       required:
-        - episode_folder_path
-        - episode_index
+      - episode_folder_path
+      - episode_index
       title: RecordingStopResponse
       type: object
     RelativeEndEffectorPosition:
-      description:
-        "Relative end effector position for a movement in relative frame.
+      description: 'Relative end effector position for a movement in relative frame.
 
-        Useful for OpenVLA-like control."
+        Useful for OpenVLA-like control.'
       properties:
         open:
           title: Open
@@ -701,14 +794,31 @@ components:
           title: Z
           type: number
       required:
-        - x
-        - y
-        - z
-        - rx
-        - ry
-        - rz
-        - open
+      - x
+      - y
+      - z
+      - rx
+      - ry
+      - rz
+      - open
       title: RelativeEndEffectorPosition
+      type: object
+    ResetPasswordRequest:
+      properties:
+        access_token:
+          title: Access Token
+          type: string
+        new_password:
+          title: New Password
+          type: string
+        refresh_token:
+          title: Refresh Token
+          type: string
+      required:
+      - access_token
+      - refresh_token
+      - new_password
+      title: ResetPasswordRequest
       type: object
     RobotConfig:
       description: Contains the configuration of a robot.
@@ -718,19 +828,28 @@ components:
           type: string
         usb_port:
           anyOf:
-            - type: string
-            - type: "null"
+          - type: string
+          - type: 'null'
           title: Usb Port
       required:
-        - name
-        - usb_port
+      - name
+      - usb_port
       title: RobotConfig
       type: object
     ServerStatus:
       description: Contains the status of the app
       properties:
+        ai_running_status:
+          default: stopped
+          description: Whether the robot is currently controlled by an AI model.
+          enum:
+          - stopped
+          - running
+          - paused
+          title: Ai Running Status
+          type: string
         cameras:
-          $ref: "#/components/schemas/AllCamerasStatus"
+          $ref: '#/components/schemas/AllCamerasStatus'
         is_recording:
           default: false
           description: Whether the server is currently recording an episode.
@@ -741,7 +860,7 @@ components:
           type: string
         robot_status:
           items:
-            $ref: "#/components/schemas/RobotConfig"
+            $ref: '#/components/schemas/RobotConfig'
           title: Robot Status
           type: array
         robots:
@@ -753,24 +872,24 @@ components:
         server_ip:
           description: IP address of the server
           examples:
-            - 192.168.1.X
+          - 192.168.1.X
           title: Server Ip
           type: string
         status:
           enum:
-            - ok
-            - error
+          - ok
+          - error
           title: Status
           type: string
         version_id:
-          default: 0.2.104
+          default: 0.2.113
           description: Current version of the teleoperation server
           title: Version Id
           type: string
       required:
-        - status
-        - name
-        - server_ip
+      - status
+      - name
+      - server_ip
       title: ServerStatus
       type: object
     SingleCameraStatus:
@@ -779,7 +898,7 @@ components:
           title: Camera Id
           type: integer
         camera_type:
-          description: "Type of camera.
+          description: 'Type of camera.
 
             `classic`: Standard camera detected by OpenCV.
 
@@ -794,14 +913,14 @@ components:
 
             `dummy_stereo`: Dummy stereoscopic camera. Used for testing.
 
-            `unknown`: Unknown camera type."
+            `unknown`: Unknown camera type.'
           enum:
-            - classic
-            - stereo
-            - realsense
-            - dummy
-            - dummy_stereo
-            - unknown
+          - classic
+          - stereo
+          - realsense
+          - dummy
+          - dummy_stereo
+          - unknown
           title: Camera Type
           type: string
         fps:
@@ -817,13 +936,39 @@ components:
           title: Width
           type: integer
       required:
-        - camera_id
-        - is_active
-        - camera_type
-        - width
-        - height
-        - fps
+      - camera_id
+      - is_active
+      - camera_type
+      - width
+      - height
+      - fps
       title: SingleCameraStatus
+      type: object
+    StartAIControlRequest:
+      description: Request to start the AI control of the robot.
+      properties:
+        model_id:
+          description: Hugging Face model id to use
+          title: Model Id
+          type: string
+        prompt:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Prompt to be followed by the robot
+          title: Prompt
+      required:
+      - model_id
+      title: StartAIControlRequest
+      type: object
+    StatusRequest:
+      properties:
+        model_url:
+          title: Model Url
+          type: string
+      required:
+      - model_url
+      title: StatusRequest
       type: object
     StatusResponse:
       additionalProperties: true
@@ -831,12 +976,14 @@ components:
       properties:
         message:
           anyOf:
-            - type: string
-            - type: "null"
+          - type: string
+          - type: 'null'
           title: Message
         status:
-          const: ok
           default: ok
+          enum:
+          - ok
+          - error
           title: Status
           type: string
       title: StatusResponse
@@ -845,24 +992,35 @@ components:
       description: Response to read the torque of the robot.
       properties:
         current_torque:
-          description: A list of length 7, with the current torque of each joint.
+          description: A list of length 6, with the current torque of each joint.
           items:
             type: number
           title: Current Torque
           type: array
       required:
-        - current_torque
+      - current_torque
       title: TorqueReadResponse
+      type: object
+    TrainingConfig:
+      properties:
+        models:
+          items:
+            $ref: '#/components/schemas/ModelTrainingConfig'
+          title: Models
+          type: array
+      required:
+      - models
+      title: TrainingConfig
       type: object
     UserSettingsRequest:
       description: Contains the user settings
       properties:
         cameras_to_disable:
           anyOf:
-            - items:
-                type: integer
-              type: array
-            - type: "null"
+          - items:
+              type: integer
+            type: array
+          - type: 'null'
           title: Cameras To Disable
         dataset_name:
           title: Dataset Name
@@ -878,13 +1036,13 @@ components:
           type: string
         video_codec:
           enum:
-            - avc1
-            - hev1
-            - mp4v
-            - hvc1
-            - avc3
-            - av01
-            - vp09
+          - avc1
+          - hev1
+          - mp4v
+          - hvc1
+          - avc3
+          - av01
+          - vp09
           title: Video Codec
           type: string
         video_size:
@@ -893,12 +1051,12 @@ components:
           title: Video Size
           type: array
       required:
-        - dataset_name
-        - episode_format
-        - freq
-        - video_codec
-        - video_size
-        - task_instruction
+      - dataset_name
+      - episode_format
+      - freq
+      - video_codec
+      - video_size
+      - task_instruction
       title: UserSettingsRequest
       type: object
     ValidationError:
@@ -906,8 +1064,8 @@ components:
         loc:
           items:
             anyOf:
-              - type: string
-              - type: integer
+            - type: string
+            - type: integer
           title: Location
           type: array
         msg:
@@ -917,9 +1075,9 @@ components:
           title: Error Type
           type: string
       required:
-        - loc
-        - msg
-        - type
+      - loc
+      - msg
+      - type
       title: ValidationError
       type: object
     VizSettingsResponse:
@@ -935,22 +1093,22 @@ components:
           title: Width
           type: integer
       required:
-        - width
-        - height
-        - quality
+      - width
+      - height
+      - quality
       title: VizSettingsResponse
       type: object
     VoltageReadResponse:
       description: Response to read the torque of the robot.
       properties:
         current_voltage:
-          description: A list of length 7, with the current voltage of each joint.
+          description: A list of length 6, with the current voltage of each joint.
           items:
             type: number
           title: Current Voltage
           type: array
       required:
-        - current_voltage
+      - current_voltage
       title: VoltageReadResponse
       type: object
 info:
@@ -962,7 +1120,7 @@ paths:
     get:
       operationId: serve_dashboard__get
       responses:
-        "200":
+        '200':
           content:
             text/html:
               schema:
@@ -970,12 +1128,12 @@ paths:
           description: Successful Response
       summary: Serve Dashboard
       tags:
-        - pages
+      - pages
   /admin:
     get:
       operationId: serve_dashboard_admin_get
       responses:
-        "200":
+        '200':
           content:
             text/html:
               schema:
@@ -983,7 +1141,7 @@ paths:
           description: Successful Response
       summary: Serve Dashboard
       tags:
-        - pages
+      - pages
   /admin/form/usersettings:
     post:
       operationId: submit_user_settings_admin_form_usersettings_post
@@ -991,65 +1149,146 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UserSettingsRequest"
+              $ref: '#/components/schemas/UserSettingsRequest'
         required: true
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema: {}
           description: Successful Response
-        "422":
+        '422':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HTTPValidationError"
+                $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
       summary: Submit User Settings
       tags:
-        - pages
+      - pages
   /admin/huggingface:
     post:
       operationId: submit_token_admin_huggingface_post
       requestBody:
         content:
-          application/x-www-form-urlencoded:
+          application/json:
             schema:
-              $ref: "#/components/schemas/HuggingFaceTokenRequest"
+              $ref: '#/components/schemas/HuggingFaceTokenRequest'
         required: true
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema: {}
           description: Successful Response
-        "422":
+        '422':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HTTPValidationError"
+                $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
       summary: Submit Token
       tags:
-        - pages
+      - pages
   /admin/settings:
     get:
       operationId: get_admin_settings_admin_settings_get
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/AdminSettingsResponse"
+                $ref: '#/components/schemas/AdminSettingsResponse'
           description: Successful Response
-      summary: Get Admin Configuration
+      summary: Get Admin Settings
       tags:
-        - pages
-  /browse:
-    get:
-      operationId: serve_dashboard_browse_get
+      - pages
+  /admin/settings/tokens:
+    post:
+      operationId: get_admin_settings_token_admin_settings_tokens_post
       responses:
-        "200":
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdminSettingsTokenResponse'
+          description: Successful Response
+      summary: Get Admin Settings Token
+      tags:
+      - pages
+  /ai-control/pause:
+    post:
+      description: Pause the auto control by AI.
+      operationId: pause_auto_control_ai_control_pause_post
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+          description: Successful Response
+      summary: Pause the auto control by AI
+      tags:
+      - control
+  /ai-control/resume:
+    post:
+      description: Resume the auto control by AI.
+      operationId: resume_auto_control_ai_control_resume_post
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+          description: Successful Response
+      summary: Resume the auto control by AI
+      tags:
+      - control
+  /ai-control/start:
+    post:
+      description: Start the auto control by AI.
+      operationId: start_auto_control_ai_control_start_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartAIControlRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Start the auto control by AI
+      tags:
+      - control
+  /ai-control/stop:
+    post:
+      description: Stop the auto control by AI.
+      operationId: stop_auto_control_ai_control_stop_post
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+          description: Successful Response
+      summary: Stop the auto control by AI
+      tags:
+      - control
+  /auth:
+    get:
+      operationId: serve_dashboard_auth_get
+      responses:
+        '200':
           content:
             text/html:
               schema:
@@ -1057,40 +1296,242 @@ paths:
           description: Successful Response
       summary: Serve Dashboard
       tags:
-        - pages
+      - pages
+  /auth/check_auth:
+    get:
+      description: 'Check if the user is authenticated by validating the session with
+        Supabase.
+
+        Returns a JSON response indicating authentication status.'
+      operationId: is_authenticated_auth_check_auth_get
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+      summary: Is Authenticated
+      tags:
+      - auth
+  /auth/confirm:
+    get:
+      operationId: serve_dashboard_auth_confirm_get
+      responses:
+        '200':
+          content:
+            text/html:
+              schema:
+                type: string
+          description: Successful Response
+      summary: Serve Dashboard
+      tags:
+      - pages
+    post:
+      operationId: confirm_email_auth_confirm_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfirmRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Confirm Email
+      tags:
+      - auth
+  /auth/forgot-password:
+    get:
+      operationId: serve_dashboard_auth_forgot_password_get
+      responses:
+        '200':
+          content:
+            text/html:
+              schema:
+                type: string
+          description: Successful Response
+      summary: Serve Dashboard
+      tags:
+      - pages
+    post:
+      description: Send a password reset email to the provided email address.
+      operationId: forgot_password_auth_forgot_password_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ForgotPasswordRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Forgot Password
+      tags:
+      - auth
+  /auth/logout:
+    post:
+      operationId: logout_auth_logout_post
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+      summary: Logout
+      tags:
+      - auth
+  /auth/reset-password:
+    get:
+      operationId: serve_dashboard_auth_reset_password_get
+      responses:
+        '200':
+          content:
+            text/html:
+              schema:
+                type: string
+          description: Successful Response
+      summary: Serve Dashboard
+      tags:
+      - pages
+    post:
+      description: Reset a user's password using the recovery tokens from the Supabase
+        reset email.
+      operationId: reset_password_auth_reset_password_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResetPasswordRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Reset Password
+      tags:
+      - auth
+  /auth/signin:
+    post:
+      description: Sign in an existing user.
+      operationId: signin_auth_signin_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginCredentials'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Signin
+      tags:
+      - auth
+  /auth/signup:
+    post:
+      description: Sign up a new user.
+      operationId: signup_auth_signup_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginCredentials'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Signup
+      tags:
+      - auth
+  /browse:
+    get:
+      operationId: serve_dashboard_browse_get
+      responses:
+        '200':
+          content:
+            text/html:
+              schema:
+                type: string
+          description: Successful Response
+      summary: Serve Dashboard
+      tags:
+      - pages
   /calibrate:
     post:
       description: Start the calibration sequence for the robot.
       operationId: calibrate_calibrate_post
       parameters:
-        - in: query
-          name: robot_id
-          required: false
-          schema:
-            default: 0
-            title: Robot Id
-            type: integer
+      - in: query
+        name: robot_id
+        required: false
+        schema:
+          default: 0
+          title: Robot Id
+          type: integer
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/CalibrateResponse"
+                $ref: '#/components/schemas/CalibrateResponse'
           description: Successful Response
-        "422":
+        '422':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HTTPValidationError"
+                $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
       summary: Calibrate Robot
       tags:
-        - control
+      - control
   /calibration:
     get:
       operationId: serve_dashboard_calibration_get
       responses:
-        "200":
+        '200':
           content:
             text/html:
               schema:
@@ -1098,12 +1539,12 @@ paths:
           description: Successful Response
       summary: Serve Dashboard
       tags:
-        - pages
+      - pages
   /control:
     get:
       operationId: serve_dashboard_control_get
       responses:
-        "200":
+        '200':
           content:
             text/html:
               schema:
@@ -1111,12 +1552,12 @@ paths:
           description: Successful Response
       summary: Serve Dashboard
       tags:
-        - pages
+      - pages
   /crane:
     get:
       operationId: serve_dashboard_crane_get
       responses:
-        "200":
+        '200':
           content:
             text/html:
               schema:
@@ -1124,142 +1565,156 @@ paths:
           description: Successful Response
       summary: Serve Dashboard
       tags:
-        - pages
+      - pages
   /dataset/delete:
     post:
       operationId: delete_dataset_dataset_delete_post
       parameters:
-        - in: query
-          name: path
-          required: true
-          schema:
-            title: Path
-            type: string
+      - in: query
+        name: path
+        required: true
+        schema:
+          title: Path
+          type: string
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema: {}
           description: Successful Response
-        "422":
+        '422':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HTTPValidationError"
+                $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
       summary: Delete Dataset
       tags:
-        - pages
+      - pages
   /dataset/download:
     get:
       operationId: download_folder_dataset_download_get
       parameters:
-        - in: query
-          name: folder_path
-          required: true
-          schema:
-            title: Folder Path
-            type: string
+      - in: query
+        name: folder_path
+        required: true
+        schema:
+          title: Folder Path
+          type: string
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema: {}
           description: Successful Response
-        "422":
+        '422':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HTTPValidationError"
+                $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
       summary: Download Folder
       tags:
-        - pages
+      - pages
+  /dataset/list:
+    post:
+      description: List all datasets that are both in Hugging Face and locally.
+      operationId: list_datasets_dataset_list_post
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatasetListResponse'
+          description: Successful Response
+      summary: List Datasets
+      tags:
+      - pages
   /dataset/sync:
     post:
       operationId: sync_dataset_dataset_sync_post
-      requestBody:
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: "#/components/schemas/Body_sync_dataset_dataset_sync_post"
+      parameters:
+      - in: query
+        name: path
         required: true
+        schema:
+          title: Path
+          type: string
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema: {}
           description: Successful Response
-        "422":
+        '422':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HTTPValidationError"
+                $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
       summary: Sync Dataset
       tags:
-        - pages
+      - pages
   /end-effector/read:
     post:
-      description:
-        Retrieve the position, orientation, and open status of the robot's
+      description: Retrieve the position, orientation, and open status of the robot's
         end effector.
       operationId: end_effector_read_end_effector_read_post
       parameters:
-        - in: query
-          name: robot_id
-          required: false
-          schema:
-            default: 0
-            title: Robot Id
-            type: integer
+      - in: query
+        name: robot_id
+        required: false
+        schema:
+          default: 0
+          title: Robot Id
+          type: integer
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/EndEffectorPosition"
+                $ref: '#/components/schemas/EndEffectorPosition'
           description: Successful Response
-        "422":
+        '422':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HTTPValidationError"
+                $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
       summary: Read End-Effector Position
       tags:
-        - control
+      - control
   /episode/delete:
     post:
-      description: "Delete an episode from the dataset.
+      description: 'Delete an episode from the dataset.
 
         Parameters:
 
         - episode_id: int: The episode ID to delete.
 
-        - path: str: The path to the dataset folder."
+        - path: str: The path to the dataset folder.'
       operationId: delete_episode_episode_delete_post
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/DeleteEpisodeRequest"
+              $ref: '#/components/schemas/DeleteEpisodeRequest'
         required: true
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema: {}
           description: Successful Response
-        "422":
+        '422':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HTTPValidationError"
+                $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
       summary: Delete Episode
       tags:
-        - pages
+      - pages
   /files:
     post:
       operationId: files_files_post
@@ -1267,162 +1722,97 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/BrowserFilesRequest"
+              $ref: '#/components/schemas/BrowserFilesRequest'
         required: true
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BrowseFilesResponse"
+                $ref: '#/components/schemas/BrowseFilesResponse'
           description: Successful Response
-        "422":
+        '422':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HTTPValidationError"
+                $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
       summary: Files
       tags:
-        - pages
+      - pages
   /frames:
     get:
-      description:
-        Capture frames from all available cameras. Returns a dictionary
+      description: Capture frames from all available cameras. Returns a dictionary
         with camera IDs as keys and base64 encoded JPG images as values. If a camera
         is not available or fails to capture, its value will be None.
       operationId: get_all_camera_frames_frames_get
       responses:
-        "200":
+        '200':
           content:
             application/json:
               example:
-                "0": base64_encoded_image_string
+                '0': base64_encoded_image_string
                 realsense: base64_encoded_image_string
               schema:
                 additionalProperties:
                   anyOf:
-                    - type: string
-                    - type: "null"
+                  - type: string
+                  - type: 'null'
                 title: Response Get All Camera Frames Frames Get
                 type: object
           description: Successfully captured frames from available cameras
-        "500":
+        '500':
           description: Server error while capturing frames
       summary: Get All Camera Frames
       tags:
-        - camera
+      - camera
   /gravity/start:
     post:
       description: Enable gravity compensation for the robot.
       operationId: start_gravity_gravity_start_post
       parameters:
-        - in: query
-          name: robot_id
-          required: false
-          schema:
-            default: 0
-            title: Robot Id
-            type: integer
+      - in: query
+        name: robot_id
+        required: false
+        schema:
+          default: 0
+          title: Robot Id
+          type: integer
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/StatusResponse"
+                $ref: '#/components/schemas/StatusResponse'
           description: Successful Response
-        "422":
+        '422':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HTTPValidationError"
+                $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
       summary: Start Gravity
       tags:
-        - control
+      - control
   /gravity/stop:
     post:
       description: Stop the gravity compensation.
       operationId: stop_gravity_compensation_gravity_stop_post
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/StatusResponse"
+                $ref: '#/components/schemas/StatusResponse'
           description: Successful Response
       summary: Stop the gravity compensation
       tags:
-        - control
-  /joints/read:
-    post:
-      description:
-        Read the current positions of the robot's joints in radians and
-        motor units.
-      operationId: read_joints_joints_read_post
-      parameters:
-        - in: query
-          name: robot_id
-          required: false
-          schema:
-            default: 0
-            title: Robot Id
-            type: integer
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JointsReadResponse"
-          description: Successful Response
-        "422":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/HTTPValidationError"
-          description: Validation Error
-      summary: Read Joint Positions
-      tags:
-        - control
-  /joints/write:
-    post:
-      description: Move the robot's joints to the specified angles.
-      operationId: write_joints_joints_write_post
-      parameters:
-        - in: query
-          name: robot_id
-          required: false
-          schema:
-            default: 0
-            title: Robot Id
-            type: integer
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/JointsWriteRequest"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/StatusResponse"
-          description: Successful Response
-        "422":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/HTTPValidationError"
-          description: Validation Error
-      summary: Write Joint Positions
-      tags:
-        - control
-  /leader:
+      - control
+  /inference:
     get:
-      operationId: serve_dashboard_leader_get
+      operationId: serve_dashboard_inference_get
       responses:
-        "200":
+        '200':
           content:
             text/html:
               schema:
@@ -1430,88 +1820,162 @@ paths:
           description: Successful Response
       summary: Serve Dashboard
       tags:
-        - pages
-  /move/absolute:
+      - pages
+  /joints/read:
     post:
-      description:
-        Move the robot to an absolute position specified by the end-effector
-        (in centimeters and degrees). Make sure to call `/move/init` before using
-        this endpoint.
-      operationId: move_to_absolute_position_move_absolute_post
+      description: Read the current positions of the robot's joints in radians and
+        motor units.
+      operationId: read_joints_joints_read_post
       parameters:
-        - in: query
-          name: robot_id
-          required: false
-          schema:
-            default: 0
-            title: Robot Id
-            type: integer
+      - in: query
+        name: robot_id
+        required: false
+        schema:
+          default: 0
+          title: Robot Id
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JointsReadResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Read Joint Positions
+      tags:
+      - control
+  /joints/write:
+    post:
+      description: Move the robot's joints to the specified angles.
+      operationId: write_joints_joints_write_post
+      parameters:
+      - in: query
+        name: robot_id
+        required: false
+        schema:
+          default: 0
+          title: Robot Id
+          type: integer
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/MoveAbsoluteRequest"
+              $ref: '#/components/schemas/JointsWriteRequest'
         required: true
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/StatusResponse"
+                $ref: '#/components/schemas/StatusResponse'
           description: Successful Response
-        "422":
+        '422':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HTTPValidationError"
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Write Joint Positions
+      tags:
+      - control
+  /leader:
+    get:
+      operationId: serve_dashboard_leader_get
+      responses:
+        '200':
+          content:
+            text/html:
+              schema:
+                type: string
+          description: Successful Response
+      summary: Serve Dashboard
+      tags:
+      - pages
+  /move/absolute:
+    post:
+      description: Move the robot to an absolute position specified by the end-effector
+        (in centimeters and degrees). Make sure to call `/move/init` before using
+        this endpoint.
+      operationId: move_to_absolute_position_move_absolute_post
+      parameters:
+      - in: query
+        name: robot_id
+        required: false
+        schema:
+          default: 0
+          title: Robot Id
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MoveAbsoluteRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
       summary: Move to Absolute Position
       tags:
-        - control
+      - control
   /move/hello:
     post:
       description: Make the robot say hello by waving its end effector. (Test endpoint)
       operationId: say_hello_move_hello_post
       parameters:
-        - in: query
-          name: robot_id
-          required: false
-          schema:
-            default: 0
-            title: Robot Id
-            type: integer
+      - in: query
+        name: robot_id
+        required: false
+        schema:
+          default: 0
+          title: Robot Id
+          type: integer
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/StatusResponse"
+                $ref: '#/components/schemas/StatusResponse'
           description: Successful Response
-        "422":
+        '422':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HTTPValidationError"
+                $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
       summary: Make the robot say hello (test endpoint)
       tags:
-        - control
+      - control
   /move/init:
     post:
-      description:
-        Initialize the robot to its initial position before starting the
+      description: Initialize the robot to its initial position before starting the
         teleoperation.
       operationId: move_init_move_init_post
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/StatusResponse"
+                $ref: '#/components/schemas/StatusResponse'
           description: Successful Response
       summary: Initialize Robot
       tags:
-        - control
+      - control
   /move/leader/start:
     post:
       description: Use the leader arm to control the follower arm.
@@ -1520,142 +1984,140 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/LeaderFollower"
+              $ref: '#/components/schemas/LeaderFollower'
         required: true
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/StatusResponse"
+                $ref: '#/components/schemas/StatusResponse'
           description: Successful Response
-        "422":
+        '422':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HTTPValidationError"
+                $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
       summary: Use the leader arm to control the follower arm
       tags:
-        - control
+      - control
   /move/leader/stop:
     post:
       description: Stop the leader-follower control.
       operationId: stop_leader_follower_move_leader_stop_post
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/StatusResponse"
+                $ref: '#/components/schemas/StatusResponse'
           description: Successful Response
       summary: Stop the leader-follower control
       tags:
-        - control
+      - control
   /move/relative:
     post:
-      description:
-        Move the robot to a relative position based on received delta values
+      description: Move the robot to a relative position based on received delta values
         (in centimeters and degrees).
       operationId: move_relative_move_relative_post
       parameters:
-        - in: query
-          name: robot_id
-          required: false
-          schema:
-            default: 0
-            title: Robot Id
-            type: integer
+      - in: query
+        name: robot_id
+        required: false
+        schema:
+          default: 0
+          title: Robot Id
+          type: integer
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/RelativeEndEffectorPosition"
+              $ref: '#/components/schemas/RelativeEndEffectorPosition'
         required: true
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/StatusResponse"
+                $ref: '#/components/schemas/StatusResponse'
           description: Successful Response
-        "422":
+        '422':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HTTPValidationError"
+                $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
       summary: Move to Relative Position
       tags:
-        - control
+      - control
   /move/sleep:
     post:
-      description:
-        Put the robot to its sleep position by giving direct instructions
+      description: Put the robot to its sleep position by giving direct instructions
         to joints.
       operationId: move_sleep_move_sleep_post
       parameters:
-        - in: query
-          name: robot_id
-          required: false
-          schema:
-            default: 0
-            title: Robot Id
-            type: integer
+      - in: query
+        name: robot_id
+        required: false
+        schema:
+          default: 0
+          title: Robot Id
+          type: integer
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/StatusResponse"
+                $ref: '#/components/schemas/StatusResponse'
           description: Successful Response
-        "422":
+        '422':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HTTPValidationError"
+                $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
       summary: Put the robot to its sleep position
       tags:
-        - control
+      - control
   /move/teleop:
     post:
       operationId: move_teleop_post_move_teleop_post
       parameters:
-        - in: query
-          name: robot_id
-          required: false
-          schema:
-            default: 0
-            title: Robot Id
-            type: integer
+      - in: query
+        name: robot_id
+        required: false
+        schema:
+          default: 0
+          title: Robot Id
+          type: integer
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/AppControlData"
+              $ref: '#/components/schemas/AppControlData'
         required: true
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/StatusResponse"
+                $ref: '#/components/schemas/StatusResponse'
           description: Successful Response
-        "422":
+        '422':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HTTPValidationError"
+                $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
       summary: Teleoperation Control
       tags:
-        - control
+      - control
   /network:
     get:
       operationId: serve_dashboard_network_get
       responses:
-        "200":
+        '200':
           content:
             text/html:
               schema:
@@ -1663,146 +2125,145 @@ paths:
           description: Successful Response
       summary: Serve Dashboard
       tags:
-        - pages
+      - pages
   /network/connect:
     post:
-      description: "Endpoint to connect phosphobot to a new network.
+      description: 'Endpoint to connect phosphobot to a new network.
 
         Returns immediately and performs connection in the background.
 
-        Will fallback to the hotspot if it fails to connect."
+        Will fallback to the hotspot if it fails to connect.'
       operationId: switch_to_network_network_connect_post
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/NetworkCredentials"
+              $ref: '#/components/schemas/NetworkCredentials'
         required: true
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema: {}
           description: Successful Response
-        "422":
+        '422':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HTTPValidationError"
+                $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
       summary: Switch To Network
       tags:
-        - networking
+      - networking
   /network/hotspot:
     post:
-      description: "Endpoint to activate the hotspot on the Raspberry Pi.
+      description: 'Endpoint to activate the hotspot on the Raspberry Pi.
 
-        Returns immediately and performs setup in the background."
+        Returns immediately and performs setup in the background.'
       operationId: activate_hotspot_network_hotspot_post
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema: {}
           description: Successful Response
       summary: Activate Hotspot
       tags:
-        - networking
+      - networking
   /recording/play:
     post:
       description: Play a recorded episode.
       operationId: play_recording_recording_play_post
       parameters:
-        - in: query
-          name: robot_id
-          required: false
-          schema:
-            default: 0
-            title: Robot Id
-            type: integer
+      - in: query
+        name: robot_id
+        required: false
+        schema:
+          default: 0
+          title: Robot Id
+          type: integer
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/RecordingPlayRequest"
+              $ref: '#/components/schemas/RecordingPlayRequest'
         required: true
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/StatusResponse"
+                $ref: '#/components/schemas/StatusResponse'
           description: Successful Response
-        "422":
+        '422':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HTTPValidationError"
+                $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
       summary: Play Recording
       tags:
-        - recording
+      - recording
   /recording/start:
     post:
-      description: "Asynchronously start recording an episode in the background.
+      description: 'Asynchronously start recording an episode in the background.
 
-        Output format is chosen when stopping the recording."
+        Output format is chosen when stopping the recording.'
       operationId: start_recording_episode_recording_start_post
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/RecordingStartRequest"
+              $ref: '#/components/schemas/RecordingStartRequest'
         required: true
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/StatusResponse"
+                $ref: '#/components/schemas/StatusResponse'
           description: Successful Response
-        "422":
+        '422':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HTTPValidationError"
+                $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
       summary: Start Recording Episode
       tags:
-        - recording
+      - recording
   /recording/stop:
     post:
-      description:
-        Stop the recording of the episode. The data is saved to disk to
+      description: Stop the recording of the episode. The data is saved to disk to
         the user home directory, in the `phosphobot` folder.
       operationId: stop_recording_episode_recording_stop_post
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/RecordingStopRequest"
+              $ref: '#/components/schemas/RecordingStopRequest'
         required: true
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/RecordingStopResponse"
+                $ref: '#/components/schemas/RecordingStopResponse'
           description: Successful Response
-        "422":
+        '422':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HTTPValidationError"
+                $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
       summary: Stop Recording Episode
       tags:
-        - recording
+      - recording
   /replay:
     get:
       operationId: serve_dashboard_replay_get
       responses:
-        "200":
+        '200':
           content:
             text/html:
               schema:
@@ -1810,17 +2271,17 @@ paths:
           description: Successful Response
       summary: Serve Dashboard
       tags:
-        - pages
+      - pages
   /status:
     get:
       description: Get the status of the server.
       operationId: status_status_get
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ServerStatus"
+                $ref: '#/components/schemas/ServerStatus'
           description: Successful Response
       summary: Status
   /torque/read:
@@ -1828,169 +2289,284 @@ paths:
       description: Read the current torque of the robot's joints.
       operationId: read_torque_torque_read_post
       parameters:
-        - in: query
-          name: robot_id
-          required: false
-          schema:
-            default: 0
-            title: Robot Id
-            type: integer
+      - in: query
+        name: robot_id
+        required: false
+        schema:
+          default: 0
+          title: Robot Id
+          type: integer
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/TorqueReadResponse"
+                $ref: '#/components/schemas/TorqueReadResponse'
           description: Successful Response
-        "422":
+        '422':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HTTPValidationError"
+                $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
       summary: Read Torque
       tags:
-        - control
+      - control
   /torque/toggle:
     post:
       description: Enable or disable the torque of the robot.
       operationId: toggle_torque_torque_toggle_post
       parameters:
-        - in: query
-          name: torque_status
-          required: true
-          schema:
-            title: Torque Status
-            type: boolean
-        - in: query
-          name: robot_id
-          required: false
-          schema:
-            default: 0
-            title: Robot Id
-            type: integer
+      - in: query
+        name: torque_status
+        required: true
+        schema:
+          title: Torque Status
+          type: boolean
+      - in: query
+        name: robot_id
+        required: false
+        schema:
+          default: 0
+          title: Robot Id
+          type: integer
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/StatusResponse"
+                $ref: '#/components/schemas/StatusResponse'
           description: Successful Response
-        "422":
+        '422':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HTTPValidationError"
+                $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
       summary: Toggle Torque
       tags:
-        - control
+      - control
+  /train:
+    post:
+      description: Send a Slack notification and trigger training on the FastAPI endpoint.
+      operationId: notify_train_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: Body
+              type: object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Notify
+      tags:
+      - pages
+  /training/models:
+    get:
+      operationId: get_models_training_models_get
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainingConfig'
+          description: Successful Response
+      summary: Get Models
+      tags:
+      - training
+    post:
+      description: Add a model to the training list
+      operationId: add_model_to_training_list_training_models_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelTrainingConfig'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainingConfig'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Add Model To Training List
+      tags:
+      - training
+  /training/models/delete:
+    post:
+      description: Delete a model from the training list
+      operationId: delete_model_from_training_list_training_models_delete_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelTrainingConfig'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainingConfig'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Delete Model From Training List
+      tags:
+      - training
+  /training/models/status:
+    post:
+      description: Fetch the status of a model
+      operationId: update_model_status_training_models_status_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StatusRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelStatus'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Update Model Status
+      tags:
+      - training
   /update/upgrade-to-latest-version:
     get:
-      description: "Upgrade the teleop software to the latest available version.
+      description: 'Upgrade the teleop software to the latest available version.
 
         Checks the latest available version and upgrades the software if necessary.
 
-        Works only on raspberry pi devices."
+        Works only on raspberry pi devices.'
       operationId: upgrade_to_latest_version_update_upgrade_to_latest_version_get
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema: {}
           description: Successful Response
       summary: Upgrade To Latest Version
       tags:
-        - update
+      - update
   /update/version:
     post:
-      description: "Get the latest available version of the teleop software.
+      description: 'Get the latest available version of the teleop software.
 
-        Works only on raspberry pi devices."
+        Works only on raspberry pi devices.'
       operationId: get_latest_available_version_update_version_post
       parameters:
-        - in: query
-          name: run_quick
-          required: false
-          schema:
-            default: false
-            title: Run Quick
-            type: boolean
+      - in: query
+        name: run_quick
+        required: false
+        schema:
+          default: false
+          title: Run Quick
+          type: boolean
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema: {}
           description: Successful Response
-        "422":
+        '422':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HTTPValidationError"
+                $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
       summary: Get Latest Available Version
       tags:
-        - update
+      - update
   /video/{camera_id}:
     get:
-      description:
-        Stream video feed of the specified camera. If no camera id is provided,
+      description: Stream video feed of the specified camera. If no camera id is provided,
         the default camera is used. If the camera id is 'realsense' or 'depth', the
         realsense camera is used.Specify a target size and quality using query parameters.
       operationId: video_feed_for_camera_video__camera_id__get
       parameters:
-        - in: path
-          name: camera_id
-          required: true
-          schema:
-            anyOf:
-              - type: integer
-              - type: string
-              - type: "null"
-            title: Camera Id
-        - in: query
-          name: height
-          required: false
-          schema:
-            anyOf:
-              - type: integer
-              - type: "null"
-            title: Height
-        - in: query
-          name: width
-          required: false
-          schema:
-            anyOf:
-              - type: integer
-              - type: "null"
-            title: Width
-        - in: query
-          name: quality
-          required: false
-          schema:
-            anyOf:
-              - type: integer
-              - type: "null"
-            title: Quality
+      - in: path
+        name: camera_id
+        required: true
+        schema:
+          anyOf:
+          - type: integer
+          - type: string
+          - type: 'null'
+          title: Camera Id
+      - in: query
+        name: height
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Height
+      - in: query
+        name: width
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Width
+      - in: query
+        name: quality
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Quality
       responses:
-        "200":
+        '200':
           description: Streaming video feed of the specified camera.
-        "404":
+        '404':
           description: Camera not available
-        "422":
+        '422':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HTTPValidationError"
+                $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
       summary: Video Feed For Camera
       tags:
-        - camera
+      - camera
   /viz:
     get:
       operationId: serve_dashboard_viz_get
       responses:
-        "200":
+        '200':
           content:
             text/html:
               schema:
@@ -1998,48 +2574,47 @@ paths:
           description: Successful Response
       summary: Serve Dashboard
       tags:
-        - pages
+      - pages
   /viz/settings:
     get:
-      description:
-        Page with an overview of the connected cameras. Open this page
+      description: Page with an overview of the connected cameras. Open this page
         in the chrome browser.
       operationId: get_viz_settings_viz_settings_get
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/VizSettingsResponse"
+                $ref: '#/components/schemas/VizSettingsResponse'
           description: Successful Response
       summary: Get Viz Settings
       tags:
-        - pages
+      - pages
   /voltage/read:
     post:
       description: Read the current voltage of the robot's motors.
       operationId: read_voltage_voltage_read_post
       parameters:
-        - in: query
-          name: robot_id
-          required: false
-          schema:
-            default: 0
-            title: Robot Id
-            type: integer
+      - in: query
+        name: robot_id
+        required: false
+        schema:
+          default: 0
+          title: Robot Id
+          type: integer
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/VoltageReadResponse"
+                $ref: '#/components/schemas/VoltageReadResponse'
           description: Successful Response
-        "422":
+        '422':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HTTPValidationError"
+                $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
       summary: Read Voltage
       tags:
-        - control
+      - control
