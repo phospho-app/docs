@@ -406,7 +406,9 @@ components:
       description: Request to set the joints of the robot.
       properties:
         angles:
-          description: A list with the position of each joint in radian.
+          description: A list with the position of each joint. The length of the list
+            must be equal to the number of joints. The unit is given by the 'unit'
+            field.
           items:
             type: number
           title: Angles
@@ -882,7 +884,7 @@ components:
           title: Status
           type: string
         version_id:
-          default: 0.2.113
+          default: 0.2.114
           description: Current version of the teleoperation server
           title: Version Id
           type: string
@@ -1543,19 +1545,6 @@ paths:
   /control:
     get:
       operationId: serve_dashboard_control_get
-      responses:
-        '200':
-          content:
-            text/html:
-              schema:
-                type: string
-          description: Successful Response
-      summary: Serve Dashboard
-      tags:
-      - pages
-  /crane:
-    get:
-      operationId: serve_dashboard_crane_get
       responses:
         '200':
           content:
