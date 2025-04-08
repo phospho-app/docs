@@ -90,6 +90,7 @@ Then, create a new python file called `inference.py`. Inside, copy the content o
 ### Example script for ACT
 
 ```python
+# pip install --upgrade phosphobot
 from phosphobot.camera import AllCameras
 from phosphobot.api.client import PhosphoApi
 from phosphobot.am import ACT
@@ -143,6 +144,7 @@ while True:
 ### Example script for Pi0
 
 ```python
+#pip install --upgrade phosphobot
 from phosphobot.camera import AllCameras
 from phosphobot.api.client import PhosphoApi
 from phosphobot.am import Pi0
@@ -205,6 +207,7 @@ pip install torch zmq
 You also need to run a GPU with the gr00t model and inference server. [Use this repo](https://github.com/phospho-app/Isaac-GR00T) to run the server.
 
 ```python
+# pip install --upgrade phosphobot
 from phosphobot.camera import AllCameras
 from phosphobot.api.client import PhosphoApi
 from phosphobot.am import Gr00tN1
