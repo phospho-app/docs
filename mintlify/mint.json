@@ -51,7 +51,10 @@
   "navigation": [
     {
       "group": "Getting Started",
-      "pages": ["welcome", "installation"]
+      "pages": [
+        "welcome",
+        "installation"
+      ]
     },
     {
       "group": "Basic Usage",
@@ -115,7 +118,9 @@
         {
           "group": "Camera",
           "icon": "camera",
-          "pages": ["camera/video-feed-for-camera"]
+          "pages": [
+            "camera/video-feed-for-camera"
+          ]
         },
         {
           "group": "Recording",
@@ -124,6 +129,13 @@
             "recording/start-recording-episode",
             "recording/stop-recording-episode",
             "recording/play-recording"
+          ]
+        },
+        {
+          "group": "Training",
+          "icon": "brain",
+          "pages": [
+            "training/start-training"
           ]
         }
       ]

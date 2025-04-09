@@ -57,6 +57,10 @@ components:
           default: false
           title: Huggingface
           type: boolean
+        wandb:
+          default: false
+          title: Wandb
+          type: boolean
       title: AdminSettingsTokenResponse
       type: object
     AllCamerasStatus:
@@ -618,6 +622,21 @@ components:
           examples:
           - ~/phosphobot/lerobot_v2/example_dataset/chunk-000/episode_000000.json
           title: Episode Path
+        interpolation_factor:
+          default: 4
+          description: Smoothen the playback by interpolating between frames. 1 means
+            no interpolation, 2 means 1 frame every 2 frames, etc. 4 is the recommended
+            value.
+          minimum: 1.0
+          title: Interpolation Factor
+          type: integer
+        playback_speed:
+          default: 1.0
+          description: Speed of the playback. 1.0 is normal speed, 0.5 is half speed,
+            2.0 is double speed. High speed may cause the robot to break.
+          minimum: 0.0
+          title: Playback Speed
+          type: number
       title: RecordingPlayRequest
       type: object
     RecordingStartRequest:
@@ -822,7 +841,7 @@ components:
       - new_password
       title: ResetPasswordRequest
       type: object
-    RobotConfig:
+    RobotConfigStatus:
       description: Contains the configuration of a robot.
       properties:
         name:
@@ -836,7 +855,7 @@ components:
       required:
       - name
       - usb_port
-      title: RobotConfig
+      title: RobotConfigStatus
       type: object
     ServerStatus:
       description: Contains the status of the app
@@ -862,7 +881,7 @@ components:
           type: string
         robot_status:
           items:
-            $ref: '#/components/schemas/RobotConfig'
+            $ref: '#/components/schemas/RobotConfigStatus'
           title: Robot Status
           type: array
         robots:
@@ -884,7 +903,7 @@ components:
           title: Status
           type: string
         version_id:
-          default: 0.2.114
+          default: 0.2.118
           description: Current version of the teleoperation server
           title: Version Id
           type: string
@@ -990,6 +1009,17 @@ components:
           type: string
       title: StatusResponse
       type: object
+    TorqueControlRequest:
+      description: Request to control the robot's torque.
+      properties:
+        torque_status:
+          description: Whether to enable or disable torque control.
+          title: Torque Status
+          type: boolean
+      required:
+      - torque_status
+      title: TorqueControlRequest
+      type: object
     TorqueReadResponse:
       description: Response to read the torque of the robot.
       properties:
@@ -1013,6 +1043,37 @@ components:
       required:
       - models
       title: TrainingConfig
+      type: object
+    TrainingRequest:
+      description: Pydantic model for training request validation
+      properties:
+        batch_size:
+          default: 64
+          description: Batch size for training, default and max is 64
+          title: Batch Size
+          type: integer
+        dataset:
+          description: Dataset repository ID
+          title: Dataset
+          type: string
+        epochs:
+          default: 20
+          description: Number of epochs to train for, default is 20
+          title: Epochs
+          type: integer
+        learning_rate:
+          default: 0.0002
+          description: Learning rate for training, default is 0.0002
+          title: Learning Rate
+          type: number
+        model_name:
+          description: Name of the model to be trained
+          title: Model Name
+          type: string
+      required:
+      - dataset
+      - model_name
+      title: TrainingRequest
       type: object
     UserSettingsRequest:
       description: Contains the user settings
@@ -1112,6 +1173,16 @@ components:
       required:
       - current_voltage
       title: VoltageReadResponse
+      type: object
+    WandBTokenRequest:
+      description: WandB token saved by the user.
+      properties:
+        token:
+          title: Token
+          type: string
+      required:
+      - token
+      title: WandBTokenRequest
       type: object
 info:
   title: FastAPI
@@ -1216,6 +1287,30 @@ paths:
                 $ref: '#/components/schemas/AdminSettingsTokenResponse'
           description: Successful Response
       summary: Get Admin Settings Token
+      tags:
+      - pages
+  /admin/wandb:
+    post:
+      operationId: submit_wandb_token_admin_wandb_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WandBTokenRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Submit Wandb Token
       tags:
       - pages
   /ai-control/pause:
@@ -1924,7 +2019,8 @@ paths:
       - control
   /move/hello:
     post:
-      description: Make the robot say hello by waving its end effector. (Test endpoint)
+      description: Make the robot say hello by opening and closing its gripper. (Test
+        endpoint)
       operationId: say_hello_move_hello_post
       parameters:
       - in: query
@@ -2307,18 +2403,19 @@ paths:
       operationId: toggle_torque_torque_toggle_post
       parameters:
       - in: query
-        name: torque_status
-        required: true
-        schema:
-          title: Torque Status
-          type: boolean
-      - in: query
         name: robot_id
         required: false
         schema:
-          default: 0
+          anyOf:
+          - type: integer
+          - type: 'null'
           title: Robot Id
-          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TorqueControlRequest'
+        required: true
       responses:
         '200':
           content:
@@ -2335,70 +2432,6 @@ paths:
       summary: Toggle Torque
       tags:
       - control
-  /train:
-    post:
-      description: Send a Slack notification and trigger training on the FastAPI endpoint.
-      operationId: notify_train_post
-      requestBody:
-        content:
-          application/json:
-            schema:
-              title: Body
-              type: object
-        required: true
-      responses:
-        '200':
-          content:
-            application/json:
-              schema: {}
-          description: Successful Response
-        '422':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-          description: Validation Error
-      summary: Notify
-      tags:
-      - pages
-  /training/models:
-    get:
-      operationId: get_models_training_models_get
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TrainingConfig'
-          description: Successful Response
-      summary: Get Models
-      tags:
-      - training
-    post:
-      description: Add a model to the training list
-      operationId: add_model_to_training_list_training_models_post
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ModelTrainingConfig'
-        required: true
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TrainingConfig'
-          description: Successful Response
-        '422':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-          description: Validation Error
-      summary: Add Model To Training List
-      tags:
-      - training
   /training/models/delete:
     post:
       description: Delete a model from the training list
@@ -2425,9 +2458,24 @@ paths:
       summary: Delete Model From Training List
       tags:
       - training
+  /training/models/read:
+    post:
+      description: Get the list of models to be trained
+      operationId: get_models_training_models_read_post
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainingConfig'
+          description: Successful Response
+      summary: Get Models
+      tags:
+      - training
   /training/models/status:
     post:
-      description: Fetch the status of a model
+      description: Fetch the status of a model, will return Not started, In progress
+        or Done
       operationId: update_model_status_training_models_status_post
       requestBody:
         content:
@@ -2449,6 +2497,77 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
       summary: Update Model Status
+      tags:
+      - training
+  /training/models/write:
+    post:
+      description: Add a model to the training list, this will not start training
+      operationId: add_model_to_training_list_training_models_write_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelTrainingConfig'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainingConfig'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Add Model To Training List
+      tags:
+      - training
+  /training/start:
+    post:
+      description: 'Trigger training for a gr00t model on the specified dataset.
+
+
+        This will upload a trained model to the Hugging Face Hub using the main branch
+        of the specified dataset.
+
+
+        Before launching a training, please make sure that:
+
+        - Your dataset is uploaded to Hugging Face
+
+        - Your dataset is in the Le Robot format (> v2.0)
+
+        - Your dataset has at least 10 episodes
+
+        - You are logged in to phosphobot
+
+
+        Pro usage:
+
+        - (You can add a wandb token in phosphobot to track your training)'
+      operationId: start_training_training_start_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrainingRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Start Training
       tags:
       - training
   /update/upgrade-to-latest-version:
