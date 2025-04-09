@@ -155,11 +155,13 @@ title="Control your robot with GR00T-N1-2B"
 </CardGroup>
 
 
-### Train an ACT model locally 
+### Train an ACT model locally with LeRobot 
 
 <Warning>
 You need a GPU with at least 16GB of memory to train the model.
 </Warning>
+
+This guide will show you how to train the ACT model locally using **LeRobot** for your SO-100 robot.
 
 1. Install UV, the modern Python package manager. 
 ```bash
@@ -186,11 +188,11 @@ export DYLD_LIBRARY_PATH="/opt/homebrew/lib:/usr/local/lib:$DYLD_LIBRARY_PATH"
 wandb login
 ```
 
-
 5. Run training script - Adjust parameters based on your hardware:
+
 ```bash
 uv run lerobot/lerobot/scripts/train.py \
- --dataset.repo_id=PLB/simple-lego-pickup-mono-2 \ # Replace with <HF_USERNAME>/<DATASET_NAME>
+ --dataset.repo_id=LegrandFrederic/Orange-brick-in-black-box \ # Replace with <HF_USERNAME>/<DATASET_NAME>
  --policy.type=act \ # Choose from act, diffusion, tdmpc, or vqbet
  --output_dir=outputs/train/phoshobot_test \
  --job_name=phosphobot_test \
@@ -227,7 +229,13 @@ phosphobot run
 3. Create inference client script (Copy the content into `my_model/inference.py`):
 
 ```python
-# pip install --upgrade phosphobot
+# /// script
+# requires-python = ">=3.10"
+# dependencies = [
+#     "phosphobot",
+# ]
+#
+# ///
 from phosphobot.camera import AllCameras
 from phosphobot.api.client import PhosphoApi
 from phosphobot.am import ACT
