@@ -207,14 +207,11 @@ Trained models will be saved in `lerobot/outputs/train/`.
 1. Launch ACT inference server (Run on GPU machine):
 
 ```bash
-# Install requirements using UV
-uv pip install -r https://raw.githubusercontent.com/phospho-app/phosphobot/main/inference/ACT/requirements.txt
-
 # Download inference script
-curl -o act_server.py https://raw.githubusercontent.com/phospho-app/phosphobot/main/inference/ACT/inference.py
+curl -o server.py https://raw.githubusercontent.com/phospho-app/phosphobot/main/inference/ACT/server.py
 
-# Start server (adjust --device based on hardware)
-uv run act_server.py -- --device=cuda --model_id=<YOUR_HF_MODEL_ID>
+# Start server
+uv run server.py -- --model_id=<YOUR_HF_MODEL_ID>
 ```
 
 2. Make sure the phosphobot server is running to control your robot:
@@ -226,7 +223,7 @@ curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install
 phosphobot run
 ```
 
-3. Create inference client script (Copy the content into `my_model/inference.py`):
+3. Create inference client script (Copy the content into `my_model/client.py`):
 
 ```python
 # /// script
@@ -288,7 +285,7 @@ while True:
 4. Run the inference script:
 
 ```bash
-uv run my_model/inference.py
+uv run my_model/client.py
 ```
 
 Stop the script by pressing `Ctrl + C`.
