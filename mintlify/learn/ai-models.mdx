@@ -161,59 +161,70 @@ title="Control your robot with GR00T-N1-2B"
 You need a GPU with at least 16GB of memory to train the model.
 </Warning>
 
-1. On the device where you want to run the training, install the [Phosphobot package](https://github.com/phospho-app/phosphobot):  
+1. Install UV, the modern Python package manager. 
+```bash
+# On macOS and Linux
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
 
-   ```bash
-   pip install --upgrade phosphobot
-   ```
+2. Set up training environment.
+```bash
+mkdir my_model
+cd my_model
+uv init
+uv add phosphobot git+https://github.com/phospho-app/lerobot
+git clone https://github.com/phospho-app/lerobot
+```
 
-2. Clone the [LeRobot repository](https://github.com/huggingface/lerobot) and install it:  
+3. (MacOS only) Set environment variables for torch compatibility:
+```bash
+export DYLD_LIBRARY_PATH="/opt/homebrew/lib:/usr/local/lib:$DYLD_LIBRARY_PATH"
+```
 
-   ```bash
-   git clone https://github.com/huggingface/lerobot.git
-   cd lerobot
-   pip install -e .  # Requires Python 3.10+
-   ```
+4. (Optional) Add the [Weight & Biases](https://wandb.ai) integration for training metrics tracking:
+```bash
+wandb login
+```
 
-3. *(Optional)* If you want to use **Weights & Biases** for tracking training metrics, log in with:  
 
-   ```bash
-   wandb login
-   ```
+5. Run training script - Adjust parameters based on your hardware:
+```bash
+uv run lerobot/lerobot/scripts/train.py \
+ --dataset.repo_id=PLB/simple-lego-pickup-mono-2 \ # Replace with <HF_USERNAME>/<DATASET_NAME>
+ --policy.type=act \ # Choose from act, diffusion, tdmpc, or vqbet
+ --output_dir=outputs/train/phoshobot_test \
+ --job_name=phosphobot_test \
+ --policy.device=mps \  # Use 'cuda' for NVIDIA GPUs or 'cpu' if no GPU
+ --wandb.enable=true # Optional
+```
 
-4. Run the training script with the following command in the `lerobot` repository (Set --device=mps for Apple Silicon (Mac M1/M2), `cuda` if you have an NVIDIA GPU or `cpu` if you don’t have a GPU). Ensure that your `lerobot` virtual environment is activated.  
-
-   ```bash
-   sudo python lerobot/scripts/train.py \
-     --dataset.repo_id=<HF_USERNAME>/<DATASET_NAME> \
-     --policy.type=<act or diffusion or tdmpc or vqbet> \
-     --output_dir=outputs/train/phoshobot_test \
-     --job_name=phosphobot_test \
-     --device=mps \
-     --wandb.enable=true
-   ```
-
-5. Your trained model will be saved in `lerobot/outputs/train/`.  
+Trained models will be saved in `lerobot/outputs/train/`. 
 
 ## 5. Control your robot with the ACT model
 
-Clone the phosphobot repository to get the inference script. You can use the `git` command to clone the repository:
+1. Launch ACT inference server (Run on GPU machine):
 
 ```bash
-git clone https://github.com/phospho-app/phosphobot.git
+# Install requirements using UV
+uv pip install -r https://raw.githubusercontent.com/phospho-app/phosphobot/main/inference/ACT/requirements.txt
+
+# Download inference script
+curl -o act_server.py https://raw.githubusercontent.com/phospho-app/phosphobot/main/inference/ACT/inference.py
+
+# Start server (adjust --device based on hardware)
+uv run act_server.py -- --device=cuda --model_id=<YOUR_HF_MODEL_ID>
 ```
 
-If you use pip, just run
+2. Make sure the phosphobot server is running to control your robot:
 
 ```bash
-cd phosphobot/inference
-pip install .
-python ACT/inference.py --model_id=<YOUR_HF_DATASET_NAME>
+# Install it this way
+curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | bash
+# Start it this way
+phosphobot run
 ```
 
-This will load your model and create an /act endpoint that expects the robot's current position and images. If using a local model, you can pass the path of a local model instead of a HF model with the "--model_id=..." flag.
-
-This inference script is intended to run on a machine with a GPU, separately from your phosphobot installation.
+3. Create inference client script (Copy the content into `my_model/inference.py`):
 
 ```python
 # pip install --upgrade phosphobot
@@ -265,6 +276,14 @@ while True:
         # Wait to respect frequency control (30 Hz)
         time.sleep(1 / 30)
 ```
+
+4. Run the inference script:
+
+```bash
+uv run my_model/inference.py
+```
+
+Stop the script by pressing `Ctrl + C`.
 
 ## What's next?
 
