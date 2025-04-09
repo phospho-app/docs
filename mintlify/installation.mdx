@@ -178,8 +178,64 @@ sudo reboot
 
 We don't offer prebuilt binaries for Windows, but we've successfully used **WSL (Windows Subsystem for Linux)**. 
 
-- Follow [this guide](https://learn.microsoft.com/en-us/windows/wsl/install) to install WSL.
-- Then, follow the [Linux (APT) setup guide](/installation#linux) to install the teleoperation server.
+1. Follow [this guide](https://learn.microsoft.com/en-us/windows/wsl/install) to install WSL.
+2. Then, follow the [Linux (APT) setup guide](/installation#linux) to install the teleoperation server.
+3. To connect the SO-100 USB devices to WSL, you should first use mirrored network.
+
+```bash
+# In WSL terminal:
+export DISPLAY=$(awk '/nameserver / {print $2 ":0"}' /etc/resolv.conf)
+```
+
+4. In your powershell terminal, run this command to install the USBIPD driver:
+
+```powershell
+winget install --interactive --accept-source-agreements --accept-package-agreements usbipd
+```
+
+List devices connected to your Windows host:
+
+```powershell
+usbipd wsl list
+```
+
+Attach the device you want to use. Replace `<busid>` with the bus ID of the device you want to attach (e.g., `1-1`):
+
+```powershell
+usbipd wsl attach --busid <busid>
+```
+
+5. Then, go back to your WSL terminal and run the following command to install the USBIP tools:
+
+```bash
+sudo apt install linux-tools-virtual hwdata
+sudo update-alternatives --install /usr/local/bin/usbip usbip /usr/lib/linux-tools/*-generic/usbip 20
+```
+
+Get the Windows host IP from WSL:
+
+```bash
+cat /etc/resolv.conf | grep nameserver | awk '{print $2}'
+```
+
+Attach the device to WSL:
+
+```bash
+usbip attach -r <windows_host_ip> -s <busid>
+```
+
+Verify the device is attached to WSL:
+
+```bash
+lsusb
+```
+
+6. You can now run the phosphobot server in WSL:
+
+```bash
+phosphobot run
+```
+
 
 ## Support
 
