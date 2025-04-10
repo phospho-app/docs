@@ -300,10 +300,7 @@ allcameras = AllCameras()
 time.sleep(1)
 
 # Instantiate the model
-model = ACT(
-  server_url="YOUR_SERVER_URL",
-  server_port="YOUR_SERVER_PORT",
-)
+model = ACT() # Change server_url and server_port if needed
 
 # Get the frames from the cameras
 # We will use this model: LegrandFrederic/Orange-brick-in-black-box
