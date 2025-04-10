@@ -210,16 +210,39 @@ uv run lerobot/lerobot/scripts/train.py \
 
 Trained models will be saved in `lerobot/outputs/train/`. 
 
+6. (Optional) Upload the model to Hugging Face. Login to HuggingFace CLI:
+
+```bash
+huggingface-cli login
+# Enter your write token from https://huggingface.co/settings/tokens
+```
+
+HuggingFace model hub is a wrapper of [Github LFS](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage). Push the model to Hugging Face:
+
+```bash
+# From your training output directory
+cd lerobot/outputs/train/phosphobot_test
+
+# Initialize and push to Hub (replace <your-username> and <model-name>)
+huggingface-cli repo-create <your-username>/<model-name> --type model
+git lfs install
+git add .
+git commit -m "Add trained ACT model"
+git push
+```
+
 ## 5. Control your robot with the ACT model
 
 1. Launch ACT inference server (Run on GPU machine):
 
 ```bash
-# Download inference script
+# Download inference server script
 curl -o server.py https://raw.githubusercontent.com/phospho-app/phosphobot/main/inference/ACT/server.py
+```
 
+```bash
 # Start server
-uv run server.py -- --model_id=<YOUR_HF_MODEL_ID>
+uv run server.py --model_id LegrandFrederic/Orange-brick-in-black-box # Replace with <YOUR_HF_MODEL_ID>
 ```
 
 2. Make sure the phosphobot server is running to control your robot:
