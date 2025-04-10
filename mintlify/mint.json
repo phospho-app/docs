@@ -51,10 +51,7 @@
   "navigation": [
     {
       "group": "Getting Started",
-      "pages": [
-        "welcome",
-        "installation"
-      ]
+      "pages": ["welcome", "installation"]
     },
     {
       "group": "Basic Usage",
@@ -107,19 +104,15 @@
             "control/move-teleoperation-ws",
             "control/move-absolute-position",
             "control/move-relative-position",
+            "control/move-leader-start",
+            "control/move-leader-stop",
+
             "control/end-effector-state",
             "control/read-torques",
             "control/turn-torque",
             "control/read-joints",
             "control/write-joints",
             "control/calibration-sequence"
-          ]
-        },
-        {
-          "group": "Camera",
-          "icon": "camera",
-          "pages": [
-            "camera/video-feed-for-camera"
           ]
         },
         {
@@ -132,11 +125,18 @@
           ]
         },
         {
-          "group": "Training",
+          "group": "AI model",
           "icon": "brain",
           "pages": [
-            "training/start-training"
+            "ai-training/start-training",
+            "ai-training/ai-control-start",
+            "ai-training/ai-control-stop"
           ]
+        },
+        {
+          "group": "Camera",
+          "icon": "camera",
+          "pages": ["camera/video-feed-for-camera"]
         }
       ]
     }
