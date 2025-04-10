@@ -76,62 +76,42 @@ Then, use the [/training/start-training](/training/start-training) endpoint to p
 
 </CardsGroup>
 
-## Training on your own machine
 
-### How to train the ACT (Action Chunking Transformer) model with LeRobot?
+## How to train the ACT (Action Chunking Transformer) model with LeRobot?
 
-1. On the device where you want to run the training, install the [phosphobot python module](https://github.com/phospho-app/phosphobot):  
+The ACT model is a transformer-based model that learns to chunk actions in a sequence. It is trained on a dataset of action sequences and their corresponding chunked actions.
 
-   ```bash
-   pip install --upgrade phosphobot
-   ```
+LeRobot is a research-oriented library by Hugging Face that provides a simple interface to train AI models. It is still a work in progress, but it is already very powerful.
 
-2. Clone the [LeRobot repository](https://github.com/huggingface/lerobot) and install it:  
+Follow [our guide](/learn/ai-models#train-an-act-model-locally-with-lerobot) to train the ACT model on your dataset.
 
-   ```bash
-   git clone https://github.com/huggingface/lerobot.git
-   cd lerobot
-   pip install -e .  # Requires Python 3.10+
-   ```
+<Card
+title="Train your ACT model with LeRobot"
+icon="cloud-arrow-up"
+link="/learn/ai-models#train-an-act-model-locally-with-lerobot"
+>
+Train your ACT model with LeRobot
+</Card>  
 
-3. *(Optional)* If you want to use **Weights & Biases** for tracking training metrics, log in with:  
+## How to train the ACT model on Replicate? Cloud-based training
 
-   ```bash
-   wandb login
-   ```
+Training ACT on your own machine can be hard. Video codecs, GPU acceleration, training time, and other factors can make it hard to train the model locally.
 
-4. Run the training script with the following command in the `lerobot` repository. Ensure that your `lerobot` virtual environment is activated.  
-
-<Warning>
-You need a GPU with at least 16GB of memory to train the ACT model.
-</Warning>
-
-   ```bash
-   sudo python lerobot/scripts/train.py \
-     --dataset.repo_id=<HF_USERNAME>/<DATASET_NAME> \
-     --policy.type=<act or diffusion or tdmpc or vqbet> \
-     --output_dir=outputs/train/phoshobot_test \
-     --job_name=phosphobot_test \
-     --device=mps \ # mps, cpu or cuda 
-     --wandb.enable=true
-   ```
-
-- For Apple Silicon (Mac M1, M2) set `--device=mps`
-- For NVIDIA GPU set `--device=cuda`
-- For CPU set `--device=cpu`
-
-
-5. Your trained model is saved in `lerobot/outputs/train/`.  
-
-#### Running on replicate
-
-To make it easier to train your model, we provide a training script that you can run on the **Replicate** platform, a cloud service that provides GPU instances and scripts to train your AI models and run inference.
-
-Check out our pipeline here: [Replicate ACT pipeline](https://replicate.com/phospho-app/act-policy)
+To help you, we provide a training script that you can run on the **Replicate** platform, a cloud service that provides GPU instances and scripts to train your AI models and run inference.
 
 You'll need to provide a Hugging Face dataset ID and token on which to train the policy.
 
+<Card
+title="Train your ACT model on Replicate"
+icon="cloud-arrow-up"
+link="https://replicate.com/phospho-app/act-policy"
+>
+Train your ACT model on Replicate
+</Card>
+
 ## How to train the Pi0 (Pi-Zero) model with the SO-100 robot arm? 
+
+[Pi0](https://www.physicalintelligence.company/blog/pi0) is a powerful VLA (Vision Language Action model) by Physical Intelligence. They released an open weight model that can be trained on your own dataset.
 
 To train the Pi0 model, you need to use the openpi repository with a few tweaks for the SO-100 robot arm compatibility. We added support for the SO-100 arm in this fork of the openpi repository. 
 
