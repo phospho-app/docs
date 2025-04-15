@@ -71,6 +71,7 @@ Go to the _Admin Configuration_ page of your phospshobot dashboard. You can adju
 - **Dataset Name**: The name of the dataset you want to record.
 - **Task**: A text description of the task you're about to record. For example: _"Pick up the lego brick and put it in the box"_. This helps you remember what you recorded and is used by some AI models to understand the task.
 - **Camera**: The cameras you want to record. By default, all cameras are recorded. You can select the cameras to record in the Admin Configuration.
+- **Video Codec**: The video codec used to record the videos. The default is `HVC1`, which is the most efficient codec. If you're having compatibility issues due to unavailable codecs (eg on Linux), switch to `mp4v` which is more compatible.
 
 
 ## 3. Control the robot in the Meta Quest app
@@ -116,6 +117,11 @@ Go to your [Hugging Face profile](https://huggingface.co) to see the uploaded da
 Once your dataset is uploaded to HuggingFace, you can view it using the [LeRobot Dataset Visualizer](https://huggingface.co/spaces/lerobot/visualize_dataset).
 
 ![LeRobot dataset visualizer](/assets/lerobot_dataset_viz.png) 
+
+<Note>
+ The dataset visualizer only works with the `HVC1` video codec. If you used another codec, you may see black screens in the video preview.
+ Preview directly the videos files in a video player by opening your recording locally: `~/phosphobot/recordings/lerobot_v2/DATASET_NAME/video`.
+</Note>
 
 Looking good? You're ready to train your AI model!
 
