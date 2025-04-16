@@ -25,10 +25,8 @@ curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install
 curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | sudo bash
 ```
 
-```bash Windows
-# In a WSL terminal:
-curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | sudo bash
-# Learn more about Windows Subsystem for Linux: https://learn.microsoft.com/en-us/windows/wsl/install
+```powershell Windows
+powershell -ExecutionPolicy ByPass -Command "irm https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.ps1 | iex"
 ```
 
 </CodeGroup>
@@ -176,38 +174,16 @@ sudo reboot
 
 ## Windows
 
-Download the latest Windows executable from our releases page:
+Install or update with this one-line command:
 
-1. Visit [https://github.com/phospho-app/homebrew-phosphobot/releases/latest](https://github.com/phospho-app/homebrew-phosphobot/releases/latest)
-2. Download the `.exe` file named `phosphobot-vXXX-amd64.exe` (where XXX is the version number)
-
-**First run setup:**
 ```powershell
-# In PowerShell or Command Prompt:
-cd ~\Downloads  # Navigate to your download folder
-# Rename the file to remove version number (recommended):
-ren .\phosphobot-vXXX-amd64.exe phosphobot.exe
-# Then run:
-.\phosphobot.exe run
+powershell -ExecutionPolicy ByPass -Command "irm https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.ps1 | iex"
 ```
 
-<Note>
-When first running the executable, Windows will show a "Windows protected your PC" warning. Click **More info** then **Run anyway** to launch the application.
-</Note>
-
-**Create a persistent shortcut:**
-1. Right-click your desktop and select New > Shortcut
-2. In target field enter: `"C:\path\to\phosphobot.exe" run`
-3. Name the shortcut "phosphobot"
-
-**Updating instructions:**
-1. Download the new `phosphobot-vYYY-amd64.exe` from [releases page](https://github.com/phospho-app/homebrew-phosphobot/releases/latest)
-2. Rename it to `phosphobot.exe` and overwrite the old file when prompted
-3. Your existing shortcut will automatically use the new version
-
-<Note type="warning">
-Always close any running instances before replacing the .exe file. The version number in the filename helps track updates, but keeping the simplified "phosphobot.exe" name makes upgrades seamless.
-</Note>
+After installation:
+- Run with `phosphobot run` from any terminal
+- Creates/updates at `%USERPROFILE%\.local\bin\phosphobot.exe`
+- Automatically adds to your PATH
 
 
 ## Support
