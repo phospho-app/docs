@@ -54,7 +54,7 @@ On the same computer, open a web browser and navigate to `localhost`. You should
   Discover how to control your robot arm from the dashboard and from the Meta Quest app.
 </Card>
 
-## MacOS
+## MacOS (brew)
 
 Use [Homebrew](https://brew.sh/) to install phosphobot:
 
@@ -67,7 +67,10 @@ To **update phosphobot**, run the following command:
 brew update && brew upgrade phosphobot
 ``` 
 
-## Linux (APT)
+You can also [directly download the binaries here.](https://github.com/phospho-app/homebrew-phosphobot/releases/latest)
+
+
+## Linux (apt)
 
 On Linux, we use apt to distribute the software and you need additional packages. That's why you need to run the install script with sudo:
 
@@ -79,7 +82,7 @@ To **update phosphobot**, run the following command:
 sudo apt update && sudo apt install --only-upgrade phosphobot
 ```
 
-## Raspberry Pi
+## Raspberry Pi (apt)
 
 phosphobot on Raspberry Pi has advanced features to make it easier to use (led ticking, bluetooth connection, extra dependencies already installed).
 
@@ -174,16 +177,23 @@ sudo reboot
 
 ## Windows
 
-Install or update with this one-line command:
-
+1. To **install** or **update** phosphobot, run the following command in PowerShell:
 ```powershell
-powershell -ExecutionPolicy ByPass -Command "irm https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.ps1 | iex"
+powershell -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.ps1 | iex"
 ```
 
-After installation:
-- Run with `phosphobot run` from any terminal
-- Creates/updates at `%USERPROFILE%\.local\bin\phosphobot.exe`
-- Automatically adds to your PATH
+2. To start the phosphobot server, run the following command in PowerShell.
+
+```powershell
+phosphobot run
+```
+3. When the "Windows protected your PC" warning appears, click **"More info"**, then click **"Run anyway"**.
+
+<Note type="tip">
+The warning only appears on first run. Subsequent launches work normally.
+</Note>
+
+You can also [directly download the binaries here.](https://github.com/phospho-app/homebrew-phosphobot/releases/latest)
 
 
 ## Support
