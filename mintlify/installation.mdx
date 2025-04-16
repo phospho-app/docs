@@ -176,65 +176,38 @@ sudo reboot
 
 ## Windows
 
-We don't offer prebuilt binaries for Windows, but we've successfully used **WSL (Windows Subsystem for Linux)**. 
+Download the latest Windows executable from our releases page:
 
-1. Follow [this guide](https://learn.microsoft.com/en-us/windows/wsl/install) to install WSL.
-2. Then, follow the [Linux (APT) setup guide](/installation#linux) to install the teleoperation server.
-3. To connect the SO-100 USB devices to WSL, you should first use mirrored network.
+1. Visit [https://github.com/phospho-app/homebrew-phosphobot/releases/latest](https://github.com/phospho-app/homebrew-phosphobot/releases/latest)
+2. Download the `.exe` file named `phosphobot-vXXX-amd64.exe` (where XXX is the version number)
 
-```bash
-# In WSL terminal:
-export DISPLAY=$(awk '/nameserver / {print $2 ":0"}' /etc/resolv.conf)
-```
-
-4. In your powershell terminal, run this command to install the USBIPD driver:
-
+**First run setup:**
 ```powershell
-winget install --interactive --accept-source-agreements --accept-package-agreements usbipd
+# In PowerShell or Command Prompt:
+cd ~\Downloads  # Navigate to your download folder
+# Rename the file to remove version number (recommended):
+ren .\phosphobot-vXXX-amd64.exe phosphobot.exe
+# Then run:
+.\phosphobot.exe run
 ```
 
-List devices connected to your Windows host:
+<Note>
+When first running the executable, Windows will show a "Windows protected your PC" warning. Click **More info** then **Run anyway** to launch the application.
+</Note>
 
-```powershell
-usbipd wsl list
-```
+**Create a persistent shortcut:**
+1. Right-click your desktop and select New > Shortcut
+2. In target field enter: `"C:\path\to\phosphobot.exe" run`
+3. Name the shortcut "phosphobot"
 
-Attach the device you want to use. Replace `<busid>` with the bus ID of the device you want to attach (e.g., `1-1`):
+**Updating instructions:**
+1. Download the new `phosphobot-vYYY-amd64.exe` from [releases page](https://github.com/phospho-app/homebrew-phosphobot/releases/latest)
+2. Rename it to `phosphobot.exe` and overwrite the old file when prompted
+3. Your existing shortcut will automatically use the new version
 
-```powershell
-usbipd wsl attach --busid <busid>
-```
-
-5. Then, go back to your WSL terminal and run the following command to install the USBIP tools:
-
-```bash
-sudo apt install linux-tools-virtual hwdata
-sudo update-alternatives --install /usr/local/bin/usbip usbip /usr/lib/linux-tools/*-generic/usbip 20
-```
-
-Get the Windows host IP from WSL:
-
-```bash
-cat /etc/resolv.conf | grep nameserver | awk '{print $2}'
-```
-
-Attach the device to WSL:
-
-```bash
-usbip attach -r <windows_host_ip> -s <busid>
-```
-
-Verify the device is attached to WSL:
-
-```bash
-lsusb
-```
-
-6. You can now run the phosphobot server in WSL:
-
-```bash
-phosphobot run
-```
+<Note type="warning">
+Always close any running instances before replacing the .exe file. The version number in the filename helps track updates, but keeping the simplified "phosphobot.exe" name makes upgrades seamless.
+</Note>
 
 
 ## Support
