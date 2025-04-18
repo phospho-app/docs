@@ -1,15 +1,62 @@
 components:
   schemas:
-    AdminSettingsResponse:
-      description: Contains the settings returned in the admin page
+    AdminSettingsRequest:
+      description: Contains the admin settings
       properties:
-        cameras_to_disable:
+        cameras_to_record:
           anyOf:
           - items:
               type: integer
             type: array
           - type: 'null'
-          title: Cameras To Disable
+          title: Cameras To Record
+        dataset_name:
+          title: Dataset Name
+          type: string
+        episode_format:
+          title: Episode Format
+          type: string
+        freq:
+          title: Freq
+          type: integer
+        task_instruction:
+          title: Task Instruction
+          type: string
+        video_codec:
+          enum:
+          - avc1
+          - hev1
+          - mp4v
+          - hvc1
+          - avc3
+          - av01
+          - vp09
+          title: Video Codec
+          type: string
+        video_size:
+          items:
+            type: integer
+          title: Video Size
+          type: array
+      required:
+      - dataset_name
+      - episode_format
+      - freq
+      - video_codec
+      - video_size
+      - task_instruction
+      title: AdminSettingsRequest
+      type: object
+    AdminSettingsResponse:
+      description: Contains the settings returned in the admin page
+      properties:
+        cameras_to_record:
+          anyOf:
+          - items:
+              type: integer
+            type: array
+          - type: 'null'
+          title: Cameras To Record
         dataset_name:
           title: Dataset Name
           type: string
@@ -42,10 +89,10 @@ components:
       - dataset_name
       - freq
       - episode_format
-      - cameras_to_disable
       - video_codec
       - video_size
       - task_instruction
+      - cameras_to_record
       title: AdminSettingsResponse
       type: object
     AdminSettingsTokenResponse:
@@ -636,6 +683,14 @@ components:
       type: object
     RecordingPlayRequest:
       description: Request to play a recorded episode.
+      examples:
+      - dataset_name: example_dataset
+        episode_id: 0
+      - episode_path: ~/phosphobot/lerobot_v2/example_dataset/chunk-000/episode_000000.json
+        replicate: false
+        robot_id:
+        - 0
+        - 1
       properties:
         dataset_name:
           anyOf:
@@ -660,8 +715,10 @@ components:
           anyOf:
           - type: string
           - type: 'null'
-          description: (Optional) Path to the .json or .parquet file of the episode
-            to play. If specified, overrides any dataset_name or episode_id.
+          description: (Optional) If you recorded your data with LeRobot v2 compatible
+            format, you can directly specifiy the path to the .parquet file of the
+            episode to play. If specified, you don't have to pass a dataset_name or
+            episode_id.
           examples:
           - ~/phosphobot/lerobot_v2/example_dataset/chunk-000/episode_000000.json
           title: Episode Path
@@ -680,6 +737,41 @@ components:
           minimum: 0.0
           title: Playback Speed
           type: number
+        replicate:
+          default: true
+          description: 'If False and there are more robots than number of robots in
+            the episode, extra robots will not move. If True, all the extras robots
+            will replicate movements of the robots in the episode.Examples: If there
+            are 4 robots and the episode has 2 robots, if replicate is True, robot
+            3 and 4 will replicate the movements of robot 1 and 2. If replicate is
+            False, robot 3 and 4 will not move.'
+          title: Replicate
+          type: boolean
+        robot_id:
+          anyOf:
+          - type: integer
+          - items:
+              type: integer
+            type: array
+          - type: 'null'
+          description: ID of the robot to play the episode on. If None, plays on all
+            robots. If a list, plays on the robots with the given IDs.
+          examples:
+          - 0
+          - - 0
+            - 1
+          title: Robot Id
+        robot_serials_to_ignore:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          description: List of robot serial ids to ignore. If set to None, plays on
+            all available robots.
+          examples:
+          - - /dev/ttyUSB0
+          title: Robot Serials To Ignore
       title: RecordingPlayRequest
       type: object
     RecordingStartRequest:
@@ -754,10 +846,10 @@ components:
               type: string
             type: array
           - type: 'null'
-          description: List of robot indexes to ignore. If set to None, records all
-            available robots.
+          description: List of robot serial ids to ignore. If set to None, records
+            all available robots.
           examples:
-          - - 1
+          - - /dev/ttyUSB0
           title: Robot Serials To Ignore
         target_video_size:
           anyOf:
@@ -903,6 +995,32 @@ components:
       - usb_port
       title: RobotConfigStatus
       type: object
+    ServerInfoResponse:
+      properties:
+        model_id:
+          title: Model Id
+          type: string
+        tcp_socket:
+          maxItems: 2
+          minItems: 2
+          prefixItems:
+          - type: string
+          - type: integer
+          title: Tcp Socket
+          type: array
+        timeout:
+          title: Timeout
+          type: integer
+        url:
+          title: Url
+          type: string
+      required:
+      - url
+      - tcp_socket
+      - model_id
+      - timeout
+      title: ServerInfoResponse
+      type: object
     ServerStatus:
       description: Contains the status of the app
       properties:
@@ -950,7 +1068,7 @@ components:
           title: Status
           type: string
         version_id:
-          default: 0.2.123
+          default: 0.2.148
           description: Current version of the teleoperation server
           title: Version Id
           type: string
@@ -1030,6 +1148,8 @@ components:
           - classic
           - stereo
           - realsense
+          - realsense_rgb
+          - realsense_depth
           - dummy
           - dummy_stereo
           - unknown
@@ -1056,6 +1176,28 @@ components:
       - fps
       title: SingleCameraStatus
       type: object
+    SpawnStatusResponse:
+      additionalProperties: true
+      description: Response to spawn a server.
+      properties:
+        message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Message
+        server_info:
+          $ref: '#/components/schemas/ServerInfoResponse'
+        status:
+          default: ok
+          enum:
+          - ok
+          - error
+          title: Status
+          type: string
+      required:
+      - server_info
+      title: SpawnStatusResponse
+      type: object
     StartAIControlRequest:
       description: Request to start the AI control of the robot.
       properties:
@@ -1069,6 +1211,15 @@ components:
           - type: 'null'
           description: Prompt to be followed by the robot
           title: Prompt
+        speed:
+          default: 1.0
+          description: Speed of the AI control. 1.0 is normal speed, 0.5 is half speed,
+            2.0 is double speed. The highest speed is still bottlenecked by the GPU
+            inference time.
+          maximum: 2.0
+          minimum: 0.1
+          title: Speed
+          type: number
       required:
       - model_id
       title: StartAIControlRequest
@@ -1133,7 +1284,7 @@ components:
           default: 64
           description: Batch size for training, default and max is 64
           exclusiveMinimum: 0.0
-          maximum: 64.0
+          maximum: 80.0
           title: Batch Size
           type: integer
         dataset:
@@ -1162,53 +1313,6 @@ components:
       - dataset
       - model_name
       title: TrainingRequest
-      type: object
-    UserSettingsRequest:
-      description: Contains the user settings
-      properties:
-        cameras_to_disable:
-          anyOf:
-          - items:
-              type: integer
-            type: array
-          - type: 'null'
-          title: Cameras To Disable
-        dataset_name:
-          title: Dataset Name
-          type: string
-        episode_format:
-          title: Episode Format
-          type: string
-        freq:
-          title: Freq
-          type: integer
-        task_instruction:
-          title: Task Instruction
-          type: string
-        video_codec:
-          enum:
-          - avc1
-          - hev1
-          - mp4v
-          - hvc1
-          - avc3
-          - av01
-          - vp09
-          title: Video Codec
-          type: string
-        video_size:
-          items:
-            type: integer
-          title: Video Size
-          type: array
-      required:
-      - dataset_name
-      - episode_format
-      - freq
-      - video_codec
-      - video_size
-      - task_instruction
-      title: UserSettingsRequest
       type: object
     ValidationError:
       properties:
@@ -1253,11 +1357,14 @@ components:
       description: Response to read the torque of the robot.
       properties:
         current_voltage:
+          anyOf:
+          - items:
+              type: number
+            type: array
+          - type: 'null'
           description: A list of length 6, with the current voltage of each joint.
-          items:
-            type: number
+            If the robot is not connected, this will be None.
           title: Current Voltage
-          type: array
       required:
       - current_voltage
       title: VoltageReadResponse
@@ -1310,7 +1417,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserSettingsRequest'
+              $ref: '#/components/schemas/AdminSettingsRequest'
         required: true
       responses:
         '200':
@@ -1349,6 +1456,18 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
       summary: Submit Token
+      tags:
+      - pages
+  /admin/huggingface/whoami:
+    post:
+      operationId: whoami_admin_huggingface_whoami_post
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+      summary: Whoami
       tags:
       - pages
   /admin/settings:
@@ -1444,7 +1563,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StatusResponse'
+                $ref: '#/components/schemas/SpawnStatusResponse'
           description: Successful Response
         '422':
           content:
@@ -2354,14 +2473,6 @@ paths:
     post:
       description: Play a recorded episode.
       operationId: play_recording_recording_play_post
-      parameters:
-      - in: query
-        name: robot_id
-        required: false
-        schema:
-          default: 0
-          title: Robot Id
-          type: integer
       requestBody:
         content:
           application/json:
