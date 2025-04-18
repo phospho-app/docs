@@ -177,6 +177,8 @@ sudo reboot
 
 ## Windows
 
+### Windows (Install script)
+
 1. To **install** or **update** phosphobot, run the following command in PowerShell:
 ```powershell
 powershell -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.ps1 | iex"
@@ -193,7 +195,19 @@ phosphobot run
 The warning only appears on first run. Subsequent launches work normally.
 </Note>
 
-You can also [directly download the binaries here.](https://github.com/phospho-app/homebrew-phosphobot/releases/latest)
+### Windows (manual)
+
+You can also [directly download the binaries here.](https://github.com/phospho-app/homebrew-phosphobot/releases/latest). After downloading, run phosphobot this way:
+
+```powershell
+C:\path\to\phosphobot.exe run
+```
+
+Change `C:\path\to\` to the path where you downloaded phosphobot. To make this easier, we recommand you to rename the file to `phosphobot.exe` and move it to your Desktop. 
+
+Then, you can **create a shortcut** to launchint `C:\Users\<your_username>\Desktop\phosphobot.exe run` from anywhere.
+
+
 
 
 ## Support
