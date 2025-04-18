@@ -68,6 +68,7 @@
         "learn/overview",
         "learn/kinematics",
         "learn/lerobot-dataset",
+        "learn/dataset-bestpractices",
         "learn/ai-models",
         "learn/policies",
         "learn/gravity-compensation",

@@ -3,19 +3,21 @@ title: "Control your robot arm"
 description: "How to remote control a robot arm with a keyboard, in VR, with an API or a leader arm?"
 ---
 
-<Info> 
-  - Before continuing, make sure you have installed [the phosphobot software](/installation) and completed the [quickstart](/so-100/quickstart).
-  - If you don't have a robot arm, you can get hardware [here](https://robots.phospho.ai/).
-  - If you built your own robot arm, you should first [calibrate it](/so-100/quickstart#calibrate-the-robot).
- </Info>
+<Info>
+  - Before continuing, make sure you have installed [the phosphobot
+  software](/installation) and completed the [quickstart](/so-100/quickstart). -
+  If you don't have a robot arm, you can get hardware
+  [here](https://robots.phospho.ai/). - If you built your own robot arm, you
+  should first [calibrate it](/so-100/quickstart#calibrate-the-robot).
+</Info>
 
 You can control your robot arm:
+
 - using your keyboard
 - through the HTTP API
 - with the Meta Quest app
 - using a leader arm or another follower arm
 - with playback
-
 
 ### How to control the SO-100 with a keyboard?
 
@@ -23,22 +25,25 @@ Use `phosphobot` to control your SO-100 robot arm with your keyboard, using the 
 
 Go to `localhost` in your web browser to access the phosphobot dashboard. Go to **Keyboard Control**. Click on the **Start robot** button to start controlling the robot arm with your keyboard. Click on the **Stop robot** button to stop controlling the robot arm with your keyboard.
 
-<iframe 
-    className="w-full aspect-video"
-    src="https://www.youtube.com/embed/Yun4Twtm_wc" 
-    title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-    referrerPolicy="strict-origin-when-cross-origin" 
-    allowFullScreen>
-</iframe>
-
+<iframe
+  className="w-full aspect-video"
+  src="https://www.youtube.com/embed/Yun4Twtm_wc"
+  title="YouTube video player"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  referrerPolicy="strict-origin-when-cross-origin"
+  allowFullScreen
+></iframe>
 
 ### Send your first commands to the API
 
 Once your phosphobot server is running, you can send your first command to the robot arm.
 
-<Warning>Make sure the robot is well fixed and the area around is clear before sending any command.</Warning>
+<Warning>
+  Make sure the robot is well fixed and the area around is clear before sending
+  any command.
+</Warning>
 
-1. Go to the interactive API docs on the phosphobot dashboard: [localhost/docs](localhost/docs). On the control module, the address [phosphobot.local/docs](http://phosphobot.local/docs). This page lets you send commands to the robot arm.
+1. Go to the interactive API docs on the phosphobot dashboard: [localhost/docs](http://localhost/docs). On the control module, the address [phosphobot.local/docs](http://phosphobot.local/docs). This page lets you send commands to the robot arm.
 
 2. Trigger the `/move/init` endpoint to initialize the robot (click `Try it out` and then press `Execute`).
 
@@ -48,13 +53,14 @@ Once your phosphobot server is running, you can send your first command to the r
 
 ## Meta Quest app
 
-<iframe 
-    className="w-full aspect-video"
-    src="https://www.youtube.com/embed/AQ-xgCTdj_w?si=NDTtX1nISABjzmbA" 
-    title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-    referrerPolicy="strict-origin-when-cross-origin" 
-    allowFullScreen>
-</iframe>
+<iframe
+  className="w-full aspect-video"
+  src="https://www.youtube.com/embed/AQ-xgCTdj_w?si=NDTtX1nISABjzmbA"
+  title="YouTube video player"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  referrerPolicy="strict-origin-when-cross-origin"
+  allowFullScreen
+></iframe>
 
 ### Set up your Meta Quest app
 
@@ -64,30 +70,35 @@ The phospho starter pack is shipped with a [Meta Quest](https://www.meta.com/fr/
 
 2. Make sure your **Meta Quest headset** is **turned on** and **connected to WiFi**. Once you’ve linked your account, the Meta Quest will automatically download the app. This can take a moment.
 
-<Info>The Meta Quest connects to the phosphobot server through a shared WiFi connection. </Info>
+<Info>
+  The Meta Quest connects to the phosphobot server through a shared WiFi
+  connection.{" "}
+</Info>
 
-3. Open the phospho teleop app from the library. Once downloading is done, you can open the software library on the Meta Quest. In the list of All apps, you’ll see the *phospho teleop* app. This app is automatically updated with the latest releases.
-
+3. Open the phospho teleop app from the library. Once downloading is done, you can open the software library on the Meta Quest. In the list of All apps, you’ll see the _phospho teleop_ app. This app is automatically updated with the latest releases.
 
 ### Use the Meta Quest app
 
-<Info>Make sure the Meta Quest is connected to the same WiFi that the computer running the phosphobot server.</Info>
+<Info>
+  Make sure the Meta Quest is connected to the same WiFi that the computer
+  running the phosphobot server.
+</Info>
 
-Connect to the dev kit through WiFi in the phospho Meta Quest app. 
+Connect to the dev kit through WiFi in the phospho Meta Quest app.
 
-1. In the Meta Quest, open the phospho teleop application. You should see a screen displaying **phosphobot** along with the server ping. Click the **Connect** button using the `Trigger Button`.   
+1. In the Meta Quest, open the phospho teleop application. You should see a screen displaying **phosphobot** along with the server ping. Click the **Connect** button using the `Trigger Button`.
 
 ![Select Phosphobot server](/assets/meta-quest-server-list.png)
 
-2. After connecting, you should see the main camera feed if a camera is connected. Move the windows with the `Grip button` to organize your space.  
+2. After connecting, you should see the main camera feed if a camera is connected. Move the windows with the `Grip button` to organize your space.
 
-![Meta Quest controller button names](/assets/names_buttons.jpg) 
+![Meta Quest controller button names](/assets/names_buttons.jpg)
 
-3. Press `A` once to start teleoperation and begin moving your controller.  
+3. Press `A` once to start teleoperation and begin moving your controller.
    - The robot will naturally follow the movement of your controller. Press the `Trigger button` to close the gripper.
-   - Press `A` again to stop the teleoperation. The robot will stop. 
+   - Press `A` again to stop the teleoperation. The robot will stop.
 
-You just teleoperated your robot arm! 🎉 
+You just teleoperated your robot arm! 🎉
 
 ## Using a leader arm
 
@@ -95,7 +106,7 @@ You just teleoperated your robot arm! 🎉
 
 If you have a leader arm, we offer some basic support.
 
-1. Plug the leader arm. 
+1. Plug the leader arm.
 
 2. Calibrate the leader arm the same way you calibrated the robot arm.
 
