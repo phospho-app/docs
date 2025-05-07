@@ -13,77 +13,79 @@ In this guide, we'll show you how to train the ACT (Action Chunking Transformer)
 
 LeRobot is a platform designed to make real-world robotics more accessible for everyone. It provides pre-trained models, datasets, and tools in PyTorch.
 
-It focuses on state-of-the-art approaches in **imitation learning** and **reinforcement learning**. 
+It focuses on state-of-the-art approaches in **imitation learning** and **reinforcement learning**.
 
 With LeRobot, you get access to:
+
 - Pretrained models for robotics applications
 - Human-collected demonstration datasets
 - Simulated environments to test and refine AI models
 
 Useful links:
+
 - [LeRobot on GitHub](https://github.com/huggingface/lerobot)
 - [LeRobot on Hugging Face](https://huggingface.co/lerobot)
 - [AI models for robotics](https://huggingface.co/models?pipeline_tag=robotics&sort=trending)
 
 ## Step by step guide
 
-In this guide, we will use the phospho starter pack to record a dataset and upload it to Hugging Face.  
+In this guide, we will use the phospho starter pack to record a dataset and upload it to Hugging Face.
 
+<iframe
+  className="w-full aspect-video"
+  src="https://www.youtube.com/embed/hBKTQLkQk9U?si=y6W3j7bSLMtK00RF"
+  title="YouTube video player"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  referrerPolicy="strict-origin-when-cross-origin"
+  allowFullScreen
+></iframe>
 
-<iframe 
-    className="w-full aspect-video"
-    src="https://www.youtube.com/embed/hBKTQLkQk9U?si=y6W3j7bSLMtK00RF"
-    title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-    referrerPolicy="strict-origin-when-cross-origin" 
-    allowFullScreen>
-</iframe>
-
-## Prerequisites  
+## Prerequisites
 
 1. You need an assembled **SO-100** robot arm and **cameras**. Get the [phosphot starter pack here](https://robots.phospho.ai).
-2. Install [the phosphobot software](/installation) 
+2. Install [the phosphobot software](/installation)
 
   <CodeGroup>
 
-  ```bash macOS
-  curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | bash
-  ```
+```bash macOS
+curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | bash
+```
 
-  ```bash Linux
-  curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | sudo bash
-  ```
+```bash Linux
+curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | sudo bash
+```
 
-  ```powershell Windows
-  powershell -ExecutionPolicy ByPass -Command "irm https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.ps1 | iex"
-  ```
+```powershell Windows
+powershell -ExecutionPolicy ByPass -Command "irm https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.ps1 | iex"
+```
 
   </CodeGroup>
 
 3. **Connect your cameras to the computer.** Start the phosphobot server.
 
-  ```bash
-  phosphobot run
-  ```
-4. Complete the [quickstart](/so-100/quickstart) and check that you can [control your robot](/basic-usage/teleop).
-5. You have the **[phosphobot teleoperation app](/examples/teleop)** is installed on your **Meta Quest 2, Pro, 3 or 3s** 
-6. You have a **device to train your model**. We recommend using a **GPU** for faster training.  
+```bash
+phosphobot run
+```
 
-## 1. Set up your Hugging Face token  
+4. Complete the [quickstart](/so-100/quickstart) and check that you can [control your robot](/basic-usage/teleop).
+5. You have the **[phosphobot teleoperation app](/examples/teleop)** is installed on your **Meta Quest 2, Pro, 3 or 3s**
+6. You have a **device to train your model**. We recommend using a **GPU** for faster training.
+
+## 1. Set up your Hugging Face token
 
 To sync datasets, you need a Hugging Face token with write access. Follow these steps to generate one:
 
 1. Log in to your Hugging Face account. You can create [one here for free](https://huggingface.co)
-2. Go to **Profile** and click **Access Tokens** in the sidebar.  
-3. Select the **Write** option to grant write access to your account. This is necessary for creating new datasets and uploading files. Name your token and click **Create token**.  
+2. Go to **Profile** and click **Access Tokens** in the sidebar.
+3. Select the **Write** option to grant write access to your account. This is necessary for creating new datasets and uploading files. Name your token and click **Create token**.
 
-4. **Copy the token** and **save it** in a secure place. You will need it later.  
+4. **Copy the token** and **save it** in a secure place. You will need it later.
 
 5. Make sure the phosphobot server is running. Open a browser and access `localhost` or `phosphobot.local` if you're using the control module. Then go to the Admin Configuration.
 
-6. **Paste the Hugging Face token**, and **save it**.  
+6. **Paste the Hugging Face token**, and **save it**.
 
 ![Paste your huggingface token here](/assets/admin-settings-huggingface.png)
-
 
 ## 2. Set your dataset name and parameters
 
@@ -98,47 +100,56 @@ Go to the _Admin Configuration_ page of your phospshobot dashboard. You can adju
 
 The easiest way to record a dataset is to use the Meta Quest app.
 
-<Info>Get access to the Meta Quest app [on the Meta Store](https://www.meta.com/en-gb/experiences/phospho-teleoperation/8873978782723478/) or [with a starter pack](https://robots.phospho.ai)</Info>
+<Info>
+  Get access to the Meta Quest app [on the Meta
+  Store](https://www.meta.com/en-gb/experiences/phospho-teleoperation/8873978782723478/)
+  or [with a starter pack](https://robots.phospho.ai)
+</Info>
 
-1. In the Meta Quest, open the phospho teleop application. Wait a moment, then you should see a row displaying **phosphobot** or your computer name. Click the **Connect** button using the `Trigger Button`.  
-  - Make sure you're connected to the **same WiFi** as the phosphobot server. 
-  - If you don't see the server, check the IP address of the server in the phosphobot dashboard and enter it manually.
+1. In the Meta Quest, open the phospho teleop application. Wait a moment, then you should see a row displaying **phosphobot** or your computer name. Click the **Connect** button using the `Trigger Button`.
+
+- Make sure you're connected to the **same WiFi** as the phosphobot server.
+- If you don't see the server, check the IP address of the server in the phosphobot dashboard and enter it manually.
 
 ![Select Phosphobot server](/assets/meta-quest-server-list.png)
 
 ![Meta Quest controller button names](/assets/names_buttons.jpg)
 
 2. After connecting, you'll see the list of connected cameras and recording options.
-  - Move the windows with the `Grip button` to organize your space.
-  - Enable preview to see the camera feed. Check the **camera angles** and adjust their positions if needed. 
+
+- Move the windows with the `Grip button` to organize your space.
+- Enable preview to see the camera feed. Check the **camera angles** and adjust their positions if needed.
 
 <Info>We recommend **disabling** the camera preview to save bandwidth.</Info>
 
-3. Press `A` once to start teleoperation and begin moving your controller.  
-   - The robot will naturally follow the movement of your controller. Press the `Trigger button` to close the gripper.
-   - Press `A` again to stop the teleoperation. The robot will stop.  
+3. Press `A` once to start teleoperation and begin moving your controller.
 
-4. Press `B` to start recording. You can leave the default settings for your first attempt.  
+   - The robot will naturally follow the movement of your controller. Press the `Trigger button` to close the gripper.
+   - Press `A` again to stop the teleoperation. The robot will stop.
+
+4. Press `B` to start recording. You can leave the default settings for your first attempt.
+
    - Press `B` again to stop the recording.
    - Press `Y` (left controller) to discard the recording.
 
-5. Continue teleoperating and stop the recording by pressing `B` when you're done.  
+5. Continue teleoperating and stop the recording by pressing `B` when you're done.
 
 6. The recording is automatically saved in **LeRobot v2** format and **uploaded to your HuggingFace account.**
 
-
-Go to your [Hugging Face profile](https://huggingface.co) to see the uploaded datasets. 
+Go to your [Hugging Face profile](https://huggingface.co) to see the uploaded datasets.
 
 You can view it using the [LeRobot Dataset Visualizer](https://huggingface.co/spaces/lerobot/visualize_dataset).
 
-![LeRobot dataset visualizer](/assets/lerobot_dataset_viz.png) 
+![LeRobot dataset visualizer](/assets/lerobot_dataset_viz.png)
 
 <Note>
- The dataset visualizer only works with `AVC1` video codec. If you used another codec, you may see black screens in the video preview.
- Preview directly the videos files in a video player by opening your recording locally: `~/phosphobot/recordings/lerobot_v2/DATASET_NAME/video`.
+  The dataset visualizer only works with `AVC1` video codec. If you used another
+  codec, you may see black screens in the video preview. Preview directly the
+  videos files in a video player by opening your recording locally:
+  `~/phosphobot/recordings/lerobot_v2/DATASET_NAME/video`.
 </Note>
 
-## 4. Train your first model  
+## 4. Train your first model
 
 ### Train GR00T-N1-2B in one click with phosphobot cloud
 
@@ -150,14 +161,14 @@ To train a model, you can use the phosphobot cloud. This is the quickest way to 
 
 ![phosphobot training cloud](/assets/phosphobot-aitraining.png)
 
-
-<iframe 
-    className="w-full aspect-video"
-    src="https://www.youtube.com/embed/kwyqUvdHJFk?si=mq6d4yAimxHOEu9K" 
-    title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-    referrerPolicy="strict-origin-when-cross-origin" 
-    allowFullScreen>
-</iframe>
+<iframe
+  className="w-full aspect-video"
+  src="https://www.youtube.com/embed/kwyqUvdHJFk?si=mq6d4yAimxHOEu9K"
+  title="YouTube video player"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  referrerPolicy="strict-origin-when-cross-origin"
+  allowFullScreen
+></iframe>
 
 <CardGroup>
 <Card
@@ -188,29 +199,30 @@ To help you, we provide a training script that you can run on the **Replicate** 
 You'll need to provide a Hugging Face dataset ID and token on which to train the policy.
 
 <Card
-title="Train your ACT model on Replicate"
-icon="cloud-arrow-up"
-href="https://replicate.com/phospho-app/act-policy"
+  title="Train your ACT model on Replicate"
+  icon="cloud-arrow-up"
+  href="https://replicate.com/phospho-app/act-policy"
 >
-Train your ACT model on Replicate
+  Train your ACT model on Replicate
 </Card>
 
-
-### Train an ACT model locally with LeRobot 
+### Train an ACT model locally with LeRobot
 
 <Warning>
-You need a GPU with at least 16GB of memory to train the model.
+  You need a GPU with at least 16GB of memory to train the model.
 </Warning>
 
 This guide will show you how to train the ACT model locally using **LeRobot** for your SO-100 robot.
 
-1. Install [uv](https://docs.astral.sh/uv/), the modern Python package manager. 
+1. Install [uv](https://docs.astral.sh/uv/), the modern Python package manager.
+
 ```bash
 # On macOS and Linux
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
 2. Set up training environment.
+
 ```bash
 mkdir my_model
 cd my_model
@@ -220,11 +232,13 @@ git clone https://github.com/phospho-app/lerobot
 ```
 
 3. (MacOS only) Set environment variables for torch compatibility:
+
 ```bash
 export DYLD_LIBRARY_PATH="/opt/homebrew/lib:/usr/local/lib:$DYLD_LIBRARY_PATH"
 ```
 
 4. (Optional) Add the [Weight & Biases](https://wandb.ai) integration for training metrics tracking:
+
 ```bash
 wandb login
 ```
@@ -241,7 +255,7 @@ uv run lerobot/lerobot/scripts/train.py \
  --wandb.enable=true # Optional
 ```
 
-Trained models will be saved in `lerobot/outputs/train/`. 
+Trained models will be saved in `lerobot/outputs/train/`.
 
 6. (Optional) Upload the model to Hugging Face. Login to HuggingFace CLI:
 
@@ -297,49 +311,45 @@ phosphobot run
 # ]
 #
 # ///
-from phosphobot.camera import AllCameras
-from phosphobot.api.client import PhosphoApi
-from phosphobot.am import ACT
+# /// script
+# requires-python = ">=3.10"
+# dependencies = [
+#     "phosphobot",
+# ]
+#
+# ///
 
+from phosphobot.camera import AllCameras
+import httpx
+from phosphobot.am import ACT
 import time
 import numpy as np
 
-# Connect to the phosphobot server
-client = PhosphoApi(base_url="http://localhost:80")
-
-# Get a camera frame
+# Initialize hardware interfaces
+PHOSPHOBOT_API_URL = "http://localhost:80"
 allcameras = AllCameras()
+time.sleep(1)  # Camera warmup
 
-# Need to wait for the cameras to initialize
-time.sleep(1)
-
-# Instantiate the model
-model = ACT() # Change server_url and server_port if needed
-
-# Get the frames from the cameras
-# We will use this model: LegrandFrederic/Orange-brick-in-black-box
-# It requires 3 cameras as you can see in the config.json
-# https://huggingface.co/LegrandFrederic/Orange-brick-in-black-box/blob/main/config.json
+# Connect to ACT server
+model = ACT()
 
 while True:
-    images = [
-        allcameras.get_rgb_frame(camera_id=0, resize=(240, 320)),
-        allcameras.get_rgb_frame(camera_id=1, resize=(240, 320)),
-        allcameras.get_rgb_frame(camera_id=2, resize=(240, 320)),
-    ]
+    # Capture multi-camera frames (adjust camera IDs and size as needed)
+    images = [allcameras.get_rgb_frame(0, resize=(240, 320))]
 
-    # Get the robot state
-    state = client.control.read_joints()
+    # Get current robot state
+    state = httpx.post(f"{PHOSPHOBOT_API_URL}/joints/read").json()
 
-    inputs = {"state": np.array(state.angles_rad), "images": np.array(images)}
+    # Generate actions
+    actions = model(
+        {"state": np.array(state["angles_rad"]), "images": np.array(images)}
+    )
 
-    # Go through the model
-    actions = model(inputs)
-
+    # Execute actions at 30Hz
     for action in actions:
-        # Send the new joint postion to the robot
-        client.control.write_joints(angles=action.tolist())
-        # Wait to respect frequency control (30 Hz)
+        httpx.post(
+            f"{PHOSPHOBOT_API_URL}/joints/write", json={"angles": action.tolist()}
+        )
         time.sleep(1 / 30)
 ```
 
@@ -356,20 +366,21 @@ Stop the script by pressing `Ctrl + C`.
 Next, you can use the trained model to control your robot. Head to our [guide](/basic-usage/inference) to get started!
 
 <CardGroup>
-<Card
-  title="Policies"
-  icon="brain-circuit"
-  iconType="regular"
-  href="/learn/policies"
->
-  Learn more about Robotics AI models
-</Card>
-<Card
-  title="Discord"
-  icon="discord"
-  iconType="regular"
-  href="https://discord.gg/cbkggY6NSK"
->
-  Join the Discord to ask questions, get help from others and get updates (we ship almost daily)
-</Card>
+  <Card
+    title="Policies"
+    icon="brain-circuit"
+    iconType="regular"
+    href="/learn/policies"
+  >
+    Learn more about Robotics AI models
+  </Card>
+  <Card
+    title="Discord"
+    icon="discord"
+    iconType="regular"
+    href="https://discord.gg/cbkggY6NSK"
+  >
+    Join the Discord to ask questions, get help from others and get updates (we
+    ship almost daily)
+  </Card>
 </CardGroup>
