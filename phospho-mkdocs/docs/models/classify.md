@@ -4,7 +4,7 @@ description: "Train, use and download classification models"
 ---
 
 <Note>
-  Request access to the preview by contacting us at contact@phospho.app
+  Request access to the preview by contacting us at contact@phospho.ai
 </Note>
 
 phospho can handle all the data processing, data engineering and model training for you.
@@ -150,7 +150,6 @@ The training will take a few minutes. You can check the status of the model usin
     print(response.text)
     ```
 
-
 Your model will be ready when the status will changed from `training` to `trained`.
 
 ## Use the model
@@ -203,7 +202,7 @@ If it's the first request you send, you might experience a delay as the model is
     ],
     "model": "YOUR_MODEL_ID"
   }'
-  ```
+```
 
 ```python Python
 # Coming soon!

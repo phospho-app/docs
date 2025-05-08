@@ -4,8 +4,8 @@ description: "Generate specific embeddings with phospho"
 ---
 
 !!! note
-    This model is in preview. Contact us for production or latency sensitive
-    specs.
+This model is in preview. Contact us for production or latency sensitive
+specs.
 
 You can generate embeddings for text using the `intent-embed` model. Intent Embed is a mdoel that generates embeddings for text, specifically to represent the user intent. Potential use cases include:
 
@@ -133,7 +133,6 @@ The pricing is based on the number of tokens in the input text.
 | `intent-embed` | $0.94                     |
 
 !!! info
-    You are billed in \$1 increment.
+You are billed in \$1 increment.
 
-
-[Contact us](mailto:contact@phospho.app) for high volume pricing.
+[Contact us](mailto:contact@phospho.ai) for high volume pricing.

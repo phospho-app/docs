@@ -66,10 +66,9 @@ print(response.json()['predictions'][0]['description'])
 
 ```
 
-
 !!! note
-    This API endpoint is for preview and not optimal for production scale serving.
-    Contact us for on premise deployment or high performance endpoints.
+This API endpoint is for preview and not optimal for production scale serving.
+Contact us for on premise deployment or high performance endpoints.
 
 # Pricing
 
@@ -81,11 +80,9 @@ The pricing is based on the number of images sent.
 | -------------------- | -------------------- | --------------------- |
 | `phospho-multimodal` | $1                   | $10                   |
 
-
 !!! info
-    You are billed in \$1 increment.
+You are billed in \$1 increment.
 
     _Example: if you send 150 images, you will be billed \$2._
 
-
-[Contact us](mailto:contact@phospho.app) for high volume pricing.
+[Contact us](mailto:contact@phospho.ai) for high volume pricing.
