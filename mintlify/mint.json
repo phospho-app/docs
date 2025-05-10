@@ -42,10 +42,6 @@
     {
       "name": "Github",
       "url": "https://github.com/phospho-app/phosphobot"
-    },
-    {
-      "name": "(External) phospho platform",
-      "url": "https://phospho-app.github.io/docs/"
     }
   ],
   "navigation": [
