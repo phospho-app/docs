@@ -5,16 +5,16 @@ description: "How to train a robotics AI model with a dataset?"
 
 To train an AI model for your robot, you need a robotics dataset. For that, you need to have first [recorded a dataset](/basic-usage/dataset-recording).
 
-<Note>Don't have a dataset? Use one of ours: `PLB/simple-lego-pickup-mono-2`</Note>
+<Note>Don't have a dataset? Use one of ours: `phospho-ai/so100-tictactoe`</Note>
 
-
-<iframe 
-    className="w-full aspect-video"
-    src="https://www.youtube.com/embed/kwyqUvdHJFk?si=mq6d4yAimxHOEu9K" 
-    title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-    referrerPolicy="strict-origin-when-cross-origin" 
-    allowFullScreen>
-</iframe>
+<iframe
+  className="w-full aspect-video"
+  src="https://www.youtube.com/embed/kwyqUvdHJFk?si=mq6d4yAimxHOEu9K"
+  title="YouTube video player"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  referrerPolicy="strict-origin-when-cross-origin"
+  allowFullScreen
+></iframe>
 
 ## Train GR00T-N1-2B in one click from the phosphobot dashboard
 
@@ -22,24 +22,24 @@ You can fine-tune [Nvidia GR00T-N1-2B](https://huggingface.co/nvidia/GR00T-N1-2B
 
 1. Launch the phosphobot server and go to the phosphobot dashboard in your browser: [http://localhost](http://localhost)
 
-  ```bash
-  phosphobot run
-  ```
+```bash
+phosphobot run
+```
 
-2. Create a phospho account or log in by clicking on the **Sign in** button in the top right corner. 
+2. Create a phospho account or log in by clicking on the **Sign in** button in the top right corner.
 3. _(If not already done)_ Add your Hugging Face token in the **Admin Settings** tab with **Write authorization**. This will sync your datasets to Hugging Face. Then, record a dataset using teleoperation. [Read the full guide here](/basic-usage/dataset-recording#1-set-up-your-hugging-face-token).
 
 <Info>
-Garbage in, garbage out. Our tests show that training works with about 30 episodes. It's better for the task to be specific. Have good lighting and similar setup.
+  Garbage in, garbage out. Our tests show that training works with about 30
+  episodes. It's better for the task to be specific. Have good lighting and
+  similar setup.
 </Info>
 
-
-4. In the **AI Training and Control** section, enter the the name of your dataset on Hugging Face (example: `PLB/simple-lego-pickup-mono-2`). 
+4. In the **AI Training and Control** section, enter the the name of your dataset on Hugging Face (example: `PLB/simple-lego-pickup-mono-2`).
 
 ![phosphobot training cloud](/assets/phosphobot-aitraining.png)
 
-
-5. Hit the **Train AI Model** button. Your model starts training. Training can take up to 3 hours. Follow the training using the button **View trained models**. 
+5. Hit the **Train AI Model** button. Your model starts training. Training can take up to 3 hours. Follow the training using the button **View trained models**.
 
 Your trained model is uploaded to HuggingFace [on the phospho-app account](https://huggingface.co/phospho-app). Its name is something like `phospho-app/YOUR_DATASET_NAME-A_RANDOM_ID`.
 
@@ -51,7 +51,7 @@ Next up, you can start controlling your robot with the trained model.
 
 You can add you Weights & Biases token to track your training metrics. Go to the **Admin Settings** tab and add your WandB token (get your token [here](https://wandb.ai/authorize)).
 
-You can also tweak the training parameters. To do so, you must have your phosphobot server running and being logged in in your dashboard. 
+You can also tweak the training parameters. To do so, you must have your phosphobot server running and being logged in in your dashboard.
 Then, use the [/training/start-training](/ai-training/start-training) endpoint to pass more training parameters.
 
 </Accordion>
@@ -76,7 +76,6 @@ Then, use the [/training/start-training](/ai-training/start-training) endpoint t
 
 </CardsGroup>
 
-
 ## How to train the ACT (Action Chunking Transformer) model with LeRobot?
 
 The ACT model is a transformer-based model that learns to chunk actions in a sequence. It is trained on a dataset of action sequences and their corresponding chunked actions.
@@ -86,12 +85,12 @@ LeRobot is a research-oriented library by Hugging Face that provides a simple in
 Follow [our guide](/learn/ai-models#train-an-act-model-locally-with-lerobot) to train the ACT model on your dataset.
 
 <Card
-title="Train your ACT model with LeRobot"
-icon="cloud-arrow-up"
-href="/learn/ai-models#train-an-act-model-locally-with-lerobot"
+  title="Train your ACT model with LeRobot"
+  icon="cloud-arrow-up"
+  href="/learn/ai-models#train-an-act-model-locally-with-lerobot"
 >
-Train your ACT model with LeRobot
-</Card>  
+  Train your ACT model with LeRobot
+</Card>{" "}
 
 ## How to train the ACT model on Replicate? Cloud-based training
 
@@ -102,18 +101,18 @@ To help you, we provide a training script that you can run on the **Replicate** 
 You'll need to provide a Hugging Face dataset ID and token on which to train the policy.
 
 <Card
-title="Train your ACT model on Replicate"
-icon="cloud-arrow-up"
-href="https://replicate.com/phospho-app/act-policy"
+  title="Train your ACT model on Replicate"
+  icon="cloud-arrow-up"
+  href="https://replicate.com/phospho-app/act-policy"
 >
-Train your ACT model on Replicate
+  Train your ACT model on Replicate
 </Card>
 
-## How to train the Pi0 (Pi-Zero) model with the SO-100 robot arm? 
+## How to train the Pi0 (Pi-Zero) model with the SO-100 robot arm?
 
 [Pi0](https://www.physicalintelligence.company/blog/pi0) is a powerful VLA (Vision Language Action model) by Physical Intelligence. They released an open weight model that can be trained on your own dataset.
 
-To train the Pi0 model, you need to use the openpi repository with a few tweaks for the SO-100 robot arm compatibility. We added support for the SO-100 arm in this fork of the openpi repository. 
+To train the Pi0 model, you need to use the openpi repository with a few tweaks for the SO-100 robot arm compatibility. We added support for the SO-100 arm in this fork of the openpi repository.
 
 1. Clone our custom openpi repository and install it:
 
@@ -135,7 +134,7 @@ source $HOME/.local/bin/env
 GIT_LFS_SKIP_SMUDGE=1 uv sync
 ```
 
-4. *(Optional)* If you want to use **Weights & Biases** for tracking training metrics, log in with:  
+4. _(Optional)_ If you want to use **Weights & Biases** for tracking training metrics, log in with:
 
 ```bash
 # Get your auth token at https://wandb.ai/authorize
@@ -146,8 +145,11 @@ uv run wandb login
 
 By default, the training config uses the `PLB/Orange-brick-in-black-box` SO-100 dataset.
 
-<Note>Make sure you dataset has a correct task description for each task in the dataset. Eg: in the `PLB/Orange-brick-in-black-box` dataset, it's _"Put the orange brick in the black pot"_</Note>
-
+<Note>
+  Make sure you dataset has a correct task description for each task in the
+  dataset. Eg: in the `PLB/Orange-brick-in-black-box` dataset, it's _"Put the
+  orange brick in the black pot"_
+</Note>
 
 6. Start the training:
 
@@ -158,7 +160,8 @@ XLA_PYTHON_CLIENT_MEM_FRACTION=0.9 uv run scripts/train.py pi0_so100 --exp-name=
 ```
 
 <Warning>
-You need a GPU with at least 70GB of memory to train the pi0 model. We recommend using a A100 (80GB) or a H100.
+  You need a GPU with at least 70GB of memory to train the pi0 model. We
+  recommend using a A100 (80GB) or a H100.
 </Warning>
 
 7. Once training is done, push your model to Hugging Face:

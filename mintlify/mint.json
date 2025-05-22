@@ -54,6 +54,7 @@
       "pages": [
         "basic-usage/teleop",
         "basic-usage/dataset-recording",
+        "basic-usage/dataset-operations",
         "basic-usage/training",
         "basic-usage/inference"
       ]
