@@ -91,6 +91,10 @@
       ]
     },
     {
+      "group": "FAQ",
+      "pages": ["faq/telemetry"]
+    },
+    {
       "group": "API Reference",
       "pages": [
         {
