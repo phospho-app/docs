@@ -57,8 +57,7 @@
         "basic-usage/dataset-operations",
         "basic-usage/training",
         "basic-usage/inference",
-        "examples/teleop",
-        "examples/teleop-from-anywhere"
+        "examples/teleop"
       ]
     },
     {
@@ -98,7 +97,6 @@
             "control/move-relative-position",
             "control/move-leader-start",
             "control/move-leader-stop",
-
             "control/end-effector-state",
             "control/read-torques",
             "control/turn-torque",
@@ -138,7 +136,11 @@
     },
     {
       "group": "Examples",
-      "pages": ["examples/control", "examples/vision"]
+      "pages": [
+        "examples/control",
+        "examples/vision",
+        "examples/teleop-from-anywhere"
+      ]
     }
   ],
   "footerSocials": {
