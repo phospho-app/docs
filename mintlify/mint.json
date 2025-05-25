@@ -81,19 +81,7 @@
         "so-100/build"
       ]
     },
-    {
-      "group": "Examples",
-      "pages": [
-        "examples/control",
-        "examples/vision",
-        "examples/teleop",
-        "examples/teleop-from-anywhere"
-      ]
-    },
-    {
-      "group": "FAQ",
-      "pages": ["faq/telemetry"]
-    },
+
     {
       "group": "API Reference",
       "pages": [
@@ -140,6 +128,19 @@
           "icon": "camera",
           "pages": ["camera/video-feed-for-camera"]
         }
+      ]
+    },
+    {
+      "group": "FAQ",
+      "pages": ["faq/telemetry"]
+    },
+    {
+      "group": "Examples",
+      "pages": [
+        "examples/control",
+        "examples/vision",
+        "examples/teleop",
+        "examples/teleop-from-anywhere"
       ]
     }
   ],
