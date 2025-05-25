@@ -1,5 +1,74 @@
 components:
   schemas:
+    AIControlStatusResponse:
+      additionalProperties: true
+      description: Response when starting the AI control.
+      properties:
+        ai_control_signal_id:
+          title: Ai Control Signal Id
+          type: string
+        ai_control_signal_status:
+          enum:
+          - stopped
+          - running
+          - paused
+          - waiting
+          title: Ai Control Signal Status
+          type: string
+        message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Message
+        server_info:
+          anyOf:
+          - $ref: '#/components/schemas/ServerInfoResponse'
+          - type: 'null'
+        status:
+          default: ok
+          enum:
+          - ok
+          - error
+          title: Status
+          type: string
+      required:
+      - ai_control_signal_id
+      - ai_control_signal_status
+      title: AIControlStatusResponse
+      type: object
+    AIStatusRequest:
+      properties:
+        user_id:
+          description: User ID of the user who started the AI control
+          title: User Id
+          type: string
+      required:
+      - user_id
+      title: AIStatusRequest
+      type: object
+    AIStatusResponse:
+      description: Response to the AI status request.
+      properties:
+        id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: ID of the AI control session.
+          title: Id
+        status:
+          description: Status of the AI control
+          enum:
+          - stopped
+          - running
+          - paused
+          - waiting
+          title: Status
+          type: string
+      required:
+      - status
+      - id
+      title: AIStatusResponse
+      type: object
     AdminSettingsRequest:
       description: Contains the admin settings
       properties:
@@ -31,6 +100,7 @@ components:
           - avc3
           - av01
           - vp09
+          - av1
           title: Video Codec
           type: string
         video_size:
@@ -78,6 +148,7 @@ components:
           - avc3
           - av01
           - vp09
+          - av1
           title: Video Codec
           type: string
         video_size:
@@ -140,6 +211,21 @@ components:
     AppControlData:
       description: Type of data sent by the Metaquest app.
       properties:
+        direction_x:
+          default: 0.0
+          description: Direction vector X, normalized between -1 (left) and 1 (right)
+          maximum: 1.0
+          minimum: -1.0
+          title: Direction X
+          type: number
+        direction_y:
+          default: 0.0
+          description: Direction vector Y, normalized between -1 (backward) and 1
+            (forward)
+          maximum: 1.0
+          minimum: -1.0
+          title: Direction Y
+          type: number
         open:
           description: 0 for closed, 1 for open
           title: Open
@@ -286,6 +372,17 @@ components:
       - refresh_token
       title: ConfirmRequest
       type: object
+    CustomTrainingRequest:
+      properties:
+        custom_command:
+          description: Will run this custom command as a subprocess when pressing
+            the train button.
+          title: Custom Command
+          type: string
+      required:
+      - custom_command
+      title: CustomTrainingRequest
+      type: object
     DatasetListResponse:
       description: List of datasets
       properties:
@@ -303,6 +400,52 @@ components:
       - pushed_datasets
       - local_datasets
       title: DatasetListResponse
+      type: object
+    DatasetRepairRequest:
+      properties:
+        dataset_path:
+          description: Path to the dataset to repair
+          examples:
+          - /lerobot_v2.1/example_dataset
+          title: Dataset Path
+          type: string
+      required:
+      - dataset_path
+      title: DatasetRepairRequest
+      type: object
+    DatasetSplitRequest:
+      properties:
+        dataset_path:
+          description: Path to the dataset to split
+          examples:
+          - /lerobot_v2.1/example_dataset
+          title: Dataset Path
+          type: string
+        first_split_name:
+          description: Name of the first split.
+          examples:
+          - /lerobot_v2.1/example_dataset_training
+          title: First Split Name
+          type: string
+        second_split_name:
+          description: Name of the second split.
+          examples:
+          - /lerobot_v2.1/example_dataset_validation
+          title: Second Split Name
+          type: string
+        split_ratio:
+          default: 0.8
+          description: Ratio of the dataset to use for the first split. The second
+            split will use the rest of the dataset.
+          maximum: 1.0
+          minimum: 0.0
+          title: Split Ratio
+          type: number
+      required:
+      - dataset_path
+      - first_split_name
+      - second_split_name
+      title: DatasetSplitRequest
       type: object
     DeleteEpisodeRequest:
       description: Request to delete an episode.
@@ -361,6 +504,24 @@ components:
       - open
       title: EndEffectorPosition
       type: object
+    FeedbackRequest:
+      properties:
+        ai_control_id:
+          description: ID of the AI control session.
+          title: Ai Control Id
+          type: string
+        feedback:
+          description: Feedback on the AI control. Can be positive or negative.
+          enum:
+          - positive
+          - negative
+          title: Feedback
+          type: string
+      required:
+      - feedback
+      - ai_control_id
+      title: FeedbackRequest
+      type: object
     ForgotPasswordRequest:
       properties:
         email:
@@ -369,6 +530,15 @@ components:
       required:
       - email
       title: ForgotPasswordRequest
+      type: object
+    HFDownloadDatasetRequest:
+      properties:
+        dataset_name:
+          title: Dataset Name
+          type: string
+      required:
+      - dataset_name
+      title: HFDownloadDatasetRequest
       type: object
     HTTPValidationError:
       properties:
@@ -388,6 +558,47 @@ components:
       required:
       - token
       title: HuggingFaceTokenRequest
+      type: object
+    InfoResponse:
+      description: Response to the /dataset/info endpoint.
+      properties:
+        image_frames:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Image Frames
+        image_keys:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Image Keys
+        number_of_episodes:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Number Of Episodes
+        robot_dof:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Robot Dof
+        robot_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Robot Type
+        status:
+          default: ok
+          enum:
+          - ok
+          - error
+          title: Status
+          type: string
+      title: InfoResponse
       type: object
     ItemInfo:
       description: Contains the information of the items in a directory used in the
@@ -445,25 +656,53 @@ components:
       - is_dir
       title: ItemInfo
       type: object
+    JointsReadRequest:
+      description: Request to read the joints of the robot.
+      properties:
+        joints_ids:
+          anyOf:
+          - items:
+              type: integer
+            type: array
+          - type: 'null'
+          description: If set, only read the joints with these ids. If None, read
+            all joints.
+          title: Joints Ids
+        unit:
+          default: rad
+          description: The unit of the angles. Defaults to radian.
+          enum:
+          - rad
+          - motor_units
+          - degrees
+          title: Unit
+          type: string
+      title: JointsReadRequest
+      type: object
     JointsReadResponse:
       description: Response to read the joints of the robot.
       properties:
-        angles_motor_units:
-          description: A list of length 6, with the position of each joint in motor
-            units.
+        angles:
+          description: A list of length 6, with the position of each joint in the
+            unit specified in the request. If a joint is not available, its value
+            will be None.
           items:
-            type: integer
-          title: Angles Motor Units
+            anyOf:
+            - type: number
+            - type: 'null'
+          title: Angles
           type: array
-        angles_rad:
-          description: A list of length 6, with the position of each joint in radian.
-          items:
-            type: number
-          title: Angles Rad
-          type: array
+        unit:
+          default: rad
+          description: The unit of the angles. Defaults to radian.
+          enum:
+          - rad
+          - motor_units
+          - degrees
+          title: Unit
+          type: string
       required:
-      - angles_rad
-      - angles_motor_units
+      - angles
       title: JointsReadResponse
       type: object
     JointsWriteRequest:
@@ -500,42 +739,33 @@ components:
       - angles
       title: JointsWriteRequest
       type: object
-    LeaderFollower:
-      description: Request to set up leader-follower control between two SO100 robots
+    LocalDevice:
       properties:
-        enable_gravity_compensation:
-          default: false
-          description: Disable gravity compensation for the leader robot
-          title: Enable Gravity Compensation
-          type: boolean
-        gravity_compensation_values:
+        device:
+          title: Device
+          type: string
+        interface:
           anyOf:
-          - additionalProperties:
-              type: integer
-            type: object
+          - type: string
           - type: 'null'
-          default:
-            elbow: 50
-            shoulder: 100
-            wrist: 10
-          description: Gravity compensation pourcentage values for shoulder, elbow,
-            and wrist joints (0-100%)
-          title: Gravity Compensation Values
-        invert_controls:
-          default: false
-          description: Mirror controls for the follower robot
-          title: Invert Controls
-          type: boolean
-        robot_order:
-          default:
-          - 58FA0811789
-          - 58FA0826529
-          description: List of robot serial numbers in the order of leader, follower
-          items:
-            type: string
-          title: Robot Order
-          type: array
-      title: LeaderFollower
+          title: Interface
+        name:
+          title: Name
+          type: string
+        pid:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Pid
+        serial_number:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Serial Number
+      required:
+      - name
+      - device
+      title: LocalDevice
       type: object
     LoginCredentialsRequest:
       properties:
@@ -550,57 +780,79 @@ components:
       - password
       title: LoginCredentialsRequest
       type: object
-    ModelStatusRequest:
+    MergeDatasetsRequest:
       properties:
-        model_url:
-          description: Hugging Face model URL
-          title: Model Url
+        first_dataset:
+          description: Path to the first dataset to merge
+          examples:
+          - /lerobot_v2.1/example_dataset
+          title: First Dataset
+          type: string
+        image_key_mappings:
+          additionalProperties:
+            type: string
+          description: Mapping of the image keys from the first dataset to the second
+            dataset.
+          examples:
+          - context_camera: context_camera_2
+            wrist_camera: wrist_camera_2
+          title: Image Key Mappings
+          type: object
+        new_dataset_name:
+          description: Name of the new dataset to create
+          examples:
+          - /lerobot_v2.1/example_dataset_merged
+          title: New Dataset Name
+          type: string
+        second_dataset:
+          description: Path to the second dataset to merge
+          examples:
+          - /lerobot_v2.1/example_dataset_to_merge_with
+          title: Second Dataset
           type: string
       required:
-      - model_url
-      title: ModelStatusRequest
+      - first_dataset
+      - second_dataset
+      - new_dataset_name
+      - image_key_mappings
+      title: MergeDatasetsRequest
       type: object
-    ModelStatusResponse:
+    ModelVideoKeysRequest:
       properties:
-        model_status:
-          enum:
-          - Done
-          - In progress
-          - Not started
-          title: Model Status
-          type: string
-        model_url:
-          title: Model Url
-          type: string
-      required:
-      - model_url
-      - model_status
-      title: ModelStatusResponse
-      type: object
-    ModelTrainingConfig:
-      properties:
-        creation_date:
-          title: Creation Date
-          type: string
-        dataset_name:
-          title: Dataset Name
-          type: string
-        model_name:
-          title: Model Name
+        model_id:
+          description: Hugging Face model id to use
+          examples:
+          - PLB/GR00T-N1-lego-pickup-mono-2
+          pattern: ^\s*\S.*$
+          title: Model Id
           type: string
         model_type:
+          description: Type of model to use.
+          enum:
+          - gr00t
+          - ACT
           title: Model Type
           type: string
-        url:
-          title: Url
-          type: string
       required:
-      - model_name
-      - dataset_name
-      - url
-      - creation_date
+      - model_id
       - model_type
-      title: ModelTrainingConfig
+      title: ModelVideoKeysRequest
+      type: object
+    ModelVideoKeysResponse:
+      properties:
+        video_keys:
+          description: List of video keys for the model. These are the keys used to
+            access the videos in the dataset.
+          examples:
+          - - video_0
+            - video_1
+          items:
+            type: string
+          title: Video Keys
+          type: array
+      required:
+      - video_keys
+      title: ModelVideoKeysResponse
       type: object
     MoveAbsoluteRequest:
       description: 'Move the robot to an absolute position. All zeros means the initial
@@ -615,9 +867,11 @@ components:
           title: Max Trials
           type: integer
         open:
+          anyOf:
+          - type: number
+          - type: 'null'
           description: 0 for closed, 1 for open
           title: Open
-          type: number
         orientation_tolerance:
           default: 0.2
           description: Increase max_trials and decrease tolerance to get more precision.Orientation
@@ -635,37 +889,44 @@ components:
           title: Position Tolerance
           type: number
         rx:
-          description: Absolute Pitch in degrees
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Absolute Pitch in degrees. If None, inverse kinematics will
+            be used to calculate the best position.
           title: Rx
-          type: number
         ry:
-          description: Absolute Yaw in degrees
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Absolute Yaw in degrees. If None, inverse kinematics will be
+            used to calculate the best position.
           title: Ry
-          type: number
         rz:
-          description: Absolute Roll in degrees
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Absolute Roll in degrees. If None, inverse kinematics will
+            be used to calculate the best position.
           title: Rz
-          type: number
         x:
+          anyOf:
+          - type: number
+          - type: 'null'
           description: X position in centimeters
           title: X
-          type: number
         y:
+          anyOf:
+          - type: number
+          - type: 'null'
           description: Y position in centimeters
           title: Y
-          type: number
         z:
+          anyOf:
+          - type: number
+          - type: 'null'
           description: Z position in centimeters
           title: Z
-          type: number
-      required:
-      - x
-      - y
-      - z
-      - rx
-      - ry
-      - rz
-      - open
       title: MoveAbsoluteRequest
       type: object
     NetworkCredentials:
@@ -680,6 +941,19 @@ components:
       - ssid
       - password
       title: NetworkCredentials
+      type: object
+    NetworkDevice:
+      properties:
+        ip:
+          title: Ip
+          type: string
+        mac:
+          title: Mac
+          type: string
+      required:
+      - ip
+      - mac
+      title: NetworkDevice
       type: object
     RecordingPlayRequest:
       description: Request to play a recorded episode.
@@ -811,6 +1085,7 @@ components:
           - enum:
             - json
             - lerobot_v2
+            - lerobot_v2.1
             type: string
           - type: 'null'
           description: 'Format to save the episode.
@@ -820,7 +1095,7 @@ components:
             `lerobot_v2` is compatible with [lerobot training.](https://docs.phospho.ai/learn/ai-models).If
             None, defaults to the value set in Admin Configuration.'
           examples:
-          - lerobot_v2
+          - lerobot_v2.1
           title: Episode Format
         freq:
           anyOf:
@@ -877,12 +1152,13 @@ components:
             - avc3
             - av01
             - vp09
+            - av1
             type: string
           - type: 'null'
           description: Codec to use for the video saving.If None, defaults to the
             value set in Admin Configuration.
           examples:
-          - mp4v
+          - avc1
           title: Video Codec
       title: RecordingStartRequest
       type: object
@@ -923,40 +1199,47 @@ components:
         Useful for OpenVLA-like control.'
       properties:
         open:
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: 0 for closed, 1 for open. If None, use the last value.
           title: Open
-          type: number
         rx:
+          anyOf:
+          - type: number
+          - type: 'null'
           description: Relative Pitch in degrees
           title: Rx
-          type: number
         ry:
+          anyOf:
+          - type: number
+          - type: 'null'
           description: Relative Yaw in degrees
           title: Ry
-          type: number
         rz:
+          anyOf:
+          - type: number
+          - type: 'null'
           description: Relative Roll in degrees
           title: Rz
-          type: number
         x:
+          anyOf:
+          - type: number
+          - type: 'null'
           description: Delta X position in centimeters
           title: X
-          type: number
         y:
+          anyOf:
+          - type: number
+          - type: 'null'
           description: Delta Y position in centimeters
           title: Y
-          type: number
         z:
+          anyOf:
+          - type: number
+          - type: 'null'
           description: Delta Z position in centimeters
           title: Z
-          type: number
-      required:
-      - x
-      - y
-      - z
-      - rx
-      - ry
-      - rz
-      - open
       title: RelativeEndEffectorPosition
       type: object
     ResetPasswordRequest:
@@ -995,11 +1278,106 @@ components:
       - usb_port
       title: RobotConfigStatus
       type: object
+    RobotConnectionRequest:
+      description: Request to manually connect to a robot.
+      properties:
+        connection_details:
+          additionalProperties: true
+          description: Connection details for the robot. These are passed to the class
+            constructor. This can include IP address, port, and other connection parameters.
+          title: Connection Details
+          type: object
+        robot_name:
+          description: Type of the robot to connect to.
+          examples:
+          - so-100
+          - wx-250s
+          - koch-v1.1
+          title: Robot Name
+          type: string
+      required:
+      - robot_name
+      - connection_details
+      title: RobotConnectionRequest
+      type: object
+    RobotPairRequest:
+      description: Represents a pair of robots for leader-follower control.
+      properties:
+        follower_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Serial number of the follower robot
+          title: Follower Id
+        leader_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Serial number of the leader robot
+          title: Leader Id
+      required:
+      - leader_id
+      - follower_id
+      title: RobotPairRequest
+      type: object
+    ScanDevicesResponse:
+      description: Response to the USB devices scan request.
+      properties:
+        devices:
+          description: List of connected USB devices.
+          items:
+            $ref: '#/components/schemas/LocalDevice'
+          title: Devices
+          type: array
+      required:
+      - devices
+      title: ScanDevicesResponse
+      type: object
+    ScanNetworkRequest:
+      description: Request to scan the network for devices.
+      properties:
+        robot_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Name of the robot to scan for. If None, scans for all devices
+            on the network.
+          title: Robot Name
+      title: ScanNetworkRequest
+      type: object
+    ScanNetworkResponse:
+      description: Response to the network scan request.
+      properties:
+        devices:
+          description: List of devices found on the network.
+          items:
+            $ref: '#/components/schemas/NetworkDevice'
+          title: Devices
+          type: array
+        subnet:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Subnet of the network.
+          examples:
+          - 192.168.1.1/24
+          title: Subnet
+      required:
+      - devices
+      - subnet
+      title: ScanNetworkResponse
+      type: object
     ServerInfoResponse:
       properties:
         model_id:
           title: Model Id
           type: string
+        port:
+          title: Port
+          type: integer
+        server_id:
+          title: Server Id
+          type: integer
         tcp_socket:
           maxItems: 2
           minItems: 2
@@ -1015,7 +1393,9 @@ components:
           title: Url
           type: string
       required:
+      - server_id
       - url
+      - port
       - tcp_socket
       - model_id
       - timeout
@@ -1040,6 +1420,11 @@ components:
           default: false
           description: Whether the server is currently recording an episode.
           title: Is Recording
+          type: boolean
+        leader_follower_status:
+          default: false
+          description: Whether the leader-follower control is currently active.
+          title: Leader Follower Status
           type: boolean
         name:
           title: Name
@@ -1068,7 +1453,7 @@ components:
           title: Status
           type: string
         version_id:
-          default: 0.2.148
+          default: 0.3.17
           description: Current version of the teleoperation server
           title: Version Id
           type: string
@@ -1201,9 +1586,28 @@ components:
     StartAIControlRequest:
       description: Request to start the AI control of the robot.
       properties:
+        cameras_keys_mapping:
+          anyOf:
+          - additionalProperties:
+              type: integer
+            type: object
+          - type: 'null'
+          description: Mapping of the camera keys to the camera ids. If set to None,
+            use the default mapping based on cameras order.
+          examples:
+          - context_camera: 1
+            wrist_camera: 0
+          title: Cameras Keys Mapping
         model_id:
           description: Hugging Face model id to use
           title: Model Id
+          type: string
+        model_type:
+          description: Type of model to use. Can be gr00t or act.
+          enum:
+          - gr00t
+          - ACT
+          title: Model Type
           type: string
         prompt:
           anyOf:
@@ -1211,6 +1615,17 @@ components:
           - type: 'null'
           description: Prompt to be followed by the robot
           title: Prompt
+        robot_serials_to_ignore:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          description: List of robot serial ids to ignore. If set to None, controls
+            all available robots.
+          examples:
+          - - /dev/ttyUSB0
+          title: Robot Serials To Ignore
         speed:
           default: 1.0
           description: Speed of the AI control. 1.0 is normal speed, 0.5 is half speed,
@@ -1222,7 +1637,81 @@ components:
           type: number
       required:
       - model_id
+      - model_type
       title: StartAIControlRequest
+      type: object
+    StartLeaderArmControlRequest:
+      description: 'Request to set up leader-follower control. The leader robot will
+        be controlled by the user,
+
+        and the follower robot will mirror the leader''s movements.
+
+
+        You need two robots connected to the same computer to use this feature.'
+      properties:
+        enable_gravity_compensation:
+          default: false
+          description: Enable gravity compensation for the leader robots
+          title: Enable Gravity Compensation
+          type: boolean
+        gravity_compensation_values:
+          anyOf:
+          - additionalProperties:
+              type: integer
+            type: object
+          - type: 'null'
+          default:
+            elbow: 50
+            shoulder: 100
+            wrist: 10
+          description: Gravity compensation pourcentage values for shoulder, elbow,
+            and wrist joints (0-100%)
+          title: Gravity Compensation Values
+        invert_controls:
+          default: false
+          description: Mirror controls for the follower robots
+          title: Invert Controls
+          type: boolean
+        robot_pairs:
+          description: List of robot pairs to control. Each pair contains the robot
+            id of the leader and the corresponding follower.
+          items:
+            $ref: '#/components/schemas/RobotPairRequest'
+          title: Robot Pairs
+          type: array
+      required:
+      - robot_pairs
+      title: StartLeaderArmControlRequest
+      type: object
+    StartServerRequest:
+      description: Request to start an inference server and get the server info.
+      properties:
+        model_id:
+          description: Hugging Face model id to use
+          title: Model Id
+          type: string
+        model_type:
+          description: Type of model to use. Can be gr00t or act.
+          enum:
+          - gr00t
+          - ACT
+          title: Model Type
+          type: string
+        robot_serials_to_ignore:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          description: List of robot serial ids to ignore. If set to None, controls
+            all available robots.
+          examples:
+          - - /dev/ttyUSB0
+          title: Robot Serials To Ignore
+      required:
+      - model_id
+      - model_type
+      title: StartServerRequest
       type: object
     StatusResponse:
       additionalProperties: true
@@ -1241,6 +1730,62 @@ components:
           title: Status
           type: string
       title: StatusResponse
+      type: object
+    SupabaseTrainingModel:
+      properties:
+        dataset_name:
+          title: Dataset Name
+          type: string
+        id:
+          title: Id
+          type: integer
+        model_name:
+          title: Model Name
+          type: string
+        model_type:
+          title: Model Type
+          type: string
+        requested_at:
+          title: Requested At
+          type: string
+        status:
+          enum:
+          - succeeded
+          - failed
+          - running
+          - canceled
+          title: Status
+          type: string
+        terminated_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Terminated At
+        training_params:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Training Params
+        used_wandb:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Used Wandb
+        user_id:
+          title: User Id
+          type: string
+      required:
+      - id
+      - status
+      - user_id
+      - dataset_name
+      - model_name
+      - requested_at
+      - terminated_at
+      - used_wandb
+      - model_type
+      title: SupabaseTrainingModel
       type: object
     TorqueControlRequest:
       description: Request to control the robot's torque.
@@ -1270,49 +1815,197 @@ components:
       properties:
         models:
           items:
-            $ref: '#/components/schemas/ModelTrainingConfig'
+            $ref: '#/components/schemas/SupabaseTrainingModel'
           title: Models
           type: array
       required:
       - models
       title: TrainingConfig
       type: object
-    TrainingRequest:
-      description: Pydantic model for training request validation
+    TrainingInfoRequest:
+      properties:
+        model_id:
+          description: Hugging Face model id to get training info
+          title: Model Id
+          type: string
+        model_type:
+          enum:
+          - gr00t
+          - ACT
+          - custom
+          title: Model Type
+          type: string
+      required:
+      - model_id
+      - model_type
+      title: TrainingInfoRequest
+      type: object
+    TrainingInfoResponse:
+      properties:
+        message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Message
+        status:
+          enum:
+          - ok
+          - error
+          title: Status
+          type: string
+        training_body:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Training Body
+      required:
+      - status
+      title: TrainingInfoResponse
+      type: object
+    TrainingParamsAct:
+      additionalProperties: false
+      description: Training paramters are left to None by default and are set depending
+        on the dataset in the training pipeline.
       properties:
         batch_size:
-          default: 64
-          description: Batch size for training, default and max is 64
-          exclusiveMinimum: 0.0
-          maximum: 80.0
+          anyOf:
+          - exclusiveMinimum: 0.0
+            maximum: 150.0
+            type: integer
+          - type: 'null'
+          description: Batch size for training, we run this on an A10G, leave it to
+            None to auto-detect based on your dataset
           title: Batch Size
-          type: integer
-        dataset:
-          description: Dataset repository ID
-          title: Dataset
+        steps:
+          anyOf:
+          - exclusiveMinimum: 0.0
+            maximum: 10000.0
+            type: integer
+          - type: 'null'
+          description: Number of training steps, leave it to None to auto-detect based
+            on your dataset
+          title: Steps
+      title: TrainingParamsAct
+      type: object
+    TrainingParamsGr00T:
+      additionalProperties: false
+      properties:
+        batch_size:
+          anyOf:
+          - exclusiveMinimum: 0.0
+            maximum: 128.0
+            type: integer
+          - type: 'null'
+          description: Batch size for training, default is 64, decrease it if you
+            get an out of memory error
+          title: Batch Size
+        data_dir:
+          default: data/
+          description: The directory to save the dataset to
+          title: Data Dir
           type: string
         epochs:
-          default: 20
-          description: Number of epochs to train for, default is 20
+          default: 10
+          description: Number of epochs to train for, default is 10
           exclusiveMinimum: 0.0
           maximum: 50.0
           title: Epochs
           type: integer
         learning_rate:
-          default: 0.0002
-          description: Learning rate for training, default is 0.0002
+          default: 0.0001
+          description: Learning rate for training, default is 0.0001
           exclusiveMinimum: 0.0
           maximum: 1.0
           title: Learning Rate
           type: number
-        model_name:
-          description: Name of the model to be trained
-          title: Model Name
+        output_dir:
+          default: outputs/
+          description: The directory to save the model to
+          title: Output Dir
           type: string
+        path_to_gr00t_repo:
+          default: .
+          description: The path to the Isaac-GR00T repo. If not provided, will assume
+            we are in the repo.
+          title: Path To Gr00T Repo
+          type: string
+        train_test_split:
+          default: 1.0
+          description: Train test split ratio, default is 1.0 (no split), should be
+            between 0 and 1
+          exclusiveMinimum: 0.0
+          maximum: 1.0
+          title: Train Test Split
+          type: number
+        validation_data_dir:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Optional directory to save the validation dataset to. If None,
+            no validation will be done.
+          title: Validation Data Dir
+        validation_dataset_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Optional dataset repository ID on Hugging Face to use for validation
+          title: Validation Dataset Name
+      title: TrainingParamsGr00T
+      type: object
+    TrainingRequest:
+      description: Pydantic model for training request validation
+      properties:
+        dataset_name:
+          description: Dataset repository ID on Hugging Face, should be a public dataset
+          title: Dataset Name
+          type: string
+        model_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Name of the trained model to upload to Hugging Face, should
+            be in the format phospho-app/<model_name> or <model_name>
+          title: Model Name
+        model_type:
+          description: Type of model to train, either 'ACT' or 'gr00t'
+          enum:
+          - ACT
+          - gr00t
+          - custom
+          title: Model Type
+          type: string
+        training_params:
+          anyOf:
+          - $ref: '#/components/schemas/TrainingParamsAct'
+          - $ref: '#/components/schemas/TrainingParamsGr00T'
+          - type: 'null'
+          description: Training parameters for the model, if not provided, default
+            parameters will be used
+          title: Training Params
+        wandb_api_key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: WandB API key for tracking training, you can find it at https://wandb.ai/authorize
+          title: Wandb Api Key
       required:
-      - dataset
-      - model_name
+      - model_type
+      - dataset_name
       title: TrainingRequest
+      type: object
+    UDPServerInformationResponse:
+      properties:
+        host:
+          title: Host
+          type: string
+        port:
+          title: Port
+          type: integer
+      required:
+      - host
+      - port
+      title: UDPServerInformationResponse
       type: object
     ValidationError:
       properties:
@@ -1520,6 +2213,32 @@ paths:
       summary: Submit Wandb Token
       tags:
       - pages
+  /ai-control/feedback:
+    post:
+      description: Feedback about the auto control session
+      operationId: feedback_auto_control_ai_control_feedback_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FeedbackRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Feedback about the auto control session
+      tags:
+      - control
   /ai-control/pause:
     post:
       description: Pause the auto control by AI.
@@ -1548,6 +2267,32 @@ paths:
       summary: Resume the auto control by AI
       tags:
       - control
+  /ai-control/spawn:
+    post:
+      description: Start an inference server and return the server info.
+      operationId: spawn_inference_server_ai_control_spawn_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartServerRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpawnStatusResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Start an inference server
+      tags:
+      - control
   /ai-control/start:
     post:
       description: Start the auto control by AI.
@@ -1563,7 +2308,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SpawnStatusResponse'
+                $ref: '#/components/schemas/AIControlStatusResponse'
           description: Successful Response
         '422':
           content:
@@ -1572,6 +2317,32 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
       summary: Start the auto control by AI
+      tags:
+      - control
+  /ai-control/status:
+    post:
+      description: Get the status of the auto control by AI.
+      operationId: fetch_auto_control_status_ai_control_status_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AIStatusRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AIStatusResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Get the status of the auto control by AI
       tags:
       - control
   /ai-control/stop:
@@ -1914,6 +2685,58 @@ paths:
       summary: Download Folder
       tags:
       - pages
+  /dataset/hf_download:
+    post:
+      operationId: hf_download_dataset_dataset_hf_download_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HFDownloadDatasetRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Hf Download Dataset
+      tags:
+      - pages
+  /dataset/info:
+    post:
+      description: Get the dataset keys and frames.
+      operationId: get_dataset_info_dataset_info_post
+      parameters:
+      - in: query
+        name: path
+        required: true
+        schema:
+          title: Path
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InfoResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Get Dataset Info
+      tags:
+      - pages
   /dataset/list:
     post:
       description: List all datasets that are both in Hugging Face and locally.
@@ -1926,6 +2749,89 @@ paths:
                 $ref: '#/components/schemas/DatasetListResponse'
           description: Successful Response
       summary: List Datasets
+      tags:
+      - pages
+  /dataset/merge:
+    post:
+      description: Merge two datasets into one.
+      operationId: merge_datasets_dataset_merge_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MergeDatasetsRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Merge Datasets
+      tags:
+      - pages
+  /dataset/repair:
+    post:
+      description: 'Repair a dataset by removing any corrupted files.
+
+        For now, this only works for parquets files.
+
+        If the parquets are wrongly indexed, it will not do anything.'
+      operationId: repair_dataset_dataset_repair_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DatasetRepairRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Repair Dataset
+      tags:
+      - pages
+  /dataset/split:
+    post:
+      description: 'Split a dataset into two datasets.
+
+        Used for creating training and validation datasets.'
+      operationId: split_dataset_dataset_split_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DatasetSplitRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Split Dataset
       tags:
       - pages
   /dataset/sync:
@@ -1956,7 +2862,7 @@ paths:
   /end-effector/read:
     post:
       description: Retrieve the position, orientation, and open status of the robot's
-        end effector.
+        end effector. Only available for manipulators.
       operationId: end_effector_read_end_effector_read_post
       parameters:
       - in: query
@@ -2132,6 +3038,14 @@ paths:
           default: 0
           title: Robot Id
           type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              anyOf:
+              - $ref: '#/components/schemas/JointsReadRequest'
+              - type: 'null'
+              title: Request
       responses:
         '200':
           content:
@@ -2193,6 +3107,46 @@ paths:
                 type: string
           description: Successful Response
       summary: Serve Dashboard
+      tags:
+      - pages
+  /local/scan-devices:
+    post:
+      description: Endpoint to list all devices connected to the system.
+      operationId: list_connected_devices_local_scan_devices_post
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScanDevicesResponse'
+          description: Successful Response
+      summary: List Connected Devices
+      tags:
+      - networking
+  /model/video-keys:
+    post:
+      description: Fetch the model info from Hugging Face and return the video keys.
+      operationId: get_model_video_keys_model_video_keys_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelVideoKeysRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelVideoKeysResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Get Model Video Keys
       tags:
       - pages
   /move/absolute:
@@ -2265,6 +3219,15 @@ paths:
       description: Initialize the robot to its initial position before starting the
         teleoperation.
       operationId: move_init_move_init_post
+      parameters:
+      - in: query
+        name: robot_id
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Robot Id
       responses:
         '200':
           content:
@@ -2272,6 +3235,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/StatusResponse'
           description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
       summary: Initialize Robot
       tags:
       - control
@@ -2283,7 +3252,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/LeaderFollower'
+              $ref: '#/components/schemas/StartLeaderArmControlRequest'
         required: true
       responses:
         '200':
@@ -2353,7 +3322,7 @@ paths:
   /move/sleep:
     post:
       description: Put the robot to its sleep position by giving direct instructions
-        to joints.
+        to joints. This function disables the torque.
       operationId: move_sleep_move_sleep_post
       parameters:
       - in: query
@@ -2412,6 +3381,35 @@ paths:
       summary: Teleoperation Control
       tags:
       - control
+  /move/teleop/udp:
+    post:
+      description: Start a UDP server to send and receive teleoperation data to the
+        robot.
+      operationId: move_teleop_udp_move_teleop_udp_post
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UDPServerInformationResponse'
+          description: Successful Response
+      summary: Move Teleop Udp
+      tags:
+      - control
+  /move/teleop/udp/stop:
+    post:
+      description: Stop the UDP server main loop.
+      operationId: stop_teleop_udp_move_teleop_udp_stop_post
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+          description: Successful Response
+      summary: Stop Teleop Udp
+      tags:
+      - control
   /network:
     get:
       operationId: serve_dashboard_network_get
@@ -2443,7 +3441,8 @@ paths:
         '200':
           content:
             application/json:
-              schema: {}
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
           description: Successful Response
         '422':
           content:
@@ -2464,9 +3463,40 @@ paths:
         '200':
           content:
             application/json:
-              schema: {}
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
           description: Successful Response
       summary: Activate Hotspot
+      tags:
+      - networking
+  /network/scan-devices:
+    post:
+      description: 'Endpoint to list all IP addresses on the local network.
+
+        Returns a list of IP addresses.'
+      operationId: list_local_network_ips_network_scan_devices_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              anyOf:
+              - $ref: '#/components/schemas/ScanNetworkRequest'
+              - type: 'null'
+              title: Query
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScanNetworkResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: List Local Network Ips
       tags:
       - networking
   /recording/play:
@@ -2563,6 +3593,60 @@ paths:
       summary: Serve Dashboard
       tags:
       - pages
+  /robot/add-connection:
+    post:
+      description: 'Manually add a robot connection to the robot manager.
+
+        Useful for adding robot that are accessible only via WiFi, for example.'
+      operationId: add_robot_connection_robot_add_connection_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RobotConnectionRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Add Robot Connection
+      tags:
+      - control
+  /sign-in:
+    get:
+      operationId: serve_dashboard_sign_in_get
+      responses:
+        '200':
+          content:
+            text/html:
+              schema:
+                type: string
+          description: Successful Response
+      summary: Serve Dashboard
+      tags:
+      - pages
+  /sign-up:
+    get:
+      operationId: serve_dashboard_sign_up_get
+      responses:
+        '200':
+          content:
+            text/html:
+              schema:
+                type: string
+          description: Successful Response
+      summary: Serve Dashboard
+      tags:
+      - pages
   /status:
     get:
       description: Get the status of the server.
@@ -2638,22 +3722,36 @@ paths:
       summary: Toggle Torque
       tags:
       - control
-  /training/models/delete:
+  /train:
+    get:
+      operationId: serve_dashboard_train_get
+      responses:
+        '200':
+          content:
+            text/html:
+              schema:
+                type: string
+          description: Successful Response
+      summary: Serve Dashboard
+      tags:
+      - pages
+  /training/info:
     post:
-      description: Delete a model from the training list
-      operationId: delete_model_from_training_list_training_models_delete_post
+      description: Fetch the info.json from the model repo and return the training
+        info.
+      operationId: get_training_info_training_info_post
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ModelTrainingConfig'
+              $ref: '#/components/schemas/TrainingInfoRequest'
         required: true
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TrainingConfig'
+                $ref: '#/components/schemas/TrainingInfoResponse'
           description: Successful Response
         '422':
           content:
@@ -2661,7 +3759,33 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
-      summary: Delete Model From Training List
+      summary: Get Training Info
+      tags:
+      - pages
+  /training/logs/{log_file}:
+    get:
+      description: Stream the logs from a log file
+      operationId: stream_logs_training_logs__log_file__get
+      parameters:
+      - in: path
+        name: log_file
+        required: true
+        schema:
+          title: Log File
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Stream Logs
       tags:
       - training
   /training/models/read:
@@ -2678,64 +3802,11 @@ paths:
       summary: Get Models
       tags:
       - training
-  /training/models/status:
-    post:
-      description: Get the status of a model. Will return Not started, In progress
-        or Done.
-      operationId: update_model_status_training_models_status_post
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ModelStatusRequest'
-        required: true
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ModelStatusResponse'
-          description: Successful Response
-        '422':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-          description: Validation Error
-      summary: Get the status of a model
-      tags:
-      - training
-  /training/models/write:
-    post:
-      description: Add a model to the training list, this will not start training
-      operationId: add_model_to_training_list_training_models_write_post
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ModelTrainingConfig'
-        required: true
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TrainingConfig'
-          description: Successful Response
-        '422':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-          description: Validation Error
-      summary: Add Model To Training List
-      tags:
-      - training
   /training/start:
     post:
-      description: Start training a gr00t model on the specified dataset. This will
-        upload a trained model to the Hugging Face Hub using the main branch of the
-        specified dataset.
+      description: Start training an ACT or gr00t model on the specified dataset.
+        This will upload a trained model to the Hugging Face Hub using the main branch
+        of the specified dataset.
       operationId: start_training_training_start_post
       requestBody:
         content:
@@ -2756,7 +3827,32 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
-      summary: Start training a gr00t model
+      summary: Start training a model
+      tags:
+      - training
+  /training/start-custom:
+    post:
+      operationId: start_custom_training_training_start_custom_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomTrainingRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Start Custom Training
       tags:
       - training
   /update/upgrade-to-latest-version:
