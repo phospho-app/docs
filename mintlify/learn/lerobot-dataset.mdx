@@ -11,21 +11,6 @@ A special feature of `LeRobotDataset` is `delta_timestamps`. Instead of just get
 
 The format is designed to be flexible for different types of robot data, whether from simulations or real robots, focusing on camera images and robot states, but extendable to other sensor data.
 
-## What are the Differences Between LeRobot v2.0 and v2.1 Dataset Versions?
-
-The main differences between LeRobot `v2.0` and `v2.1` dataset versions lie in how they store statistics and support dataset modifications, with `v2.1` being the recommended, more flexible version.
-
-*   **`lerobot_v2.0` (Older):**
-    *   Uses one file, `meta/stats.json`, to store statistics (like mean, min, max) for the entire dataset.
-    *   Modifying the dataset (like deleting an episode) is not well-supported with this version because updating these global statistics is tricky.
-*   **`lerobot_v2.1` (Recommended):**
-    *   Uses `meta/episodes_stats.jsonl` instead of `stats.json`.
-    *   This file stores statistics *for each episode separately*. Each line in the file is for one episode and its stats.
-    *   This makes it much easier to manage the dataset, like deleting, merging, or splitting episodes, because stats can be updated or recalculated more easily for the affected parts.
-    *   The `info.json` file will clearly state `codebase_version: "v2.1"`.
-    *   **Recommendation:** Always try to use or convert datasets to `v2.1` for the best experience and support.
-
-Tooling around LeRobot, like the `phosphobot` code, usually handles both versions, but `v2.1` gives you more power.
 
 ## How is a LeRobot Dataset Organized on Disk?
 
@@ -77,8 +62,6 @@ You can also use [python scripts](https://github.com/phospho-app/phosphobot/tree
 You can visualize a LeRobotDataset using the HuggingFace Visualize Dataset space, which leverages `rerun.io` to display camera streams, robot states, and actions. This is a convenient way to inspect your data, check for anomalies, or simply understand the recorded behaviors.
 
 ![Visualize Dataset space](/assets/lerobot_dataset_visualizer.png)
-
-
 
 ## What are the columns in a LeRobot Dataset?
 
@@ -195,8 +178,28 @@ Common pitfalls when working with LeRobot datasets include version incompatibili
 11. **Action Definition:** Know exactly what `action` means in your dataset (e.g., target joint positions, joint velocities?). This is vital for training a policy.
 12. **Adding Custom Data:** You can add your own observation or action types. Just make sure they can be turned into tensors and describe them in `info.json`.
 
+## LeRobot Dataset Versions
 
-## What's New in the Upcoming LeRobot v3.0 Dataset Format?
+LeRobot datasets have different versions (v1, v2, v2.1), with `v2.1` being the recommended version for most use cases. The version is specified in the `info.json` file under the `codebase_version` field.
+
+### What are the Differences Between LeRobot v2.0 and v2.1 Dataset Versions?
+
+The main differences between LeRobot `v2.0` and `v2.1` dataset versions lie in how they store statistics and support dataset modifications, with `v2.1` being the recommended, more flexible version.
+
+*   **`lerobot_v2.0` (Older):**
+    *   Uses one file, `meta/stats.json`, to store statistics (like mean, min, max) for the entire dataset.
+    *   Modifying the dataset (like deleting an episode) is not well-supported with this version because updating these global statistics is tricky.
+*   **`lerobot_v2.1` (Recommended):**
+    *   Uses `meta/episodes_stats.jsonl` instead of `stats.json`.
+    *   This file stores statistics *for each episode separately*. Each line in the file is for one episode and its stats.
+    *   This makes it much easier to manage the dataset, like deleting, merging, or splitting episodes, because stats can be updated or recalculated more easily for the affected parts.
+    *   The `info.json` file will clearly state `codebase_version: "v2.1"`.
+    *   **Recommendation:** Always try to use or convert datasets to `v2.1` for the best experience and support.
+
+Tooling around LeRobot, like the `phosphobot` code, usually handles both versions, but `v2.1` gives you more power.
+
+
+### What's New in the Upcoming LeRobot v3.0 Dataset Format?
 
 The upcoming LeRobot v3.0 dataset format introduces significant changes aimed at improving scalability, data organization, and efficiency, particularly for handling very large datasets. The primary rationale appears to be a move towards a more sharded and consolidated data structure, where episode data, videos, and metadata are grouped into larger, chunked files rather than per-episode files. This is evident from the conversion script `convert_dataset_v21_to_v30.py` (from [Pull Request #969 on GitHub](https://github.com/huggingface/lerobot/pull/969)), which details the transformation from v2.1 to v3.0.
 
