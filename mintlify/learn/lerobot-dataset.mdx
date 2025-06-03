@@ -134,12 +134,6 @@ LeRobot metadata files, found in the `meta/` directory, store crucial informatio
 5.  **`stats.json` (for v2.0):** A single JSON file with statistics for the entire dataset combined.
     *   Similar structure to the `stats` object in `episodes_stats.jsonl`, but for all data.
 
-## What Additional Attributes Does a Loaded `LeRobotDataset` Object Have?
-
-When loaded, a `LeRobotDataset` object has additional attributes like `episode_data_index` for efficient episode lookup and `videos_dir` for locating video files.
-
-*   `episode_data_index`: Helps quickly find the start and end global frame numbers for each episode. It has two tensors: `from` (start global index of each episode) and `to` (end global index of each episode).
-*   `videos_dir` (Path object): The local folder where video files are stored or cached.
 
 ## What are the Key Concepts and Important Fields in a LeRobot Dataset?
 
