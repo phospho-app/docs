@@ -14,6 +14,7 @@ description: "How to remote control a robot arm with a keyboard, in VR, with an 
 You can control your robot arm:
 
 - using your keyboard
+- using a game controller
 - through the HTTP API
 - with the Meta Quest app
 - using a leader arm or another follower arm
@@ -33,6 +34,30 @@ Go to `localhost` in your web browser to access the phosphobot dashboard. Go to 
   referrerPolicy="strict-origin-when-cross-origin"
   allowFullScreen
 ></iframe>
+
+### How to control the SO-100 with a game controller?
+
+You can control your robot arm using standard game controllers (Xbox, PlayStation, or similar) for more intuitive and ergonomic control.
+
+1. **Connect your controller** to your computer via USB or Bluetooth.
+
+2. Go to `localhost` in your web browser to access the phosphobot dashboard. Navigate to the **Control** page and select the **Gamepad control** tab.
+
+3. **Press any button** on your controller to activate it. The dashboard will detect your controller automatically.
+
+4. The robot will **start moving automatically** once the gamepad is detected.
+
+**Control mapping:**
+- **Left stick**: Rotate (X-axis) and move up/down (Y-axis)
+- **Right stick**: Strafe left/right (X-axis) and move forward/backward (Y-axis)
+- **D-Pad or face buttons (ABXY)**: Wrist pitch and roll control
+- **L1/R1 bumpers**: Toggle gripper open/close
+- **L2/R2 triggers**: Analog gripper control (0-100%)
+- **Start/Menu**: Move arm to sleep position
+
+<Info>
+  The gamepad control feature requires a browser with Gamepad API support (Chrome/Edge 21+, Firefox 29+, Safari 10.1+).
+</Info>
 
 ### Send your first commands to the API
 
@@ -70,14 +95,14 @@ The phospho starter pack is shipped with a [Meta Quest](https://www.meta.com/fr/
 
 1. After purchasing your phospho starter pack, you'll receive an **email invitation** to the Meta Alpha program of the phospho teleop app. Follow the email instructions to link your Meta account to the Alpha program.
 
-2. Make sure your **Meta Quest headset** is **turned on** and **connected to WiFi**. Once you’ve linked your account, the Meta Quest will automatically download the app. This can take a moment.
+2. Make sure your **Meta Quest headset** is **turned on** and **connected to WiFi**. Once you've linked your account, the Meta Quest will automatically download the app. This can take a moment.
 
 <Info>
   The Meta Quest connects to the phosphobot server through a shared WiFi
   connection.
 </Info>
 
-3. Open the phospho teleop app from the library. Once downloading is done, you can open the software library on the Meta Quest. In the list of All apps, you’ll see the _phospho teleop_ app. This app is automatically updated with the latest releases.
+3. Open the phospho teleop app from the library. Once downloading is done, you can open the software library on the Meta Quest. In the list of All apps, you'll see the _phospho teleop_ app. This app is automatically updated with the latest releases.
 
 ### Use the Meta Quest app
 
