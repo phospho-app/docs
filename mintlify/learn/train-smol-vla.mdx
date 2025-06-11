@@ -95,6 +95,20 @@ Training a VLA model is computationally intensive and requires a powerful GPU. T
     *   `--save_freq`: Saves a model checkpoint every 5000 steps, which is useful for not losing your work.
     > **Note on WandB:** As of June 11, 2025, Weights & Biases logging (`wandb`) may have issues in the current version of LeRobot. If you encounter errors, you can disable it by changing the flag to `--wandb.enable=false`.
 
+2. **Fixing config.json** You need to change `n_action_steps` in the `config.json` file. The default value is set to 1, but for training SmolVLA, it should be set to 50. This is crucial for the model to learn to predict a sequence of actions rather than just a single action step.
+
+    *   **Locate the config.json file:** It will be in the `lerobot/smolvla_base` directory.
+    *   **Edit the file:** Open it in a text editor and change the line:
+        ```json
+        "n_action_steps": 1,
+        ```
+        to
+        ```json
+        "n_action_steps": 50,
+        ```
+
+    > **Note:** If you don't change this, the inference will be very slow, as the model will only predict one action at a time instead of a sequence of actions.
+
 2.  **Uploading the Model to the Hub:**
     Once training is complete, you'll need to upload your fine-tuned model to the Hugging Face Hub to use it for inference.
 
