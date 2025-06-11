@@ -50,7 +50,7 @@
       "pages": ["welcome", "installation"]
     },
     {
-      "group": "Basic Usage",
+      "group": "phosphobot Basic Usage",
       "pages": [
         "basic-usage/teleop",
         "basic-usage/dataset-recording",
@@ -61,7 +61,7 @@
       ]
     },
     {
-      "group": "Learn about robotics",
+      "group": "Learn about AI and robotics",
       "pages": [
         "learn/overview",
         "learn/kinematics",
