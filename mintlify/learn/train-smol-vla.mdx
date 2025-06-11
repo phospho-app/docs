@@ -246,7 +246,7 @@ uv run python -m lerobot.record \
 ### Part 5: LeRobot Troubleshooting and Code Fixes
 
 #### Issue 1: Unit Mismatch (Radians vs. Degrees)
-*   **Problem:** The SmolVLA model outputs actions in the same units as its training data. The `PLB/phospho-playground-mono` dataset uses radians. However, the LeRobot SO-100 driver expects actions in degrees. This will cause the robot to move erratically or barely at all.
+*   **Problem:** The SmolVLA model outputs actions in the same units as its training data. Some datasets use radians. For example, the datasets recorder with phosphobot such as `PLB/phospho-playground-mono` uses radians. However, the LeRobot SO-100 driver expects actions in degrees. This will cause the robot to move erratically or barely at all.
 *   **Fix:** Convert the model's output from radians to degrees.
 
     *   **File:** `lerobot/common/policies/smolvla/modeling_smolvla.py`
