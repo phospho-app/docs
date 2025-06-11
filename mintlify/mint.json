@@ -67,8 +67,8 @@
         "learn/kinematics",
         "learn/lerobot-dataset",
         "learn/dataset-bestpractices",
-        "learn/train-smol-vla",
         "learn/ai-models",
+        "learn/train-smol-vla",
         "learn/policies",
         "learn/gravity-compensation",
         "learn/cameras"
