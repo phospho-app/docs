@@ -140,8 +140,23 @@ GR00T-N1 combines both [VLA](#openvla) for language understanding and [Diffusion
   The gr00t-N1 model is a promptable model by NVIDIA
 </Card>
 
+### gr00t N1.5 by Nvidia
 
-### pi0 and pi-0 FAST by Physical Intelligence
+[GR00T N1.5](https://huggingface.co/nvidia/GR00T-N1.5-3B) is an updated version of Nvidia's open foundation model for humanoid robots. It's also open source, but has 3B parameters instead of 2B like gr00t n1. Other than that, it's the same architecture as gr00t n1. The model weights are available on [Hugging Face](https://huggingface.co/nvidia/GR00T-N1.5-3B).
+
+
+### SmolVLA by Hugging Face
+
+[SmolVLA](https://huggingface.co/blog/smolvla) is a small, open-source Vision-Language-Action (VLA) model from Hugging Face designed to be efficient and accessible. It was created as a lightweight, reproducible, and performant alternative to large, proprietary models that often have high computational costs. The model, whose weights are available on [Hugging Face](https://huggingface.co/collections/smol-ai/smolvla-665893a9033433a047029562), was trained entirely on publicly available, community-contributed datasets. It's a 450M parameters model. 
+
+![SmolVLA model architecture](/assets/policies-smolvla.png)
+
+**How it works**:
+*   SmolVLA has a modular architecture with two main parts: a vision-language model that processes images and text, and an "action expert" that generates the robot's next moves.
+*   The action expert is a compact transformer that uses a flow matching objective to predict a sequence of future actions in a non-autoregressive way, which is fast and efficient.
+*   The model's design includes optimizations like reducing the number of visual tokens to speed up inference.
+
+### pi0, pi-0 FAST, and pi0.5 by Physical Intelligence
 
 [pi0](https://github.com/Physical-Intelligence/openpi), also written as **π₀** or pi zero, is a a flow-based diffusion vision-language-action model (VLA) by Physical Intelligence. The weight of pi0 are open sourced [on Hugging Face](https://huggingface.co/blog/pi0). [Learn more.](https://www.physicalintelligence.company/blog/pi0)
 
@@ -149,7 +164,12 @@ GR00T-N1 combines both [VLA](#openvla) for language understanding and [Diffusion
 
 [pi0 FAST](https://github.com/Physical-Intelligence/openpi), also written as **π₀-FAST** or pi zero FAST, is an **autoregressive VLA**, based on the FAST action tokenizer. Similar to how LLMs generate text token by token, pi0 FAST generates actions token by token. [Learn more.](https://www.physicalintelligence.company/research/fast)
 
-![pi0 model architecture](/assets/policies-pi0-fast.png)
+![pi0 FAST model architecture](/assets/policies-pi0-fast.png)
+
+[pi0.5](https://www.physicalintelligence.company/blog/pi05) is a Vision-Language-Action model by Physical Intelligence that focuses on "open-world generalization." It's designed to enable robots to perform tasks in entirely new environments that they have not seen during training, a significant step toward creating truly general-purpose robots for homes and other unstructured spaces. While the [research](https://www.physicalintelligence.company/download/pi05.pdf) and results are public, the model itself is not open-source.
+
+![pi0.T model architecture](/assets/policies-pi0.5.png)
+
 
 ### RT-2 and AutoRT by Google DeepMind
 
