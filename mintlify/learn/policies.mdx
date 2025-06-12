@@ -146,14 +146,25 @@ GR00T-N1 combines both [VLA](#openvla) for language understanding and [Diffusion
 
 ### SmolVLA by Hugging Face 
 
-[SmolVLA](https://huggingface.co/blog/smolvla) (June 2025) is a small, open-source Vision-Language-Action (VLA) model from Hugging Face designed to be efficient and accessible. It was created as a lightweight, reproducible, and performant alternative to large, proprietary models that often have high computational costs. The model, whose weights are available on [Hugging Face](https://huggingface.co/collections/smol-ai/smolvla-665893a9033433a047029562), was trained entirely on publicly available, community-contributed datasets. It's a 450M parameters model. 
+[SmolVLA](https://huggingface.co/blog/smolvla) (June 2025) is a small, open-source Vision-Language-Action (VLA) model from Hugging Face designed to be efficient and accessible. It was created as a lightweight, reproducible, and performant alternative to large, proprietary models that often have high computational costs. The model, whose weights are available on [Hugging Face](https://huggingface.co/collections/smol-ai/smolvla-665893a9033433a047029562), was trained entirely on publicly available, community-contributed datasets. 
+
+It's a 450M parameters model, trained with 30,000 hours of compute. 
 
 ![SmolVLA model architecture](/assets/policies-smolvla.png)
 
 **How it works**:
-*   SmolVLA has a modular architecture with two main parts: a vision-language model that processes images and text, and an "action expert" that generates the robot's next moves.
-*   The action expert is a compact transformer that uses a flow matching objective to predict a sequence of future actions in a non-autoregressive way, which is fast and efficient.
-*   The model's design includes optimizations like reducing the number of visual tokens to speed up inference.
+*   SmolVLA has a modular architecture with two main parts: a vision-language model (a cut-out SmolVLM) that processes images and text, and an "action expert" that generates the robot's next moves.
+*   The action expert is a compact transformer that uses a flow matching objective to predict a sequence of future actions in a non-autoregressive way.
+*   The model needs to be fine-tuned on a specific robot and task. Fine-tuning takes about 8 hours on a single NVIDIA A100 GPU.
+
+<Card
+  title="Train SmolVLA with LeRobot"
+  icon="rocket"
+  iconType="regular"
+  href="/learn/train-smol-vla"
+>
+  The gr00t-N1 model is a promptable model by NVIDIA
+</Card>
 
 ### pi0, pi-0 FAST, and pi0.5 by Physical Intelligence
 
