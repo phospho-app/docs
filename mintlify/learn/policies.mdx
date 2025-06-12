@@ -55,9 +55,9 @@ The [phospho starter pack](https://robots.phospho.ai) helps you learn and experi
 
 Since 2024, there have been breakthroughs in AI robotics. Here are some of the latest ideas in AI robotics.
 
-### ACT (Action Chunking Transformer) (October 2024)
+### ACT (Action Chunking Transformer) 
 
-[ACT (Action Chunking Transformer)](https://github.com/Shaka-Labs/ACT) is a popular repo that that showcases how to use transformers for robotics. The model is trained to predict the action sequences based on the current state of the robot and cameras' images. ACT is an efficient way to do imitation learning. [Learn more.](https://arxiv.org/abs/2406.09246)
+[ACT (Action Chunking Transformer)](https://github.com/Shaka-Labs/ACT) (October 2024) is a popular repo that that showcases how to use transformers for robotics. The model is trained to predict the action sequences based on the current state of the robot and cameras' images. ACT is an efficient way to do imitation learning. [Learn more.](https://arxiv.org/abs/2406.09246)
 
 <Accordion title="Imitation Learning">
 **Imitation Learning** is a popular approach to train AI models for robotics. In imitation learning, the robot learns by mimicking human demonstrations. It's like teaching a child to ride a bike by showing them how it's done.
@@ -86,9 +86,9 @@ Usually, the demonstrations are collected by **teleoperating** the robot. The ro
   A few dozens of episodes are enough to train ACT to reproduce human demonstrations.
 </Card>
 
-### OpenVLA (June 2024)
+### OpenVLA 
 
-[OpenVLA](https://github.com/openvla/openvla?tab=readme-ov-file#getting-started) is a great repo that showcases a more advanced model designed for **complex robotics tasks**. The architecture of OpenVLA include a [Llama-2-7b](https://huggingface.co/meta-llama/Llama-2-7b) model (July 2023) that receives a prompt describing the task. This gives the model some common sense and allows it to generalize to new tasks.
+[OpenVLA](https://github.com/openvla/openvla?tab=readme-ov-file#getting-started) (June 2024) is a great repo that showcases a more advanced model designed for **complex robotics tasks**. The architecture of OpenVLA include a [Llama-2-7b](https://huggingface.co/meta-llama/Llama-2-7b) model (July 2023) that receives a prompt describing the task. This gives the model some common sense and allows it to generalize to new tasks.
 
 ![OpenVLA model architecture](/assets/policies-openvla.png)
 
@@ -144,9 +144,9 @@ GR00T-N1 combines both [VLA](#openvla) for language understanding and [Diffusion
 [GR00T N1.5](https://huggingface.co/nvidia/GR00T-N1.5-3B) (June 2025) is an updated version of Nvidia's open foundation model for humanoid robots. It's also open source, but has 3B parameters instead of 2B like gr00t n1. Other than that, it's the same architecture as gr00t n1. The model weights are available on [Hugging Face](https://huggingface.co/nvidia/GR00T-N1.5-3B).
 
 
-### SmolVLA by Hugging Face (June 2025)
+### SmolVLA by Hugging Face 
 
-[SmolVLA](https://huggingface.co/blog/smolvla) is a small, open-source Vision-Language-Action (VLA) model from Hugging Face designed to be efficient and accessible. It was created as a lightweight, reproducible, and performant alternative to large, proprietary models that often have high computational costs. The model, whose weights are available on [Hugging Face](https://huggingface.co/collections/smol-ai/smolvla-665893a9033433a047029562), was trained entirely on publicly available, community-contributed datasets. It's a 450M parameters model. 
+[SmolVLA](https://huggingface.co/blog/smolvla) (June 2025) is a small, open-source Vision-Language-Action (VLA) model from Hugging Face designed to be efficient and accessible. It was created as a lightweight, reproducible, and performant alternative to large, proprietary models that often have high computational costs. The model, whose weights are available on [Hugging Face](https://huggingface.co/collections/smol-ai/smolvla-665893a9033433a047029562), was trained entirely on publicly available, community-contributed datasets. It's a 450M parameters model. 
 
 ![SmolVLA model architecture](/assets/policies-smolvla.png)
 
@@ -170,13 +170,13 @@ GR00T-N1 combines both [VLA](#openvla) for language understanding and [Diffusion
 ![pi0.T model architecture](/assets/policies-pi0.5.png)
 
 
-### RT-2 (July 2023) and AutoRT (January 2024) by Google DeepMind
+### RT-2 and AutoRT by Google DeepMind
 
-[**RT-2**](https://github.com/kyegomez/RT-2) is Google DeepMind's twist on VLAs. It's a closed-source model, very similar to OpenVLA. based on the Palm architecture. The model is trained on a large dataset of human demonstrations. [Learn more.](https://arxiv.org/pdf/2307.15818)
+[**RT-2**](https://github.com/kyegomez/RT-2) (July 2023) is Google DeepMind's twist on VLAs. It's a closed-source model, very similar to OpenVLA. based on the Palm architecture. The model is trained on a large dataset of human demonstrations. [Learn more.](https://arxiv.org/pdf/2307.15818)
 
 ![RT-2 model architecture](/assets/policies-rt2.png)
 
-[**AutoRT**](https://github.com/kyegomez/AutoRT) is a framework by Google DeepMind, designed for robot fleets and data collection. A LLM is used to generate "to do lists" for  robots based on descriptions of the environment. The to do lists tasks are then executed by teleoperators, a scripted pick policy, or RT-2 (Google's VLA). [Learn more.](https://auto-rt.github.io/static/pdf/AutoRT.pdf)
+[**AutoRT**](https://github.com/kyegomez/AutoRT) (January 2024) is a framework by Google DeepMind, designed for robot fleets and data collection. A LLM is used to generate "to do lists" for  robots based on descriptions of the environment. The to do lists tasks are then executed by teleoperators, a scripted pick policy, or RT-2 (Google's VLA). [Learn more.](https://auto-rt.github.io/static/pdf/AutoRT.pdf)
 
 ![AutoRT model architecture](/assets/policies-autort.png)
 
