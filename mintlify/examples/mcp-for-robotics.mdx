@@ -159,6 +159,7 @@ Claude will call:
 ```python
 @mcp.tool()
 def pickup_object(name: Literal["banana", "black circle", "green cross"]) -> str
+    ...
 ````
 
 * Launches a pre-recorded episode based on the object name.
@@ -170,6 +171,7 @@ def pickup_object(name: Literal["banana", "black circle", "green cross"]) -> str
 ```python
 @mcp.tool()
 def get_camera_frame() -> Image
+    ...
 ```
 
 * Uses the local phosphobot API (`/frames`)
