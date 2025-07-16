@@ -140,7 +140,8 @@
       "pages": [
         "examples/control",
         "examples/vision",
-        "examples/teleop-from-anywhere"
+        "examples/teleop-from-anywhere",
+        "examples/mcp"
       ]
     }
   ],
