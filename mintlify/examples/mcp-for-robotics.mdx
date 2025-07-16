@@ -80,10 +80,23 @@ Make sure [Claude desktop](https://support.anthropic.com/en/articles/10065433-in
 
 Install phospho-mcp-server this way using [uv](https://docs.astral.sh/uv/getting-started/installation/):
 
-```bash
-curl -LsSf https://astral.sh/uv/install.sh | sh # Install uv on MacOs or Linux
-powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex" # On Windows
+1. Install uv:
 
+<CodeGroup>
+
+```bash macOS and Linux
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+```powershell Windows
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+</CodeGroup>
+
+2. Install the MCP server:
+
+```bash
 # Clone repo
 git clone https://github.com/phospho-app/phospho-mcp-server.git
 
