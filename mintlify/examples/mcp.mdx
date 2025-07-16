@@ -19,7 +19,7 @@ description: "Control your robot with natural language"
 ## What is an MCP?
 The **Model Context Protocol (MCP)** is a standard for connecting **large language models** to **real-world tools and data**.
 
-Think of it like a **USB-C port for AI**: you expose Python functions and data sources, and the model can plug in and use them.
+Think of it like a **USB-C port for AI**: you expose tools and data sources, and the model can plug in and use them.
 
 With MCP, you can build **LLM agents that see, reason, and act** just by wiring your app logic into a clean interface the model understands.
 
@@ -29,9 +29,9 @@ With MCP, you can build **LLM agents that see, reason, and act** just by wiring 
 - **Resources** are read-only data sources, accessible via URIs. 
     - Example: file://home/user/notes.txt to expose the content of a local text file.
 - **Host / Client / Server architecture**
-    - Host = the LLM tool (e.g. Claude)
-    - Client = the MCP protocol connector
-    - Server = your app exposing tools/resources
+    - Host = the LLM applications that start the connection (e.g. Claude)
+    - Client = the MCP protocol that conects tools to the LLM
+    - Server = your app exposing tools/resources (e.g. the phosphobot MCP server)
 - **Lifespan** lets you run startup/shutdown code (e.g., to launch a robot process), and share context across tools.
 
 ## How phospho uses MCP in robotics
@@ -85,7 +85,7 @@ uv run mcp install server.py
 This will:
 
 * Boot the MCP server under the name `phospho`
-* Register all tools with 
+* Register all tools with the Claude MCP client
 
 Now, open Claude desktop. You should see the phospho MCP server listed along the tools.  
 
