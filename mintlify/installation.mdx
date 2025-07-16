@@ -13,7 +13,7 @@ description: "How to set up phosphobot for free and control your robot arm in si
 
 ## Install phosphobot
 
-The quickest way to get started is to use the install script. In a terminal, run the following command:
+The quickest way to get started is to use the install script and a compiled version. In a terminal, run the following command:
 
 <CodeGroup>
 
@@ -54,9 +54,34 @@ On the same computer, open a web browser and navigate to `localhost`. You should
   Discover how to control your robot arm from the dashboard and from the Meta Quest app.
 </Card>
 
+## Using uv (pip)
+
+phosphobot is also available as a [Python package.](https://pypi.org/project/phosphobot/) We recommend using [uv](https://docs.astral.sh/uv/getting-started/installation/) to install it.
+
+1. Install uv by running the following command in your terminal:
+
+<CodeGroup>
+
+```bash macOS and Linux
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+```powershell Windows
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+</CodeGroup>
+
+
+2. Run phosphobot with uv by running the following command in your terminal:
+
+```bash
+uvx phosphobot run
+```
+
+
 ## MacOS (brew)
 
-Use [Homebrew](https://brew.sh/) to install phosphobot:
+On MacOS, use [Homebrew](https://brew.sh/) to install phosphobot:
 
 ```bash
 brew tap phospho-app/phosphobot
@@ -72,19 +97,21 @@ You can also [directly download the binaries here.](https://github.com/phospho-a
 
 ## Linux (apt)
 
-On Linux, we use apt to distribute the software and you need additional packages. That's why you need to run the install script with sudo:
+On Linux, we use apt to distribute phosphobot and you need additional packages. That's why you need to run the install script with sudo:
 
 ```bash 
 curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | sudo bash
 ```
+
 To **update phosphobot**, run the following command:
+
 ```bash
 sudo apt update && sudo apt install --only-upgrade phosphobot
 ```
 
 ## Raspberry Pi (apt)
 
-phosphobot on Raspberry Pi has advanced features to make it easier to use (led ticking, bluetooth connection, extra dependencies already installed).
+phosphobot on Raspberry Pi has advanced features to make it easier to use (led ticking, bluetooth connection, WiFi hotspot, extra dependencies already installed).
 
 <Accordion title="Setup your Raspberry Pi"
 icon="raspberry-pi"
@@ -207,6 +234,12 @@ Change `C:\path\to\` to the path where you downloaded phosphobot. To make this e
 
 Then, you can **create a shortcut** to launch `C:\Users\<your_username>\Desktop\phosphobot.exe run` from anywhere.
 
+
+## Install from source
+
+phosphobot is open source and you can install it from source to contribute to the project or fix compatibility issues. 
+
+You can find the instructions in the [GitHub repository right here](https://github.com/phospho-app/phosphobot/tree/main/phosphobot)
 
 ## Support
 
