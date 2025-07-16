@@ -1,13 +1,15 @@
 ---
-title: phospho MCP server
-description: "Control your robot with natural language"
+title: MCP for Robotics using phosphobot
+description: Learn how to use the Model Context Protocol (MCP) with phosphobot to control robots, access camera feeds, and trigger actions.
 ---
+
+In this guide, we'll share with you code to get started with the Model Context Protocol (MCP) for robotics using [phosphobot](https://docs.phospho.ai/installation). This will allow you to control robots, access camera feeds, and trigger actions using a large language model (LLM) like Claude in a standardized and seamless way.
+
 
 <iframe
   className="w-full aspect-video rounded-xl"
   src="https://www.youtube.com/embed/vMYgt9AT2Uo"
   title="Short YouTube video mixage mcp"
-  frameBorder="0"
   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
   allowFullScreen
 ></iframe>
@@ -17,6 +19,7 @@ description: "Control your robot with natural language"
 - 🤖 Designed for [Claude](https://claude.ai/download) and [phosphobot](https://github.com/phospho-app/phosphobot)
 
 ## What is an MCP?
+
 The **Model Context Protocol (MCP)** is a standard for connecting **large language models** to **real-world tools and data**.
 
 Think of it like a **USB-C port for AI**: you expose tools and data sources, and the model can plug in and use them.
@@ -24,6 +27,7 @@ Think of it like a **USB-C port for AI**: you expose tools and data sources, and
 With MCP, you can build **LLM agents that see, reason, and act** just by wiring your app logic into a clean interface the model understands.
 
 ## Key Concepts
+
 - **Tools** are real Python functions that the model can call to perform actions. 
     - Example: pickup_object("banana") to move a robot arm.
 - **Resources** are read-only data sources, accessible via URIs. 
