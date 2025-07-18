@@ -8,6 +8,18 @@ description: "Understanding Gravity Compensation in Robotics"
 
 Gravity compensation is a fundamental technique in robotics that **allows a robot arm to be freely moved by hand** while maintaining its position when released. This page will explain how you can create a simple gravity compensation algorithm for the SO-100 robot arm.
 
+You can enable gravity compensation in phosphobot by going to **Leader arm control** and clicking on the **Enable gravity compensation** button.
+
+<iframe
+  className="w-full aspect-video"
+  src="https://www.youtube.com/embed/BN3nXp0n7ec"
+  title="so100 gravity compensation"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  referrerPolicy="strict-origin-when-cross-origin"
+  allowFullScreen
+></iframe>
+
+
 ### How Gravity Compensation Works
 
 At its core, **gravity compensation counteracts the effect of gravity on a robot's joints**. Without compensation, a robot arm would fall due to gravity when the motors are not actively holding position. _With proper compensation, you can move the robot by hand, and it will stay in place when released._
