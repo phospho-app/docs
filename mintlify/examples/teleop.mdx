@@ -1,15 +1,23 @@
 ---
-title: "Teleoperation on local network"
-description: "How to control your robot arm using a Meta Quest 3 over a local WiFi network"
+title: "VR Control with a Meta Quest"
+description: "How to control your robot arm using a Meta Quest 2, Pro, 3, 3s over a local WiFi network"
 ---
 
+import InstallCode from '/snippets/install-code.mdx';
+import GetMQApp from '/snippets/get-mq-app.mdx';
+import TeleopInstructions from '/snippets/teleop-instructions.mdx';
 
-Move in real time. Record datasets. Start training AI models.
+
+
+Control your robot arm using a Meta Quest 2, Pro, 3, or 3s. The phosphobot app lets you teleoperate your SO-100 or SO-101 robot in real time. 
+
+<GetMQApp/>
+
 
 <iframe 
     className="w-full aspect-video"
     src="https://www.youtube.com/embed/AQ-xgCTdj_w?si=NDTtX1nISABjzmbA" 
-    title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+    title="VR Control tutorial" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
     referrerPolicy="strict-origin-when-cross-origin" 
     allowFullScreen>
 </iframe>
@@ -17,24 +25,10 @@ Move in real time. Record datasets. Start training AI models.
 
 ## Prerequisites
 
-1. You need an assembled **SO-100** robot arm. Get the [phosphot starter pack here](https://robots.phospho.ai).
+1. You need a robot arm such as the SO-100, the SO-101, or [other compatible hardware](https://github.com/phospho-app/phosphobot). Get the [phosphot starter pack here](https://robots.phospho.ai).
 2. Install [the phosphobot software](/installation) on your computer.
 
-  <CodeGroup>
-
-  ```bash macOS
-  curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | bash
-  ```
-
-  ```bash Linux
-  curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | sudo bash
-  ```
-
-  ```powershell Windows
-  powershell -ExecutionPolicy ByPass -Command "irm https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.ps1 | iex"
-  ```
-
-  </CodeGroup>
+<InstallCode/>
 
 3. Connect robots to your computer. Start the phosphobot server.
 
@@ -43,39 +37,15 @@ Move in real time. Record datasets. Start training AI models.
   ```
 
 4. Complete the [quickstart](/so-100/quickstart) and check that you can [control your robot](/basic-usage/teleop).
-5. The **[phosphobot teleoperation app](/examples/teleop)** is installed on your **Meta Quest 2, Pro, 3 or 3s**. 
-    1. If you bought the [starter pack](https://robots.phospho.ai), you should have received a link to download the app. Please [reach out](mailto:contact@phospho.ai) if not. 
-    2. If you didn't buy our products, you can still get access to the Meta Quest app [on the Meta Store](https://www.meta.com/en-gb/experiences/phospho-teleoperation/8873978782723478/)
+5. The **[phosphobot teleoperation app](/examples/teleop)** is installed on your **Meta Quest 2, Pro, 3 or 3s**. >
 
+<GetMQApp/>
 
-## Step by step guide
+## How to control your robot arm with the Meta Quest app? Step by step instructions
 
-Connect to the dev kit through WiFi in the **phospho teleoperation** Meta Quest app.
+<TeleopInstructions/>
 
-<Info>The app works with a [Meta Quest](https://www.meta.com/fr/quest/quest-3/?srsltid=AfmBOorMLUmJKFQr35ssCi1DDqSNgpHk0sLHqo_tHG8kgclCYbMToAPa). Compatible models: Pro, 2, 3, 3s.</Info>
-
-![Meta Quest controller button names](/assets/names_buttons.jpg)  
-
-1. Open the application. You should see a screen displaying **phosphobot** along with the server ping. Click the **Connect** button using the `Trigger Button`.  
-
-<Note>Make sure you're connected to the same WiFi as the phosphobot server or the control module</Note>  
-
-![Select Phosphobot server](/assets/meta-quest-server-list.png)  
-
-2. After connecting, you should see the main camera feed if a camera is connected. Move the windows with the `Grip button` to organize your space.  
-3. Press `A` once to start teleoperation and begin moving your controller.  
-   - The robot will naturally follow the movement of your controller. Press the `Trigger button` to close the gripper.
-   - Press `A` again to stop the teleoperation. The robot will stop.  
-
-4. Press `B` to start recording. You can leave the default settings for your first attempt.  
-   - Press `B` again to stop the recording.
-   - Press `Y` (left controller) to discard the recording.
-
-5. Continue teleoperating and stop the recording when you're done.  
-
-6. The recording is automatically saved in **LeRobot** format and uploaded to your HuggingFace account. Check it in your profile.  
-
-## Examples
+## Examples of VR control
 
 <iframe 
     className="w-full aspect-video"
@@ -94,8 +64,6 @@ The phospho Meta Quest app lets you operate the robot arm in real time. With the
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
     allowFullScreen>
 </iframe>
-
-
 
 
 ## What's next?

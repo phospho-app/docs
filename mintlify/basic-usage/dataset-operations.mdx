@@ -1,18 +1,16 @@
 ---
-title: "Manipulate datasets"
+title: "Manipulate LeRobot datasets"
 description: "How to repair, merge, split and delete LeRobot datasets"
 ---
 
-<Note>
-  To manipulate datasets, you need to install [phosphobot](/installation) 
-</Note>
+import InstallCode from '/snippets/install-code.mdx';
 
 You just recorded a LeRobot dataset with your robot. Maybe you also downloaded a dataset from the HuggingFace hub. With phospho, you can:
 
-- repair it if it's corrupted
-- merge it with another dataset
-- split it into multiple datasets (e.g. training/validation/test sets)
-- delete it
+- repair corrupted datasets
+- merge two datasets into one
+- split a dataset into multiple datasets (e.g. training/validation/test sets)
+- delete episodes from a dataset
 
 <iframe 
     className="w-full aspect-video"
@@ -23,9 +21,16 @@ You just recorded a LeRobot dataset with your robot. Maybe you also downloaded a
 </iframe>
 
 
+## Prerequisites 
+
+You need to install the phosphobot software on your computer. If you haven't done it yet, follow the [installation guide](/installation).
+
+<InstallCode/>
+
+
 For any of this operations, go to the dashboard and click on the `Browse Datasets` tab. Then move to the `lerobot_v2.1` folder.
 
-You wil see all your local datasets. To download a dataset from the HuggingFace hub, click on the `Download dataset` button. It will be downloaded and added to your local datasets.
+You will see all your local datasets. To download a dataset from the HuggingFace hub, click on the `Add from hub` button. It will be downloaded and added to your local datasets.
 
 ## Repair a dataset
 

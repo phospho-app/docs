@@ -3,6 +3,9 @@ title: "Install phosphobot"
 description: "Control your robot arm in seconds with phosphobot on any computer"
 ---
 
+import InstallCode from '/snippets/install-code.mdx';
+
+
 <iframe 
     className="w-full aspect-video"
     src="https://www.youtube.com/embed/AQ-xgCTdj_w?si=NDTtX1nISABjzmbA" 
@@ -15,21 +18,7 @@ description: "Control your robot arm in seconds with phosphobot on any computer"
 
 The quickest way to get started is to use the install script and a compiled version. In a terminal, run the following command:
 
-<CodeGroup>
-
-```bash macOS
-curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | bash
-```
-
-```bash Linux
-curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | sudo bash
-```
-
-```powershell Windows
-powershell -ExecutionPolicy ByPass -Command "irm https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.ps1 | iex"
-```
-
-</CodeGroup>
+<InstallCode/>
 
 
 Then, run the phosphobot server:
@@ -154,7 +143,7 @@ Then hit Save and hit Yes to use the OS customization settings. Write the image 
 
 When writing is finished, take out the SD card from your computer. 
 
-Insert the microSD into the Raspberry Pi when it’s turned off.
+Insert the microSD into the Raspberry Pi when it's turned off.
 
 </Accordion>
 
@@ -165,13 +154,13 @@ SSH (Secure Shell) allows you to access the Raspberry Pi remotely from your main
 
 Turn on the Raspberry Pi by plugging it to a power source. Wait for it to boot (look for the LED pattern)
 
-Then, open a terminal and SSH into your Raspberry Pi. If you’ve followed the previous part, this means running on your computer this command :
+Then, open a terminal and SSH into your Raspberry Pi. If you've followed the previous part, this means running on your computer this command :
 
 ```bash
 ssh phosphobot@phosphobot.local
 ```
 
-*If you didn’t follow the previous part, the username@hostname.local and password may be different.*
+*If you didn't follow the previous part, the username@hostname.local and password may be different.*
 
 When asked about the authenticity of host phosphobot.local, type `yes` to accept.
 
@@ -179,7 +168,7 @@ And when asked for password, enter `password123` .
 
 **2. Install the software**
 
-When you’ve successfully SSH in the Raspberry Pi, run this to install the teleoperation server :
+When you've successfully SSH in the Raspberry Pi, run this to install the teleoperation server :
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | sudo bash

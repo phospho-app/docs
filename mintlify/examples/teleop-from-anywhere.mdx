@@ -1,16 +1,34 @@
 ---
-title: "Teleoperation from anywhere in the world"
-description: "Control your robot over the internet using ngrok"
+title: "VR Control from anywhere in the world"
+description: "How to control your robot arm from anywhere in the world using ngrok and a Meta Quest 2, Pro, 3 or 3s"
 ---
+
+
+import InstallCode from '/snippets/install-code.mdx';
+import GetMQApp from '/snippets/get-mq-app.mdx';
+
+Control your robot arm from anywhere in the world using ngrok and a Meta Quest 2, Pro, 3 or 3s. This lets you collect datasets with manipulators in different locations. 
 
 ## Prerequisites
 
-Before starting, make sure you have the following:
+1. You need a robot arm such as the SO-100, the SO-101, or [other compatible hardware](https://github.com/phospho-app/phosphobot). Get the [phosphot starter pack here](https://robots.phospho.ai).
+2. Install [the phosphobot software](/installation) on your computer.
 
-1. A **phosphobot server** set up and connected to the internet. [Learn how to set up your control module](/unboxings/dk1).
-2. An **ngrok account**. [Sign up here](https://ngrok.com/) (*or use an alternative like Cloudflare Tunnel*).
-3. The **ngrok CLI** installed on your device. [Download it here](https://ngrok.com/download)
-4. A **Meta Quest 2, Pro, 3 or 3s** with the phosphobot teleoperation app installed. [Purchase the app here](https://robots.phospho.ai/).
+<InstallCode/>
+
+3. Connect robots to your computer. Start the phosphobot server.
+
+  ```bash
+  phosphobot run
+  ```
+
+4. Complete the [quickstart](/so-100/quickstart) and check that you can [control your robot](/basic-usage/teleop).
+5. The **[phosphobot teleoperation app](/examples/teleop)** is installed on your **Meta Quest 2, Pro, 3 or 3s**. >
+
+<GetMQApp/>
+
+6. An **ngrok account**. [Sign up here](https://ngrok.com/) (*or use an alternative like Cloudflare Tunnel*).
+7. The **ngrok CLI** installed on your device. [Download it here](https://ngrok.com/download)
 
 ## 1. Authenticate ngrok
 

@@ -3,7 +3,6 @@ title: "Quickstart with your SO-100"
 description: "How to set up phosphobot and control your SO-100 robot arm"
 ---
 
-If you haven't already, install phosphobot on your computer. See the [installation guide](/installation) for more information.
 
 # Setup the hardware
 
@@ -38,20 +37,24 @@ Below is an example of a full setup with a SO-100 arm, a stereoscopic camera plu
 
 # Launch the server
 
-<Info> If you change the cameras connected to the computer running the server, you have to restart the server. </Info>
+Once everything is connected and powered on, run the following command in a terminal to install the phosphobot software:
 
-Once everything is connected and powered on, run the following command to start the phosphobot server:
+<InstallCode/>
+
+Then, fire up the the server:
 
 ```bash
 phosphobot run
 ```
 
-It can take up to 15 seconds for the server to start for the first time because of macOS security settings.
+Go to `localhost` in your web browser to access the phosphobot dashboard. Go to **Control** to control your robot using only your keyboard!
+
+![phosphobot dashboard](/assets/phosphobot-dashboard.png)
+
 
 ## Check everything is setup properly
 
-Go to the dashboard (at `localhost` if you are running the server on your laptop or `phosphobot.local` if it's a Raspberry Pi on your network) 
-in your web browser.
+Go to the dashboard using the link `localhost` in your web browser. You should see the **phosphobot dashboard**.
 
 ![phosphobot dashboard](/assets/phosphobot-dashboard.png)
 

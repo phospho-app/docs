@@ -131,18 +131,21 @@ GR00T-N1 combines both [VLA](#openvla) for language understanding and [Diffusion
 - Supports prompting and zero-shot learning for tasks not explicitly seen during training.
 - Small model size (2B parameters) for efficient fine-tuning and fast inference on Nvidia Jetson devices.
 
+
+[GR00T N1.5](https://huggingface.co/nvidia/GR00T-N1.5-3B) (June 2025) is an updated version of Nvidia's open foundation model for humanoid robots. It's also open source, but has 3B parameters instead of 2B like gr00t n1. The model weights are available on [Hugging Face](https://huggingface.co/nvidia/GR00T-N1.5-3B). 
+
+Key differences with gr00t n1.5 are:
+- The VLM is frozen during both pretraining and finetuning. 
+- The adapter MLP connecting the vision encoder to the LLM is simplified and adds layer normalization to both visual and text token embeddings input to the LLM.
+
 <Card
-  title="Train gr00t-n1 with phospho"
+  title="Train gr00t-n1.5 with phospho"
   icon="rocket"
   iconType="regular"
   href="/installation"
 >
-  The gr00t-N1 model is a promptable model by NVIDIA
+  The gr00t-N1.5 model is a promptable model by NVIDIA
 </Card>
-
-
-[GR00T N1.5](https://huggingface.co/nvidia/GR00T-N1.5-3B) (June 2025) is an updated version of Nvidia's open foundation model for humanoid robots. It's also open source, but has 3B parameters instead of 2B like gr00t n1. Other than that, it's the same architecture as gr00t n1. The model weights are available on [Hugging Face](https://huggingface.co/nvidia/GR00T-N1.5-3B).
-
 
 ### SmolVLA by Hugging Face 
 

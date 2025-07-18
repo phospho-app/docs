@@ -3,41 +3,31 @@ title: "Welcome to phosphobot"
 description: "An absurdly simple way to train AI models for real-world robots, built for ML engineers."
 ---
 
+import InstallCode from '/snippets/install-code.mdx';
+import GetMQApp from '/snippets/get-mq-app.mdx';
+
 Phospho is how ML engineers make real robots intelligent. 
 We provide the hardware, libraries, and remote control capabilities so developers can collect data, 
 train AI models and deploy applications to real robots in minutes instead of months.
 
 # Highlights
 
-- 🕹️ Teleoperate robots to capture datasets in minutes
-- ⚡ Train AI models such as ACT, π0 or gr00t-n1 with one command
-- 🦾 Compatible with the SO-100 arm 
+- 🕹️ Control your robots to record datasets in minutes with a keyboard, a gamepad, a leader arm, and more
+- ⚡ Train Action models such as ACT, π0 or gr00t-n1 with one command
+- 🦾 Compatible with the SO-100, SO-101, Unitree Go2, Agilex Piper...
 - 🚪 Dev-friendly API
 - 🤗 Fully compatible with LeRobot and HuggingFace
 - 🖥️ Runs on macOS, Linux and Windows
 - 🥽 Meta Quest app for teleoperation
 - 📸 Supports most cameras (classic, depth, stereo)
-- 🔌 Extend it with your own robots and cameras
+- 🔌 Open Source: [Extend it with your own robots and cameras](https://github.com/phospho-app/phosphobot/tree/main/phosphobot)
+
 
 # Installation
 
 In a terminal, run the following command:
 
-<CodeGroup>
-
-```bash macOS
-curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | bash
-```
-
-```bash Linux
-curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | sudo bash
-```
-
-```powershell Windows
-powershell -ExecutionPolicy ByPass -Command "irm https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.ps1 | iex"
-```
-
-</CodeGroup>
+<InstallCode/ >
 
 Then, fire up the the server:
 
@@ -47,7 +37,11 @@ phosphobot run
 
 It can take up to 15 seconds for the server to start.
 
-Go to `localhost` in your web browser to access the phosphobot dashboard. Go to **Keyboard Control** to control your robot using only your keyboard!
+Go to `localhost` in your web browser to access the phosphobot dashboard. Go to **Keyboard Control** to control your robot using only your keyboard, record datasets, and train AI models!
+
+# VR Control
+
+<GetMQApp/>
 
 <iframe 
     className="w-full aspect-video"
@@ -57,30 +51,29 @@ Go to `localhost` in your web browser to access the phosphobot dashboard. Go to 
     allowFullScreen>
 </iframe>
 
-# Updates
+# How to update phosphobot?
 
-We're shipping updates **daily** to improve the experience, add new features, and fix issues.
+[We're shipping updates daily](https://github.com/phospho-app/phosphobot/releases). We fix bugs, add features, and improve the experience constantly.
+
 Keep your software up-to-date to benefit from the latest improvements.
 
-On Mac:
+<CodeGroup>
 
-```bash
+```bash macOS 
 brew update && brew upgrade phosphobot
 ```
 
-On Linux:
-
-```bash
+```bash Linux
 sudo apt update && sudo apt install --only-upgrade phosphobot
 ```
 
-On Windows:
 
-```powershell
+```powershell Windows
 powershell -ExecutionPolicy ByPass -Command "irm https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.ps1 | iex"
 ```
 
-If you use the control module of the dev kit, simply restart it, updates will be installed automatically.
+</CodeGroup>
+
 
 # Next step
 

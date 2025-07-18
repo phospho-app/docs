@@ -131,10 +131,7 @@
         }
       ]
     },
-    {
-      "group": "FAQ",
-      "pages": ["faq/telemetry"]
-    },
+
     {
       "group": "Examples",
       "pages": [
@@ -143,6 +140,10 @@
         "examples/teleop-from-anywhere",
         "examples/mcp-for-robotics"
       ]
+    },
+    {
+      "group": "Other",
+      "pages": ["faq"]
     }
   ],
   "footerSocials": {

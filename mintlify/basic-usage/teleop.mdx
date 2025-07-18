@@ -3,11 +3,9 @@ title: "Control your robot arm"
 description: "How to remote control a robot arm with a keyboard, in VR, with an API or a leader arm?"
 ---
 
-<Note>
-  To control your robot, you need to install [phosphobot](/installation) and completed the [quickstart](/so-100/quickstart). -
-  If you don't have a robot arm, you can get hardware [here](https://robots.phospho.ai/). If you built your own robot arm, you
-  should first [calibrate it](/so-100/quickstart#calibrate-the-robot).
-</Note>
+import InstallCode from '/snippets/install-code.mdx';
+import GetMQApp from '/snippets/get-mq-app.mdx';
+import TeleopInstructions from '/snippets/teleop-instructions.mdx';
 
 phosphobot lets you control the SO-100 or SO-101 robot arm with:
 
@@ -18,11 +16,21 @@ phosphobot lets you control the SO-100 or SO-101 robot arm with:
 - a leader arm or another follower arm
 - by playing back a recording
 
-You can also control other kind of robots and write your own controllers. 
+You can also control other kind of robots and [write your own controllers.](https://github.com/phospho-app/phosphobot/tree/main/phosphobot)
 
-### How to control the SO-100 with a keyboard?
+<Note>
+ If you don't have a robot arm, you can get hardware [here](https://robots.phospho.ai/).
+</Note>
 
-Use `phosphobot` to control your SO-100 robot arm with your keyboard, using the `arrow keys` to move the robot arm in the desired direction.
+## Prerequisites
+
+To control your robot, you need to install [phosphobot](/installation). Make sure the robot was [calibrated with phosphobot](/so-100/quickstart). -
+
+<InstallCode/>
+
+## How to control the SO-100 with a keyboard? How to control the SO-101 with a keyboard?
+
+Use `phosphobot` to control your SO-100, SO-101, or any supported robot arm with your keyboard, using the `arrow keys` to move the robot arm in the desired direction.
 
 Go to `localhost` in your web browser to access the phosphobot dashboard. Go to **Keyboard Control**. Click on the **Start robot** button to start controlling the robot arm with your keyboard. Click on the **Stop robot** button to stop controlling the robot arm with your keyboard.
 
@@ -35,7 +43,7 @@ Go to `localhost` in your web browser to access the phosphobot dashboard. Go to 
   allowFullScreen
 ></iframe>
 
-### How to control the SO-100 with a game controller?
+## How to control the SO-100 with a game controller? How to control the SO-101 with a game controller?
 
 You can control your robot arm using standard game controllers (Xbox, PlayStation, or similar) for more intuitive and ergonomic control.
 
@@ -59,7 +67,51 @@ You can control your robot arm using standard game controllers (Xbox, PlayStatio
   The gamepad control feature requires a browser with Gamepad API support (Chrome/Edge 21+, Firefox 29+, Safari 10.1+).
 </Info>
 
-### Send your first commands to the API
+
+## How to control the SO-100 with the Meta Quest app? How to control the SO-101 with the Meta Quest app?
+
+Control your robot arm in virtual reality with the Meta Quest app. This app lets you control your robot arm in VR, using the Meta Quest controllers.
+
+<GetMQApp/>
+
+<iframe
+  className="w-full aspect-video"
+  src="https://www.youtube.com/embed/AQ-xgCTdj_w?si=NDTtX1nISABjzmbA"
+  title="VR Control tutorial"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  referrerPolicy="strict-origin-when-cross-origin"
+  allowFullScreen
+></iframe>
+
+
+<TeleopInstructions/>
+
+
+## How to control the SO-100 with a leader arm? How to control the SO-101 with a leader arm?
+
+If you have a leader arm, we offer some basic support.
+
+1. Plug the leader arm.
+
+2. Calibrate the leader arm the same way you calibrated the robot arm.
+
+3. Go to the phosphobot dashboard, in the **Control** page and click on the **Leader Arm** section.
+
+<Note>You have more than one pair leader/follower arms, using the + button to add more</Note>
+
+### Does the leader arm need to be calibrated?
+
+Yes, the leader arm needs to be calibrated the same way you calibrated the robot arm. The calibration is done in the **Calibration** page of the phosphobot dashboard.
+
+### Can you do bimanual teleoperation with two leader arms? Can I control two robot arms with two leader arms?
+
+Yes, you can control two robot arms with two leader arms. You need to plug both leader arms and calibrate them the same way you calibrated the robot arms. Then, go to the **Control** page of the phosphobot dashboard and click on the **Leader Arm** section. You can add multiple leader arms by clicking on the + button.
+
+### Is the leader arm mandatory?
+
+No, the leader arm is optional. You can control the robot arm with the keyboard, the game controller, the HTTP API, or the Meta Quest app without a leader arm. The leader arm is just an additional way to control the robot arm.
+
+## How to control the SO-100 with the HTTP API? How to control the SO-101 with the HTTP API?
 
 Once your phosphobot server is running, you can send your first command to the robot arm.
 
@@ -76,78 +128,8 @@ Once your phosphobot server is running, you can send your first command to the r
 
 4. Now, you can call the `/move/absolute` endpoint to move the robot to a specific position. The distances are in centimeters, and the angles in degrees.
 
-## Meta Quest app
 
-<iframe
-  className="w-full aspect-video"
-  src="https://www.youtube.com/embed/AQ-xgCTdj_w?si=NDTtX1nISABjzmbA"
-  title="YouTube video player"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  referrerPolicy="strict-origin-when-cross-origin"
-  allowFullScreen
-></iframe>
-
-### Set up your Meta Quest app
-
-The phospho starter pack is shipped with a [Meta Quest](https://www.meta.com/fr/quest/quest-3/?srsltid=AfmBOoqPSrSx_ABUZwNg30PYExXeJ_mTx3yyaK6Y_juZif_BlfcdpTjw) app for teleoperation. In this section, we will set up the app on your Meta Quest headset.
-
-<Info>If you didn't buy a starter pack, you can still get access to the Meta Quest app by [purchasing it](https://robots.phospho.ai)</Info>
-
-1. After purchasing your phospho starter pack, you'll receive an **email invitation** to the Meta Alpha program of the phospho teleop app. Follow the email instructions to link your Meta account to the Alpha program.
-
-2. Make sure your **Meta Quest headset** is **turned on** and **connected to WiFi**. Once you've linked your account, the Meta Quest will automatically download the app. This can take a moment.
-
-<Info>
-  The Meta Quest connects to the phosphobot server through a shared WiFi
-  connection.
-</Info>
-
-3. Open the phospho teleop app from the library. Once downloading is done, you can open the software library on the Meta Quest. In the list of All apps, you'll see the _phospho teleop_ app. This app is automatically updated with the latest releases.
-
-### Use the Meta Quest app
-
-<Info>
-  Make sure the Meta Quest is connected to the same WiFi that the computer
-  running the phosphobot server.
-</Info>
-
-Connect to the dev kit through WiFi in the phospho Meta Quest app.
-
-1. In the Meta Quest, open the phospho teleop application. You should see a screen displaying **phosphobot** along with the server ping. Click the **Connect** button using the `Trigger Button`.
-
-![Select Phosphobot server](/assets/meta-quest-server-list.png)
-
-<Info>
-  **Troubleshooting if you don't see the server:**
-    1. Make sure the **port** field in the Meta Quest app settings matches the port of your phosphobot server (default is `80`, then `8020`).
-    2. Use the manual connection option by *Adding to favourite* your phosphobot server's IP address (e.g., `192.168.1.X`) and port.
-    3. Your computer may have a firewall blocking the connection. Make sure the port is open and check your local network settings.
-</Info>
-
-2. After connecting, you should see the main camera feed if a camera is connected. Move the windows with the `Grip button` to organize your space.
-
-![Meta Quest controller button names](/assets/names_buttons.jpg)
-
-3. Press `A` once to start teleoperation and begin moving your controller.
-   - The robot will naturally follow the movement of your controller. Press the `Trigger button` to close the gripper.
-   - Press `A` again to stop the teleoperation. The robot will stop.
-
-You just teleoperated your robot arm! 🎉
-
-
-## Using a leader arm
-
-<Info>The leader arm is optional.</Info>
-
-If you have a leader arm, we offer some basic support.
-
-1. Plug the leader arm.
-
-2. Calibrate the leader arm the same way you calibrated the robot arm.
-
-3. Go to the phosphobot dashboard, in the **Control** page and click on the **Leader Arm** section.
-
-### What's next?
+## What's next?
 
 <Card
   title="Record a dataset"

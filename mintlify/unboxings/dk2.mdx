@@ -3,6 +3,8 @@ title: "Starter pack unboxing (DK2)"
 description: "Unbox and set up your phospho starter pack."
 ---
 
+import InstallCode from '/snippets/install-code.mdx';
+
 In this guide, we will unbox and set up the **phospho starter pack** (DK2). 
 
 <Note>We are currently taking orders [here](https://robots.phospho.ai).</Note>
@@ -21,6 +23,18 @@ In this guide, we will unbox and set up the **phospho starter pack** (DK2).
 - **2 Wrist Cameras**
     - 2x Wrist cameras
     - 2x Camera cables (USB)
+- **Access to the [Meta Quest app](../examples/teleop)** for VR control
+
+<iframe
+  className="w-full aspect-video"
+  src="https://youtube.com/embed/eOB_BhM1oGM"
+  title="phospho starter pack unboxing"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  referrerPolicy="strict-origin-when-cross-origin"
+  allowFullScreen
+></iframe>
+
+
 
 ## 1. Attach the SO-100 arms
 
@@ -39,7 +53,7 @@ Please refer to the video below to see how to install the wrist cameras.
 <iframe 
     className="w-full aspect-video"
     src="https://www.youtube.com/embed/dxsEUsX_v_o" 
-    title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+    title="how to install the wrist camera" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
     referrerPolicy="strict-origin-when-cross-origin" 
     allowFullScreen>
 </iframe>
@@ -59,29 +73,14 @@ In this order:
 
 Once everything is connected and powered on, run the following command in a terminal to install the phosphobot software:
 
-<CodeGroup>
 
-```bash macOS
-curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | bash
-```
-
-```bash Linux
-curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | sudo bash
-```
-
-```powershell Windows
-powershell -ExecutionPolicy ByPass -Command "irm https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.ps1 | iex"
-```
-
-</CodeGroup>
+<InstallCode/>
 
 Then, fire up the the server:
 
 ```bash
 phosphobot run
 ```
-
-It can take up to 15 seconds for the server to start.
 
 Go to `localhost` in your web browser to access the phosphobot dashboard. Go to **Control** to control your robot using only your keyboard!
 

@@ -3,6 +3,11 @@ title: "Record a robotics dataset"
 description: "How to record a robotics dataset with your robot?"
 ---
 
+import InstallCode from '/snippets/install-code.mdx';
+import GetMQApp from '/snippets/get-mq-app.mdx';
+import TeleopInstructions from '/snippets/teleop-instructions.mdx';
+
+
 The easiest way to record datasets is to use the phospho Meta Quest app to control your robot arm. 
 
 Recorded datasets are saved in the `lerobot_v2` format from **[LeRobot](https://huggingface.co/lerobot)** and uploaded to your HuggingFace account.
@@ -19,32 +24,21 @@ Alternatively, you can implement your own dataset recording logic on top of the 
 
 ## Prerequisites
 
-1. You need an assembled **SO-100** robot arm and **cameras**. Get the [phosphot starter pack here](https://robots.phospho.ai).
+1. You need a robot arm such as the SO-100, the SO-101, or [other compatible hardware](https://github.com/phospho-app/phosphobot). Get the [phosphot starter pack here](https://robots.phospho.ai).
 2. Install [the phosphobot software](/installation) 
 
-  <CodeGroup>
+<InstallCode/>
 
-  ```bash macOS
-  curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | bash
-  ```
-
-  ```bash Linux
-  curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | sudo bash
-  ```
-
-  ```powershell Windows
-  powershell -ExecutionPolicy ByPass -Command "irm https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.ps1 | iex"
-  ```
-
-  </CodeGroup>
-
-3. **Connect your cameras to the computer.** Start the phosphobot server.
+3. Connect your cameras to the computer. Start the phosphobot server.
 
   ```bash
   phosphobot run
   ```
 4. Complete the [quickstart](/so-100/quickstart) and check that you can [control your robot](/basic-usage/teleop).
 5. You have the **[phosphobot teleoperation app](/examples/teleop)** is installed on your **Meta Quest 2, Pro, 3 or 3s** 
+
+<GetMQApp/>
+
 
 # 1. Set up your Hugging Face token
 
@@ -72,38 +66,9 @@ Go to the _Admin Configuration_ page of your phospshobot dashboard. You can adju
 - **Video Codec**: The video codec used to record the videos. The default is `AVC1`, which is the most efficient codec. If you're having compatibility issues due to unavailable codecs (eg on Linux), switch to `mp4v` which is more compatible.
 
 
-## 3. Control the robot in the Meta Quest app
+## 3. How to record a dataset using the phosphobot teleoperation Meta Quest app?
 
-The easiest way to record a dataset is to use the Meta Quest app.
-
-<Info>Get access to the Meta Quest app [on the Meta Store](https://www.meta.com/en-gb/experiences/phospho-teleoperation/8873978782723478/) or [with a starter pack](https://robots.phospho.ai)</Info>
-
-
-1. In the Meta Quest, open the phospho teleop application. Wait a moment, then you should see a row displaying **phosphobot** or your computer name. Click the **Connect** button using the `Trigger Button`.  
-  - Make sure you're connected to the **same WiFi** as the phosphobot server. 
-  - If you don't see the server, check the IP address of the server in the phosphobot dashboard and enter it manually.
-
-![Select Phosphobot server](/assets/meta-quest-server-list.png)
-
-![Meta Quest controller button names](/assets/names_buttons.jpg)
-
-2. After connecting, you'll see the list of connected cameras and recording options.
-  - Move the windows with the `Grip button` to organize your space.
-  - Enable preview to see the camera feed. Check the **camera angles** and adjust their positions if needed. 
-
-<Info>We recommend **disabling** the camera preview to save bandwidth.</Info>
-
-3. Press `A` once to start teleoperation and begin moving your controller.  
-   - The robot will naturally follow the movement of your controller. Press the `Trigger button` to close the gripper.
-   - Press `A` again to stop the teleoperation. The robot will stop.  
-
-4. Press `B` to start recording. You can leave the default settings for your first attempt.  
-   - Press `B` again to stop the recording.
-   - Press `Y` (left controller) to discard the recording.
-
-5. Continue teleoperating and stop the recording by pressing `B` when you're done.  
-
-6. The recording is automatically saved in **LeRobot v2** format and **uploaded to your HuggingFace account.**
+<TeleopInstructions/>
 
 ## 4. Check your dataset
 

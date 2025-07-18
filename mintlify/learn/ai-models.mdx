@@ -3,6 +3,11 @@ title: "Train robotics AI models"
 description: "A guide to training AI models that control robots"
 ---
 
+import InstallCode from '/snippets/install-code.mdx';
+import GetMQApp from '/snippets/get-mq-app.mdx';
+import TeleopInstructions from '/snippets/teleop-instructions.mdx';
+
+
 The phospho starter pack makes it easy to train robotics AI models by integrating with **LeRobot** from Hugging Face.
 
 In this guide, we'll show you how to train the ACT (Action Chunking Transformer) model using the phospho starter pack and LeRobot by Hugging Face.
@@ -45,21 +50,7 @@ In this guide, we will use the phospho starter pack to record a dataset and uplo
 1. You need an assembled **SO-100** robot arm and **cameras**. Get the [phosphot starter pack here](https://robots.phospho.ai).
 2. Install [the phosphobot software](/installation)
 
-  <CodeGroup>
-
-```bash macOS
-curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | bash
-```
-
-```bash Linux
-curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | sudo bash
-```
-
-```powershell Windows
-powershell -ExecutionPolicy ByPass -Command "irm https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.ps1 | iex"
-```
-
-  </CodeGroup>
+<InstallCode/>
 
 3. **Connect your cameras to the computer.** Start the phosphobot server.
 
@@ -69,6 +60,9 @@ phosphobot run
 
 4. Complete the [quickstart](/so-100/quickstart) and check that you can [control your robot](/basic-usage/teleop).
 5. You have the **[phosphobot teleoperation app](/examples/teleop)** is installed on your **Meta Quest 2, Pro, 3 or 3s**
+
+<GetMQApp/>
+
 6. You have a **device to train your model**. We recommend using a **GPU** for faster training.
 
 ## 1. Set up your Hugging Face token
@@ -100,45 +94,19 @@ Go to the _Admin Configuration_ page of your phospshobot dashboard. You can adju
 
 The easiest way to record a dataset is to use the Meta Quest app.
 
-<Info>
-  Get access to the Meta Quest app [on the Meta
-  Store](https://www.meta.com/en-gb/experiences/phospho-teleoperation/8873978782723478/)
-  or [with a starter pack](https://robots.phospho.ai)
-</Info>
+<GetMQApp/>
 
-1. In the Meta Quest, open the phospho teleop application. Wait a moment, then you should see a row displaying **phosphobot** or your computer name. Click the **Connect** button using the `Trigger Button`.
+<iframe 
+    className="w-full aspect-video"
+    src="https://www.youtube.com/embed/AQ-xgCTdj_w?si=NDTtX1nISABjzmbA" 
+    title="VR Control tutorial" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+    referrerPolicy="strict-origin-when-cross-origin" 
+    allowFullScreen>
+</iframe>
 
-- Make sure you're connected to the **same WiFi** as the phosphobot server.
-- If you don't see the server, check the IP address of the server in the phosphobot dashboard and enter it manually.
+<TeleopInstructions/>
 
-![Select Phosphobot server](/assets/meta-quest-server-list.png)
-
-![Meta Quest controller button names](/assets/names_buttons.jpg)
-
-2. After connecting, you'll see the list of connected cameras and recording options.
-
-- Move the windows with the `Grip button` to organize your space.
-- Enable preview to see the camera feed. Check the **camera angles** and adjust their positions if needed.
-
-<Info>We recommend **disabling** the camera preview to save bandwidth.</Info>
-
-3. Press `A` once to start teleoperation and begin moving your controller.
-
-   - The robot will naturally follow the movement of your controller. Press the `Trigger button` to close the gripper.
-   - Press `A` again to stop the teleoperation. The robot will stop.
-
-4. Press `B` to start recording. You can leave the default settings for your first attempt.
-
-   - Press `B` again to stop the recording.
-   - Press `Y` (left controller) to discard the recording.
-
-5. Continue teleoperating and stop the recording by pressing `B` when you're done.
-
-6. The recording is automatically saved in **LeRobot v2** format and **uploaded to your HuggingFace account.**
-
-Go to your [Hugging Face profile](https://huggingface.co) to see the uploaded datasets.
-
-You can view it using the [LeRobot Dataset Visualizer](https://huggingface.co/spaces/lerobot/visualize_dataset).
+Go to the **Dataset tab** in the phosphobot dashboard to see the recorded dataset. Use the button Preview to preview them using [LeRobot Dataset Visualizer](https://huggingface.co/spaces/lerobot/visualize_dataset).
 
 ![LeRobot dataset visualizer](/assets/lerobot_dataset_viz.png)
 
@@ -146,7 +114,7 @@ You can view it using the [LeRobot Dataset Visualizer](https://huggingface.co/sp
   The dataset visualizer only works with `AVC1` video codec. If you used another
   codec, you may see black screens in the video preview. Preview directly the
   videos files in a video player by opening your recording locally:
-  `~/phosphobot/recordings/lerobot_v2/DATASET_NAME/video`.
+  `~/phosphobot/recordings/`.
 </Note>
 
 ## 4. Train your first model

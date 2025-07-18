@@ -3,6 +3,8 @@ title: 'MCP Robotics: Controlling Robots with LLMs using phosphobot MCP'
 description: "Connect a Large Language Model to a robot using the Model Context Protocol (MCP) and phosphobot."
 ---
 
+import InstallCode from '/snippets/install-code.mdx';
+
 This guide provides the essential code and instructions to get started with **MCP for robotics**. Using [phosphobot](../installation) and the **Model Context Protocol (MCP)**, you can connect a Large Language Model (LLM) like Claude to a robot, enabling it to access camera feeds and trigger actions through a standardized interface.
 
 <iframe
@@ -73,17 +75,7 @@ Follow these steps to set up your **MCP robotics** environment.
 
 First, [install phosphobot](../installation) with the command for your OS:
 
-<CodeGroup>
-```bash macOS
-curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | bash
-```
-```bash Linux
-curl -fsSL https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.sh | sudo bash
-```
-```powershell Windows
-powershell -ExecutionPolicy ByPass -Command "irm https://raw.githubusercontent.com/phospho-app/phosphobot/main/install.ps1 | iex"
-```
-</CodeGroup>
+<InstallCode/>
 
 Next, run the phosphobot server, which will listen for commands from the MCP server.
 ```bash
