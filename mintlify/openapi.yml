@@ -359,6 +359,16 @@ components:
       - total_nb_steps
       title: CalibrateResponse
       type: object
+    CancelTrainingRequest:
+      properties:
+        training_id:
+          description: ID of the training to cancel.
+          title: Training Id
+          type: integer
+      required:
+      - training_id
+      title: CancelTrainingRequest
+      type: object
     ConfirmRequest:
       properties:
         access_token:
@@ -412,6 +422,18 @@ components:
       required:
       - dataset_path
       title: DatasetRepairRequest
+      type: object
+    DatasetShuffleRequest:
+      properties:
+        dataset_path:
+          description: Path to the dataset to shuffle
+          examples:
+          - /lerobot_v2.1/example_dataset
+          title: Dataset Path
+          type: string
+      required:
+      - dataset_path
+      title: DatasetShuffleRequest
       type: object
     DatasetSplitRequest:
       properties:
@@ -831,6 +853,7 @@ components:
           enum:
           - gr00t
           - ACT
+          - ACT_BBOX
           title: Model Type
           type: string
       required:
@@ -966,6 +989,15 @@ components:
         - 0
         - 1
       properties:
+        dataset_format:
+          default: lerobot_v2.1
+          description: Format of the dataset to play. This is used to determine how
+            to read the episode data.
+          enum:
+          - lerobot_v2
+          - lerobot_v2.1
+          title: Dataset Format
+          type: string
         dataset_name:
           anyOf:
           - type: string
@@ -1265,17 +1297,32 @@ components:
     RobotConfigStatus:
       description: Contains the configuration of a robot.
       properties:
-        name:
-          title: Name
-          type: string
-        usb_port:
+        device_name:
           anyOf:
           - type: string
           - type: 'null'
-          title: Usb Port
+          title: Device Name
+        name:
+          title: Name
+          type: string
+        robot_type:
+          default: manipulator
+          enum:
+          - manipulator
+          - mobile
+          - other
+          title: Robot Type
+          type: string
+        temperature:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/Temperature'
+            type: array
+          - type: 'null'
+          title: Temperature
       required:
       - name
-      - usb_port
+      - device_name
       title: RobotConfigStatus
       type: object
     RobotConnectionRequest:
@@ -1441,11 +1488,19 @@ components:
           title: Robots
           type: array
         server_ip:
-          description: IP address of the server
+          description: IP address of the phosphobot server
           examples:
           - 192.168.1.X
           title: Server Ip
           type: string
+        server_port:
+          description: Port of the phosphobot server
+          examples:
+          - 80
+          - 8020
+          - 8021
+          title: Server Port
+          type: integer
         status:
           enum:
           - ok
@@ -1453,7 +1508,7 @@ components:
           title: Status
           type: string
         version_id:
-          default: 0.3.17
+          default: 0.3.65
           description: Current version of the teleoperation server
           title: Version Id
           type: string
@@ -1461,6 +1516,7 @@ components:
       - status
       - name
       - server_ip
+      - server_port
       title: ServerStatus
       type: object
     Session:
@@ -1496,6 +1552,11 @@ components:
     SessionReponse:
       description: Response for login/signup
       properties:
+        is_pro_user:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Pro User
         message:
           title: Message
           type: string
@@ -1607,6 +1668,7 @@ components:
           enum:
           - gr00t
           - ACT
+          - ACT_BBOX
           title: Model Type
           type: string
         prompt:
@@ -1626,6 +1688,13 @@ components:
           examples:
           - - /dev/ttyUSB0
           title: Robot Serials To Ignore
+        selected_camera_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Name of the camera to use when ACT_BBOX model is used. This
+            is only required for ACT_BBOX models, and is ignored for other models.
+          title: Selected Camera Id
         speed:
           default: 1.0
           description: Speed of the AI control. 1.0 is normal speed, 0.5 is half speed,
@@ -1635,6 +1704,12 @@ components:
           minimum: 0.1
           title: Speed
           type: number
+        verify_cameras:
+          default: true
+          description: Whether to verify the setup before starting the AI control.
+            If False, skips the verification step.
+          title: Verify Cameras
+          type: boolean
       required:
       - model_id
       - model_type
@@ -1713,6 +1788,32 @@ components:
       - model_type
       title: StartServerRequest
       type: object
+    StartTrainingResponse:
+      additionalProperties: true
+      properties:
+        message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Message
+        status:
+          default: ok
+          enum:
+          - ok
+          - error
+          title: Status
+          type: string
+        training_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: ID of the training to start. This is the ID returned by the
+            training request.
+          title: Training Id
+      required:
+      - training_id
+      title: StartTrainingResponse
+      type: object
     StatusResponse:
       additionalProperties: true
       description: Default response. May contain other fields.
@@ -1732,6 +1833,7 @@ components:
       title: StatusResponse
       type: object
     SupabaseTrainingModel:
+      additionalProperties: true
       properties:
         dataset_name:
           title: Dataset Name
@@ -1739,6 +1841,11 @@ components:
         id:
           title: Id
           type: integer
+        modal_function_call_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Modal Function Call Id
         model_name:
           title: Model Name
           type: string
@@ -1787,6 +1894,53 @@ components:
       - model_type
       title: SupabaseTrainingModel
       type: object
+    Temperature:
+      properties:
+        current:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Current
+        max:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Max
+      required:
+      - current
+      - max
+      title: Temperature
+      type: object
+    TemperatureReadResponse:
+      description: Response to read the Temperature of the robot.
+      properties:
+        current_max_Temperature:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/Temperature'
+            type: array
+          - type: 'null'
+          description: ' A list of Temperature objects, one for each joint. If the
+            robot is not connected, this will be None.'
+          title: Current Max Temperature
+      required:
+      - current_max_Temperature
+      title: TemperatureReadResponse
+      type: object
+    TemperatureWriteRequest:
+      description: Request to set the maximum Temperature for joints of the robot.
+      properties:
+        maximum_temperature:
+          description: A list with the maximum temperature of each joint. The length
+            of the list must be equal to the number of joints.
+          items:
+            type: integer
+          title: Maximum Temperature
+          type: array
+      required:
+      - maximum_temperature
+      title: TemperatureWriteRequest
+      type: object
     TorqueControlRequest:
       description: Request to control the robot's torque.
       properties:
@@ -1832,6 +1986,7 @@ components:
           enum:
           - gr00t
           - ACT
+          - ACT_BBOX
           - custom
           title: Model Type
           type: string
@@ -1887,6 +2042,57 @@ components:
             on your dataset
           title: Steps
       title: TrainingParamsAct
+      type: object
+    TrainingParamsActWithBbox:
+      additionalProperties: false
+      description: Training parameters for ACT with bounding box
+      properties:
+        batch_size:
+          anyOf:
+          - exclusiveMinimum: 0.0
+            maximum: 150.0
+            type: integer
+          - type: 'null'
+          description: Batch size for training, we run this on an A10G, leave it to
+            None to auto-detect based on your dataset
+          title: Batch Size
+        image_key:
+          default: main
+          description: Key for the image to run detection on, e.g. 'main' or 'images.main'
+          examples:
+          - main
+          - images.main
+          minLength: 1
+          title: Image Key
+          type: string
+        image_keys_to_keep:
+          description: Optional list of image keys to keep. If none, all image keys
+            will be dropped.
+          items:
+            type: string
+          title: Image Keys To Keep
+          type: array
+        steps:
+          anyOf:
+          - exclusiveMinimum: 0.0
+            maximum: 10000.0
+            type: integer
+          - type: 'null'
+          description: Number of training steps, leave it to None to auto-detect based
+            on your dataset
+          title: Steps
+        target_detection_instruction:
+          default: 'e.g.: green lego brick, red ball, blue plushy...'
+          description: Instruction for the target object to detect, e.g. 'red/orange
+            lego brick'
+          examples:
+          - red/orange lego brick
+          - brown plushy
+          - blue ball
+          minLength: 4
+          title: Target Detection Instruction
+          type: string
+      title: TrainingParamsActWithBbox
       type: object
     TrainingParamsGr00T:
       additionalProperties: false
@@ -1971,6 +2177,7 @@ components:
           description: Type of model to train, either 'ACT' or 'gr00t'
           enum:
           - ACT
+          - ACT_BBOX
           - gr00t
           - custom
           title: Model Type
@@ -1978,6 +2185,7 @@ components:
         training_params:
           anyOf:
           - $ref: '#/components/schemas/TrainingParamsAct'
+          - $ref: '#/components/schemas/TrainingParamsActWithBbox'
           - $ref: '#/components/schemas/TrainingParamsGr00T'
           - type: 'null'
           description: Training parameters for the model, if not provided, default
@@ -2027,6 +2235,19 @@ components:
       - msg
       - type
       title: ValidationError
+      type: object
+    VerifyEmailCodeRequest:
+      properties:
+        email:
+          title: Email
+          type: string
+        token:
+          title: Token
+          type: string
+      required:
+      - email
+      - token
+      title: VerifyEmailCodeRequest
       type: object
     VizSettingsResponse:
       description: Settings for the vizualisation page.
@@ -2568,6 +2789,32 @@ paths:
       summary: Signup
       tags:
       - auth
+  /auth/verify-email-token:
+    post:
+      description: Verify the email confirmation code sent to the user.
+      operationId: verify_email_token_auth_verify_email_token_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyEmailCodeRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionReponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Verify Email Token
+      tags:
+      - auth
   /browse:
     get:
       operationId: serve_dashboard_browse_get
@@ -2622,6 +2869,24 @@ paths:
       summary: Serve Dashboard
       tags:
       - pages
+  /cameras/refresh:
+    post:
+      description: Refresh the list of available cameras. This operation can take
+        a few seconds as it disconnects and reconnects to all cameras. It is useful
+        when cameras are added or removed while the application is running.
+      operationId: refresh_camera_list_cameras_refresh_post
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Refresh Camera List Cameras Refresh Post
+                type: object
+          description: Successful Response
+      summary: Refresh Camera List
+      tags:
+      - camera
   /control:
     get:
       operationId: serve_dashboard_control_get
@@ -2804,6 +3069,32 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
       summary: Repair Dataset
+      tags:
+      - pages
+  /dataset/shuffle:
+    post:
+      description: Shuffle a dataset in place.
+      operationId: shuffle_dataset_dataset_shuffle_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DatasetShuffleRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Shuffle Dataset
       tags:
       - pages
   /dataset/split:
@@ -3096,19 +3387,6 @@ paths:
       summary: Write Joint Positions
       tags:
       - control
-  /leader:
-    get:
-      operationId: serve_dashboard_leader_get
-      responses:
-        '200':
-          content:
-            text/html:
-              schema:
-                type: string
-          description: Successful Response
-      summary: Serve Dashboard
-      tags:
-      - pages
   /local/scan-devices:
     post:
       description: Endpoint to list all devices connected to the system.
@@ -3356,9 +3634,10 @@ paths:
         name: robot_id
         required: false
         schema:
-          default: 0
+          anyOf:
+          - type: integer
+          - type: 'null'
           title: Robot Id
-          type: integer
       requestBody:
         content:
           application/json:
@@ -3580,19 +3859,6 @@ paths:
       summary: Stop Recording Episode
       tags:
       - recording
-  /replay:
-    get:
-      operationId: serve_dashboard_replay_get
-      responses:
-        '200':
-          content:
-            text/html:
-              schema:
-                type: string
-          description: Successful Response
-      summary: Serve Dashboard
-      tags:
-      - pages
   /robot/add-connection:
     post:
       description: 'Manually add a robot connection to the robot manager.
@@ -3647,6 +3913,19 @@ paths:
       summary: Serve Dashboard
       tags:
       - pages
+  /sign-up/confirm:
+    get:
+      operationId: serve_dashboard_sign_up_confirm_get
+      responses:
+        '200':
+          content:
+            text/html:
+              schema:
+                type: string
+          description: Successful Response
+      summary: Serve Dashboard
+      tags:
+      - pages
   /status:
     get:
       description: Get the status of the server.
@@ -3659,6 +3938,69 @@ paths:
                 $ref: '#/components/schemas/ServerStatus'
           description: Successful Response
       summary: Status
+  /temperature/read:
+    post:
+      description: Read the current Temperature and maximum Temperature of the robot's
+        motors.
+      operationId: read_temperature_temperature_read_post
+      parameters:
+      - in: query
+        name: robot_id
+        required: false
+        schema:
+          default: 0
+          title: Robot Id
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemperatureReadResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Read Temperature
+      tags:
+      - control
+  /temperature/write:
+    post:
+      description: Set the robot's maximum temperature for motors..
+      operationId: write_temperature_temperature_write_post
+      parameters:
+      - in: query
+        name: robot_id
+        required: false
+        schema:
+          default: 0
+          title: Robot Id
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TemperatureWriteRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Write the Maximum Temperature for Joints
+      tags:
+      - control
   /torque/read:
     post:
       description: Read the current torque of the robot's joints.
@@ -3735,6 +4077,32 @@ paths:
       summary: Serve Dashboard
       tags:
       - pages
+  /training/cancel:
+    post:
+      description: Cancel a training job
+      operationId: cancel_training_training_cancel_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancelTrainingRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Cancel Training
+      tags:
+      - training
   /training/info:
     post:
       description: Fetch the info.json from the model repo and return the training
@@ -3819,7 +4187,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StatusResponse'
+                $ref: '#/components/schemas/StartTrainingResponse'
           description: Successful Response
         '422':
           content:
@@ -3904,8 +4272,8 @@ paths:
   /video/{camera_id}:
     get:
       description: Stream video feed of the specified camera. If no camera id is provided,
-        the default camera is used. If the camera id is 'realsense' or 'depth', the
-        realsense camera is used.Specify a target size and quality using query parameters.
+        the default camera is used. Specify a target size and quality using query
+        parameters.
       operationId: video_feed_for_camera_video__camera_id__get
       parameters:
       - in: path
@@ -3914,7 +4282,6 @@ paths:
         schema:
           anyOf:
           - type: integer
-          - type: string
           - type: 'null'
           title: Camera Id
       - in: query

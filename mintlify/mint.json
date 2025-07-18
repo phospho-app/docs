@@ -95,6 +95,7 @@
           "group": "Control",
           "icon": "robot",
           "pages": [
+            "control/calibration-sequence",
             "control/move-init",
             "control/move-teleoperation",
             "control/move-teleoperation-ws",
@@ -107,7 +108,8 @@
             "control/turn-torque",
             "control/read-joints",
             "control/write-joints",
-            "control/calibration-sequence"
+            "control/read-temperature",
+            "control/write-temperature"
           ]
         },
         {
@@ -124,6 +126,7 @@
           "icon": "brain",
           "pages": [
             "ai-training/start-training",
+            "ai-training/cancel-training",
             "ai-training/ai-control-start",
             "ai-training/ai-control-stop"
           ]
@@ -131,7 +134,11 @@
         {
           "group": "Camera",
           "icon": "camera",
-          "pages": ["camera/video-feed-for-camera"]
+          "pages": [
+            "camera/video-feed-for-camera",
+            "camera/frames",
+            "camera/cameras-refresh"
+          ]
         }
       ]
     },
