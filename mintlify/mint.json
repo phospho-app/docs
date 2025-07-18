@@ -40,6 +40,10 @@
   },
   "tabs": [
     {
+      "name": "phospho pro",
+      "url": "https://phospho.ai/pro"
+    },
+    {
       "name": "Github",
       "url": "https://github.com/phospho-app/phosphobot"
     }
