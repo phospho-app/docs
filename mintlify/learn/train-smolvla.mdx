@@ -36,7 +36,6 @@ Useful links:
 - [LeRobot on Hugging Face](https://huggingface.co/lerobot)
 - [AI models for robotics](https://huggingface.co/models?pipeline_tag=robotics&sort=trending)
 
-
 ### Introduction to SmolVLA
 
 SmolVLA is a 450M parameter, open-source Vision-Language-Action (VLA) model from Hugging Face's LeRobot team. It's designed to run efficiently on consumer hardware by using several clever tricks, such as skipping layers in its Vision-Language Model (VLM) backbone and using asynchronous inference to compute the next action while the current one is still executing.
@@ -46,6 +45,14 @@ SmolVLA is a 450M parameter, open-source Vision-Language-Action (VLA) model from
 - [model card](https://huggingface.co/lerobot/smolvla_base)
 
 ### Part 1: Training the SmolVLA Model with LeRobot by Hugging Face
+
+<iframe 
+    className="w-full aspect-video"
+    src="https://www.youtube.com/embed/5g-DXBp_CQc?si=InPfw-YS31eqQJty"
+    title="Train SmolVLA" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+    referrerPolicy="strict-origin-when-cross-origin" 
+    allowFullScreen>
+</iframe>
 
 #### 1.1 Environment Setup for LeRobot by Hugging Face
 
@@ -176,6 +183,14 @@ Here are some other common issues you might face and how to solve them.
     ```
 
 ### Part 4: Running Inference on a Real SO-100 or SO-101 Robot with LeRobot by Hugging Face
+
+<iframe 
+    className="w-full aspect-video"
+    src="https://www.youtube.com/embed/00A6j02v450?si=hWCPJK3-staDb52t"
+    title="Run SmolVLA inference" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+    referrerPolicy="strict-origin-when-cross-origin" 
+    allowFullScreen>
+</iframe>
 
 The LeRobot library is integrated with the SO-100 and SO-101 robots, allowing you to run inference directly on these devices. This section will guide you through the hardware setup, calibration, and running the inference script with LeRobot. 
 
