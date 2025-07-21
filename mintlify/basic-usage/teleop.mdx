@@ -15,6 +15,7 @@ phosphobot lets you control the SO-100 or SO-101 robot arm with:
 - the Meta Quest app
 - a leader arm or another follower arm
 - by playing back a recording
+- with AI
 
 You can also control other kind of robots and [write your own controllers.](https://github.com/phospho-app/phosphobot/tree/main/phosphobot)
 
@@ -148,6 +149,14 @@ Once your phosphobot server is running, you can send your first command to the r
 
 4. Now, you can call the `/move/absolute` endpoint to move the robot to a specific position. The distances are in centimeters, and the angles in degrees.
 
+
+## Control by playing back a recording
+
+You can [record episodes](./dataset-recording.mdx) and then play them back to control the robot arm using [the recording feature](../recording/play-recording.mdx). 
+
+## Control with AI 
+
+You can [train an AI model](./training) and then run [AI control.](./inference) Basically, the AI model will predict the next position of the robot based on the previous position and what the cameras sees. This is a whole [area of research.](../learn/policies.mdx)
 
 ## What's next?
 
