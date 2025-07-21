@@ -36,12 +36,12 @@
   ],
   "topbarCtaButton": {
     "name": "Get hardware",
-    "url": "https://robots.phospho.ai"
+    "url": "https://robots.phospho.ai?utm_source=docs"
   },
   "tabs": [
     {
       "name": "phospho pro",
-      "url": "https://phospho.ai/pro"
+      "url": "https://phospho.ai/pro?utm_source=docs"
     },
     {
       "name": "Github",
@@ -161,7 +161,7 @@
     "twitter": "https://twitter.com/phospho_ai",
     "github": "https://github.com/phospho-app/phosphobot",
     "youtube": "https://www.youtube.com/@phospho_ai",
-    "website": "https://robots.phospho.ai",
+    "website": "https://robots.phospho.ai?utm_source=docs",
     "linkedin": "https://www.linkedin.com/company/phospho-app/",
     "discord": "https://discord.gg/cbkggY6NSK"
   },
