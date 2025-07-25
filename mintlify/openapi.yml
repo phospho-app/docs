@@ -36,16 +36,6 @@ components:
       - ai_control_signal_status
       title: AIControlStatusResponse
       type: object
-    AIStatusRequest:
-      properties:
-        user_id:
-          description: User ID of the user who started the AI control
-          title: User Id
-          type: string
-      required:
-      - user_id
-      title: AIStatusRequest
-      type: object
     AIStatusResponse:
       description: Response to the AI status request.
       properties:
@@ -288,6 +278,73 @@ components:
       - authenticated
       title: AuthResponse
       type: object
+    BaseRobotConfig:
+      description: Calibration configuration for a robot
+      properties:
+        gripping_threshold:
+          default: 80
+          description: Torque threshold to consider an object gripped. This will block
+            the gripper position and prevent it from moving further.
+          exclusiveMinimum: 0.0
+          title: Gripping Threshold
+          type: integer
+        name:
+          title: Name
+          type: string
+        non_gripping_threshold:
+          default: 10
+          description: Torque threshold to consider an object not gripped. This will
+            allow the gripper to move freely.
+          exclusiveMinimum: 0.0
+          title: Non Gripping Threshold
+          type: integer
+        pid_gains:
+          items:
+            $ref: '#/components/schemas/BaseRobotPIDGains'
+          title: Pid Gains
+          type: array
+        servos_calibration_position:
+          items:
+            type: number
+          title: Servos Calibration Position
+          type: array
+        servos_offsets:
+          items:
+            type: number
+          title: Servos Offsets
+          type: array
+        servos_offsets_signs:
+          items:
+            type: number
+          title: Servos Offsets Signs
+          type: array
+        servos_voltage:
+          title: Servos Voltage
+          type: number
+      required:
+      - name
+      - servos_voltage
+      - servos_calibration_position
+      title: BaseRobotConfig
+      type: object
+    BaseRobotPIDGains:
+      description: PID gains for servo motors
+      properties:
+        d_gain:
+          title: D Gain
+          type: number
+        i_gain:
+          title: I Gain
+          type: number
+        p_gain:
+          title: P Gain
+          type: number
+      required:
+      - p_gain
+      - i_gain
+      - d_gain
+      title: BaseRobotPIDGains
+      type: object
     BrowseFilesResponse:
       description: Represents a response for browsing directories or items in a robotic
         system.
@@ -525,6 +582,17 @@ components:
       - rz
       - open
       title: EndEffectorPosition
+      type: object
+    EndEffectorReadRequest:
+      properties:
+        sync:
+          default: false
+          description: If True, the simulation will first read the motor positions,
+            synchronize them with the simulated robot, and then return the end effector
+            position.Useful for measurements, however it will take more time to respond.
+          title: Sync
+          type: boolean
+      title: EndEffectorReadRequest
       type: object
     FeedbackRequest:
       properties:
@@ -839,7 +907,7 @@ components:
       - image_key_mappings
       title: MergeDatasetsRequest
       type: object
-    ModelVideoKeysRequest:
+    ModelConfigurationRequest:
       properties:
         model_id:
           description: Hugging Face model id to use
@@ -859,10 +927,19 @@ components:
       required:
       - model_id
       - model_type
-      title: ModelVideoKeysRequest
+      title: ModelConfigurationRequest
       type: object
-    ModelVideoKeysResponse:
+    ModelConfigurationResponse:
       properties:
+        checkpoints:
+          description: List of available checkpoints for the model.
+          examples:
+          - - '100'
+            - '500'
+          items:
+            type: string
+          title: Checkpoints
+          type: array
         video_keys:
           description: List of video keys for the model. These are the keys used to
             access the videos in the dataset.
@@ -875,7 +952,7 @@ components:
           type: array
       required:
       - video_keys
-      title: ModelVideoKeysResponse
+      title: ModelConfigurationResponse
       type: object
     MoveAbsoluteRequest:
       description: 'Move the robot to an absolute position. All zeros means the initial
@@ -1112,6 +1189,11 @@ components:
           examples:
           - example_dataset
           title: Dataset Name
+        enable_rerun_visualization:
+          default: false
+          description: Enable rerun
+          title: Enable Rerun Visualization
+          type: boolean
         episode_format:
           anyOf:
           - enum:
@@ -1293,6 +1375,39 @@ components:
       - refresh_token
       - new_password
       title: ResetPasswordRequest
+      type: object
+    RobotConfigResponse:
+      description: Response model for robot configuration.
+      properties:
+        config:
+          anyOf:
+          - $ref: '#/components/schemas/BaseRobotConfig'
+          - type: 'null'
+        gripper_joint_index:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Gripper Joint Index
+        name:
+          title: Name
+          type: string
+        resolution:
+          default: 4096
+          title: Resolution
+          type: integer
+        robot_id:
+          title: Robot Id
+          type: integer
+        servo_ids:
+          items:
+            type: integer
+          title: Servo Ids
+          type: array
+      required:
+      - robot_id
+      - name
+      - config
+      title: RobotConfigResponse
       type: object
     RobotConfigStatus:
       description: Contains the configuration of a robot.
@@ -1508,7 +1623,7 @@ components:
           title: Status
           type: string
         version_id:
-          default: 0.3.65
+          default: 0.3.77
           description: Current version of the teleoperation server
           title: Version Id
           type: string
@@ -1659,6 +1774,14 @@ components:
           - context_camera: 1
             wrist_camera: 0
           title: Cameras Keys Mapping
+        checkpoint:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Checkpoint to use for the model. If None, uses the latest checkpoint.
+          examples:
+          - 500
+          title: Checkpoint
         model_id:
           description: Hugging Face model id to use
           title: Model Id
@@ -2032,10 +2155,18 @@ components:
           description: Batch size for training, we run this on an A10G, leave it to
             None to auto-detect based on your dataset
           title: Batch Size
+        save_steps:
+          default: 5000
+          description: Number of steps between saving the model, leave it to None
+            to get the default value
+          exclusiveMinimum: 0.0
+          maximum: 1000000.0
+          title: Save Steps
+          type: integer
         steps:
           anyOf:
           - exclusiveMinimum: 0.0
-            maximum: 10000.0
+            maximum: 1000000.0
             type: integer
           - type: 'null'
           description: Number of training steps, leave it to None to auto-detect based
@@ -2072,10 +2203,18 @@ components:
             type: string
           title: Image Keys To Keep
           type: array
+        save_steps:
+          default: 5000
+          description: Number of steps between saving the model, leave it to None
+            to get the default value
+          exclusiveMinimum: 0.0
+          maximum: 1000000.0
+          title: Save Steps
+          type: integer
         steps:
           anyOf:
           - exclusiveMinimum: 0.0
-            maximum: 10000.0
+            maximum: 1000000.0
             type: integer
           - type: 'null'
           description: Number of training steps, leave it to None to auto-detect based
@@ -2115,7 +2254,7 @@ components:
           default: 10
           description: Number of epochs to train for, default is 10
           exclusiveMinimum: 0.0
-          maximum: 50.0
+          maximum: 100.0
           title: Epochs
           type: integer
         learning_rate:
@@ -2136,6 +2275,13 @@ components:
             we are in the repo.
           title: Path To Gr00T Repo
           type: string
+        save_steps:
+          default: 1000
+          description: Number of steps between saving the model, default is 1000
+          exclusiveMinimum: 0.0
+          maximum: 100000.0
+          title: Save Steps
+          type: integer
         train_test_split:
           default: 1.0
           description: Train test split ratio, default is 1.0 (no split), should be
@@ -2544,12 +2690,6 @@ paths:
     post:
       description: Get the status of the auto control by AI.
       operationId: fetch_auto_control_status_ai_control_status_post
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AIStatusRequest'
-        required: true
       responses:
         '200':
           content:
@@ -2557,12 +2697,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/AIStatusResponse'
           description: Successful Response
-        '422':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-          description: Validation Error
       summary: Get the status of the auto control by AI
       tags:
       - control
@@ -3163,6 +3297,14 @@ paths:
           default: 0
           title: Robot Id
           type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              anyOf:
+              - $ref: '#/components/schemas/EndEffectorReadRequest'
+              - type: 'null'
+              title: Query
       responses:
         '200':
           content:
@@ -3401,22 +3543,22 @@ paths:
       summary: List Connected Devices
       tags:
       - networking
-  /model/video-keys:
+  /model/configuration:
     post:
-      description: Fetch the model info from Hugging Face and return the video keys.
-      operationId: get_model_video_keys_model_video_keys_post
+      description: Fetch the model info from Hugging Face and return its configuration.
+      operationId: get_model_configuration_model_configuration_post
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ModelVideoKeysRequest'
+              $ref: '#/components/schemas/ModelConfigurationRequest'
         required: true
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ModelVideoKeysResponse'
+                $ref: '#/components/schemas/ModelConfigurationResponse'
           description: Successful Response
         '422':
           content:
@@ -3424,7 +3566,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
-      summary: Get Model Video Keys
+      summary: Get Model Configuration
       tags:
       - pages
   /move/absolute:
@@ -3885,6 +4027,34 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
       summary: Add Robot Connection
+      tags:
+      - control
+  /robot/config:
+    post:
+      description: Get the configuration of the robot.
+      operationId: get_robot_config_robot_config_post
+      parameters:
+      - in: query
+        name: robot_id
+        required: false
+        schema:
+          default: 0
+          title: Robot Id
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RobotConfigResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Get Robot Config
       tags:
       - control
   /sign-in:
