@@ -64,8 +64,18 @@ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | ie
 2. Run phosphobot with uv by running the following command in your terminal:
 
 ```bash
-uvx phosphobot run
+uvx phosphobot@latest run
 ```
+
+Using the `@latest` tag ensures you always run the latest version of phosphobot.
+
+If you want to run a specific version, [you can specify it:](https://docs.astral.sh/uv/guides/tools/#requesting-specific-versions)
+
+```bash
+uvx phosphobot>=0.30 run
+```
+
+Check the [uv doc](https://docs.astral.sh/uv/guides/tools/#upgrading-tools) on how to manually handle updates.
 
 
 ## MacOS (brew)
