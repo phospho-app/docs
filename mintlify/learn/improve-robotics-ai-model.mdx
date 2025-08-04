@@ -3,6 +3,9 @@ title: "How to train a good AI model"
 description: "Best practices for recording a dataset for imitation learning in robotics"
 ---
 
+import GetMQApp from '/snippets/get-mq-app.mdx';
+
+
 It can be frustrating when your AI robotics model doesn't perform as expected after hours of training. Imitation learning models are powerful mimics, but **they don't understand the intent** behind an action; **they only learn to replicate the patterns they see.** This means that if a model is failing, the root cause often isn't a bug in the model itself, but rather an issue in the data it was trained on or the way it was trained.
 
 The principle of **"garbage in, garbage out"** is especially true here. A model trained on ambiguous, inconsistent, or noisy data will produce ambiguous, inconsistent, or noisy behavior. This guide will walk you through the most critical areas to focus on, starting with the foundation of any good model: the dataset.
