@@ -82,9 +82,9 @@
       "group": "Hardware",
       "pages": [
         "unboxings/dk2",
+        "so-101/quickstart",
         "so-100/quickstart",
-        "unboxings/dk1",
-        "so-100/build"
+        "unboxings/dk1"
       ]
     },
 
