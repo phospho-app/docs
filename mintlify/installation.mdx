@@ -78,6 +78,10 @@ uvx phosphobot>=0.30 run
 Check the [uv doc](https://docs.astral.sh/uv/guides/tools/#upgrading-tools) on how to manually handle updates.
 
 
+### Troubleshooting 
+
+Depending on your system, you may encouter errors related to **pybullet** compilation. If so, please refer [to this guide](https://github.com/phospho-app/phosphobot/tree/main/phosphobot#troubleshooting-pybullet-wont-build-on-windows) that list some common issues and how to fix them..
+
 ## MacOS (brew)
 
 On MacOS, use [Homebrew](https://brew.sh/) to install phosphobot:
@@ -233,6 +237,14 @@ Change `C:\path\to\` to the path where you downloaded phosphobot. To make this e
 
 Then, you can **create a shortcut** to launch `C:\Users\<your_username>\Desktop\phosphobot.exe run` from anywhere.
 
+
+### Windows (WSL)
+
+You can use the Windows Subsystem for Linux (WSL) to run phosphobot.
+
+1. Please refer to [this guide](https://learn.microsoft.com/en-us/windows/wsl/install) to install WSL on your Windows machine.
+2. Use [usbipd](https://github.com/dorssel/usbipd-win) to pass the robot arms and the cameras to WSL. 
+3. Carry on with the [Linux installation instructions](#linux-apt).
 
 ## Install from source
 
