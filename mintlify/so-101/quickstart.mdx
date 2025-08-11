@@ -1,19 +1,17 @@
 ---
-title: "SO-101 quickstart guide"
-description: "How to set up phosphobot and control your SO-101 robot arm"
+title: "SO-101 Quickstart Guide"
+description: "How to set up phosphobot and control your SO-101 robot arms"
 ---
 
 import InstallCode from '/snippets/install-code.mdx';
 
+## Get Your SO-101 Robot Arms
 
+The SO-101 is a robot setup consisting of two 6-DOF arms (5 DOF body, 1 DOF gripper). One of the robot arms is the "leader" arm, and the other is the "follower" arm. The operator moves the leader arm, and the follower arm mimics the movements. It's a popular setup for teleoperation and imitation learning in AI robotics.
 
-## Get Your SO-101 Robot Arm
+The SO-101 robot arms are [open source](https://github.com/TheRobotStudio/SO-ARM100), and you can build them using off-the-shelf components and 3D-printed parts.
 
-The SO-100 robot arm is a 5-DOF robotic arm with a 1-DOF gripper. It's a popular robot arm for AI robotics, with many users.
-
-The SO-100 robot arm is [open source](https://github.com/TheRobotStudio/SO-ARM100) and can be built using off-the-shelf components and 3D printed parts.
-
-If you're looking to buy SO-100 robot arms already assembled, with cameras and software, you can get a starter pack [on our shop](https://robots.phospho.ai).
+If you're looking to buy pre-assembled SO-101 robot arms, with cameras and software, you can get a starter pack [on our shop](https://robots.phospho.ai).
 
 ### SO-100 vs. SO-101
 
@@ -24,7 +22,7 @@ The differences between the SO-100 and SO-101 are **subtle.** Software compatibl
 
 ## Assembly Guide for the SO-101
 
-A video tutorial is available to guide you through the assembly of the SO-101 robot arm. 
+A video tutorial is available to guide you through the assembly of the SO-101 follower arm. The assembly for the leader arm is similar. Note that the leader and follower arms use motors with different gear ratios to ensure the leader is easy to move while still supporting its weight.
 
 <iframe
     className="w-full aspect-video"
@@ -34,14 +32,14 @@ A video tutorial is available to guide you through the assembly of the SO-101 ro
     allowFullScreen>
 </iframe>
 
-- **Parts List:** [https://github.com/TheRobotStudio/SO-ARM100](https://github.com/TheRobotStudio/SO-ARM100)
+- **Parts List & 3D Models:** [https://github.com/TheRobotStudio/SO-ARM100](https://github.com/TheRobotStudio/SO-ARM100)
 - **Motor Configuration:** [https://github.com/phospho-app/phosphobot/tree/main/scripts/feetech](https://github.com/phospho-app/phosphobot/tree/main/scripts/feetech)
 
-## Secure the SO-101 Arm
+## Secure the SO-101 Arms
 
-Choose a stable surface and firmly attach the SO-101 robot arm using the provided table clamps.
+Choose a stable surface and firmly attach both the leader and follower SO-101 robot arms using the provided table clamps. Separate them by about 50cm to ensure they can move freely without colliding.
 
-<Warning>Ensure the arm is securely fastened to prevent any movement during operation. Keep the surrounding area clear of any obstacles that could impede the arm's movement.</Warning>
+<Warning>Ensure both arms are securely fastened to prevent any movement during operation. Keep the surrounding area clear of any obstacles that could impede the arms' movement.</Warning>
 
 ![SO-100 fixed using clamps](/assets/so100clamps.jpg)
 
@@ -49,11 +47,9 @@ Choose a stable surface and firmly attach the SO-101 robot arm using the provide
 
 Follow this sequence to connect your setup:
 
-1.  Connect the **SO-101 robot arm** to the power supply. Note that the Pro Edition of the SO-101 requires a 12V power supply for the follower arm and a 5V supply for the leader arm.
-2.  Plug one end of the **USB-C cable** into the SO-101 arm and the other end into your computer (e.g., laptop, Raspberry Pi).
+1.  Connect both the **leader and follower arms** to their power supplies. Make sure the voltage matches the specifications of the motors (6V or 12V depending on the motors you use).
+2.  For each arm, plug one end of a **USB-C cable** into the arm's controller and the other end into your computer (e.g., laptop, Raspberry Pi).
 3.  Connect any additional cameras to your computer.
-
-Here is an illustration of a complete setup with a robotic arm and camera connected to a Raspberry Pi.
 
 ![Full setup](/assets/pdk1_plugged.jpg)
 
@@ -69,16 +65,15 @@ Next, start the server:
 phosphobot run
 ```
 
-Navigate to `localhost` in your web browser to access the phosphobot dashboard, where you can find the **Control** section to operate your robot with your keyboard.
+Navigate to `localhost` in your web browser to access the phosphobot dashboard, where you can find the **Control** section to operate your robot with the leader arm.
 
 ![phosphobot dashboard](/assets/phosphobot-dashboard.png)
 
+## Calibrating the Robot Arms
 
-## Calibrating the Robot
+<Info>If you purchased pre-assembled robots, they should already be calibrated. This step is for those who have built their own arms.</Info>
 
-<Info>If you purchased a pre-assembled robot, it should already be calibrated. This step is for those who have built their own arm.</Info>
-
-The phosphobot software should automatically detect your SO-101 arm, but calibration is necessary for proper functionality. A video guide is available to walk you through the calibration process with phosphobot.
+The phosphobot software should automatically detect your SO-101 arms, but **calibration is necessary** for proper functionality. This ensures that the leader and follower arms have the same position values when they are in the same physical configuration. A video guide is available to walk you through the calibration process with phosphobot.
 
 <iframe
     className="w-full aspect-video"
@@ -88,24 +83,26 @@ The phosphobot software should automatically detect your SO-101 arm, but calibra
     allowFullScreen>
 </iframe>
 
+1.  You will need to calibrate **each arm separately**.
+2.  Navigate to the **Calibration** page in the dashboard.
+3.  Be prepared to securely hold the arm you are calibrating, as the process will disable motor torque, which could cause it to fall.
+4.  Follow the positions in the video to calibrate each robot arm one by one.
 
-1.  Navigate to the **Calibration** page in the dashboard.
-2.  Be prepared to securely hold your robot, as calibration will disable the motor torque, which could cause the arm to fall.
-3.  Follow the positions in the video to calibrate your robot arm. 
+Your calibration settings are saved in the `~/phosphobot/calibration` folder in your home directory, where you can manually edit the file for finer adjustments.
 
-Your calibration settings are saved in the `~/phosphobot/calibration` folder in your home directory, where you can manually edit the file for finer adjustments. For example, to tune the PID. 
+### About LeRobot calibration
 
-### About LeRobot calibration 
+If you're using the LeRobot framework for training, you'll need to calibrate the robot with LeRobot after this phosphobot calibration.
 
-If you're using LeRobot framework for training, you'll need to calibrate the robot with LeRobot after this phosphobot calibration. 
-
-You need first to calibrate with phosphobot, then with LeRobot. The LeRobot calibration process is compatible with phosphobot, but independent. This only needs to be done once. 
+You need to first calibrate with phosphobot, then with LeRobot. The LeRobot calibration process is compatible with phosphobot, but independent. This only needs to be done once.
 
 # Controlling the Robot
 
 Your robot is now ready for operation!
 
-From the dashboard, select **Keyboard Control** to manipulate the robot arm using your keyboard. Six keys are assigned to move the robot in a fixed frame of reference, and the spacebar is used to open and close the gripper.
+From the dashboard, select **Control** then the **Leader arm** tab to control the follower arm by moving the leader arm. Y
+
+You can also use Keyboard Control to manipulate the robot arm using your keyboard, a gamepad, or a Meta Quest VR headset. [Learn more.](/basic-usage/teleop")
 
 ![Robot_Controller](/assets/controll_schema.png)
 
