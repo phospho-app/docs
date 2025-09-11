@@ -96,6 +96,16 @@ If you're using the LeRobot framework for training, you'll need to calibrate the
 
 You need to first calibrate with phosphobot, then with LeRobot. The LeRobot calibration process is compatible with phosphobot, but independent. This only needs to be done once.
 
+<Info icon="lightbulb">
+Why is this the case? 
+
+This is because LeRobot calibrates a SO-101 by moving the arm to the maximum and minimum positions of each joint. Then, LeRobot saves the min and max limits **inside** the servomotors. The servos can't move outside these limits. 
+
+phosphobot, on the other hand, sets the "first calibration position" as the **position zero** of each servo. The min and max limits are **not** updated. Because of this, the LeRobot's min and max limits keep their old values, and the servos can't move outside of these stale ranges. 
+
+To solve this, you need to re-calibrate the robot with LeRobot **after calibrating with phosphobot** to ensure that the min and max limits are correct. The calibration are compatible, but independent. 
+</Info>
+
 # Controlling the Robot
 
 Your robot is now ready for operation!
