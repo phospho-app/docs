@@ -59,6 +59,29 @@ components:
       - id
       title: AIStatusResponse
       type: object
+    AddZMQCameraRequest:
+      description: Request model for adding a ZMQ camera feed.
+      properties:
+        tcp_address:
+          description: 'TCP address of the ZMQ publisher. Format: ''tcp://<host>:<port>''.'
+          examples:
+          - tcp://localhost:5555
+          title: Tcp Address
+          type: string
+        topic:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Topic to subscribe to. If None, will subscribes to all messages
+            on the given TCP address.
+          examples:
+          - cabin_view
+          - wrist_camera
+          title: Topic
+      required:
+      - tcp_address
+      title: AddZMQCameraRequest
+      type: object
     AdminSettingsRequest:
       description: Contains the admin settings
       properties:
@@ -78,6 +101,10 @@ components:
         freq:
           title: Freq
           type: integer
+        hf_private_mode:
+          default: false
+          title: Hf Private Mode
+          type: boolean
         task_instruction:
           title: Task Instruction
           type: string
@@ -126,6 +153,9 @@ components:
         freq:
           title: Freq
           type: integer
+        hf_private_mode:
+          title: Hf Private Mode
+          type: boolean
         task_instruction:
           title: Task Instruction
           type: string
@@ -154,6 +184,7 @@ components:
       - video_size
       - task_instruction
       - cameras_to_record
+      - hf_private_mode
       title: AdminSettingsResponse
       type: object
     AdminSettingsTokenResponse:
@@ -270,6 +301,11 @@ components:
         authenticated:
           title: Authenticated
           type: boolean
+        is_pro_user:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Pro User
         session:
           anyOf:
           - $ref: '#/components/schemas/Session'
@@ -345,40 +381,6 @@ components:
       - d_gain
       title: BaseRobotPIDGains
       type: object
-    BrowseFilesResponse:
-      description: Represents a response for browsing directories or items in a robotic
-        system.
-      properties:
-        directoryTitle:
-          title: Directorytitle
-          type: string
-        episode_ids:
-          default: []
-          items:
-            type: integer
-          title: Episode Ids
-          type: array
-        episode_paths:
-          default: []
-          items:
-            type: string
-          title: Episode Paths
-          type: array
-        items:
-          items:
-            $ref: '#/components/schemas/ItemInfo'
-          title: Items
-          type: array
-        tokenError:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Tokenerror
-      required:
-      - directoryTitle
-      - items
-      title: BrowseFilesResponse
-      type: object
     BrowserFilesRequest:
       description: Request to browse files in a directory.
       properties:
@@ -425,6 +427,66 @@ components:
       required:
       - training_id
       title: CancelTrainingRequest
+      type: object
+    ChatRequest:
+      description: Control the robot with a natural language prompt.
+      properties:
+        chat_id:
+          description: Unique identifier for the chat session. If not provided, a
+            new UUID will be generated.
+          title: Chat Id
+          type: string
+        command_history:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          description: List of previous commands to provide context for the chat.
+          title: Command History
+        images:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          description: 'base64 encoded images to be sent with the request. '
+          title: Images
+        prompt:
+          description: The task to be performed by the robot, described in natural
+            language.
+          title: Prompt
+          type: string
+      required:
+      - prompt
+      title: ChatRequest
+      type: object
+    ChatResponse:
+      description: Response to the chat request.
+      properties:
+        command:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The command to be executed by the robot, generated from the
+            prompt.
+          title: Command
+        endpoint:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The endpoint to call.
+          title: Endpoint
+        endpoint_params:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          description: Parameters to pass to the endpoint.
+          title: Endpoint Params
+      required:
+      - command
+      title: ChatResponse
       type: object
     ConfirmRequest:
       properties:
@@ -550,29 +612,41 @@ components:
           title: Open
           type: number
         rx:
+          anyOf:
+          - type: number
+          - type: 'null'
           description: Absolute Pitch in degrees
           title: Rx
-          type: number
         ry:
+          anyOf:
+          - type: number
+          - type: 'null'
           description: Absolute Yaw in degrees
           title: Ry
-          type: number
         rz:
+          anyOf:
+          - type: number
+          - type: 'null'
           description: Absolute Roll in degrees
           title: Rz
-          type: number
         x:
+          anyOf:
+          - type: number
+          - type: 'null'
           description: X position in centimeters
           title: X
-          type: number
         y:
+          anyOf:
+          - type: number
+          - type: 'null'
           description: Y position in centimeters
           title: Y
-          type: number
         z:
+          anyOf:
+          - type: number
+          - type: 'null'
           description: Z position in centimeters
           title: Z
-          type: number
       required:
       - x
       - y
@@ -585,6 +659,12 @@ components:
       type: object
     EndEffectorReadRequest:
       properties:
+        only_gripper:
+          default: false
+          description: If True, only return the gripper state. If False, return the
+            full end effector position and orientation.
+          title: Only Gripper
+          type: boolean
         sync:
           default: false
           description: If True, the simulation will first read the motor positions,
@@ -629,6 +709,28 @@ components:
       required:
       - dataset_name
       title: HFDownloadDatasetRequest
+      type: object
+    HFWhoamIResponse:
+      additionalProperties: true
+      properties:
+        message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Message
+        status:
+          default: ok
+          enum:
+          - ok
+          - error
+          title: Status
+          type: string
+        username:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Username
+      title: HFWhoamIResponse
       type: object
     HTTPValidationError:
       properties:
@@ -690,62 +792,6 @@ components:
           type: string
       title: InfoResponse
       type: object
-    ItemInfo:
-      description: Contains the information of the items in a directory used in the
-        browser page
-      properties:
-        absolute_path:
-          title: Absolute Path
-          type: string
-        browseUrl:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Browseurl
-        canDeleteDataset:
-          default: false
-          title: Candeletedataset
-          type: boolean
-        deleteDatasetAction:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Deletedatasetaction
-        downloadUrl:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Downloadurl
-        huggingfaceUrl:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Huggingfaceurl
-        is_dataset_dir:
-          default: false
-          title: Is Dataset Dir
-          type: boolean
-        is_dir:
-          title: Is Dir
-          type: boolean
-        name:
-          title: Name
-          type: string
-        path:
-          title: Path
-          type: string
-        previewUrl:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Previewurl
-      required:
-      - name
-      - path
-      - absolute_path
-      - is_dir
-      title: ItemInfo
-      type: object
     JointsReadRequest:
       description: Request to read the joints of the robot.
       properties:
@@ -758,6 +804,15 @@ components:
           description: If set, only read the joints with these ids. If None, read
             all joints.
           title: Joints Ids
+        source:
+          default: robot
+          description: Source of the joint angles. 'sim' means the angles are read
+            from the simulation, 'robot' means the angles are read from the hardware.
+          enum:
+          - sim
+          - robot
+          title: Source
+          type: string
         unit:
           default: rad
           description: The unit of the angles. Defaults to radian.
@@ -1160,6 +1215,23 @@ components:
     RecordingStartRequest:
       description: Request to start the recording of an episode.
       properties:
+        add_metadata:
+          anyOf:
+          - additionalProperties:
+              items: {}
+              type: array
+            type: object
+          - type: 'null'
+          description: Passing a dictionnary will store the value in each row of the
+            recorded dataset. The key is the name of the column, and the value is
+            a list. If set to None, no additional metadata is saved.
+          examples:
+          - bbox_position:
+            - 0.5
+            - 1.0
+            - 0.0
+            - 0.5
+          title: Add Metadata
         branch_path:
           anyOf:
           - type: string
@@ -1229,6 +1301,16 @@ components:
           examples:
           - Pick up the orange brick and put it in the black box.
           title: Instruction
+        leader_arm_ids:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          description: Serial numbers of the leader arms used during the recording
+          examples:
+          - - /dev/ttyUSB0
+          title: Leader Arm Ids
         robot_serials_to_ignore:
           anyOf:
           - items:
@@ -1240,6 +1322,13 @@ components:
           examples:
           - - /dev/ttyUSB0
           title: Robot Serials To Ignore
+        save_cartesian:
+          default: false
+          description: Record cartesian positions of the robots as well, this will
+            make your dataset incompatible with lerobot and it only works for robots
+            with simulators. Defaults to False.
+          title: Save Cartesian
+          type: boolean
         target_video_size:
           anyOf:
           - maxItems: 2
@@ -1462,6 +1551,28 @@ components:
       - connection_details
       title: RobotConnectionRequest
       type: object
+    RobotConnectionResponse:
+      additionalProperties: true
+      properties:
+        message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Message
+        robot_id:
+          title: Robot Id
+          type: integer
+        status:
+          default: ok
+          enum:
+          - ok
+          - error
+          title: Status
+          type: string
+      required:
+      - robot_id
+      title: RobotConnectionResponse
+      type: object
     RobotPairRequest:
       description: Represents a pair of robots for leader-follower control.
       properties:
@@ -1623,7 +1734,7 @@ components:
           title: Status
           type: string
         version_id:
-          default: 0.3.77
+          default: 0.3.120
           description: Current version of the teleoperation server
           title: Version Id
           type: string
@@ -1714,6 +1825,7 @@ components:
           - dummy
           - dummy_stereo
           - unknown
+          - zmq
           title: Camera Type
           type: string
         fps:
@@ -1762,6 +1874,19 @@ components:
     StartAIControlRequest:
       description: Request to start the AI control of the robot.
       properties:
+        angle_format:
+          default: rad
+          description: Format of the angles used in the model. Can be 'degrees', 'radians',
+            or 'other'. If other is selected, you will need to specify a min and max
+            angle value.
+          enum:
+          - degrees
+          - rad
+          - other
+          examples:
+          - rad
+          title: Angle Format
+          type: string
         cameras_keys_mapping:
           anyOf:
           - additionalProperties:
@@ -1782,6 +1907,22 @@ components:
           examples:
           - 500
           title: Checkpoint
+        max_angle:
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: If angle_format is 'other', this is the maximum angle value
+            used in the model. If None and angle_format is 'other', will raise an
+            error.
+          title: Max Angle
+        min_angle:
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: If angle_format is 'other', this is the minimum angle value
+            used in the model. If None and angle_format is 'other', will raise an
+            error.
+          title: Min Angle
         model_id:
           description: Hugging Face model id to use
           title: Model Id
@@ -1919,6 +2060,12 @@ components:
           - type: string
           - type: 'null'
           title: Message
+        model_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: URL to the Hugging Face model card.
+          title: Model Url
         status:
           default: ok
           enum:
@@ -1978,6 +2125,10 @@ components:
         requested_at:
           title: Requested At
           type: string
+        session_count:
+          default: 0
+          title: Session Count
+          type: integer
         status:
           enum:
           - succeeded
@@ -1986,6 +2137,11 @@ components:
           - canceled
           title: Status
           type: string
+        success_rate:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Success Rate
         terminated_at:
           anyOf:
           - type: string
@@ -2016,6 +2172,38 @@ components:
       - used_wandb
       - model_type
       title: SupabaseTrainingModel
+      type: object
+    TeleopSettings:
+      description: Model representing current teleop settings.
+      properties:
+        vr_scaling:
+          description: VR scaling factor for teleoperation control.
+          examples:
+          - 1.0
+          - 0.5
+          - 2.0
+          exclusiveMinimum: 0.0
+          title: Vr Scaling
+          type: number
+      required:
+      - vr_scaling
+      title: TeleopSettings
+      type: object
+    TeleopSettingsRequest:
+      description: Request model for updating teleop settings.
+      properties:
+        vr_scaling:
+          description: VR scaling factor for teleoperation control.
+          examples:
+          - 1.0
+          - 0.5
+          - 2.0
+          exclusiveMinimum: 0.0
+          title: Vr Scaling
+          type: number
+      required:
+      - vr_scaling
+      title: TeleopSettingsRequest
       type: object
     Temperature:
       properties:
@@ -2088,23 +2276,14 @@ components:
       - current_torque
       title: TorqueReadResponse
       type: object
-    TrainingConfig:
-      properties:
-        models:
-          items:
-            $ref: '#/components/schemas/SupabaseTrainingModel'
-          title: Models
-          type: array
-      required:
-      - models
-      title: TrainingConfig
-      type: object
     TrainingInfoRequest:
       properties:
         model_id:
+          anyOf:
+          - type: string
+          - type: 'null'
           description: Hugging Face model id to get training info
           title: Model Id
-          type: string
         model_type:
           enum:
           - gr00t
@@ -2114,7 +2293,6 @@ components:
           title: Model Type
           type: string
       required:
-      - model_id
       - model_type
       title: TrainingInfoRequest
       type: object
@@ -2142,8 +2320,8 @@ components:
       title: TrainingInfoResponse
       type: object
     TrainingParamsAct:
-      additionalProperties: false
-      description: Training paramters are left to None by default and are set depending
+      additionalProperties: true
+      description: Training parameters are left to None by default and are set depending
         on the dataset in the training pipeline.
       properties:
         batch_size:
@@ -2152,16 +2330,15 @@ components:
             maximum: 150.0
             type: integer
           - type: 'null'
-          description: Batch size for training, we run this on an A10G, leave it to
+          description: Batch size for training, we run this on an A10G. Leave it to
             None to auto-detect based on your dataset
           title: Batch Size
-        save_steps:
+        save_freq:
           default: 5000
-          description: Number of steps between saving the model, leave it to None
-            to get the default value
+          description: Number of steps between saving the model.
           exclusiveMinimum: 0.0
           maximum: 1000000.0
-          title: Save Steps
+          title: Save Freq
           type: integer
         steps:
           anyOf:
@@ -2169,13 +2346,13 @@ components:
             maximum: 1000000.0
             type: integer
           - type: 'null'
-          description: Number of training steps, leave it to None to auto-detect based
+          description: Number of training steps. Leave it to None to auto-detect based
             on your dataset
           title: Steps
       title: TrainingParamsAct
       type: object
     TrainingParamsActWithBbox:
-      additionalProperties: false
+      additionalProperties: true
       description: Training parameters for ACT with bounding box
       properties:
         batch_size:
@@ -2184,7 +2361,7 @@ components:
             maximum: 150.0
             type: integer
           - type: 'null'
-          description: Batch size for training, we run this on an A10G, leave it to
+          description: Batch size for training, we run this on an A10G. Leave it to
             None to auto-detect based on your dataset
           title: Batch Size
         image_key:
@@ -2203,13 +2380,12 @@ components:
             type: string
           title: Image Keys To Keep
           type: array
-        save_steps:
+        save_freq:
           default: 5000
-          description: Number of steps between saving the model, leave it to None
-            to get the default value
+          description: Number of steps between saving the model.
           exclusiveMinimum: 0.0
           maximum: 1000000.0
-          title: Save Steps
+          title: Save Freq
           type: integer
         steps:
           anyOf:
@@ -2217,7 +2393,7 @@ components:
             maximum: 1000000.0
             type: integer
           - type: 'null'
-          description: Number of training steps, leave it to None to auto-detect based
+          description: Number of training steps. Leave it to None to auto-detect based
             on your dataset
           title: Steps
         target_detection_instruction:
@@ -2234,7 +2410,7 @@ components:
       title: TrainingParamsActWithBbox
       type: object
     TrainingParamsGr00T:
-      additionalProperties: false
+      additionalProperties: true
       properties:
         batch_size:
           anyOf:
@@ -2242,8 +2418,68 @@ components:
             maximum: 128.0
             type: integer
           - type: 'null'
-          description: Batch size for training, default is 64, decrease it if you
-            get an out of memory error
+          default: 64
+          description: Batch size for training. Decrease it if you get an Out Of Memory
+            (OOM) error
+          title: Batch Size
+        data_dir:
+          default: data/
+          description: The directory to save the dataset to
+          title: Data Dir
+          type: string
+        learning_rate:
+          default: 0.0001
+          description: Learning rate for training.
+          exclusiveMinimum: 0.0
+          maximum: 1.0
+          title: Learning Rate
+          type: number
+        num_epochs:
+          default: 10
+          description: Number of epochs to train for.
+          exclusiveMinimum: 0.0
+          maximum: 100.0
+          title: Num Epochs
+          type: integer
+        output_dir:
+          default: outputs/
+          description: The directory to save the model to
+          title: Output Dir
+          type: string
+        save_steps:
+          default: 1000
+          description: Number of steps between saving the model.
+          exclusiveMinimum: 0.0
+          maximum: 100000.0
+          title: Save Steps
+          type: integer
+        validation_data_dir:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Optional directory to save the validation dataset to. If None,
+            validation is not run.
+          title: Validation Data Dir
+        validation_dataset_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Optional dataset repository ID on Hugging Face to use for validation
+          title: Validation Dataset Name
+      title: TrainingParamsGr00T
+      type: object
+    TrainingParamsPi0:
+      additionalProperties: false
+      description: Training parameters for Pi0 model
+      properties:
+        batch_size:
+          anyOf:
+          - exclusiveMinimum: 0.0
+            maximum: 128.0
+            type: integer
+          - type: 'null'
+          description: Batch size for training, leave it to None to auto-detect based
+            on your dataset
           title: Batch Size
         data_dir:
           default: data/
@@ -2254,7 +2490,7 @@ components:
           default: 10
           description: Number of epochs to train for, default is 10
           exclusiveMinimum: 0.0
-          maximum: 100.0
+          maximum: 50.0
           title: Epochs
           type: integer
         learning_rate:
@@ -2269,19 +2505,12 @@ components:
           description: The directory to save the model to
           title: Output Dir
           type: string
-        path_to_gr00t_repo:
+        path_to_pi0_repo:
           default: .
-          description: The path to the Isaac-GR00T repo. If not provided, will assume
-            we are in the repo.
-          title: Path To Gr00T Repo
+          description: The path to the openpi repo. If not provided, will assume we
+            are in the repo.
+          title: Path To Pi0 Repo
           type: string
-        save_steps:
-          default: 1000
-          description: Number of steps between saving the model, default is 1000
-          exclusiveMinimum: 0.0
-          maximum: 100000.0
-          title: Save Steps
-          type: integer
         train_test_split:
           default: 1.0
           description: Train test split ratio, default is 1.0 (no split), should be
@@ -2290,23 +2519,20 @@ components:
           maximum: 1.0
           title: Train Test Split
           type: number
-        validation_data_dir:
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Optional directory to save the validation dataset to. If None,
-            no validation will be done.
-          title: Validation Data Dir
         validation_dataset_name:
           anyOf:
           - type: string
           - type: 'null'
           description: Optional dataset repository ID on Hugging Face to use for validation
           title: Validation Dataset Name
-      title: TrainingParamsGr00T
+      title: TrainingParamsPi0
       type: object
     TrainingRequest:
-      description: Pydantic model for training request validation
+      description: 'Pydantic model for training request validation.
+
+        This version consolidates all model name and parameter logic into a single
+
+        validator to prevent redundant operations and fix the duplicate suffix bug.'
       properties:
         dataset_name:
           description: Dataset repository ID on Hugging Face, should be a public dataset
@@ -2320,23 +2546,35 @@ components:
             be in the format phospho-app/<model_name> or <model_name>
           title: Model Name
         model_type:
-          description: Type of model to train, either 'ACT' or 'gr00t'
+          description: Type of model to train, supports 'ACT', 'gr00t', and 'pi0'
           enum:
           - ACT
           - ACT_BBOX
           - gr00t
+          - pi0
           - custom
           title: Model Type
           type: string
+        private_mode:
+          default: false
+          description: Whether to use private training (PRO users only)
+          title: Private Mode
+          type: boolean
         training_params:
           anyOf:
           - $ref: '#/components/schemas/TrainingParamsAct'
           - $ref: '#/components/schemas/TrainingParamsActWithBbox'
           - $ref: '#/components/schemas/TrainingParamsGr00T'
+          - $ref: '#/components/schemas/TrainingParamsPi0'
           - type: 'null'
-          description: Training parameters for the model, if not provided, default
-            parameters will be used
+          description: Training parameters for the model.
           title: Training Params
+        user_hf_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: User's personal HF token for private training
+          title: User Hf Token
         wandb_api_key:
           anyOf:
           - type: string
@@ -2347,6 +2585,17 @@ components:
       - model_type
       - dataset_name
       title: TrainingRequest
+      type: object
+    TrainingsList:
+      properties:
+        models:
+          items:
+            $ref: '#/components/schemas/SupabaseTrainingModel'
+          title: Models
+          type: array
+      required:
+      - models
+      title: TrainingsList
       type: object
     UDPServerInformationResponse:
       properties:
@@ -2483,7 +2732,8 @@ paths:
         '200':
           content:
             application/json:
-              schema: {}
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
           description: Successful Response
         '422':
           content:
@@ -2507,7 +2757,8 @@ paths:
         '200':
           content:
             application/json:
-              schema: {}
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
           description: Successful Response
         '422':
           content:
@@ -2525,7 +2776,8 @@ paths:
         '200':
           content:
             application/json:
-              schema: {}
+              schema:
+                $ref: '#/components/schemas/HFWhoamIResponse'
           description: Successful Response
       summary: Whoami
       tags:
@@ -2569,7 +2821,8 @@ paths:
         '200':
           content:
             application/json:
-              schema: {}
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
           description: Successful Response
         '422':
           content:
@@ -2580,10 +2833,60 @@ paths:
       summary: Submit Wandb Token
       tags:
       - pages
+  /ai-control/chat:
+    post:
+      description: Endpoint to handle AI control chat requests.
+      operationId: ai_control_chat_ai_control_chat_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Ai Control Chat
+      tags:
+      - chat
+  /ai-control/chat/log:
+    post:
+      description: Log the first chat request to the database.
+      operationId: log_chat_ai_control_chat_log_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Log Chat
+      tags:
+      - chat
   /ai-control/feedback:
     post:
-      description: Feedback about the auto control session
-      operationId: feedback_auto_control_ai_control_feedback_post
+      operationId: feedback_ai_control_ai_control_feedback_post
       requestBody:
         content:
           application/json:
@@ -2603,13 +2906,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
-      summary: Feedback about the auto control session
+      summary: Feedback about the AI control session
       tags:
       - control
   /ai-control/pause:
     post:
       description: Pause the auto control by AI.
-      operationId: pause_auto_control_ai_control_pause_post
+      operationId: pause_ai_control_ai_control_pause_post
       responses:
         '200':
           content:
@@ -2623,7 +2926,7 @@ paths:
   /ai-control/resume:
     post:
       description: Resume the auto control by AI.
-      operationId: resume_auto_control_ai_control_resume_post
+      operationId: resume_ai_control_ai_control_resume_post
       responses:
         '200':
           content:
@@ -2663,7 +2966,7 @@ paths:
   /ai-control/start:
     post:
       description: Start the auto control by AI.
-      operationId: start_auto_control_ai_control_start_post
+      operationId: start_ai_control_ai_control_start_post
       requestBody:
         content:
           application/json:
@@ -2703,7 +3006,7 @@ paths:
   /ai-control/stop:
     post:
       description: Stop the auto control by AI.
-      operationId: stop_auto_control_ai_control_stop_post
+      operationId: stop_ai_control_ai_control_stop_post
       responses:
         '200':
           content:
@@ -2727,7 +3030,7 @@ paths:
       summary: Serve Dashboard
       tags:
       - pages
-  /auth/check_auth:
+  /auth/check-auth:
     get:
       description: 'Check if the user is authenticated by validating the session with
         Supabase.
@@ -3003,6 +3306,34 @@ paths:
       summary: Serve Dashboard
       tags:
       - pages
+  /cameras/add-zmq:
+    post:
+      description: Add a camera feed from a ZMQ publisher.
+      operationId: add_zmq_camera_feed_cameras_add_zmq_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddZMQCameraRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Add Zmq Camera Feed Cameras Add Zmq Post
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Add Zmq Camera Feed
+      tags:
+      - camera
   /cameras/refresh:
     post:
       description: Refresh the list of available cameras. This operation can take
@@ -3048,7 +3379,8 @@ paths:
         '200':
           content:
             application/json:
-              schema: {}
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
           description: Successful Response
         '422':
           content:
@@ -3061,6 +3393,7 @@ paths:
       - pages
   /dataset/download:
     get:
+      description: Download a folder as a ZIP file.
       operationId: download_folder_dataset_download_get
       parameters:
       - in: query
@@ -3164,7 +3497,8 @@ paths:
         '200':
           content:
             application/json:
-              schema: {}
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
           description: Successful Response
         '422':
           content:
@@ -3273,7 +3607,8 @@ paths:
         '200':
           content:
             application/json:
-              schema: {}
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
           description: Successful Response
         '422':
           content:
@@ -3341,7 +3676,8 @@ paths:
         '200':
           content:
             application/json:
-              schema: {}
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
           description: Successful Response
         '422':
           content:
@@ -3365,8 +3701,7 @@ paths:
         '200':
           content:
             application/json:
-              schema:
-                $ref: '#/components/schemas/BrowseFilesResponse'
+              schema: {}
           description: Successful Response
         '422':
           content:
@@ -3383,6 +3718,23 @@ paths:
         with camera IDs as keys and base64 encoded JPG images as values. If a camera
         is not available or fails to capture, its value will be None.
       operationId: get_all_camera_frames_frames_get
+      parameters:
+      - in: query
+        name: resize_x
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Resize X
+      - in: query
+        name: resize_y
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Resize Y
       responses:
         '200':
           content:
@@ -3398,6 +3750,12 @@ paths:
                 title: Response Get All Camera Frames Frames Get
                 type: object
           description: Successfully captured frames from available cameras
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
         '500':
           description: Server error while capturing frames
       summary: Get All Camera Frames
@@ -4018,7 +4376,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StatusResponse'
+                $ref: '#/components/schemas/RobotConnectionResponse'
           description: Successful Response
         '422':
           content:
@@ -4055,6 +4413,36 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
       summary: Get Robot Config
+      tags:
+      - control
+  /robot/disconnect:
+    post:
+      description: 'Manually add a robot connection to the robot manager.
+
+        Useful for adding robot that are accessible only via WiFi, for example.'
+      operationId: disconnect_robot_robot_disconnect_post
+      parameters:
+      - in: query
+        name: robot_id
+        required: false
+        schema:
+          default: 0
+          title: Robot Id
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Disconnect Robot
       tags:
       - control
   /sign-in:
@@ -4108,6 +4496,46 @@ paths:
                 $ref: '#/components/schemas/ServerStatus'
           description: Successful Response
       summary: Status
+  /teleop/settings:
+    post:
+      description: Update teleoperation settings such as VR scaling factor.
+      operationId: update_teleop_settings_teleop_settings_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeleopSettingsRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Update Teleop Settings
+      tags:
+      - control
+  /teleop/settings/read:
+    post:
+      description: Get current teleoperation settings.
+      operationId: read_teleop_settings_teleop_settings_read_post
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeleopSettings'
+          description: Successful Response
+      summary: Read Teleop Settings
+      tags:
+      - control
   /temperature/read:
     post:
       description: Read the current Temperature and maximum Temperature of the robot's
@@ -4275,8 +4703,10 @@ paths:
       - training
   /training/info:
     post:
-      description: Fetch the info.json from the model repo and return the training
+      description: '- Fetch the info.json from the model repo and return the training
         info.
+
+        - If the model type is "custom", return a custom command to run the training.'
       operationId: get_training_info_training_info_post
       requestBody:
         content:
@@ -4328,14 +4758,14 @@ paths:
       - training
   /training/models/read:
     post:
-      description: Get the list of models to be trained
+      description: Get the list of models with aggregated AI control session metrics
       operationId: get_models_training_models_read_post
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TrainingConfig'
+                $ref: '#/components/schemas/TrainingsList'
           description: Successful Response
       summary: Get Models
       tags:
@@ -4405,7 +4835,11 @@ paths:
         '200':
           content:
             application/json:
-              schema: {}
+              schema:
+                additionalProperties: true
+                title: Response Upgrade To Latest Version Update Upgrade To Latest
+                  Version Get
+                type: object
           description: Successful Response
       summary: Upgrade To Latest Version
       tags:
@@ -4428,7 +4862,10 @@ paths:
         '200':
           content:
             application/json:
-              schema: {}
+              schema:
+                additionalProperties: true
+                title: Response Get Latest Available Version Update Version Post
+                type: object
           description: Successful Response
         '422':
           content:
@@ -4480,6 +4917,9 @@ paths:
           title: Quality
       responses:
         '200':
+          content:
+            application/json:
+              schema: {}
           description: Streaming video feed of the specified camera.
         '404':
           description: Camera not available
