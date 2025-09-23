@@ -3,10 +3,9 @@ title: "Train robotics AI models"
 description: "A guide to training AI models that control robots"
 ---
 
-import InstallCode from '/snippets/install-code.mdx';
-import GetMQApp from '/snippets/get-mq-app.mdx';
-import TeleopInstructions from '/snippets/teleop-instructions.mdx';
-
+import InstallCode from "/snippets/install-code.mdx";
+import GetMQApp from "/snippets/get-mq-app.mdx";
+import TeleopInstructions from "/snippets/teleop-instructions.mdx";
 
 The phospho starter pack makes it easy to train robotics AI models by integrating with **LeRobot** from Hugging Face.
 
@@ -50,7 +49,7 @@ In this guide, we will use the phospho starter pack to record a dataset and uplo
 1. You need an assembled **SO-100** robot arm and **cameras**. Get the [phosphot starter pack here](https://robots.phospho.ai).
 2. Install [the phosphobot software](/installation)
 
-<InstallCode/>
+<InstallCode />
 
 3. **Connect your cameras to the computer.** Start the phosphobot server.
 
@@ -61,7 +60,7 @@ phosphobot run
 4. Complete the [quickstart](/so-100/quickstart) and check that you can [control your robot](/basic-usage/teleop).
 5. You have the **[phosphobot teleoperation app](/examples/teleop)** is installed on your **Meta Quest 2, Pro, 3 or 3s**
 
-<GetMQApp/>
+<GetMQApp />
 
 6. You have a **device to train your model**. We recommend using a **GPU** for faster training.
 
@@ -94,17 +93,18 @@ Go to the _Admin Configuration_ page of your phospshobot dashboard. You can adju
 
 The easiest way to record a dataset is to use the Meta Quest app.
 
-<GetMQApp/>
+<GetMQApp />
 
-<iframe 
-    className="w-full aspect-video"
-    src="https://www.youtube.com/embed/AQ-xgCTdj_w?si=NDTtX1nISABjzmbA" 
-    title="VR Control tutorial" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-    referrerPolicy="strict-origin-when-cross-origin" 
-    allowFullScreen>
-</iframe>
+<iframe
+  className="w-full aspect-video"
+  src="https://www.youtube.com/embed/AQ-xgCTdj_w?si=NDTtX1nISABjzmbA"
+  title="VR Control tutorial"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  referrerPolicy="strict-origin-when-cross-origin"
+  allowFullScreen
+></iframe>
 
-<TeleopInstructions/>
+<TeleopInstructions />
 
 Go to the **Dataset tab** in the phosphobot dashboard to see the recorded dataset. Use the button Preview to preview them using [LeRobot Dataset Visualizer](https://huggingface.co/spaces/lerobot/visualize_dataset).
 
@@ -119,13 +119,14 @@ Go to the **Dataset tab** in the phosphobot dashboard to see the recorded datase
 
 ## 4. Train your first model
 
-### Train GR00T-N1-2B in one click with phosphobot cloud
+### Train GR00T-N1-2B/Pi0.5/ACT/BB_ACT in one click with phosphobot cloud
 
 To train a model, you can use the phosphobot cloud. This is the quickest way to train a model.
 
 1. Enter the name of your dataset on Hugging Face (example: `PLB/simple-lego-pickup-mono-2`) in the **AI Training and Control** section.
-2. Click on **Train AI Model**. Your model starts training. Training can take up to 3 hours. Follow the training using the button **View trained models**. Your model is uploaded to HuggingFace [on the phospho-app account](https://huggingface.co/phospho-app).
-3. To control your robot with the trained model, go to the **Control your robot** section and enter the name of your model.
+2. Select the parameters you want to change or leave the default ones.
+3. Click on **Train AI Model**. Your model starts training. Training can take up to 3 hours. Follow the training using the button **View trained models**. Your model is uploaded to HuggingFace [on the phospho-app account](https://huggingface.co/phospho-app).
+4. To control your robot with the trained model, go to the **Control your robot** section and enter the name of your model.
 
 ![phosphobot training cloud](/assets/phosphobot-aitraining.png)
 
@@ -157,7 +158,6 @@ title="Control your robot with GR00T-N1-2B"
   Learn about controlling your robot with GR00T-N1-2B and phosphobot cloud
 </Card>
 </CardGroup>
-
 
 ### Train an ACT model locally with LeRobot
 
