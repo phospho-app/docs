@@ -92,16 +92,18 @@ Join the community and add support for more cameras for the phospho starter pack
 
 Every camera vendor has its own SDK and drivers. This can lead to compatibility issues. Here are some tips:
 
-1. Run `phosphobot` with `sudo` to avoid permission issues.
+1. On MacOS, you may have the error `failed to set power state` when connecting a Realsense camer. [This is a known issue](https://github.com/phospho-app/phosphobot/issues/171). The solution is to run `phosphobot` with `sudo` to avoid permission issues. 
 
 ```
 sudo phosphobot run
 ```
 
-2. Use **virtual cameras** to avoid compatibility issues. Virtual cameras let you record your computer screen or a specific window. This is helpful as a workaround when your camera is not detected by phosphobot. 
+2. On Nvidia Jetpack 6 (Nvidia jetson), [pyrealsense2 doesn't work out of the box.](https://github.com/phospho-app/phosphobot/issues/206). You need to recompile the pyrealsense2 library from source.  
+
+3. Use **virtual cameras** to avoid compatibility issues. Virtual cameras let you record your computer screen or a specific window. This is helpful as a workaround when your camera is not detected by phosphobot. 
 
 <Card icon="camera-movie" title="Virtual cameras in OBS" href="https://obsproject.com/kb/virtual-camera-guide">
 Check OBS Studio guide to create virtual cameras
 </Card>
 
-3. Ask for help on the [phospho Discord](https://docs.phospho.ai/welcome), along with your camera model, your operating system (MacOS, Linux, Windows...) and what you have tried so far. We'll get this working together!
+4. Ask for help on the [phospho Discord](https://docs.phospho.ai/welcome), along with your camera model, your operating system (MacOS, Linux, Windows...) and what you have tried so far. We'll get this working together!
