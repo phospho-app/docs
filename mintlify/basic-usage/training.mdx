@@ -93,73 +93,34 @@ Follow [our guide](/learn/ai-models#train-an-act-model-locally-with-lerobot) to 
 </Card>
 
 
-## How to train the Pi0 (Pi-Zero) model with the SO-100 robot arm?
+## How to train Pi0.5 (Pi-Zero point five) model with the SO-100 robot arm?
 
-[Pi0](https://www.physicalintelligence.company/blog/pi0) is a powerful VLA (Vision Language Action model) by Physical Intelligence. They released an open weight model that can be trained on your own dataset.
+[Pi0.5](https://www.physicalintelligence.company/blog/pi05) is a powerful VLA (Vision Language Action model) by Physical Intelligence. They released an open weight model that can be trained on your own datasets.
 
-To train the Pi0 model, you need to use the openpi repository with a few tweaks for the SO-100 robot arm compatibility. We added support for the SO-100 arm in this fork of the openpi repository.
+This VLA promises **open world generalization** and requires lots of data to properly train, think datasets of several hours.
 
-1. Clone our custom openpi repository and install it:
+You can still **use phosphobot to fine-tune the Pi0.5 model on your own dataset**.
 
-```bash
-git clone https://github.com/phospho-app/openpi.git
-cd openpi
-```
+We will use the phosphobot cloud for this.
 
-2. Install UV if you don't have it already:
+Just head over to the **AI training** tab on phosphobot. It should look a little something like this.
 
-```bash
-curl -LsSf https://astral.sh/uv/install.sh | sh
-source $HOME/.local/bin/env
-```
+![AI training tab on phosphobot](/assets/training-pi0.5.png)
 
-3. Setup the environment using uv:
+In the top left, enter your **dataset name**, it should be on Hugging Face. For example: `LegrandFrederic/Marker_pickup_piper`.
 
-```bash
-GIT_LFS_SKIP_SMUDGE=1 uv sync
-```
+Then, select the **Pi0.5 model** from the dropdown menu in the upper right.
 
-4. _(Optional)_ If you want to use **Weights & Biases** for tracking training metrics, log in with:
-
-```bash
-# Get your auth token at https://wandb.ai/authorize
-uv run wandb login
-```
-
-5. Edit the config file `src/openpi/training/config.py` to change the dataset to your own.
-
-By default, the training config uses the `PLB/Orange-brick-in-black-box` SO-100 dataset.
+Change the training parameters such as the image keys to match your dataset. If your dataset only contains one camera, you should set the image keys to `["image.name.in.the.dataset"]`, most likely `["observation.images.main"]` if you recorded it with phosphobot.
 
 <Note>
-  Make sure you dataset has a correct task description for each task in the
-  dataset. Eg: in the `PLB/Orange-brick-in-black-box` dataset, it's _"Put the
-  orange brick in the black pot"_
+Pro tips: 
+- Set your wandb token in the admin panel to track your training metrics.
+- Use a dataset with at least 15 minutes of data.
+- Make sure to set a prompt when recording your dataset.
 </Note>
 
-6. Start the training:
-
-```bash
-uv run scripts/compute_norm_stats.py --config-name pi0_so100
-# Main train command in nohup, it will take a while
-XLA_PYTHON_CLIENT_MEM_FRACTION=0.9 uv run scripts/train.py pi0_so100 --exp-name=pi0_so100_blackbox --overwrite
-```
-
-<Warning>
-  You need a GPU with at least 70GB of memory to train the pi0 model. We
-  recommend using a A100 (80GB) or a H100.
-</Warning>
-
-7. Once training is done, push your model to Hugging Face:
-
-```bash
-huggingface-cli login  # Follow the authentication steps
-huggingface-cli repo create your-model-name --type model
-
-# Push direclty using the cli
-huggingface-cli upload USERNAME/your-model-name \
-  ~/path/to/folder/ \
-  --repo-type model
-```
+Finally, hit the **Train AI Model** button. Your model starts training. Training can take several hours depending on your dataset size. Follow the training using the button **View trained models**.
 
 # Next steps
 
